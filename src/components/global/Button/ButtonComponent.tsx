@@ -1,12 +1,12 @@
-import theme from "layout/theme";
 import ButtonComponent from "./ButtonComponent.styled";
+import theme from "layout/theme";
 
 interface Preset {
-  color: keyof typeof theme.color;
-  background: keyof typeof theme.color;
+  color: keyof typeof theme.colors;
+  background: keyof typeof theme.colors;
   hover: {
-    color: keyof typeof theme.color;
-    background: keyof typeof theme.color;
+    color: keyof typeof theme.colors;
+    background: keyof typeof theme.colors;
   };
 }
 
@@ -23,7 +23,7 @@ export const presets: Record<string, Preset> = {
     color: "black",
     background: "white",
     hover: {
-      color: "black",
+      color: "white",
       background: "light-gray-2",
     },
   },
@@ -38,28 +38,8 @@ export interface ButtonProps
   size?: string[];
   disabled?: boolean;
 }
-
-const Button = ({
-  preset,
-  margin,
-  padding,
-  size,
-  disabled,
-  children,
-  ...props
-}: ButtonProps) => {
-  return (
-    <ButtonComponent
-      preset={presets[preset]}
-      margin={margin}
-      padding={padding}
-      size={size}
-      disabled={disabled ?? false}
-      {...props}
-    >
-      {children}
-    </ButtonComponent>
-  );
+const Button = ({ children, preset }: ButtonProps) => {
+  return <ButtonComponent preset={presets[preset]}>{children}</ButtonComponent>;
 };
 
 export default Button;

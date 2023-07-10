@@ -1,4 +1,7 @@
 import { Helmet } from "react-helmet";
+import Login from "pages/Login";
+import { ThemeProvider } from "styled-components";
+import theme from "./layout/theme";
 
 function App() {
   return (
@@ -10,7 +13,9 @@ function App() {
           rel="stylesheet"
         />
       </Helmet>
-      <div>Hello World</div>;
+      <ThemeProvider theme={theme}>
+        <Login />
+      </ThemeProvider>
     </>
   );
 }
