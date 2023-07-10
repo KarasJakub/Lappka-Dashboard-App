@@ -1,5 +1,8 @@
 import ButtonComponent from "./ButtonComponent.styled";
 import theme from "layout/theme";
+import { ReactComponent as ArrowRightIcon } from "assets/icons/ArrowRightIcon.svg";
+
+export type Variant = keyof typeof presets;
 
 interface Preset {
   color: keyof typeof theme.colors;
@@ -33,13 +36,26 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode | React.ReactNode[];
   preset: keyof typeof presets;
-  margin?: string[];
-  padding?: string[];
-  size?: string[];
-  disabled?: boolean;
+  variant: keyof typeof presets;
+  size?: "XLarge" | "Large" | "Medium";
+  arrow?: boolean;
 }
-const Button = ({ children, preset }: ButtonProps) => {
-  return <ButtonComponent preset={presets[preset]}>{children}</ButtonComponent>;
+const Button = ({
+  children,
+  preset,
+  variant,
+  arrow,
+  ...props
+}: ButtonProps) => {
+  return (
+    <ButtonComponent preset={presets[preset]} variant={variant} {...props}>
+      {children}
+      <ArrowRightIcon
+        fill={theme.colors.white}
+        style={{ display: arrow ? "block" : "none" }}
+      />
+    </ButtonComponent>
+  );
 };
 
 export default Button;
