@@ -13,7 +13,7 @@ export const Navigation = styled.nav`
     justify-content: space-between;
     /* max-width: 120rem; */
     margin: 0 auto;
-    padding: 4rem 15rem 0 15rem;
+    /* padding: 4rem; */
 `
 
 export const LoginContainer = styled.div`

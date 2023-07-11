@@ -6,11 +6,26 @@ export interface TypographyProps {
   variant?: string;
   children?: React.ReactNode;
   color?: string;
+  margin?: string;
+  padding?: string;
 }
 
-const Typography = ({ tag, variant, children, color }: TypographyProps) => {
+const Typography = ({
+  tag,
+  variant,
+  children,
+  color,
+  margin,
+  padding,
+}: TypographyProps) => {
   return (
-    <TypographyComponent as={tag} className={variant} color={color}>
+    <TypographyComponent
+      as={tag}
+      className={variant}
+      color={color}
+      margin={margin}
+      padding={padding}
+    >
       {children}
     </TypographyComponent>
   );

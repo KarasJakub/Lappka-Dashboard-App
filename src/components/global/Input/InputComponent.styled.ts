@@ -6,7 +6,7 @@ interface StylingProps {
     padding?: string
 }
 
-const TypographyComponent = styled.div<StylingProps>`
+const InputComponent = styled.div<StylingProps>`
     font-family: ${({ theme }) => theme.font.primary};
     color: ${({ color }) => color};
     margin: ${({ margin }) => margin};
@@ -111,4 +111,4 @@ const TypographyComponent = styled.div<StylingProps>`
     }
 `
 
-export default TypographyComponent
+export default InputComponent

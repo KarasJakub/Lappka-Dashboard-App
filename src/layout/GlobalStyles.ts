@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     overflow-x: hidden;
     color: #1E2022;
   }
