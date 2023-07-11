@@ -17,6 +17,7 @@ const ButtonComponent = styled.button<StylingProps>`
   padding: ${({ size }) => size === "Medium" ? ".4rem 1.2rem" : ""};
   padding: ${({ size }) => size === "Large" ? ".8rem 1.6rem" : ""};
   padding: ${({ size }) => size === "XLarge" ? "1.2rem 1.6rem" : ""};
+  font-size: ${({ size }) => size === "Medium" ? "1.4rem" : "1.6rem"};
 
   &.primary {
     color: ${({ theme }) => theme.colors.white};
