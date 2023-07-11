@@ -1,114 +1,64 @@
-import { styled } from "styled-components"
+import { styled } from 'styled-components'
 
-interface StylingProps {
-    color?: string
-    margin?: string
-    padding?: string
-}
+  interface StylingProps {
+    size?: string
+  }
 
-const InputComponent = styled.div<StylingProps>`
-    font-family: ${({ theme }) => theme.font.primary};
-    color: ${({ color }) => color};
-    margin: ${({ margin }) => margin};
-    padding: ${({ padding }) => padding};
+const StyledInputComponent = styled.button<StylingProps>`
+  border-radius: .3rem;
+  border: none;
+  font-family: ${({ theme }) => theme.font.primary};
+  font-weight: ${({ theme }) => theme.weight.medium};
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  cursor: pointer;
+  padding: 0;
+  padding: ${({ size }) => size === "Medium" ? ".4rem 1.2rem" : ""};
+  padding: ${({ size }) => size === "Large" ? ".8rem 1.6rem" : ""};
+  padding: ${({ size }) => size === "XLarge" ? "1.2rem 1.6rem" : ""};
+  font-size: ${({ size }) => size === "Medium" ? "1.4rem" : "1.6rem"};
 
-    &.Heading30Semi {
-        font-weight: ${({ theme }) => theme.weight.semiBold};
-        font-size: 3rem;
-        line-height: 4rem;
-        letter-spacing: -0.8%;
+  &.primary {
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.primaryPr600};
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.primaryPr700};
     }
 
-    &.Heading24SemiBold {
-        font-weight: ${({ theme }) => theme.weight.semiBold};
-        font-size: 2.4rem;
-        line-height: 3.2rem;
-        letter-spacing: -1.9%;
+    &:disabled {
+      opacity: 50%;
+    }
+  }
+
+  &.secondary {
+    color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.lightGray2};
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.lightGray2};
     }
 
-    &.Heading20SemiBold {
-        font-weight: ${({ theme }) => theme.weight.semiBold};
-        font-size: 2rem;
-        line-height: 2.6rem;
-        letter-spacing: -1%;
+    &:disabled {
+      background-color: ${({ theme }) => theme.colors.darkGray2};
+    }
+  }
+
+  &.toggle {
+    color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.lightGray2};
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.lightGray2};
     }
 
-    &.Heading18SemiBold {
-        font-weight: ${({ theme }) => theme.weight.semiBold};
-        font-size: 1.8rem;
-        line-height: 2.4rem;
-        letter-spacing: -1.4%;
+    &:disabled {
+      background-color: ${({ theme }) => theme.colors.darkGray2};
     }
-
-    &.UIText16SemiBold {
-        font-weight: ${({ theme }) => theme.weight.semiBold};
-        font-size: 1.6rem;
-        line-height: 2.4rem;
-        letter-spacing: -0.4%;
-    }
-
-    &.UIText16MediumButton {
-        font-weight: ${({ theme }) => theme.weight.medium};
-        font-size: 1.6rem;
-        line-height: 2.4rem;
-        letter-spacing: -0.4%;
-    }
-
-    &.UIText14Reg {
-        font-weight: ${({ theme }) => theme.weight.regular};
-        font-size: 1.4rem;
-        line-height: 2.4rem;
-        letter-spacing: -0.6%;
-    }
-
-    &.UIText14SemiBold {
-        font-weight: ${({ theme }) => theme.weight.semiBold};
-        font-size: 1.4rem;
-        line-height: 2.4rem;
-        letter-spacing: -0.6%;
-    }
-
-    &.UIText14Med {
-        font-weight: ${({ theme }) => theme.weight.medium};
-        font-size: 1.4rem;
-        line-height: 2rem;
-        letter-spacing: -0.3%;
-    }
-
-    &.UITableNumbers14Reg {
-        font-weight: ${({ theme }) => theme.weight.regular};
-        font-size: 1.4rem;
-        line-height: 2.4rem;
-        letter-spacing: -0.6%;
-    }
-
-    &.UIText13Med {
-        font-weight: ${({ theme }) => theme.weight.medium};
-        font-size: 1.3rem;
-        line-height: 1.8rem;
-        letter-spacing: 0%;
-    }
-
-    &.UIText13Reg {
-        font-weight: ${({ theme }) => theme.weight.regular};
-        font-size: 1.3rem;
-        line-height: 1.6rem;
-        letter-spacing: 0%;
-    }
-
-    &.UIText12Reg {
-        font-weight: ${({ theme }) => theme.weight.regular};
-        font-size: 1.2rem;
-        line-height: 1.6rem;
-        letter-spacing: 0%;
-    }
-
-    &.UIText12SemiBold {
-        font-weight: ${({ theme }) => theme.weight.semiBold};
-        font-size: 1.2rem;
-        line-height: 1.6rem;
-        letter-spacing: 0%;
-    }
+  }
 `
 
-export default InputComponent
+export default StyledInputComponent
