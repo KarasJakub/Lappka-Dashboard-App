@@ -3,12 +3,13 @@ import Button from "components/global/Button/ButtonComponent";
 const Login = () => {
   return (
     <>
-      <Button preset="primary" variant="primary" size="Medium">
-        Button
+      <Button size="Medium" arrow variant="primary">
+        Primary
       </Button>
-      <Button preset="secondary" variant="secondary">
-        Button
+      <Button size="Large" variant="secondary">
+        Secondary
       </Button>
+      <Button variant="toggle" />
     </>
   );
 };
