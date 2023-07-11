@@ -1,12 +1,13 @@
 import { styled } from "styled-components"
-import { TypographyProps } from "./Typography"
 
 interface StylingProps {
     color?: string
 }
 
-const TypographyComponent = styled.div`
-  font-family: ${({ theme }) => theme.font.primary};
+const TypographyComponent = styled.div<StylingProps>`
+    font-family: ${({ theme }) => theme.font.primary};
+    color: ${({ color }) => color};
+
     &.Heading30Semi {
         font-weight: ${({ theme }) => theme.weight.semiBold};
         font-size: 3rem;

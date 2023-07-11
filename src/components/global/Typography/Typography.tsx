@@ -2,7 +2,7 @@ import React from "react";
 import TypographyComponent from "./Typography.styled";
 
 export interface TypographyProps {
-  tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
   variant?: string;
   children?: React.ReactNode;
   color?: string;
@@ -10,7 +10,7 @@ export interface TypographyProps {
 
 const Typography = ({ tag, variant, children, color }: TypographyProps) => {
   return (
-    <TypographyComponent as={tag} className={variant}>
+    <TypographyComponent as={tag} className={variant} color={color}>
       {children}
     </TypographyComponent>
   );
