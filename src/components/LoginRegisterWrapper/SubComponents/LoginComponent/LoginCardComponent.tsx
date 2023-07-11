@@ -4,9 +4,11 @@ import theme from "layout/theme";
 
 interface LoginCardProps {
   children?: React.ReactNode;
+  title: string;
+  subtitle: string;
 }
 
-const LoginCardComponent = ({ children }: LoginCardProps) => {
+const LoginCardComponent = ({ children, title, subtitle }: LoginCardProps) => {
   return (
     <S.Wrapper>
       <Typography
@@ -14,10 +16,10 @@ const LoginCardComponent = ({ children }: LoginCardProps) => {
         color={theme.colors.primaryPr800}
         margin="0 0 .5rem 0"
       >
-        Zaloguj się
+        {title}
       </Typography>
       <Typography variant="Paragraph14Reg" color={theme.colors.midGray2}>
-        Witaj ponownie!
+        {subtitle}
       </Typography>
       {children}
     </S.Wrapper>

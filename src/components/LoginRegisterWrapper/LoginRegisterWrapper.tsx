@@ -21,9 +21,7 @@ const LoginRegisterWrapper = ({ children }: Props) => {
           </Typography>
         </ButtonComponent>
       </S.Navigation>
-      <S.LoginContainer>
-        <LoginCardComponent />
-      </S.LoginContainer>
+      <S.LoginContainer>{children}</S.LoginContainer>
       <S.ImageContainer>
         <WomenWithCat />
       </S.ImageContainer>

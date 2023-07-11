@@ -1,26 +1,13 @@
 import StyledInputComponent from "./InputComponent.styled";
-import theme from "layout/theme";
 
 export interface InputProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode | React.ReactNode[];
-  size?: "XLarge" | "Large" | "Medium";
-  arrow?: boolean;
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  variant?: "XLarge" | "Large" | "Medium";
   disabled?: boolean;
-  variant?: string;
 }
-const InputComponent = ({
-  children,
-  arrow,
-  size,
-  variant,
-  ...props
-}: InputProps) => {
-  return (
-    <StyledInputComponent {...props} size={size} className={`${variant}`}>
-      {children}
-    </StyledInputComponent>
-  );
+
+const InputComponent = ({ variant, ...props }: InputProps) => {
+  return <StyledInputComponent {...props} variant={variant} />;
 };
 
 export default InputComponent;
