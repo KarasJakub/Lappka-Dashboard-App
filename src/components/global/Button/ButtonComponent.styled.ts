@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 
   interface StylingProps {
     size?: string
+    margin?: string
   }
 
 const ButtonComponent = styled.button<StylingProps>`
@@ -11,6 +12,7 @@ const ButtonComponent = styled.button<StylingProps>`
   font-weight: ${({ theme }) => theme.weight.medium};
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: .3rem;
   cursor: pointer;
   padding: 0;
@@ -18,6 +20,7 @@ const ButtonComponent = styled.button<StylingProps>`
   padding: ${({ size }) => size === "Large" ? ".8rem 1.6rem" : ""};
   padding: ${({ size }) => size === "XLarge" ? "1.2rem 1.6rem" : ""};
   font-size: ${({ size }) => size === "Medium" ? "1.4rem" : "1.6rem"};
+  margin: ${({ margin }) => margin};
 
   &.primary {
     color: ${({ theme }) => theme.colors.white};

@@ -22,7 +22,7 @@ const ParentCardComponent = ({
       >
         {title}
       </Typography>
-      <Typography variant="Paragraph14Reg" color={theme.colors.midGray2}>
+      <Typography variant="UIText14Reg" color={theme.colors.midGray2} tag="p">
         {subtitle}
       </Typography>
       {children}

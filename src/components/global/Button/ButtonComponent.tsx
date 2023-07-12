@@ -10,8 +10,16 @@ export interface ButtonProps
   arrow?: boolean;
   disabled?: boolean;
   variant?: string;
+  margin?: string;
 }
-const Button = ({ children, arrow, size, variant, ...props }: ButtonProps) => {
+const Button = ({
+  children,
+  arrow,
+  size,
+  variant,
+  margin,
+  ...props
+}: ButtonProps) => {
   const [toggleState, setToggleState] = useState(false);
 
   const handleToggle = () => {
@@ -24,6 +32,7 @@ const Button = ({ children, arrow, size, variant, ...props }: ButtonProps) => {
       size={size}
       className={`${variant} ${toggleState ? "on" : "off"}`}
       onClick={handleToggle}
+      margin={margin}
     >
       {children}
       <ArrowRightIcon
