@@ -59,3 +59,14 @@ export const MultiLoginHeading = styled.div`
         background-color: ${({ theme }) => theme.colors.lightGray4};
     }
 `
+
+export const ButtonsWrapper = styled.div`
+    margin-top: 2.4rem;
+    display: flex;
+    gap: 1.6rem;
+`
+
+export const SocialButtonWrapper = styled.div`
+    width: 50%;
+
+`

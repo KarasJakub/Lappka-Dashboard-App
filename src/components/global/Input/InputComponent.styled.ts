@@ -19,6 +19,7 @@ const StyledInputComponent = styled.input<StylingProps>`
   margin: ${({ margin }) => margin};
 
     &:focus {
+        outline: none;
         border: 1px solid ${({ theme }) => theme.colors.statusFocus};
     }
 

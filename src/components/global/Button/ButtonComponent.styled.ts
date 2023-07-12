@@ -6,7 +6,8 @@ import { styled } from 'styled-components'
   }
 
 const ButtonComponent = styled.button<StylingProps>`
-  border-radius: .3rem;
+  width: 100%;
+  border-radius: .8rem;
   border: none;
   font-family: ${({ theme }) => theme.font.primary};
   font-weight: ${({ theme }) => theme.weight.medium};
@@ -42,6 +43,36 @@ const ButtonComponent = styled.button<StylingProps>`
 
     &:hover {
       background-color: ${({ theme }) => theme.colors.lightGray2};
+    }
+
+    &:disabled {
+      background-color: ${({ theme }) => theme.colors.darkGray2};
+    }
+  }
+
+  &.google {
+    color: rgba(0, 0, 0, .54);
+    background-color: ${({ theme }) => theme.colors.white};
+    border: none;
+    box-shadow: 0px 1px 3px 0px rgba(66, 68, 90, .5);
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.lightGray2};
+    }
+
+    &:disabled {
+      background-color: ${({ theme }) => theme.colors.darkGray2};
+    }
+  }
+
+  &.facebook {
+    color: ${({ theme }) => theme.colors.white};
+    background-color: rgb(24, 119, 242);
+    border: none;
+    box-shadow: 0px 1px 3px 0px rgba(66, 68, 90, .5);
+
+    &:hover {
+      background-color: rgb(19, 103, 212);
     }
 
     &:disabled {

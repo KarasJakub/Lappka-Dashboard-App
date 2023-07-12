@@ -3,6 +3,8 @@ import InputComponent from "components/global/Input/InputComponent";
 import Typography from "components/global/Typography/Typography";
 import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 import theme from "layout/theme";
+import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg";
+import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg";
 
 const FormContentLogin = () => {
   return (
@@ -53,6 +55,32 @@ const FormContentLogin = () => {
           Lub zaloguj się przez
         </Typography>
       </S.MultiLoginHeading>
+      <S.ButtonsWrapper>
+        <S.SocialButtonWrapper>
+          <ButtonComponent size="XLarge" className="google">
+            <GoogleIcon style={{ marginRight: "1.5rem" }} />
+            <Typography
+              tag="p"
+              variant="UIText16MediumButton"
+              color="rgba(0, 0, 0, .54)"
+            >
+              Google
+            </Typography>
+          </ButtonComponent>
+        </S.SocialButtonWrapper>
+        <S.SocialButtonWrapper>
+          <ButtonComponent size="XLarge" className="facebook">
+            <FacebookIcon style={{ marginRight: "1.5rem" }} />
+            <Typography
+              tag="p"
+              variant="UIText16MediumButton"
+              color={theme.colors.white}
+            >
+              Facebook
+            </Typography>
+          </ButtonComponent>
+        </S.SocialButtonWrapper>
+      </S.ButtonsWrapper>
     </S.Form>
   );
 };
