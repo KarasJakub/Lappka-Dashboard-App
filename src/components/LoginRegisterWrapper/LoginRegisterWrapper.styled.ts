@@ -9,11 +9,12 @@ export const Navigation = styled.nav`
     width: 100%;
     position: fixed;
     top: 0;
+    /* left: 50%;
+    transform: translateX(-50%); */
     display: flex;
     justify-content: space-between;
     /* max-width: 120rem; */
     margin: 0 auto;
-    /* padding: 4rem; */
 `
 
 export const LoginContainer = styled.div`

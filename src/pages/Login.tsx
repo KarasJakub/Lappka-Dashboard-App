@@ -1,16 +1,15 @@
 import LoginRegisterWrapper from "components/LoginRegisterWrapper/LoginRegisterWrapper";
-import LoginCardComponent from "components/LoginRegisterWrapper/SubComponents/LoginComponent/LoginCardComponent";
+import ParentCardComponent from "components/LoginRegisterWrapper/SubComponents/LoginComponent/ParentCardComponent";
 import InputComponent from "components/global/Input/InputComponent";
-import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 
 const Login = () => {
   return (
     <>
       <LoginRegisterWrapper>
-        <LoginCardComponent title="Zaloguj się" subtitle="Witaj ponownie!">
+        <ParentCardComponent title="Zaloguj się" subtitle="Witaj ponownie!">
           <InputComponent variant="XLarge" placeholder="Adres email" />
           <InputComponent variant="XLarge" placeholder="Wpisz" />
-        </LoginCardComponent>
+        </ParentCardComponent>
       </LoginRegisterWrapper>
     </>
   );

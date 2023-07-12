@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import Login from "pages/Login";
 import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
+import GlobalStyles from "layout/GlobalStyles";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           rel="stylesheet"
         />
       </Helmet>
+      <GlobalStyles />
       <ThemeProvider theme={theme}>
         <Login />
       </ThemeProvider>

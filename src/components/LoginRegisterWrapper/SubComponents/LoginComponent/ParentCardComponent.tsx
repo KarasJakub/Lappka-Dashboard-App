@@ -1,14 +1,18 @@
-import * as S from "./LoginCardComponent.styled";
+import * as S from "./ParentCardComponent.styled";
 import Typography from "components/global/Typography/Typography";
 import theme from "layout/theme";
 
-interface LoginCardProps {
+interface ParentCardComponentProps {
   children?: React.ReactNode;
   title: string;
   subtitle: string;
 }
 
-const LoginCardComponent = ({ children, title, subtitle }: LoginCardProps) => {
+const ParentCardComponent = ({
+  children,
+  title,
+  subtitle,
+}: ParentCardComponentProps) => {
   return (
     <S.Wrapper>
       <Typography
@@ -26,4 +30,4 @@ const LoginCardComponent = ({ children, title, subtitle }: LoginCardProps) => {
   );
 };
 
-export default LoginCardComponent;
+export default ParentCardComponent;

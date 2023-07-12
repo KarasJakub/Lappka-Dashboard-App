@@ -4,7 +4,6 @@ import Typography from "components/global/Typography/Typography";
 import { ReactComponent as CompanyLogo } from "assets/icons/CompanyLogo.svg";
 import { ReactComponent as WomenWithCat } from "assets/photos/WomenWithCat.svg";
 import ButtonComponent from "components/global/Button/ButtonComponent.styled";
-import LoginCardComponent from "./SubComponents/LoginComponent/LoginCardComponent";
 
 interface Props {
   children?: React.ReactNode;
