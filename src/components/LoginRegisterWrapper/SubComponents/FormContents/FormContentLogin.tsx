@@ -1,3 +1,4 @@
+import React from "react";
 import * as S from "./FormContentLogin.syled";
 import InputComponent from "components/global/Input/InputComponent";
 import Typography from "components/global/Typography/Typography";
@@ -5,8 +6,11 @@ import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 import theme from "layout/theme";
 import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg";
 import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg";
+import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 
 const FormContentLogin = () => {
+  const ResponsiveString = useResponsiveProps();
+
   return (
     <S.Form>
       <Typography tag="p" variant="UIText13Med" margin="0 0 .4rem 0">
@@ -44,7 +48,7 @@ const FormContentLogin = () => {
         className="primary"
         size="XLarge"
         style={{ width: "100%" }}
-        margin="3.2rem 0 2.4rem 0"
+        margin={ResponsiveString}
       >
         <Typography tag="p" variant="UIText16MediumButton">
           Zaloguj się

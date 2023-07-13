@@ -7,10 +7,10 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode | React.ReactNode[];
   size?: "XLarge" | "Large" | "Medium";
+  margin?: "XLarge" | "Large" | "Medium";
   arrow?: boolean;
   disabled?: boolean;
   variant?: string;
-  margin?: string;
 }
 const Button = ({
   children,

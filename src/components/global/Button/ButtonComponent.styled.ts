@@ -21,7 +21,9 @@ const ButtonComponent = styled.button<StylingProps>`
   padding: ${({ size }) => size === "Large" ? ".8rem 1.6rem" : ""};
   padding: ${({ size }) => size === "XLarge" ? "1.2rem 1.6rem" : ""};
   font-size: ${({ size }) => size === "Medium" ? "1.4rem" : "1.6rem"};
-  margin: ${({ margin }) => margin};
+  margin: ${({ margin }) => margin === "XLarge" ? "3.2rem 0 0 0" : ""};
+  margin: ${({ margin }) => margin === "Large" ? "2.4rem 0 0 0" : ""};
+  margin: ${({ margin }) => margin === "Medium" ? "1.6rem 0 0 0" : ""};
 
   &.primary {
     color: ${({ theme }) => theme.colors.white};
