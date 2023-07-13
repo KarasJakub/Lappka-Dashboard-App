@@ -1,4 +1,3 @@
-import React from "react";
 import * as S from "./FormContentLogin.syled";
 import InputComponent from "components/global/Input/InputComponent";
 import Typography from "components/global/Typography/Typography";
@@ -7,30 +6,63 @@ import theme from "layout/theme";
 import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg";
 import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg";
 import useResponsiveProps from "helpers/hooks/useResponsiveProps";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+export type FormData = {
+  email: string;
+  password: string;
+};
+
+const schema = yup.object({
+  email: yup.string().required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
 
 const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+  };
+
   return (
-    <S.Form>
+    <S.Form onSubmit={handleSubmit(onSubmit)}>
       <Typography tag="p" variant="UIText13Med" margin="0 0 .4rem 0">
         E-mail
       </Typography>
       <InputComponent
-        variant="XLarge"
+        // variant="XLarge"
         placeholder="Adres email"
         type="text"
-        margin="Medium"
+        // margin="Medium"
+        {...register("email")}
       />
+      {errors.email && <p>{errors.email.message}</p>}
       <Typography tag="p" variant="UIText13Med" margin="0 0 .4rem 0">
         Hasło
       </Typography>
-      <InputComponent
+      {/* <InputComponent
         variant="XLarge"
         placeholder="Wpisz"
         type="password"
         margin="Medium"
+        // {...register("password")}
       />
+      {errors.password && <p>{errors.password.message}</p>} */}
       <S.AdditionalOptionsWrapper>
         <S.CheckBoxWrapper>
           <S.Checkbox type="checkbox" id="checkbox" />
@@ -48,6 +80,7 @@ const FormContentLogin = () => {
         className="primary"
         size="XLarge"
         margin={ResponsiveString}
+        type="submit"
       >
         <Typography tag="p" variant="UIText16MediumButton">
           Zaloguj się

@@ -35,5 +35,9 @@ export const StyledInputComponent = styled.input<StylingProps>`
     &:disabled {
         background-color: ${({ theme }) => theme.colors.lightGray4};
     }
+
+    &:checked {
+      background-color: pink;
+    }
 `
 
