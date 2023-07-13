@@ -34,6 +34,7 @@ export const MultiLoginHeading = styled.div`
     display: flex;
     justify-content: center;
     position: relative;
+    margin-top: 2.4rem;
 
     &:before {
         content: '';

@@ -4,6 +4,7 @@ import Typography from "components/global/Typography/Typography";
 import { ReactComponent as CompanyLogo } from "assets/icons/CompanyLogo.svg";
 import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 import { ReactComponent as CloseIcon } from "assets/icons/CloseButtonIcon.svg";
+import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 
 interface Props {
   children?: React.ReactNode;
@@ -11,17 +12,19 @@ interface Props {
 }
 
 const LoginRegisterWrapper = ({ children, photo }: Props) => {
+  const ResponsiveString = useResponsiveProps();
+
   return (
     <S.LoginRegisterWrapper>
       <S.Navigation>
         <CompanyLogo />
         <S.ButtonsWrapper>
-          <ButtonComponent className="secondary" size="Large">
+          <ButtonComponent className="secondary" size={ResponsiveString}>
             <Typography tag="p" variant="UIText16MediumButton">
               Zarejestruj się
             </Typography>
           </ButtonComponent>
-          <ButtonComponent>
+          <ButtonComponent style={{ width: "unset" }}>
             <CloseIcon />
           </ButtonComponent>
         </S.ButtonsWrapper>

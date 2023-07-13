@@ -33,8 +33,9 @@ export const LoginContainer = styled.div`
     place-items: center;
     padding: 15rem 2rem 0 2rem;
 
-    ${({ theme }) => theme.MQ.desktop} {
+    ${({ theme }) => theme.MQ.laptop} {
         width: 50%;
+        padding: unset;
     }
 `
 

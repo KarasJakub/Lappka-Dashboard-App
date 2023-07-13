@@ -47,7 +47,6 @@ const FormContentLogin = () => {
       <ButtonComponent
         className="primary"
         size="XLarge"
-        style={{ width: "100%" }}
         margin={ResponsiveString}
       >
         <Typography tag="p" variant="UIText16MediumButton">
