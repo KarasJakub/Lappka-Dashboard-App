@@ -1,4 +1,5 @@
-import StyledInputComponent from "./InputComponent.styled";
+import * as S from "./InputComponent.styled";
+import { ReactComponent as CrossedEyeIcon } from "assets/icons/CrossedEyeIcon.svg";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -15,12 +16,15 @@ const InputComponent = ({
   ...props
 }: InputProps) => {
   return (
-    <StyledInputComponent
+    // <S.StyledInputComponentWrapper>
+    <S.StyledInputComponent
       {...props}
       variant={variant}
       maxWidth={maxWidth}
       margin={margin}
     />
+    // <CrossedEyeIcon />
+    // </S.StyledInputComponentWrapper>
   );
 };
 

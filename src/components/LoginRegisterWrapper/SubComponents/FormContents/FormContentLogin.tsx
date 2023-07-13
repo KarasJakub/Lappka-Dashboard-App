@@ -6,6 +6,7 @@ import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 import theme from "layout/theme";
 import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg";
 import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg";
+import { ReactComponent as CrossedEyeIcon } from "assets/icons/CrossedEyeIcon.svg";
 import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 
 const FormContentLogin = () => {
@@ -30,6 +31,7 @@ const FormContentLogin = () => {
         placeholder="Wpisz"
         type="password"
         margin="0 0 1.6rem 0"
+        required
       />
       <S.AdditionalOptionsWrapper>
         <S.CheckBoxWrapper>

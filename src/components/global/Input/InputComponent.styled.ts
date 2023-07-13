@@ -6,7 +6,15 @@ import { styled } from 'styled-components'
     margin?: string
   }
 
-const StyledInputComponent = styled.input<StylingProps>`
+export const StyledInputComponentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`
+
+export const StyledInputComponent = styled.input<StylingProps>`
+  /* position: absolute; */
+  /* right: 0; */
   padding: ${({ variant }) => variant === "XLarge" ? "1.2rem 1.6rem" : ""};
   padding: ${({ variant }) => variant === "Large" ? ".8rem 1.6rem" : ""};
   padding: ${({ variant }) => variant === "Medium" ? ".4rem 1.2rem" : ""};
@@ -28,4 +36,3 @@ const StyledInputComponent = styled.input<StylingProps>`
     }
 `
 
-export default StyledInputComponent

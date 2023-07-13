@@ -20,7 +20,7 @@ export const Navigation = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 112rem;
+    max-width: 120rem;
 
     ${({ theme }) => theme.MQ.desktop} {
         max-width: 140rem;
@@ -31,7 +31,7 @@ export const LoginContainer = styled.div`
     width: 100%;
     display: grid;
     place-items: center;
-    padding: 15rem 2rem 0 2rem;
+    padding: 10rem 2rem 0 2rem;
 
     ${({ theme }) => theme.MQ.laptop} {
         width: 50%;
