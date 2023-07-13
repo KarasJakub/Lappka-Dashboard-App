@@ -18,6 +18,7 @@ export const StyledInputComponent = styled.input<StylingProps>`
   padding: ${({ variant }) => variant === "XLarge" ? "1.2rem 1.6rem" : ""};
   padding: ${({ variant }) => variant === "Large" ? ".8rem 1.6rem" : ""};
   padding: ${({ variant }) => variant === "Medium" ? ".4rem 1.2rem" : ""};
+  margin: ${({ margin }) => margin === "Medium" ? "0 0 1.6rem 0" : ""};
   font-size: 1.4rem;
   border: none;
   border: 1px solid ${({ theme }) => theme.colors.lightGray1};

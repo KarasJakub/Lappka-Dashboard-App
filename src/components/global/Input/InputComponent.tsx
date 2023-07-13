@@ -4,9 +4,9 @@ import { ReactComponent as CrossedEyeIcon } from "assets/icons/CrossedEyeIcon.sv
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: "XLarge" | "Large" | "Medium";
+  margin?: "XLarge" | "Large" | "Medium";
   disabled?: boolean;
   maxWidth?: string;
-  margin?: string;
 }
 
 const InputComponent = ({
