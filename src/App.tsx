@@ -1,6 +1,9 @@
 import { Helmet } from "react-helmet";
 import Login from "pages/Login";
 import ResetPassword from "pages/ResetPassword";
+import ResetPasswordThanks from "pages/ResetPasswordThanks";
+import SetNewPassword from "pages/SetNewPassword";
+import SetNewPasswordEnd from "pages/SetNewPasswordEnd";
 import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
@@ -22,6 +25,12 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route
+              path="/resetpasswordthanks"
+              element={<ResetPasswordThanks />}
+            />
+            <Route path="/setnewpassword" element={<SetNewPassword />} />
+            <Route path="/setnewpasswordend" element={<SetNewPasswordEnd />} />
             <Route path="/" element={<Login />} />
           </Routes>
         </Router>

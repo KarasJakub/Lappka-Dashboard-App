@@ -8,17 +8,29 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 
 export interface FormData {
-  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 const schema = yup.object({
-  email: yup
+  password: yup
     .string()
-    .email("Nieprawidłowy adres email")
-    .required("Email jest wymagany"),
+    .min(8, "Hasło musi zawierac co najmniej 8 znaków")
+    .max(32, "Hasło nie może zawierać więcej jak 32 znaki")
+    .required("Hasło jest wymagane"),
+  confirmPassword: yup
+    .string()
+    .required("Hasło jest wymagane")
+    .test({
+      name: "password-match",
+      message: "Hasła nie są takie same",
+      test: function (value) {
+        return this.parent.password === value;
+      },
+    }),
 });
 
-const FormContentResetPassword = () => {
+const FormContentSetNewPassword = () => {
   const navigate = useNavigate();
   const {
     register,
@@ -26,29 +38,43 @@ const FormContentResetPassword = () => {
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
-      email: "",
+      password: "",
+      confirmPassword: "",
     },
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data: FormData) => {
     console.log(data);
-    navigate("/ResetPasswordThanks");
+    navigate("/setnewpasswordend");
   };
 
   return (
     <>
       <S.Form onSubmit={handleSubmit(onSubmit)}>
         <Typography tag="p" variant="UIText13Med" margin="Medium">
-          E-mail
+          Hasło
         </Typography>
         <InputComponent
           variant="XLarge"
-          placeholder="Adres email"
+          placeholder="Wpisz"
           type="text"
           margin="Medium"
-          {...register("email")}
-          formInfo={errors.email ? errors.email.message : ""}
+          {...register("password")}
+          formInfo={errors.password ? errors.password.message : ""}
+        />
+        <Typography tag="p" variant="UIText13Med" margin="Medium">
+          Potwierdź hasło
+        </Typography>
+        <InputComponent
+          variant="XLarge"
+          placeholder="Wpisz"
+          type="text"
+          margin="Medium"
+          {...register("confirmPassword")}
+          formInfo={
+            errors.confirmPassword ? errors.confirmPassword.message : ""
+          }
         />
         <ButtonComponent
           className="primary"
@@ -57,7 +83,7 @@ const FormContentResetPassword = () => {
           type="submit"
         >
           <Typography tag="p" variant="UIText16MediumButton">
-            Resetuj hasło
+            Utwórz nowe hasło
           </Typography>
         </ButtonComponent>
       </S.Form>
@@ -65,4 +91,4 @@ const FormContentResetPassword = () => {
   );
 };
 
-export default FormContentResetPassword;
+export default FormContentSetNewPassword;
