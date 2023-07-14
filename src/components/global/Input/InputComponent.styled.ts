@@ -6,6 +6,14 @@ import { styled } from 'styled-components'
     margin?: string
   }
 
+export const StyledInputTextWrapper = styled.div`
+  width: 100%;
+`
+
+export const Information = styled.div`
+  margin: -1rem 0 1rem 0;
+`
+
 export const StyledInputComponentWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -13,8 +21,8 @@ export const StyledInputComponentWrapper = styled.div`
 `
 
 export const StyledInputComponent = styled.input<StylingProps>`
-  /* position: absolute; */
-  /* right: 0; */
+  /* position: absolute;
+  right: 0; */
   padding: ${({ variant }) => variant === "XLarge" ? "1.2rem 1.6rem" : ""};
   padding: ${({ variant }) => variant === "Large" ? ".8rem 1.6rem" : ""};
   padding: ${({ variant }) => variant === "Medium" ? ".4rem 1.2rem" : ""};

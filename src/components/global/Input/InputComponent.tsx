@@ -1,8 +1,9 @@
 import * as S from "./InputComponent.styled";
 import { ReactComponent as CrossedEyeIcon } from "assets/icons/CrossedEyeIcon.svg";
-import React, { forwardRef } from "react";
-import { RegisterOptions, FieldValues } from "react-hook-form";
+import React from "react";
 import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin";
+import { UseFormRegister } from "react-hook-form";
+import Typography from "../Typography/Typography";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -10,45 +11,30 @@ export interface InputProps
   margin?: "XLarge" | "Large" | "Medium";
   disabled?: boolean;
   maxWidth?: string;
-  register?: RegisterOptions<FormData>;
+  register?: UseFormRegister<FormData>;
+  formInfo?: string;
 }
 
-// const InputComponent = ({
-//   variant,
-//   maxWidth,
-//   margin,
-//   ...props
-// }: InputProps) => {
-//   return (
-//     // <S.StyledInputComponentWrapper>
-//     <S.StyledInputComponent
-//       {...props}
-//       variant={variant}
-//       maxWidth={maxWidth}
-//       margin={margin}
-//     />
-//     // <CrossedEyeIcon />
-//     // </S.StyledInputComponentWrapper>
-//   );
-// };
-
-const InputComponent: React.ForwardRefRenderFunction<
-  HTMLInputElement,
-  InputProps
-> = ({ variant, maxWidth, margin, register, ...props }, ref) => {
-  return (
-    // <S.StyledInputComponentWrapper>
-    <S.StyledInputComponent
-      ref={ref}
-      variant={variant}
-      maxWidth={maxWidth}
-      margin={margin}
-      {...register}
-      {...props}
-    />
-    // <CrossedEyeIcon />
-    // </S.StyledInputComponentWrapper>
-  );
-};
+const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ variant, maxWidth, margin, register, formInfo, ...props }, ref) => (
+    <>
+      <S.StyledInputComponentWrapper>
+        <S.StyledInputTextWrapper>
+          <S.StyledInputComponent
+            ref={ref}
+            variant={variant}
+            maxWidth={maxWidth}
+            margin={margin}
+            {...register}
+            {...props}
+          />
+          <S.Information>
+            <Typography variant="UIText12Reg">{formInfo}</Typography>
+          </S.Information>
+        </S.StyledInputTextWrapper>
+      </S.StyledInputComponentWrapper>
+    </>
+  )
+);
 
 export default InputComponent;

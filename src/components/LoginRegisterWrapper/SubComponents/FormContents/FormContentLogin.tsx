@@ -9,19 +9,34 @@ import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import React, { useState, ChangeEvent } from "react";
 
-export type FormData = {
+export interface FormData {
   email: string;
   password: string;
-};
+}
 
 const schema = yup.object({
-  email: yup.string().required("Email is required"),
-  password: yup.string().required("Password is required"),
+  email: yup
+    .string()
+    .email("Nieprawidłowy adres email")
+    .required("Email jest wymagany"),
+  password: yup
+    .string()
+    .min(8, "Hasło musi zawierac co najmniej 8 znaków")
+    .max(32, "Hasło nie może zawierać więcej jak 32 znaki")
+    .required("Hasło jest wymagane"),
 });
 
 const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps();
+
+  const [isChecked, setIsChecked] = React.useState(false);
+
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(!event.target.checked);
+    console.log(isChecked);
+  };
 
   const {
     register,
@@ -45,27 +60,32 @@ const FormContentLogin = () => {
         E-mail
       </Typography>
       <InputComponent
-        // variant="XLarge"
+        variant="XLarge"
         placeholder="Adres email"
         type="text"
-        // margin="Medium"
+        margin="Medium"
         {...register("email")}
+        formInfo={errors.email ? errors.email.message : ""}
       />
-      {errors.email && <p>{errors.email.message}</p>}
       <Typography tag="p" variant="UIText13Med" margin="0 0 .4rem 0">
         Hasło
       </Typography>
-      {/* <InputComponent
+      <InputComponent
         variant="XLarge"
         placeholder="Wpisz"
         type="password"
         margin="Medium"
-        // {...register("password")}
+        {...register("password")}
+        formInfo={errors.password ? errors.password.message : ""}
       />
-      {errors.password && <p>{errors.password.message}</p>} */}
       <S.AdditionalOptionsWrapper>
         <S.CheckBoxWrapper>
-          <S.Checkbox type="checkbox" id="checkbox" />
+          <S.Checkbox
+            type="checkbox"
+            id="checkbox"
+            defaultChecked={isChecked}
+            onChange={handleCheckboxChange}
+          />
           <Typography tag="p" variant="UIText14Reg">
             Pamiętaj mnie
           </Typography>
