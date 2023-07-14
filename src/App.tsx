@@ -1,8 +1,10 @@
 import { Helmet } from "react-helmet";
 import Login from "pages/Login";
+import ResetPassword from "pages/ResetPassword";
 import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -16,7 +18,13 @@ function App() {
       </Helmet>
       <GlobalStyles />
       <ThemeProvider theme={theme}>
-        <Login />
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/" element={<Login />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </>
   );
