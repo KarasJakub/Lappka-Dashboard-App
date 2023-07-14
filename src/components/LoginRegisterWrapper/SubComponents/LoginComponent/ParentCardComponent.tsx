@@ -18,7 +18,7 @@ const ParentCardComponent = ({
       <Typography
         variant="Heading30Semi"
         color={theme.colors.primaryPr800}
-        margin="0 0 .5rem 0"
+        margin="Medium"
       >
         {title}
       </Typography>

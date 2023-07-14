@@ -9,7 +9,7 @@ import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import React, { useState, ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 
 export interface FormData {
   email: string;
@@ -55,57 +55,58 @@ const FormContentLogin = () => {
   };
 
   return (
-    <S.Form onSubmit={handleSubmit(onSubmit)}>
-      <Typography tag="p" variant="UIText13Med" margin="0 0 .4rem 0">
-        E-mail
-      </Typography>
-      <InputComponent
-        variant="XLarge"
-        placeholder="Adres email"
-        type="text"
-        margin="Medium"
-        {...register("email")}
-        formInfo={errors.email ? errors.email.message : ""}
-      />
-      <Typography tag="p" variant="UIText13Med" margin="0 0 .4rem 0">
-        Hasło
-      </Typography>
-      <InputComponent
-        variant="XLarge"
-        placeholder="Wpisz"
-        type="password"
-        margin="Medium"
-        {...register("password")}
-        formInfo={errors.password ? errors.password.message : ""}
-      />
-      <S.AdditionalOptionsWrapper>
-        <S.CheckBoxWrapper>
-          <S.Checkbox
-            type="checkbox"
-            id="checkbox"
-            defaultChecked={isChecked}
-            onChange={handleCheckboxChange}
-          />
-          <Typography tag="p" variant="UIText14Reg">
-            Pamiętaj mnie
-          </Typography>
-        </S.CheckBoxWrapper>
-        <S.PasswordLink href="/">
-          <Typography tag="p" variant="UIText14Reg" margin="0 0 .4rem 0">
-            Zapomniałem hasła
-          </Typography>
-        </S.PasswordLink>
-      </S.AdditionalOptionsWrapper>
-      <ButtonComponent
-        className="primary"
-        size="XLarge"
-        margin={ResponsiveString}
-        type="submit"
-      >
-        <Typography tag="p" variant="UIText16MediumButton">
-          Zaloguj się
+    <>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <Typography tag="p" variant="UIText13Med" margin="Medium">
+          E-mail
         </Typography>
-      </ButtonComponent>
+        <InputComponent
+          variant="XLarge"
+          placeholder="Adres email"
+          type="text"
+          margin="Medium"
+          {...register("email")}
+          formInfo={errors.email ? errors.email.message : ""}
+        />
+        <Typography tag="p" variant="UIText13Med" margin="Medium">
+          Hasło
+        </Typography>
+        <InputComponent
+          variant="XLarge"
+          placeholder="Wpisz"
+          type="password"
+          margin="Medium"
+          {...register("password")}
+          formInfo={errors.password ? errors.password.message : ""}
+        />
+        <S.AdditionalOptionsWrapper>
+          <S.CheckBoxWrapper>
+            <S.Checkbox
+              type="checkbox"
+              id="checkbox"
+              onChange={handleCheckboxChange}
+            />
+            <Typography tag="p" variant="UIText14Reg">
+              Pamiętaj mnie
+            </Typography>
+          </S.CheckBoxWrapper>
+          <S.PasswordLink href="/">
+            <Typography tag="p" variant="UIText14Reg" margin="Medium">
+              Zapomniałem hasła
+            </Typography>
+          </S.PasswordLink>
+        </S.AdditionalOptionsWrapper>
+        <ButtonComponent
+          className="primary"
+          size="XLarge"
+          margin={ResponsiveString}
+          type="submit"
+        >
+          <Typography tag="p" variant="UIText16MediumButton">
+            Zaloguj się
+          </Typography>
+        </ButtonComponent>
+      </S.Form>
       <S.MultiLoginHeading>
         <Typography tag="p" variant="UIText12Reg" color={theme.colors.midGray3}>
           Lub zaloguj się przez
@@ -137,7 +138,7 @@ const FormContentLogin = () => {
           </ButtonComponent>
         </S.SocialButtonWrapper>
       </S.ButtonsWrapper>
-    </S.Form>
+    </>
   );
 };
 

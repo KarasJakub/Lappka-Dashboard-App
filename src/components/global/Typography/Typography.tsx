@@ -6,8 +6,7 @@ export interface TypographyProps {
   variant?: string;
   children?: React.ReactNode;
   color?: string;
-  margin?: string;
-  padding?: string;
+  margin?: "XLarge" | "Large" | "Medium";
 }
 
 const Typography = ({
@@ -16,7 +15,6 @@ const Typography = ({
   children,
   color,
   margin,
-  padding,
 }: TypographyProps) => {
   return (
     <TypographyComponent
@@ -24,7 +22,6 @@ const Typography = ({
       className={variant}
       color={color}
       margin={margin}
-      padding={padding}
     >
       {children}
     </TypographyComponent>

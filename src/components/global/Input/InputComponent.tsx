@@ -1,5 +1,4 @@
 import * as S from "./InputComponent.styled";
-import { ReactComponent as CrossedEyeIcon } from "assets/icons/CrossedEyeIcon.svg";
 import React from "react";
 import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin";
 import { UseFormRegister } from "react-hook-form";

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+
 export const Form = styled.form`
     width: 100%;
     margin: 4rem 0 0 0;
@@ -13,7 +14,7 @@ export const AdditionalOptionsWrapper = styled.div`
 
 export const Checkbox = styled.input`
     &:checked {
-        background-color: pink;
+        background-color: ${({ theme }) => theme.colors.primaryPr500};
     }
 `
 

@@ -10,7 +10,9 @@ const TypographyComponent = styled.p<StylingProps>`
     font-family: ${({ theme }) => theme.font.primary};
     color: ${({ color }) => color};
     margin: ${({ margin }) => margin};
-    padding: ${({ padding }) => padding};
+    margin: ${({ margin }) => margin === "XLarge" ? "3.2rem 0 0 0" : ""};
+    margin: ${({ margin }) => margin === "Large" ? "2.4rem 0 0 0" : ""};
+    margin: ${({ margin }) => margin === "Medium" ? "0 0 .4rem 0" : ""};
 
     &.Heading30Semi {
         font-weight: ${({ theme }) => theme.weight.semiBold};
