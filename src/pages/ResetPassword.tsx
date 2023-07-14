@@ -1,6 +1,7 @@
 import LoginRegisterWrapper from "components/LoginRegisterWrapper/LoginRegisterWrapper";
-import ParentCardComponent from "components/LoginRegisterWrapper/SubComponents/LoginComponent/ParentCardComponent";
+import ParentCardComponent from "components/LoginRegisterWrapper/SubComponents/ParentComponent/ParentCardComponent";
 import { ReactComponent as ManOnHammock } from "assets/photos/ManOnHammock.svg";
+import FormContentResetPassword from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentResetPassword/FormContentResetPassword";
 
 const ResetPassword = () => {
   return (
@@ -9,7 +10,9 @@ const ResetPassword = () => {
         <ParentCardComponent
           title="Zapomniałeś hasła?"
           subtitle="Podaj adres email użyty przy rejestracji."
-        ></ParentCardComponent>
+        >
+          <FormContentResetPassword />
+        </ParentCardComponent>
       </LoginRegisterWrapper>
     </>
   );
