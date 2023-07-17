@@ -5,13 +5,11 @@ import { ReactComponent as WomenWithCat } from "assets/photos/WomenWithCat.svg";
 
 const Login = () => {
   return (
-    <>
-      <LoginRegisterWrapper photo={<WomenWithCat />}>
-        <ParentCardComponent title="Zaloguj się" subtitle="Witaj ponownie!">
-          <FormContentLogin />
-        </ParentCardComponent>
-      </LoginRegisterWrapper>
-    </>
+    <LoginRegisterWrapper photo={<WomenWithCat />}>
+      <ParentCardComponent title="Zaloguj się" subtitle="Witaj ponownie!">
+        <FormContentLogin />
+      </ParentCardComponent>
+    </LoginRegisterWrapper>
   );
 };
 

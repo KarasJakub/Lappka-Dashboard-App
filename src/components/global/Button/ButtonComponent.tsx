@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode | React.ReactNode[];
+  children: React.ReactNode;
   size?: "XLarge" | "Large" | "Medium";
   margin?: "XLarge" | "Large" | "Medium";
   arrow?: boolean;
