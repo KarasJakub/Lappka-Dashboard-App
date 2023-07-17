@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import React, { ChangeEvent } from "react";
+import axios from "axios";
 
 export interface FormData {
   email: string;
