@@ -11,11 +11,11 @@ export interface InputProps
   disabled?: boolean;
   maxWidth?: string;
   register?: UseFormRegister<FormData>;
-  formInfo?: string;
+  error?: string;
 }
 
 const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ variant, maxWidth, margin, register, formInfo, ...props }, ref) => (
+  ({ variant, maxWidth, margin, register, error, ...props }, ref) => (
     <>
       <S.StyledInputComponentWrapper>
         <S.StyledInputTextWrapper>
@@ -28,7 +28,7 @@ const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           <S.Information>
-            <Typography variant="UIText12Reg">{formInfo}</Typography>
+            <Typography variant="UIText12Reg">{error}</Typography>
           </S.Information>
         </S.StyledInputTextWrapper>
       </S.StyledInputComponentWrapper>

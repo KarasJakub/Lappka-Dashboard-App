@@ -24,12 +24,6 @@ export const CheckBoxWrapper = styled.div`
     gap: .8rem;
 `
 
-export const PasswordLink = styled.a`
-    color: ${({ theme }) => theme.colors.primaryPr600};
-    text-underline-offset: .5rem;
-    text-decoration-color: ${({ theme }) => theme.colors.primaryPr500};
-`
-
 export const MultiLoginHeading = styled.div`
     width: 100%;
     display: flex;

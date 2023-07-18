@@ -9,12 +9,12 @@ import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import React, { ChangeEvent } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export interface FormData {
   email: string;
   password: string;
+  checkbox?: boolean;
 }
 
 const schema = yup.object({
@@ -31,13 +31,7 @@ const schema = yup.object({
 
 const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps();
-
-  const [isChecked, setIsChecked] = React.useState(false);
-
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(!event.target.checked);
-    console.log(isChecked);
-  };
+  const navigate = useNavigate();
 
   const {
     register,
@@ -47,6 +41,7 @@ const FormContentLogin = () => {
     defaultValues: {
       email: "",
       password: "",
+      checkbox: true,
     },
     resolver: yupResolver(schema),
   });
@@ -67,7 +62,7 @@ const FormContentLogin = () => {
           type="text"
           margin="Medium"
           {...register("email")}
-          formInfo={errors.email ? errors.email.message : ""}
+          error={errors.email ? errors.email.message : ""}
         />
         <Typography tag="p" variant="UIText13Med" margin="Medium">
           Hasło
@@ -78,24 +73,27 @@ const FormContentLogin = () => {
           type="password"
           margin="Medium"
           {...register("password")}
-          formInfo={errors.password ? errors.password.message : ""}
+          error={errors.password ? errors.password.message : ""}
         />
         <S.AdditionalOptionsWrapper>
           <S.CheckBoxWrapper>
             <S.Checkbox
               type="checkbox"
               id="checkbox"
-              onChange={handleCheckboxChange}
+              {...register("checkbox")}
             />
             <Typography tag="p" variant="UIText14Reg">
               Pamiętaj mnie
             </Typography>
           </S.CheckBoxWrapper>
-          <S.PasswordLink href="/">
+          <ButtonComponent
+            className="underlined"
+            onClick={() => navigate("/setnewpassword")}
+          >
             <Typography tag="p" variant="UIText14Reg" margin="Medium">
               Zapomniałem hasła
             </Typography>
-          </S.PasswordLink>
+          </ButtonComponent>
         </S.AdditionalOptionsWrapper>
         <ButtonComponent
           className="primary"

@@ -48,7 +48,7 @@ const FormContentResetPassword = () => {
           type="text"
           margin="Medium"
           {...register("email")}
-          formInfo={errors.email ? errors.email.message : ""}
+          error={errors.email ? errors.email.message : ""}
         />
         <ButtonComponent
           className="primary"
