@@ -61,7 +61,7 @@ const FormContentSetNewPassword = () => {
           type="text"
           margin="Medium"
           {...register("password")}
-          formInfo={errors.password ? errors.password.message : ""}
+          error={errors.password ? errors.password.message : ""}
         />
         <Typography tag="p" variant="UIText13Med" margin="Medium">
           Potwierdź hasło
@@ -72,9 +72,7 @@ const FormContentSetNewPassword = () => {
           type="text"
           margin="Medium"
           {...register("confirmPassword")}
-          formInfo={
-            errors.confirmPassword ? errors.confirmPassword.message : ""
-          }
+          error={errors.confirmPassword ? errors.confirmPassword.message : ""}
         />
         <ButtonComponent
           className="primary"
