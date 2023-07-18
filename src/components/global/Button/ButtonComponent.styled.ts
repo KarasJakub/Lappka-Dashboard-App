@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { getButtonPaddingSize, getButtonMarginSize } from 'helpers/utils/getStyles'
 
   interface StylingProps {
     size?: string
@@ -16,14 +17,9 @@ const ButtonComponent = styled.button<StylingProps>`
   justify-content: center;
   gap: .3rem;
   cursor: pointer;
-  padding: 0;
-  padding: ${({ size }) => size === "Medium" ? ".4rem 1.2rem" : ""};
-  padding: ${({ size }) => size === "Large" ? ".8rem 1.6rem" : ""};
-  padding: ${({ size }) => size === "XLarge" ? "1.2rem 1.6rem" : ""};
+  padding: ${({ size }) => getButtonPaddingSize(size)};
   font-size: ${({ size }) => size === "Medium" ? "1.4rem" : "1.6rem"};
-  margin: ${({ margin }) => margin === "XLarge" ? "3.2rem 0 0 0" : ""};
-  margin: ${({ margin }) => margin === "Large" ? "2.4rem 0 0 0" : ""};
-  margin: ${({ margin }) => margin === "Medium" ? "1.6rem 0 0 0" : ""};
+  margin: ${({ margin }) => getButtonMarginSize(margin)};
 
   &.primary {
     color: ${({ theme }) => theme.colors.white};

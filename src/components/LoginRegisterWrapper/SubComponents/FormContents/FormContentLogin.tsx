@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import React, { ChangeEvent } from "react";
+import { getButtonPaddingSize } from "helpers/utils/getStyles";
 
 export interface FormData {
   email: string;
@@ -66,7 +67,7 @@ const FormContentLogin = () => {
           type="text"
           margin="Medium"
           {...register("email")}
-          formInfo={errors.email ? errors.email.message : ""}
+          error={errors.email ? errors.email.message : ""}
         />
         <Typography tag="p" variant="UIText13Med" margin="Medium">
           Hasło
@@ -77,7 +78,7 @@ const FormContentLogin = () => {
           type="password"
           margin="Medium"
           {...register("password")}
-          formInfo={errors.password ? errors.password.message : ""}
+          error={errors.password ? errors.password.message : ""}
         />
         <S.AdditionalOptionsWrapper>
           <S.CheckBoxWrapper>
