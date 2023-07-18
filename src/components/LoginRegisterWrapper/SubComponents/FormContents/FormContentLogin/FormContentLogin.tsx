@@ -9,6 +9,7 @@ import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 export interface FormData {
   email: string;
@@ -30,6 +31,7 @@ const schema = yup.object({
 
 const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -84,11 +86,14 @@ const FormContentLogin = () => {
               Pamiętaj mnie
             </Typography>
           </S.CheckBoxWrapper>
-          <S.PasswordLink href="/">
+          <ButtonComponent
+            className="underlined"
+            onClick={() => navigate("/setnewpassword")}
+          >
             <Typography tag="p" variant="UIText14Reg" margin="Medium">
               Zapomniałem hasła
             </Typography>
-          </S.PasswordLink>
+          </ButtonComponent>
         </S.AdditionalOptionsWrapper>
         <ButtonComponent
           className="primary"

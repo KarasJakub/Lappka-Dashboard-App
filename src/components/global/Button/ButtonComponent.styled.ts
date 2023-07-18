@@ -78,6 +78,14 @@ const ButtonComponent = styled.button<StylingProps>`
     }
   }
 
+  &.underlined {
+    color: ${({ theme }) => theme.colors.primaryPr600};
+    text-decoration: underline;
+    text-underline-offset: .5rem;
+    text-decoration-color: ${({ theme }) => theme.colors.primaryPr500};
+    width: unset;
+  }
+
   &.toggle {
     color: ${({ theme }) => theme.colors.black};
     background-color: ${({ theme }) => theme.colors.white};
