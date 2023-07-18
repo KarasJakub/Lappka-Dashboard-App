@@ -4,6 +4,7 @@ import ResetPassword from "pages/ResetPassword";
 import ResetPasswordThanks from "pages/ResetPasswordThanks";
 import SetNewPassword from "pages/SetNewPassword";
 import SetNewPasswordEnd from "pages/SetNewPasswordEnd";
+import Dashboard from "components/protected/Dashboard/Dashboard";
 import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
@@ -32,6 +33,7 @@ function App() {
             <Route path="/setnewpassword" element={<SetNewPassword />} />
             <Route path="/setnewpasswordend" element={<SetNewPasswordEnd />} />
             <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </Router>
       </ThemeProvider>

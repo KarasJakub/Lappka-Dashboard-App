@@ -1,3 +1,4 @@
+import React from "react";
 import { createContext, useReducer } from "react";
 
 interface AuthProps {
@@ -6,27 +7,16 @@ interface AuthProps {
 
 export const AuthContext = createContext({});
 
-export const authReducer = (state: any, action: any) => {
-  switch (action.type) {
-    case "LOGIN":
-      return { user: action.payload };
-    case "LOGOUT":
-      return { user: null };
-    default:
-      return state;
-  }
-};
-
 export const AuthContextProvider = ({ children }: AuthProps) => {
-  const [state, dispatch] = useReducer(authReducer, {
-    user: null,
-  });
+  const [authUser, setAuthUser] = React.useState();
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  console.log("AuthContext state:", state);
+  const value = {
+    authUser,
+    setAuthUser,
+    isLoggedIn,
+    setIsLoggedIn,
+  };
 
-  return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

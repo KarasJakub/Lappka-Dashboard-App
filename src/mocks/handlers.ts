@@ -6,13 +6,13 @@ const user = {
     password: "123456789"
 }
 
-interface LoginBody {
+interface LoginProps {
     email: string;
     password: string;
   }
 
   export const handlers = [
-    rest.post<LoginBody>('/login', async (req, res, ctx) => {
+    rest.post<LoginProps>('/login', async (req, res, ctx) => {
       sessionStorage.setItem('is-authenticated', 'true');
 
       const { email, password } = await req.json();
