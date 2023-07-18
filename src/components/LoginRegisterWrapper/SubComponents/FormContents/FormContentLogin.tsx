@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import React, { ChangeEvent } from "react";
-import { getButtonPaddingSize } from "helpers/utils/getStyles";
 
 export interface FormData {
   email: string;

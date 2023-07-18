@@ -18,8 +18,8 @@ const ButtonComponent = styled.button<StylingProps>`
   gap: .3rem;
   cursor: pointer;
   padding: ${({ size }) => getButtonPaddingSize(size)};
-  font-size: ${({ size }) => size === "Medium" ? "1.4rem" : "1.6rem"};
   margin: ${({ margin }) => getButtonMarginSize(margin)};
+  font-size: ${({ size }) => size === "Medium" ? "1.4rem" : "1.6rem"};
 
   &.primary {
     color: ${({ theme }) => theme.colors.white};

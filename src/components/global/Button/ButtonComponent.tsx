@@ -6,8 +6,8 @@ import { useState } from "react";
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  size?: string;
-  margin?: string;
+  size?: "XLarge" | "Large" | "Medium";
+  margin?: "XLarge" | "Large" | "Medium";
   arrow?: boolean;
   disabled?: boolean;
   variant?: string;

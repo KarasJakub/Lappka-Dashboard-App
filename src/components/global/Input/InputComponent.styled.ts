@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { getInputPaddingSize, getInputMarginSize } from 'helpers/utils/getStyles'
 
   interface StylingProps {
     variant?: string
@@ -23,17 +24,14 @@ export const StyledInputComponentWrapper = styled.div`
 export const StyledInputComponent = styled.input<StylingProps>`
   /* position: absolute;
   right: 0; */
-  padding: ${({ variant }) => variant === "XLarge" ? "1.2rem 1.6rem" : ""};
-  padding: ${({ variant }) => variant === "Large" ? ".8rem 1.6rem" : ""};
-  padding: ${({ variant }) => variant === "Medium" ? ".4rem 1.2rem" : ""};
-  margin: ${({ margin }) => margin === "Medium" ? "0 0 1.6rem 0" : ""};
+  padding: ${({ variant }) => getInputPaddingSize(variant)};
+  margin: ${({ margin }) => getInputMarginSize(margin)};
   font-size: 1.4rem;
   border: none;
   border: 1px solid ${({ theme }) => theme.colors.lightGray1};
   border-radius: .5rem;
   width: 100%;
   max-width: ${({ maxWidth }) => maxWidth};
-  margin: ${({ margin }) => margin};
 
     &:focus {
         outline: none;
