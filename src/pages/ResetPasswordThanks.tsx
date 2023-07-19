@@ -5,16 +5,14 @@ import FormContentResetPasswordThanks from "components/LoginRegisterWrapper/SubC
 
 const ResetPasswordThanks = () => {
   return (
-    <>
-      <LoginRegisterWrapper photo={<ManOnHammock />}>
-        <ParentCardComponent
-          title="Dziękujemy"
-          subtitle="Wysłalismy na adres email link do stworzenia nowego hasła."
-        >
-          <FormContentResetPasswordThanks />
-        </ParentCardComponent>
-      </LoginRegisterWrapper>
-    </>
+    <LoginRegisterWrapper photo={<ManOnHammock />}>
+      <ParentCardComponent
+        title="Dziękujemy"
+        subtitle="Wysłalismy na adres email link do stworzenia nowego hasła."
+      >
+        <FormContentResetPasswordThanks />
+      </ParentCardComponent>
+    </LoginRegisterWrapper>
   );
 };
 

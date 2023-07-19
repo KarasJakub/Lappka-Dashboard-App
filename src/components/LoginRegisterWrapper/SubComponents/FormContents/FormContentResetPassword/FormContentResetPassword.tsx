@@ -14,8 +14,8 @@ export interface FormData {
 const schema = yup.object({
   email: yup
     .string()
-    .email("Nieprawidłowy adres email")
-    .required("Email jest wymagany"),
+    .required("Email jest wymagany")
+    .email("Nieprawidłowy adres email"),
 });
 
 const FormContentResetPassword = () => {
@@ -37,31 +37,29 @@ const FormContentResetPassword = () => {
   };
 
   return (
-    <>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <Typography tag="p" variant="UIText13Med" margin="Medium">
-          E-mail
+    <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <Typography tag="p" variant="UIText13Med" margin="Medium">
+        E-mail
+      </Typography>
+      <InputComponent
+        variant="XLarge"
+        placeholder="Adres email"
+        type="text"
+        margin="Medium"
+        {...register("email")}
+        error={errors.email ? errors.email.message : ""}
+      />
+      <ButtonComponent
+        className="primary"
+        size="XLarge"
+        margin="Medium"
+        type="submit"
+      >
+        <Typography tag="p" variant="UIText16MediumButton">
+          Resetuj hasło
         </Typography>
-        <InputComponent
-          variant="XLarge"
-          placeholder="Adres email"
-          type="text"
-          margin="Medium"
-          {...register("email")}
-          error={errors.email ? errors.email.message : ""}
-        />
-        <ButtonComponent
-          className="primary"
-          size="XLarge"
-          margin="Medium"
-          type="submit"
-        >
-          <Typography tag="p" variant="UIText16MediumButton">
-            Resetuj hasło
-          </Typography>
-        </ButtonComponent>
-      </S.Form>
-    </>
+      </ButtonComponent>
+    </S.Form>
   );
 };
 

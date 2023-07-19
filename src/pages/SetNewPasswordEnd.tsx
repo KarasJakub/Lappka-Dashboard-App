@@ -5,16 +5,14 @@ import FormContentSetNewPasswordEnd from "components/LoginRegisterWrapper/SubCom
 
 const SetNewPasswordEnd = () => {
   return (
-    <>
-      <LoginRegisterWrapper photo={<ManOnHammock />}>
-        <ParentCardComponent
-          title="Hasło zrestartowane pomyślnie"
-          subtitle="Twoje hasło zostało zresetowane. Możesz już zalogować się do swojego konta."
-        >
-          <FormContentSetNewPasswordEnd />
-        </ParentCardComponent>
-      </LoginRegisterWrapper>
-    </>
+    <LoginRegisterWrapper photo={<ManOnHammock />}>
+      <ParentCardComponent
+        title="Hasło zrestartowane pomyślnie"
+        subtitle="Twoje hasło zostało zresetowane. Możesz już zalogować się do swojego konta."
+      >
+        <FormContentSetNewPasswordEnd />
+      </ParentCardComponent>
+    </LoginRegisterWrapper>
   );
 };
 

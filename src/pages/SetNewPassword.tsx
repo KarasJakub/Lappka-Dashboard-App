@@ -5,16 +5,14 @@ import FormContentSetNewPassword from "components/LoginRegisterWrapper/SubCompon
 
 const SetNewPassword = () => {
   return (
-    <>
-      <LoginRegisterWrapper photo={<ManOnHammock />}>
-        <ParentCardComponent
-          title="Utwórz nowe hasło"
-          subtitle="Hasło powinno mieć m.in. 8 znaków."
-        >
-          <FormContentSetNewPassword />
-        </ParentCardComponent>
-      </LoginRegisterWrapper>
-    </>
+    <LoginRegisterWrapper photo={<ManOnHammock />}>
+      <ParentCardComponent
+        title="Utwórz nowe hasło"
+        subtitle="Hasło powinno mieć m.in. 8 znaków."
+      >
+        <FormContentSetNewPassword />
+      </ParentCardComponent>
+    </LoginRegisterWrapper>
   );
 };
 

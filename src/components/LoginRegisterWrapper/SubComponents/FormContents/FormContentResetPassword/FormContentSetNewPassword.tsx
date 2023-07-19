@@ -50,42 +50,40 @@ const FormContentSetNewPassword = () => {
   };
 
   return (
-    <>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <Typography tag="p" variant="UIText13Med" margin="Medium">
-          Hasło
+    <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <Typography tag="p" variant="UIText13Med" margin="Medium">
+        Hasło
+      </Typography>
+      <InputComponent
+        variant="XLarge"
+        placeholder="Wpisz"
+        type="text"
+        margin="Medium"
+        {...register("password")}
+        error={errors.password ? errors.password.message : ""}
+      />
+      <Typography tag="p" variant="UIText13Med" margin="Medium">
+        Potwierdź hasło
+      </Typography>
+      <InputComponent
+        variant="XLarge"
+        placeholder="Wpisz"
+        type="text"
+        margin="Medium"
+        {...register("confirmPassword")}
+        error={errors.confirmPassword ? errors.confirmPassword.message : ""}
+      />
+      <ButtonComponent
+        className="primary"
+        size="XLarge"
+        margin="Medium"
+        type="submit"
+      >
+        <Typography tag="p" variant="UIText16MediumButton">
+          Utwórz nowe hasło
         </Typography>
-        <InputComponent
-          variant="XLarge"
-          placeholder="Wpisz"
-          type="text"
-          margin="Medium"
-          {...register("password")}
-          error={errors.password ? errors.password.message : ""}
-        />
-        <Typography tag="p" variant="UIText13Med" margin="Medium">
-          Potwierdź hasło
-        </Typography>
-        <InputComponent
-          variant="XLarge"
-          placeholder="Wpisz"
-          type="text"
-          margin="Medium"
-          {...register("confirmPassword")}
-          error={errors.confirmPassword ? errors.confirmPassword.message : ""}
-        />
-        <ButtonComponent
-          className="primary"
-          size="XLarge"
-          margin="Medium"
-          type="submit"
-        >
-          <Typography tag="p" variant="UIText16MediumButton">
-            Utwórz nowe hasło
-          </Typography>
-        </ButtonComponent>
-      </S.Form>
-    </>
+      </ButtonComponent>
+    </S.Form>
   );
 };
 

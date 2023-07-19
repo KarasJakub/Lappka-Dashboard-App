@@ -5,16 +5,14 @@ import FormContentResetPassword from "components/LoginRegisterWrapper/SubCompone
 
 const ResetPassword = () => {
   return (
-    <>
-      <LoginRegisterWrapper photo={<ManOnHammock />}>
-        <ParentCardComponent
-          title="Zapomniałeś hasła?"
-          subtitle="Podaj adres email użyty przy rejestracji."
-        >
-          <FormContentResetPassword />
-        </ParentCardComponent>
-      </LoginRegisterWrapper>
-    </>
+    <LoginRegisterWrapper photo={<ManOnHammock />}>
+      <ParentCardComponent
+        title="Zapomniałeś hasła?"
+        subtitle="Podaj adres email użyty przy rejestracji."
+      >
+        <FormContentResetPassword />
+      </ParentCardComponent>
+    </LoginRegisterWrapper>
   );
 };
 

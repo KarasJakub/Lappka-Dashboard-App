@@ -10,19 +10,17 @@ const FormContentSetNewPasswordEnd = () => {
   };
 
   return (
-    <>
-      <ButtonComponent
-        className="primary"
-        size="XLarge"
-        margin="XLarge"
-        type="submit"
-        onClick={NavigateToReset}
-      >
-        <Typography tag="p" variant="UIText16MediumButton">
-          Zaloguj się
-        </Typography>
-      </ButtonComponent>
-    </>
+    <ButtonComponent
+      className="primary"
+      size="XLarge"
+      margin="XLarge"
+      type="submit"
+      onClick={NavigateToReset}
+    >
+      <Typography tag="p" variant="UIText16MediumButton">
+        Zaloguj się
+      </Typography>
+    </ButtonComponent>
   );
 };
 
