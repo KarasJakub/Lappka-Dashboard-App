@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import ROUTES from "helpers/utils/routes";
 
 export interface FormData {
   email: string;
@@ -33,7 +34,7 @@ const FormContentResetPassword = () => {
 
   const onSubmit = (data: FormData) => {
     console.log(data);
-    navigate("/ResetPasswordThanks");
+    navigate(ROUTES.resetpasswordthanks);
   };
 
   return (

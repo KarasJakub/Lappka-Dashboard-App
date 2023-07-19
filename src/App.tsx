@@ -8,6 +8,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ROUTES from "helpers/utils/routes";
 
 function App() {
   return (
@@ -23,15 +24,18 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path={ROUTES.login} element={<Login />} />
+            <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
             <Route
-              path="/resetpasswordthanks"
+              path={ROUTES.resetpasswordthanks}
               element={<ResetPasswordThanks />}
             />
-            <Route path="/setnewpassword" element={<SetNewPassword />} />
-            <Route path="/setnewpasswordend" element={<SetNewPasswordEnd />} />
-            <Route path="/" element={<Login />} />
+            <Route path={ROUTES.setnewpassword} element={<SetNewPassword />} />
+            <Route
+              path={ROUTES.setnewpasswordend}
+              element={<SetNewPasswordEnd />}
+            />
+            <Route path={ROUTES.home} element={<Login />} />
           </Routes>
         </Router>
       </ThemeProvider>

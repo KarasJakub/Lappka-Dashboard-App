@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import ROUTES from "helpers/utils/routes";
 
 export interface FormData {
   password: string;
@@ -46,7 +47,7 @@ const FormContentSetNewPassword = () => {
 
   const onSubmit = (data: FormData) => {
     console.log(data);
-    navigate("/setnewpasswordend");
+    navigate(ROUTES.setnewpasswordend);
   };
 
   return (
