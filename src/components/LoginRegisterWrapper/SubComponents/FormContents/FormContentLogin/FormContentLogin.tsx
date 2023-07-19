@@ -11,6 +11,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "context/AuthProvider";
+import { useContext } from "react";
 
 export interface FormData {
   email: string;
@@ -34,8 +36,9 @@ const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps();
   const navigate = useNavigate();
 
+  const { loginHandler } = useContext(AuthContext);
+
   const {
-    reset,
     setError,
     register,
     handleSubmit,
@@ -52,27 +55,7 @@ const FormContentLogin = () => {
   const onSubmit = (data: FormData) => {
     console.log(data);
 
-    axios
-      .post("/login", {
-        email: data.email,
-        password: data.password,
-      })
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        reset();
-        navigate("/dashboard");
-      })
-      .catch((err) => {
-        const { type, message } = err.response.data;
-
-        if (type === "email") {
-          setError("email", { type, message });
-        }
-        if (type === "password") {
-          setError("password", { type, message });
-        }
-      });
-    reset();
+    loginHandler(data, setError);
   };
 
   return (

@@ -4,25 +4,27 @@ import ResetPassword from "pages/ResetPassword";
 import ResetPasswordThanks from "pages/ResetPasswordThanks";
 import SetNewPassword from "pages/SetNewPassword";
 import SetNewPasswordEnd from "pages/SetNewPasswordEnd";
-import Dashboard from "components/protected/Dashboard/Dashboard";
+import Dashboard from "pages/Dashboard";
 import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { AuthContextProvider } from "context/AuthProvider";
+import { ProtectedRoute } from "protectedRoutes";
 
 function App() {
   return (
     <>
-      <Helmet>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </Helmet>
-      <GlobalStyles />
-      <ThemeProvider theme={theme}>
-        <Router>
+      <AuthContextProvider>
+        <Helmet>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+          />
+        </Helmet>
+        <GlobalStyles />
+        <ThemeProvider theme={theme}>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
@@ -32,11 +34,18 @@ function App() {
             />
             <Route path="/setnewpassword" element={<SetNewPassword />} />
             <Route path="/setnewpasswordend" element={<SetNewPasswordEnd />} />
-            <Route path="/" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/" element={<Dashboard />} /> */}
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
-        </Router>
-      </ThemeProvider>
+        </ThemeProvider>
+      </AuthContextProvider>
     </>
   );
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { AuthContextProvider } from "context/AuthProvider";
+
+import { BrowserRouter } from "react-router-dom";
 
 import { worker } from "./mocks/browser";
 
@@ -12,8 +13,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
+    <BrowserRouter>
       <App />
-    </AuthContextProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
