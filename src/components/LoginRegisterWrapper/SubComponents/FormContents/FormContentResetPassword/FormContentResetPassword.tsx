@@ -5,8 +5,6 @@ import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import ROUTES from "helpers/utils/routes";
 import { AuthContext } from "context/AuthProvider";
 import { useContext } from "react";
 
@@ -24,7 +22,6 @@ const schema = yup.object({
 const FormContentResetPassword = () => {
   const { resetPasswordEmailSendHandler } = useContext(AuthContext);
 
-  const navigate = useNavigate();
   const {
     setError,
     register,
@@ -40,7 +37,6 @@ const FormContentResetPassword = () => {
   const onSubmit = (data: ResetPasswordFormData) => {
     console.log(data);
     resetPasswordEmailSendHandler(data, setError);
-    navigate(ROUTES.resetpasswordthanks);
   };
 
   return (

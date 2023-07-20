@@ -59,6 +59,7 @@ interface LoginProps {
     "/Auth/resetPassword",
     async (req, res, ctx) => {
       const { email } = await req.json();
+
       try {
         if (email === "test@test.pl") return res(ctx.status(204));
 
@@ -69,8 +70,6 @@ interface LoginProps {
           );
         }
 
-      } catch (error) {
-        console.error(error);
         if (email !== user.email) {
           return res(
             ctx.status(401),
@@ -80,6 +79,10 @@ interface LoginProps {
             })
           );
         }
+
+      } catch (error) {
+        console.error(error);
+
         return res(ctx.status(500), ctx.json({ message: "Server error" }));
       }
     }

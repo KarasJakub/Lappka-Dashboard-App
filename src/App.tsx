@@ -30,18 +30,18 @@ function App() {
             <Route element={<ProtectedRoutes />}>
               <Route path={ROUTES.home} element={<Dashboard />} />
             </Route>
-            <Route path={ROUTES.login} element={<Login />} />
             <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
-            <Route
-              path={ROUTES.resetpasswordthanks}
-              element={<ResetPasswordThanks />}
-            />
             <Route path={ROUTES.setnewpassword} element={<SetNewPassword />} />
             <Route
               path={ROUTES.setnewpasswordend}
               element={<SetNewPasswordEnd />}
             />
-            <Route path={ROUTES.home} element={<Login />} />
+            <Route
+              path={ROUTES.resetpasswordthanks}
+              element={<ResetPasswordThanks />}
+            />
+            <Route path={ROUTES.login} element={<Login />} />
+            <Route path={ROUTES.home} element={<Dashboard />} />
           </Routes>
         </ThemeProvider>
       </AuthContextProvider>
