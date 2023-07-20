@@ -110,10 +110,10 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
   ) => {
     try {
       const response = await axios.post("/Auth/resetPassword", {
-        password: payload.email,
+        email: payload.email,
       });
 
-      navigate(ROUTES.home, { replace: true });
+      navigate(ROUTES.resetpasswordthanks, { replace: true });
     } catch (error: any) {
       const { type, message } = error.response.data;
       if (type === "email") {

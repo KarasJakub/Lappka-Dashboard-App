@@ -58,7 +58,7 @@ const FormContentSetNewPassword = () => {
       <InputComponent
         variant="XLarge"
         placeholder="Wpisz"
-        type="text"
+        type="password"
         margin="Medium"
         {...register("password")}
         error={errors.password ? errors.password.message : ""}
@@ -69,7 +69,7 @@ const FormContentSetNewPassword = () => {
       <InputComponent
         variant="XLarge"
         placeholder="Wpisz"
-        type="text"
+        type="password"
         margin="Medium"
         {...register("confirmPassword")}
         error={errors.confirmPassword ? errors.confirmPassword.message : ""}
