@@ -4,6 +4,7 @@ import ResetPassword from "pages/ResetPassword";
 import ResetPasswordThanks from "pages/ResetPasswordThanks";
 import SetNewPassword from "pages/SetNewPassword";
 import SetNewPasswordEnd from "pages/SetNewPasswordEnd";
+import Dashboard from "pages/Dashboard";
 import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
@@ -13,16 +14,16 @@ import ROUTES from "helpers/utils/routes";
 function App() {
   return (
     <>
-      <Helmet>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </Helmet>
-      <GlobalStyles />
-      <ThemeProvider theme={theme}>
-        <Router>
+      <AuthContextProvider>
+        <Helmet>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+          />
+        </Helmet>
+        <GlobalStyles />
+        <ThemeProvider theme={theme}>
           <Routes>
             <Route path={ROUTES.login} element={<Login />} />
             <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
@@ -37,8 +38,8 @@ function App() {
             />
             <Route path={ROUTES.home} element={<Login />} />
           </Routes>
-        </Router>
-      </ThemeProvider>
+        </ThemeProvider>
+      </AuthContextProvider>
     </>
   );
 }

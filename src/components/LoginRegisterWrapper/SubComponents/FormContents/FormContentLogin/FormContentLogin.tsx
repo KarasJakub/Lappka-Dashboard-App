@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "context/AuthProvider";
+import { useContext } from "react";
 
 export interface FormData {
   email: string;
@@ -33,7 +35,10 @@ const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps();
   const navigate = useNavigate();
 
+  const { loginHandler } = useContext(AuthContext);
+
   const {
+    setError,
     register,
     handleSubmit,
     formState: { errors },
@@ -48,6 +53,8 @@ const FormContentLogin = () => {
 
   const onSubmit = (data: FormData) => {
     console.log(data);
+
+    loginHandler(data, setError);
   };
 
   return (

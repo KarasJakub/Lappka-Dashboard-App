@@ -12,6 +12,9 @@
     "@types/node": "^16.18.38",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "axios": "^1.4.0",
+    "jwt-decode": "^3.1.2",
+    "msw": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -66,5 +69,8 @@
     "prop-types": "15.8.1",
     "storybook": "7.0.27",
     "webpack": "5.88.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
