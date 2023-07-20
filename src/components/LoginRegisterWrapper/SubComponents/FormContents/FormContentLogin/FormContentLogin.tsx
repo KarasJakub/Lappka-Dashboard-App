@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthProvider";
 import { useContext } from "react";
+import ROUTES from "helpers/utils/routes";
 
 export interface FormData {
   email: string;
@@ -95,7 +96,7 @@ const FormContentLogin = () => {
           </S.CheckBoxWrapper>
           <ButtonComponent
             className="underlined"
-            onClick={() => navigate("/setnewpassword")}
+            onClick={() => navigate(ROUTES.setnewpassword)}
           >
             <Typography tag="p" variant="UIText14Reg" margin="Medium">
               Zapomniałem hasła

@@ -8,8 +8,10 @@ import Dashboard from "pages/Dashboard";
 import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ROUTES from "helpers/utils/routes";
+import { AuthContextProvider } from "context/AuthProvider";
+import { ProtectedRoutes } from "protectedRoutes";
 
 function App() {
   return (
@@ -25,6 +27,9 @@ function App() {
         <GlobalStyles />
         <ThemeProvider theme={theme}>
           <Routes>
+            <Route element={<ProtectedRoutes />}>
+              <Route path={ROUTES.home} element={<Dashboard />} />
+            </Route>
             <Route path={ROUTES.login} element={<Login />} />
             <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
             <Route

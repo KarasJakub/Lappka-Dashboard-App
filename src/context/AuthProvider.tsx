@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { UseFormSetError } from "react-hook-form";
 import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin/FormContentLogin";
 import axios from "axios";
+import ROUTES from "helpers/utils/routes";
 
 interface AuthProps {
   children: React.ReactNode;
@@ -60,7 +61,7 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
         })
       );
 
-      navigate("/", { replace: true });
+      navigate(ROUTES.home, { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +82,7 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
         })
       );
 
-      navigate("/", { replace: true });
+      navigate(ROUTES.home, { replace: true });
     } catch (error: any) {
       const { type, message } = error.response.data;
       if (type === "email") {
@@ -108,7 +109,7 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
 
         refreshTokenHandler(JSON.parse(tokens).refreshToken);
 
-        navigate("/login");
+        navigate(ROUTES.login);
       }
     } else {
       return;

@@ -5,13 +5,14 @@ import { ReactComponent as WomenWithCat } from "assets/photos/WomenWithCat.svg";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthProvider";
+import ROUTES from "helpers/utils/routes";
 
 const Login = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    isLoggedIn && navigate("/");
+    isLoggedIn && navigate(ROUTES.home);
   });
   return (
     <LoginRegisterWrapper photo={<WomenWithCat />} displayRegister>
