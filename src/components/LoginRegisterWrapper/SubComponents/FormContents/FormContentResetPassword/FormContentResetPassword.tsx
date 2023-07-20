@@ -7,8 +7,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "helpers/utils/routes";
+import { AuthContext } from "context/AuthProvider";
+import { useContext } from "react";
 
-export interface FormData {
+export interface ResetPasswordFormData {
   email: string;
 }
 
@@ -20,20 +22,24 @@ const schema = yup.object({
 });
 
 const FormContentResetPassword = () => {
+  const { resetPasswordEmailSendHandler } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const {
+    setError,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<ResetPasswordFormData>({
     defaultValues: {
       email: "",
     },
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: ResetPasswordFormData) => {
     console.log(data);
+    resetPasswordEmailSendHandler(data, setError);
     navigate(ROUTES.resetpasswordthanks);
   };
 

@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { UseFormSetError } from "react-hook-form";
 import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin/FormContentLogin";
+import { ResetPasswordFormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentResetPassword/FormContentResetPassword";
 import axios from "axios";
 import ROUTES from "helpers/utils/routes";
 
@@ -16,6 +17,10 @@ type AuthContextType = {
     data: logInPayload,
     setError: UseFormSetError<FormData>
   ) => void;
+  resetPasswordEmailSendHandler: (
+    data: resetPasswordPayload,
+    setError: UseFormSetError<ResetPasswordFormData>
+  ) => void;
   rememberMe: boolean;
   setRememberMe: (rembemberMe: boolean) => void;
   isLoggedIn: boolean;
@@ -24,6 +29,10 @@ type AuthContextType = {
 type logInPayload = {
   email: string;
   password: string;
+};
+
+type resetPasswordPayload = {
+  email: string;
 };
 
 type refreshTokenHandler = {
@@ -52,7 +61,7 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
 
   const refreshTokenHandler = async (payload: refreshTokenHandler) => {
     try {
-      const response = await axios.post("/auth/usetoken", { payload });
+      const response = await axios.post("/auth/useToken", { payload });
       const data = await response.data;
 
       localStorage.setItem(
@@ -70,7 +79,7 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
 
   const loginHandler = async (payload: logInPayload, setError: any) => {
     try {
-      const response = await axios.post("/login", {
+      const response = await axios.post("/Auth/loginWeb", {
         email: payload.email,
         password: payload.password,
       });
@@ -91,6 +100,24 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
       }
       if (type === "password") {
         setError("password", { type, message });
+      }
+    }
+  };
+
+  const resetPasswordEmailSendHandler = async (
+    payload: resetPasswordPayload,
+    setError: any
+  ) => {
+    try {
+      const response = await axios.post("/Auth/resetPassword", {
+        password: payload.email,
+      });
+
+      navigate(ROUTES.home, { replace: true });
+    } catch (error: any) {
+      const { type, message } = error.response.data;
+      if (type === "email") {
+        setError("email", { type, message });
       }
     }
   };
@@ -128,6 +155,7 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
         setRememberMe,
         rememberMe,
         isLoggedIn,
+        resetPasswordEmailSendHandler,
       }}
     >
       {children}

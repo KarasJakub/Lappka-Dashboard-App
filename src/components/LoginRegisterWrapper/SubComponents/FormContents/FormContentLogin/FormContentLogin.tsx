@@ -99,7 +99,7 @@ const FormContentLogin = () => {
           </S.CheckBoxWrapper>
           <ButtonComponent
             className="underlined"
-            onClick={() => navigate(ROUTES.setnewpassword)}
+            onClick={() => navigate(ROUTES.resetpassword)}
           >
             <Typography tag="p" variant="UIText14Reg" margin="Medium">
               Zapomniałem hasła
