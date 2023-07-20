@@ -3,14 +3,7 @@ import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { isLoggedIn } = useContext(AuthContext);
-
-  return (
-    <div>
-      sdsdsdsdds
-      {/* {isLoggedIn ? <div>Dashboard hello</div> : <Navigate to="login" />} */}
-    </div>
-  );
+  return <div>test</div>;
 };
 
 export default Dashboard;

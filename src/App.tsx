@@ -10,7 +10,7 @@ import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
 import { Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "context/AuthProvider";
-import { ProtectedRoute } from "protectedRoutes";
+import { PrivateRoutes } from "protectedRoutes";
 
 function App() {
   return (
@@ -26,6 +26,9 @@ function App() {
         <GlobalStyles />
         <ThemeProvider theme={theme}>
           <Routes>
+            <Route element={<PrivateRoutes />}>
+              <Route path="/" element={<Dashboard />} />
+            </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route
@@ -34,15 +37,6 @@ function App() {
             />
             <Route path="/setnewpassword" element={<SetNewPassword />} />
             <Route path="/setnewpasswordend" element={<SetNewPasswordEnd />} />
-            {/* <Route path="/" element={<Dashboard />} /> */}
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
           </Routes>
         </ThemeProvider>
       </AuthContextProvider>
