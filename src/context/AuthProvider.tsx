@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createContext } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +16,8 @@ type AuthContextType = {
     data: logInPayload,
     setError: UseFormSetError<FormData>
   ) => void;
-  rememberMe?: boolean;
-  setRememberMe?: (rembemberMe: boolean) => void;
+  rememberMe: boolean;
+  setRememberMe: (rembemberMe: boolean) => void;
   isLoggedIn: boolean;
 };
 
@@ -45,6 +45,7 @@ interface DecodedAccessToken {
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthContextProvider = ({ children }: AuthProps) => {
+  const [rememberMe, setRememberMe] = useState(false);
   const isLoggedIn = localStorage.getItem("tokens") !== null;
 
   const navigate = useNavigate();
@@ -121,7 +122,14 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
   setInterval(expiredAccessTokenHandler, 60000);
 
   return (
-    <AuthContext.Provider value={{ loginHandler, isLoggedIn }}>
+    <AuthContext.Provider
+      value={{
+        loginHandler,
+        setRememberMe,
+        rememberMe,
+        isLoggedIn,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

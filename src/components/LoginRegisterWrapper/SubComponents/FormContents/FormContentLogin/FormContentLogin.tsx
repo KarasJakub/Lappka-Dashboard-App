@@ -36,7 +36,7 @@ const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps();
   const navigate = useNavigate();
 
-  const { loginHandler } = useContext(AuthContext);
+  const { loginHandler, setRememberMe } = useContext(AuthContext);
 
   const {
     setError,
@@ -53,6 +53,9 @@ const FormContentLogin = () => {
   });
 
   const onSubmit = (data: FormData) => {
+    if (data.checkbox) {
+      setRememberMe(true);
+    }
     console.log(data);
 
     loginHandler(data, setError);
