@@ -1,13 +1,13 @@
 import LoginRegisterWrapper from "components/LoginRegisterWrapper/LoginRegisterWrapper";
 import ParentCardComponent from "components/LoginRegisterWrapper/SubComponents/ParentComponent/ParentCardComponent";
-import FormContentLogin from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin/FormContentLogin";
-import { ReactComponent as WomenWithCat } from "assets/photos/WomenWithCat.svg";
+import { ReactComponent as ManOnHammock } from "assets/photos/ManOnHammock.svg";
+import FormContentSetNewPassword from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentResetPassword/FormContentSetNewPassword";
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthProvider";
 import ROUTES from "helpers/utils/routes";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const SetNewPassword = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -15,12 +15,15 @@ const Login = () => {
     isLoggedIn && navigate(ROUTES.home);
   });
   return (
-    <LoginRegisterWrapper photo={<WomenWithCat />} displayRegister>
-      <ParentCardComponent title="Zaloguj się" subtitle="Witaj ponownie!">
-        <FormContentLogin />
+    <LoginRegisterWrapper photo={<ManOnHammock />}>
+      <ParentCardComponent
+        title="Utwórz nowe hasło"
+        subtitle="Hasło powinno mieć m.in. 8 znaków."
+      >
+        <FormContentSetNewPassword />
       </ParentCardComponent>
     </LoginRegisterWrapper>
   );
 };
 
-export default Login;
+export default SetNewPassword;

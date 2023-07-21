@@ -9,6 +9,10 @@ import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "context/AuthProvider";
+import { useContext } from "react";
+import ROUTES from "helpers/utils/routes";
 
 export interface FormData {
   email: string;
@@ -30,8 +34,12 @@ const schema = yup.object({
 
 const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps();
+  const navigate = useNavigate();
+
+  const { loginHandler, setRememberMe } = useContext(AuthContext);
 
   const {
+    setError,
     register,
     handleSubmit,
     formState: { errors },
@@ -45,7 +53,12 @@ const FormContentLogin = () => {
   });
 
   const onSubmit = (data: FormData) => {
+    if (data.checkbox) {
+      setRememberMe(true);
+    }
     console.log(data);
+
+    loginHandler(data, setError);
   };
 
   return (
@@ -84,11 +97,14 @@ const FormContentLogin = () => {
               Pamiętaj mnie
             </Typography>
           </S.CheckBoxWrapper>
-          <S.PasswordLink href="/">
+          <ButtonComponent
+            className="underlined"
+            onClick={() => navigate(ROUTES.resetpassword)}
+          >
             <Typography tag="p" variant="UIText14Reg" margin="Medium">
               Zapomniałem hasła
             </Typography>
-          </S.PasswordLink>
+          </ButtonComponent>
         </S.AdditionalOptionsWrapper>
         <ButtonComponent
           className="primary"

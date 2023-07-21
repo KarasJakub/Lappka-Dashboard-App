@@ -9,9 +9,10 @@ import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 interface Props {
   children?: React.ReactNode;
   photo: JSX.Element;
+  displayRegister?: boolean;
 }
 
-const LoginRegisterWrapper = ({ children, photo }: Props) => {
+const LoginRegisterWrapper = ({ children, photo, displayRegister }: Props) => {
   const ResponsiveString = useResponsiveProps();
 
   return (
@@ -19,7 +20,11 @@ const LoginRegisterWrapper = ({ children, photo }: Props) => {
       <S.Navigation>
         <CompanyLogo />
         <S.ButtonsWrapper>
-          <ButtonComponent className="secondary" size={ResponsiveString}>
+          <ButtonComponent
+            className="secondary"
+            size={ResponsiveString}
+            style={{ display: displayRegister ? "block" : "none" }}
+          >
             <Typography tag="p" variant="UIText16MediumButton">
               Zarejestruj się
             </Typography>

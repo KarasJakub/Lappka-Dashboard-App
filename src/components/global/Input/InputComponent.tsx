@@ -1,6 +1,6 @@
 import * as S from "./InputComponent.styled";
 import React from "react";
-import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin";
+import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin/FormContentLogin";
 import { UseFormRegister } from "react-hook-form";
 import Typography from "../Typography/Typography";
 
