@@ -1,5 +1,6 @@
 import LoginRegisterWrapper from "components/LoginRegisterWrapper/LoginRegisterWrapper";
 import ParentCardComponent from "components/LoginRegisterWrapper/SubComponents/ParentComponent/ParentCardComponent";
+import FormContentRegister from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentRegister/FormContentRegister";
 import { ReactComponent as ManOnBench } from "assets/photos/ManOnBench.svg";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,10 +17,11 @@ const Register = () => {
 
   return (
     <LoginRegisterWrapper photo={<ManOnBench />} displayLogin>
-      <ParentCardComponent
+      {/* <ParentCardComponent
         title="Zarejestruj schronisko"
         subtitle="Wypełnij poniższy formularz i załóż Konto schroniska"
-      ></ParentCardComponent>
+      ></ParentCardComponent> */}
+      <FormContentRegister />
     </LoginRegisterWrapper>
   );
 };
