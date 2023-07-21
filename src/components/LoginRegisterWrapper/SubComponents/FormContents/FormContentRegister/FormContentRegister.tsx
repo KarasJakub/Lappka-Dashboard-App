@@ -4,7 +4,7 @@ import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 import Typography from "components/global/Typography/Typography";
 import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 import { useMultistepForm } from "helpers/hooks/useMultistepForm";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import RegisterShelter from "./RegisterShelter";
 import RegisterUser from "./RegisterUser";
 
@@ -42,14 +42,10 @@ const FormContentRegister = () => {
       return { ...prev, ...fields };
     });
   }
-  const { steps, currentStepIndex, step, back, next } = useMultistepForm([
+  const { currentStepIndex, step, back, next } = useMultistepForm([
     <RegisterShelter {...data} updateFields={updateFields} />,
     <RegisterUser {...data} updateFields={updateFields} />,
   ]);
-
-  // useEffect(() => {
-  //   console.log(currentStepIndex);
-  // }, [step]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
