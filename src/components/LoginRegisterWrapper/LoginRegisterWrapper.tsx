@@ -5,6 +5,8 @@ import { ReactComponent as CompanyLogo } from "assets/icons/CompanyLogo.svg";
 import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 import { ReactComponent as CloseIcon } from "assets/icons/CloseButtonIcon.svg";
 import useResponsiveProps from "helpers/hooks/useResponsiveProps";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "helpers/utils/routes";
 
 interface Props {
   children?: React.ReactNode;
@@ -14,6 +16,7 @@ interface Props {
 
 const LoginRegisterWrapper = ({ children, photo, displayRegister }: Props) => {
   const ResponsiveString = useResponsiveProps();
+  const navigate = useNavigate();
 
   return (
     <S.LoginRegisterWrapper>
@@ -24,6 +27,7 @@ const LoginRegisterWrapper = ({ children, photo, displayRegister }: Props) => {
             className="secondary"
             size={ResponsiveString}
             style={{ display: displayRegister ? "block" : "none" }}
+            onClick={() => navigate(ROUTES.register)}
           >
             <Typography tag="p" variant="UIText16MediumButton">
               Zarejestruj się
