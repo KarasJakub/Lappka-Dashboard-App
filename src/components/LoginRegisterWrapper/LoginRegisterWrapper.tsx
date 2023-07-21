@@ -12,9 +12,15 @@ interface Props {
   children?: React.ReactNode;
   photo: JSX.Element;
   displayRegister?: boolean;
+  displayLogin?: boolean;
 }
 
-const LoginRegisterWrapper = ({ children, photo, displayRegister }: Props) => {
+const LoginRegisterWrapper = ({
+  children,
+  photo,
+  displayRegister,
+  displayLogin,
+}: Props) => {
   const ResponsiveString = useResponsiveProps();
   const navigate = useNavigate();
 
@@ -31,6 +37,16 @@ const LoginRegisterWrapper = ({ children, photo, displayRegister }: Props) => {
           >
             <Typography tag="p" variant="UIText16MediumButton">
               Zarejestruj się
+            </Typography>
+          </ButtonComponent>
+          <ButtonComponent
+            className="secondary"
+            size={ResponsiveString}
+            style={{ display: displayLogin ? "block" : "none" }}
+            onClick={() => navigate(ROUTES.login)}
+          >
+            <Typography tag="p" variant="UIText16MediumButton">
+              Zaloguj się
             </Typography>
           </ButtonComponent>
           <ButtonComponent style={{ width: "unset" }}>
