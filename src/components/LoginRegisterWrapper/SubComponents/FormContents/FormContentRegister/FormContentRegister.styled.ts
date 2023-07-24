@@ -83,3 +83,8 @@ export const ProgressBarDot = styled.div`
     }
 
 `
+
+export const RegisterButtonsWrapper = styled.div`
+    display: flex;
+    gap: 2.4rem;
+`

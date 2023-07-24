@@ -7,6 +7,8 @@ import { useMultistepForm } from "helpers/hooks/useMultistepForm";
 import { FormEvent, useState } from "react";
 import RegisterShelter from "./RegisterShelter";
 import RegisterUser from "./RegisterUser";
+import { ReactComponent as ArrowRightIcon } from "assets/icons/ArrowRightIcon.svg";
+import { ReactComponent as ArrowLeftIcon } from "assets/icons/ArrowLeftIcon.svg";
 
 export type FormData = {
   organizationName: string;
@@ -89,29 +91,34 @@ const FormContentRegister = () => {
           </S.ProgressBarBottomWrapper>
         </S.ProgressBarWrapper>
         {step}
-        {currentStepIndex !== 0 && (
+        <S.RegisterButtonsWrapper>
+          {currentStepIndex !== 0 && (
+            <ButtonComponent
+              className="secondary"
+              size="XLarge"
+              margin={ResponsiveString}
+              type="button"
+              onClick={back}
+              style={{ flexDirection: "row-reverse", maxWidth: "30%" }}
+            >
+              <Typography tag="p" variant="UIText16MediumButton">
+                Powrót
+              </Typography>
+              <ArrowLeftIcon />
+            </ButtonComponent>
+          )}
           <ButtonComponent
-            className="secondary"
+            className="primary"
             size="XLarge"
             margin={ResponsiveString}
-            type="button"
-            onClick={back}
+            type="submit"
           >
             <Typography tag="p" variant="UIText16MediumButton">
-              Powrót
+              {currentStepIndex === 1 ? "Zarejestruj się" : "Następny krok"}
             </Typography>
+            {currentStepIndex === 0 && <ArrowRightIcon fill="white" />}
           </ButtonComponent>
-        )}
-        <ButtonComponent
-          className="primary"
-          size="XLarge"
-          margin={ResponsiveString}
-          type="submit"
-        >
-          <Typography tag="p" variant="UIText16MediumButton">
-            {currentStepIndex === 1 ? "Zarejestruj się" : "Następny krok"}
-          </Typography>
-        </ButtonComponent>
+        </S.RegisterButtonsWrapper>
       </S.Form>
     </ParentCardComponent>
   );
