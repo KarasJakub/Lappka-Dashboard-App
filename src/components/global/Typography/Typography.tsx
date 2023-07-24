@@ -7,6 +7,7 @@ export interface TypographyProps {
   children: React.ReactNode;
   color?: string;
   margin?: "XLarge" | "Large" | "Medium";
+  className?: string;
 }
 
 const Typography = ({

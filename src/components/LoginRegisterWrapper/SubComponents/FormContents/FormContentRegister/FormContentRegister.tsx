@@ -52,12 +52,42 @@ const FormContentRegister = () => {
     next();
     console.log(data);
   }
+
   return (
     <ParentCardComponent
       title="Zarejestruj schronisko"
       subtitle="Wypełnij poniższy formularz i załóż Konto schroniska"
     >
       <S.Form onSubmit={handleSubmit}>
+        <S.ProgressBarWrapper>
+          <S.ProgressBarTopWrapper>
+            <S.ProgressBarDot
+              className={
+                currentStepIndex === 1
+                  ? "active isPrev isSecond"
+                  : "active isPrev"
+              }
+            />
+            <S.ProgressBarDot
+              className={
+                currentStepIndex === 1
+                  ? "second isPrev active"
+                  : "second isPrev"
+              }
+            />
+            <S.ProgressBarDot className="third" />
+          </S.ProgressBarTopWrapper>
+          <S.ProgressBarBottomWrapper>
+            <Typography tag="p" variant="UIText12Reg">
+              Dane organizacji
+            </Typography>
+            <S.TypographySecondWrapper>
+              <Typography tag="p" variant="UIText12Reg">
+                Dane użytkownika
+              </Typography>
+            </S.TypographySecondWrapper>
+          </S.ProgressBarBottomWrapper>
+        </S.ProgressBarWrapper>
         {step}
         {currentStepIndex !== 0 && (
           <ButtonComponent

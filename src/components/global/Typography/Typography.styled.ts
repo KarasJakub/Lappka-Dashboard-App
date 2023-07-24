@@ -4,6 +4,7 @@ import { getTypographyMarginSize } from "helpers/utils/getStyles"
 interface StylingProps {
     color?: string
     margin?: string
+    className?: string
 }
 
 const TypographyComponent = styled.p<StylingProps>`
