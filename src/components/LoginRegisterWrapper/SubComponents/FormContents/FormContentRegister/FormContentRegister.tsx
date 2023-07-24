@@ -9,6 +9,7 @@ import RegisterShelter from "./RegisterShelter";
 import RegisterUser from "./RegisterUser";
 import { ReactComponent as ArrowRightIcon } from "assets/icons/ArrowRightIcon.svg";
 import { ReactComponent as ArrowLeftIcon } from "assets/icons/ArrowLeftIcon.svg";
+import axios from "axios";
 
 export type FormData = {
   organizationName: string;
@@ -49,10 +50,30 @@ const FormContentRegister = () => {
     <RegisterUser {...data} updateFields={updateFields} />,
   ]);
 
+  const SendData = async () => {
+    try {
+      await axios.post("/Auth/shelterRegister", {
+        organizationName: data.organizationName,
+        street: data.street,
+        postalCode: data.postalCode,
+        city: data.city,
+        nip: data.nip,
+        krs: data.krs,
+        fullName: data.fullName,
+        email: data.email,
+        password: data.password,
+        repeatPassword: data.repeatPassword,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     next();
-    console.log(data);
+    // console.log(data);
+    SendData();
   }
 
   return (
@@ -112,6 +133,7 @@ const FormContentRegister = () => {
             size="XLarge"
             margin={ResponsiveString}
             type="submit"
+            onClick={() => next()}
           >
             <Typography tag="p" variant="UIText16MediumButton">
               {currentStepIndex === 1 ? "Zarejestruj się" : "Następny krok"}

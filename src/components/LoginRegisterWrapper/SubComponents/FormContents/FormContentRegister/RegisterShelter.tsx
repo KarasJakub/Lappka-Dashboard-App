@@ -19,7 +19,10 @@ type ShelterFormProps = ShelterFormData & {
 };
 
 const schema = yup.object({
-  organizationName: yup.string().required("Nazwa organizacji jest wymagana"),
+  organizationName: yup
+    .string()
+    .email("Nieprawidłowy adres email")
+    .required("Nazwa organizacji jest wymagana"),
   street: yup.string().required("Nazwa ulicy jest wymagana"),
   postalCode: yup.string().required("Kod pocztowy jest wymagany"),
   city: yup.string().required("Miasto jest wymagane"),
@@ -36,23 +39,38 @@ const RegisterShelter = ({
   krs,
   updateFields,
 }: ShelterFormProps) => {
-  //   const {
-  //     setError,
-  //     register,
-  //     handleSubmit,
-  //     formState: { errors },
-  //   } = useForm<Partial<ShelterFormData>>({
-  //     defaultValues: {
-  //       organizationName: "",
-  //       street: "",
-  //       postalCode: "",
-  //       city: "",
-  //       nip: "",
-  //       krs: "",
-  //     },
-  //     resolver: yupResolver(schema),
-  //   });
-
+  // const {
+  //   setError,
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm<Partial<ShelterFormData>>({
+  //   defaultValues: {
+  //     organizationName: "",
+  //     street: "",
+  //     postalCode: "",
+  //     city: "",
+  //     nip: "",
+  //     krs: "",
+  //   },
+  //   resolver: yupResolver(schema),
+  // });
+  const {
+    setError,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ShelterFormData>({
+    defaultValues: {
+      organizationName: "",
+      street: "",
+      postalCode: "",
+      city: "",
+      nip: "",
+      krs: "",
+    },
+    resolver: yupResolver(schema),
+  });
   return (
     <>
       <Typography tag="p" variant="UIText13Med" margin="Medium">
@@ -64,7 +82,9 @@ const RegisterShelter = ({
         type="text"
         margin="Medium"
         value={organizationName}
+        {...register("organizationName")}
         onChange={(e) => updateFields({ organizationName: e.target.value })}
+        error={errors.organizationName ? errors.organizationName.message : ""}
       />
       <Typography tag="p" variant="UIText13Med" margin="Medium">
         Ulica
@@ -75,6 +95,7 @@ const RegisterShelter = ({
         type="text"
         margin="Medium"
         value={street}
+        {...register("street")}
         onChange={(e) => updateFields({ street: e.target.value })}
       />
       <S.PostalCodeCityWrapper>
@@ -88,6 +109,7 @@ const RegisterShelter = ({
             type="text"
             margin="Medium"
             value={postalCode}
+            {...register("postalCode")}
             onChange={(e) => updateFields({ postalCode: e.target.value })}
           />
         </S.InputTypographyVerticalWrapper>
@@ -101,6 +123,7 @@ const RegisterShelter = ({
             type="text"
             margin="Medium"
             value={city}
+            {...register("city")}
             onChange={(e) => updateFields({ city: e.target.value })}
           />
         </S.InputTypographyVerticalWrapper>
@@ -114,6 +137,7 @@ const RegisterShelter = ({
         type="text"
         margin="Medium"
         value={nip}
+        {...register("nip")}
         onChange={(e) => updateFields({ nip: e.target.value })}
       />
       <Typography tag="p" variant="UIText13Med" margin="Medium">
@@ -125,6 +149,7 @@ const RegisterShelter = ({
         type="text"
         margin="Medium"
         value={krs}
+        {...register("krs")}
         onChange={(e) => updateFields({ krs: e.target.value })}
       />
     </>
