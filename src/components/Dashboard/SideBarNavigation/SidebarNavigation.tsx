@@ -36,8 +36,9 @@ const SidebarNavigation = () => {
         <CompanyLogo />
         <S.NavigationWrapper>
           <S.NavigationList>
-            {NavigationContent.map((item) => (
+            {NavigationContent.map((item, index) => (
               <DashboardNavElement
+                key={index}
                 image={item.icon}
                 text={item.name}
                 path={item.path}

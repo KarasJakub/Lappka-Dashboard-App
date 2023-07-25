@@ -14,6 +14,6 @@ export const StyledNavLink = styled(NavLink)`
     border-radius: 6px;
 
         &.active {
-        background-color: ${({ theme }) => theme.colors.primaryPr200}
+        background-color: ${({ theme }) => theme.colors.primaryPr200};
     }
 `
