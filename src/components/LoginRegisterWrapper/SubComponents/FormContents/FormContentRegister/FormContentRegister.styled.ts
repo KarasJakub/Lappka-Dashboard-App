@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const Form = styled.form`
     width: 100%;
-    margin: 4rem 0 0 0;
+    margin: 2.4rem 0 0 0;
 `
 
 export const PostalCodeCityWrapper = styled.div`
@@ -17,7 +17,7 @@ export const InputTypographyVerticalWrapper = styled.div`
 
 export const ProgressBarWrapper = styled.div`
     width: 100%;
-    padding-bottom: 4rem;
+    margin-top: 3rem;
 `
 
 export const ProgressBarTopWrapper = styled.div`

@@ -18,7 +18,10 @@ type RegisterOrganizationFormProps = {
 const registerOrganizationValidation = yup.object({
   organizationName: yup.string().required("Nazwa organizacji jest wymagana"),
   street: yup.string().required("Ulica jest wymagana"),
-  postalCode: yup.string().required("Kod pocztowy jest wymagany"),
+  postalCode: yup
+    .string()
+    .matches(/^\d{2}-\d{3}$/, "Kod pocztowy powinien być w formacie XX-XXX")
+    .required("Kod pocztowy jest wymagany"),
   city: yup.string().required("Miasto jest wymagany"),
   nip: yup.string().required("NIP jest wymagany"),
   krs: yup.string().required("KRS jest wymagany"),
@@ -41,6 +44,7 @@ const RegisterShelter = ({
     resolver: yupResolver(registerOrganizationValidation),
   });
   const {
+    register,
     formState: { errors },
   } = methods;
 
@@ -56,22 +60,10 @@ const RegisterShelter = ({
         title="Zarejestruj schronisko"
         subtitle="Wypełnij poniższy formularz i załóż Konto schroniska"
       >
-        {/* <S.ProgressBarWrapper>
+        <S.ProgressBarWrapper>
           <S.ProgressBarTopWrapper>
-            <S.ProgressBarDot
-              className={
-                currentStepIndex === 1
-                  ? "active isPrev isSecond"
-                  : "active isPrev"
-              }
-            />
-            <S.ProgressBarDot
-              className={
-                currentStepIndex === 1
-                  ? "second isPrev active"
-                  : "second isPrev"
-              }
-            />
+            <S.ProgressBarDot className="active isPrev" />
+            <S.ProgressBarDot className="second isPrev" />
             <S.ProgressBarDot className="third" />
           </S.ProgressBarTopWrapper>
           <S.ProgressBarBottomWrapper>
@@ -84,9 +76,9 @@ const RegisterShelter = ({
               </Typography>
             </S.TypographySecondWrapper>
           </S.ProgressBarBottomWrapper>
-        </S.ProgressBarWrapper> */}
+        </S.ProgressBarWrapper>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <S.Form onSubmit={methods.handleSubmit(onSubmit)}>
             <Typography tag="p" variant="UIText13Med" margin="Medium">
               Pełna nazwa Organizacji
             </Typography>
@@ -95,6 +87,7 @@ const RegisterShelter = ({
               placeholder="Wpisz"
               type="text"
               margin="Medium"
+              {...register("organizationName")}
               error={
                 errors.organizationName ? errors.organizationName.message : ""
               }
@@ -107,6 +100,7 @@ const RegisterShelter = ({
               placeholder="Wpisz"
               type="text"
               margin="Medium"
+              {...register("street")}
               error={errors.street ? errors.street.message : ""}
             />
             <S.PostalCodeCityWrapper>
@@ -119,6 +113,7 @@ const RegisterShelter = ({
                   placeholder="00-000"
                   type="text"
                   margin="Medium"
+                  {...register("postalCode")}
                   error={errors.postalCode ? errors.postalCode.message : ""}
                 />
               </S.InputTypographyVerticalWrapper>
@@ -131,6 +126,7 @@ const RegisterShelter = ({
                   placeholder="Wpisz"
                   type="text"
                   margin="Medium"
+                  {...register("city")}
                   error={errors.city ? errors.city.message : ""}
                 />
               </S.InputTypographyVerticalWrapper>
@@ -143,6 +139,7 @@ const RegisterShelter = ({
               placeholder="Wpisz"
               type="text"
               margin="Medium"
+              {...register("nip")}
               error={errors.nip ? errors.nip.message : ""}
             />
             <Typography tag="p" variant="UIText13Med" margin="Medium">
@@ -153,6 +150,7 @@ const RegisterShelter = ({
               placeholder="Wpisz"
               type="text"
               margin="Medium"
+              {...register("krs")}
               error={errors.krs ? errors.krs.message : ""}
             />
             <ButtonComponent
@@ -166,7 +164,7 @@ const RegisterShelter = ({
               </Typography>
               <ArrowRightIcon fill="white" />
             </ButtonComponent>
-          </form>
+          </S.Form>
         </FormProvider>
       </ParentCardComponent>
     </>

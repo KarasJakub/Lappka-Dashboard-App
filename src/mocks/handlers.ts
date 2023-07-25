@@ -109,7 +109,7 @@ interface LoginProps {
   rest.post(
     "/Auth/shelterRegister",
     (req, res, ctx) => {
-      return res(ctx.status(204));
+      return res(ctx.status(200));
     }
   )
   ];

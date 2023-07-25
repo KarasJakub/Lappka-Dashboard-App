@@ -2,8 +2,10 @@ import ParentCardComponent from "../../ParentComponent/ParentCardComponent";
 import ButtonComponent from "components/global/Button/ButtonComponent.styled";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "helpers/utils/routes";
+import useResponsiveProps from "helpers/hooks/useResponsiveProps";
 
 const RegisterSuccess = () => {
+  const ResponsiveString = useResponsiveProps();
   const navigate = useNavigate();
   return (
     <ParentCardComponent
@@ -12,6 +14,8 @@ const RegisterSuccess = () => {
     >
       <ButtonComponent
         className="primary"
+        size="XLarge"
+        margin={ResponsiveString}
         onClick={() => navigate(ROUTES.login)}
       >
         Zaloguj się

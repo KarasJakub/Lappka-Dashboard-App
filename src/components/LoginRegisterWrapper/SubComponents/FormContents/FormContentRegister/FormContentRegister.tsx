@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import RegisterShelter from "./RegisterShelter";
 import RegisterUser from "./RegisterUser";
 import axios from "axios";
@@ -27,7 +27,6 @@ export const RegisterForm = () => {
   const [multiFormValues, setMultiFormValues] =
     useState<defaultMultiFormValuesTypes>(defaultMultiFormValues);
 
-  const [formIsComplete, setFormIsComplete] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [step, setStep] = useState(1);
 
