@@ -1,5 +1,23 @@
-const Dashboard = () => {
-  return <div>Dashboarddfsdsdf</div>;
-};
+import * as S from "./Dashboard.styled"
+import SidebarNavigation from "./SideBarNavigation/SidebarNavigation"
+import TopBar from "./TopBar/TopBar"
 
-export default Dashboard;
+interface DashboardProps {
+  children: React.ReactNode
+}
+
+const Dashboard = ({ children }: DashboardProps) => {
+  return (
+    <>
+      <S.DashboardWrapper>
+        <SidebarNavigation />
+        <S.DashboardRightSection>
+          <TopBar />
+          <div style={{ border: "1px solid red" }}>{children}</div>
+        </S.DashboardRightSection>
+      </S.DashboardWrapper>
+    </>
+  )
+}
+
+export default Dashboard
