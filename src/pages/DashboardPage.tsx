@@ -1,8 +1,12 @@
-import Dashboard from "components/Dashboard/Dashboard"
-import Pets from "./Pets"
+import Dashboard from "components/Dashboard/DashboardLayout"
+import DashboardDefaultRootWrapper from "components/Dashboard/DashboardDefaultComponents/DashboardDefaultRootWrapper/DashboardDefaultRootWrapper"
 
 const DashboardPage = () => {
-  return <Dashboard>dashboard initial</Dashboard>
+  return (
+    <Dashboard>
+      <DashboardDefaultRootWrapper />
+    </Dashboard>
+  )
 }
 
 export default DashboardPage

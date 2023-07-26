@@ -1,23 +1,23 @@
-import * as S from "./Dashboard.styled"
+import * as S from "./DashboardLayout.styled"
 import SidebarNavigation from "./SideBarNavigation/SidebarNavigation"
 import TopBar from "./TopBar/TopBar"
 
-interface DashboardProps {
+interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
-const Dashboard = ({ children }: DashboardProps) => {
+const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <>
       <S.DashboardWrapper>
         <SidebarNavigation />
         <S.DashboardRightSection>
           <TopBar />
-          <div>{children}</div>
+          <div style={{ height: "100%" }}>{children}</div>
         </S.DashboardRightSection>
       </S.DashboardWrapper>
     </>
   )
 }
 
-export default Dashboard
+export default DashboardLayout
