@@ -31,7 +31,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <Routes>
             <Route element={<ProtectedRoutes />}>
-              <Route path="dashboard" element={<DashboardPage />} />
+              <Route path="/" element={<DashboardPage />} />
               <Route path="pets" element={<Pets />} />
               <Route path="Messages" element={<Messages />} />
             </Route>

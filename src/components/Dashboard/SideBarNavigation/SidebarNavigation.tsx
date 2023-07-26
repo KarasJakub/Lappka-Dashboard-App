@@ -13,7 +13,7 @@ const NavigationContent = [
   {
     icon: <HomeIcon stroke={theme.colors.midGray4} />,
     name: "Dashboard",
-    path: "/dashboard",
+    path: "/",
   },
   {
     icon: <MessageIcon stroke={theme.colors.midGray4} />,
@@ -65,6 +65,7 @@ const SidebarNavigation = () => {
             />
           </S.NavigationList>
         </S.NavigationWrapper>
+        <div>adasd</div>
       </S.DashboardSideBar>
     </>
   )

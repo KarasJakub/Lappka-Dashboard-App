@@ -6,6 +6,8 @@ export const DashboardSideBar = styled.div`
     height: 100vh;
     max-width: 25.6rem;
     border-right: 1px solid ${({ theme }) => theme.colors.lightGray3};
+    display: flex;
+    flex-direction: column;
 `
 
 export const NavigationWrapper = styled.nav`

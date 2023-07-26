@@ -14,9 +14,10 @@ export const StyledNavLink = styled(NavLink)`
     border-radius: 6px;
 
         &.active {
-        background-color: ${({ theme }) => theme.colors.primaryPr200};
-        & svg {
-            stroke: ${({ isActive, theme }: any) => (isActive ? "" : theme.colors.primaryPr500 )}
-        }
+            background-color: ${({ theme }) => theme.colors.primaryPr50};
+            & svg {
+                stroke: ${({ isActive, theme }: any) => (isActive ? "" : theme.colors.primaryPr500 )}
+            }
+            color: ${({ isActive, theme }: any) => (isActive ? "" : theme.colors.primaryPr700 )}
     }
 `

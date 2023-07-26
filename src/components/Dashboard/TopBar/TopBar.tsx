@@ -15,7 +15,9 @@ const TopBar = () => {
   return (
     <S.TopBarWrapper>
       <Typography variant="Heading20SemiBold" tag="h5">
-        {removeSlashFromString(location.pathname)}
+        {location.pathname === "/"
+          ? "Dashboard"
+          : removeSlashFromString(location.pathname)}
       </Typography>
     </S.TopBarWrapper>
   )
