@@ -1,14 +1,14 @@
-import { useState, useCallback } from "react";
-import RegisterShelter from "./RegisterShelter";
-import RegisterUser from "./RegisterUser";
-import axios from "axios";
-import RegisterSuccess from "./RegisterSuccess";
+import { useState, useCallback } from "react"
+import RegisterShelter from "./RegisterShelter"
+import RegisterUser from "./RegisterUser"
+import axios from "axios"
+import RegisterSuccess from "./RegisterSuccess"
 
 const defaultMultiFormValues = {
   shelter: {
     organizationName: "",
     street: "",
-    postalCode: "xx-xxx",
+    postalCode: "",
     city: "",
     nip: "",
     krs: "",
@@ -19,55 +19,55 @@ const defaultMultiFormValues = {
     password: "",
     repeatPassword: "",
   },
-};
+}
 
-export type defaultMultiFormValuesTypes = typeof defaultMultiFormValues;
+export type defaultMultiFormValuesTypes = typeof defaultMultiFormValues
 
 export const RegisterForm = () => {
   const [multiFormValues, setMultiFormValues] =
-    useState<defaultMultiFormValuesTypes>(defaultMultiFormValues);
+    useState<defaultMultiFormValuesTypes>(defaultMultiFormValues)
 
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [step, setStep] = useState(1);
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [step, setStep] = useState(1)
 
   const nextStepHandler = () => {
-    setStep((prevState) => prevState + 1);
-  };
+    setStep((prevState) => prevState + 1)
+  }
 
   const prevStepHandler = () => {
-    setStep((prevState) => prevState - 1);
-  };
+    setStep((prevState) => prevState - 1)
+  }
 
   const onFinalSubmit = () => {
-    sendFormData();
-  };
+    sendFormData()
+  }
 
   const handleMultiFormValues = useCallback(
     (values: Partial<defaultMultiFormValuesTypes>) => {
       setMultiFormValues({
         ...multiFormValues,
         ...values,
-      });
+      })
     },
     [multiFormValues]
-  );
+  )
 
   const sendFormData = useCallback(async () => {
     try {
       const response = await axios.post("/Auth/shelterRegister", {
         multiFormValues,
-      });
+      })
 
       if (response.status === 200) {
-        setIsSuccess(true);
+        setIsSuccess(true)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  }, [multiFormValues]);
+  }, [multiFormValues])
 
   if (isSuccess) {
-    return <RegisterSuccess />;
+    return <RegisterSuccess />
   }
 
   return (
@@ -85,5 +85,5 @@ export const RegisterForm = () => {
         />
       )}
     </>
-  );
-};
+  )
+}
