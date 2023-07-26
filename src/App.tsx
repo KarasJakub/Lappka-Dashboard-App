@@ -5,6 +5,7 @@ import ResetPasswordThanks from "pages/ResetPasswordThanks";
 import SetNewPassword from "pages/SetNewPassword";
 import SetNewPasswordEnd from "pages/SetNewPasswordEnd";
 import Dashboard from "pages/Dashboard";
+import Register from "pages/Register";
 import { ThemeProvider } from "styled-components";
 import theme from "./layout/theme";
 import GlobalStyles from "layout/GlobalStyles";
@@ -42,6 +43,7 @@ function App() {
             />
             <Route path={ROUTES.login} element={<Login />} />
             <Route path={ROUTES.home} element={<Dashboard />} />
+            <Route path={ROUTES.register} element={<Register />} />
           </Routes>
         </ThemeProvider>
       </AuthContextProvider>

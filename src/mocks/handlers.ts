@@ -105,5 +105,11 @@ interface LoginProps {
         return res(ctx.status(500), ctx.json({ message: "Server error" }));
       }
     }
+  ),
+  rest.post(
+    "/Auth/shelterRegister",
+    (req, res, ctx) => {
+      return res(ctx.status(200));
+    }
   )
   ];

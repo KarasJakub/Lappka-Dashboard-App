@@ -5,6 +5,7 @@ const ROUTES = {
   resetpasswordthanks: "/resetpasswordthanks",
   setnewpassword: "/setnewpassword",
   setnewpasswordend: "/setnewpasswordend",
+  register: "/register",
 };
 
 export default ROUTES;
