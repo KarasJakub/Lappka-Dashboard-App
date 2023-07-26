@@ -5,25 +5,28 @@ import { ReactComponent as HomeIcon } from "assets/icons/HomeIcon.svg"
 import { ReactComponent as MessageIcon } from "assets/icons/MessageIcon.svg"
 import { ReactComponent as SmillingFaceIcon } from "assets/icons/SimllingFaceIcon.svg"
 import { ReactComponent as HeartIcon } from "assets/icons/HeartIcon.svg"
+import { ReactComponent as UsersIcon } from "assets/icons/UsersIcon.svg"
+import Typography from "components/global/Typography/Typography"
+import theme from "layout/theme"
 
 const NavigationContent = [
   {
-    icon: <HomeIcon />,
+    icon: <HomeIcon stroke={theme.colors.midGray4} />,
     name: "Dashboard",
-    path: "/",
+    path: "/dashboard",
   },
   {
-    icon: <MessageIcon />,
+    icon: <MessageIcon stroke={theme.colors.midGray4} />,
     name: "Wiadomości",
-    path: "/",
+    path: "/messages",
   },
   {
-    icon: <SmillingFaceIcon />,
+    icon: <SmillingFaceIcon stroke={theme.colors.midGray4} />,
     name: "Karty zwierząt",
-    path: "pets",
+    path: "/pets",
   },
   {
-    icon: <HeartIcon />,
+    icon: <HeartIcon stroke={theme.colors.midGray4} />,
     name: "Wolontariat",
     path: "/",
   },
@@ -33,7 +36,7 @@ const SidebarNavigation = () => {
   return (
     <>
       <S.DashboardSideBar>
-        <CompanyLogo />
+        <CompanyLogo style={{ marginLeft: "1rem" }} />
         <S.NavigationWrapper>
           <S.NavigationList>
             {NavigationContent.map((item, index) => (
@@ -44,6 +47,22 @@ const SidebarNavigation = () => {
                 path={item.path}
               />
             ))}
+            <S.OrganizationPositionWrapper>
+              <Typography
+                tag="p"
+                variant="UIText12SemiBold"
+                color={theme.colors.midGray3}
+                margin="Large"
+              >
+                ORGANIZACJA
+              </Typography>
+            </S.OrganizationPositionWrapper>
+
+            <DashboardNavElement
+              image={<UsersIcon stroke={theme.colors.midGray4} />}
+              text="Pracownicy"
+              path="/"
+            />
           </S.NavigationList>
         </S.NavigationWrapper>
       </S.DashboardSideBar>

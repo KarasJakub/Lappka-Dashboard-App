@@ -13,7 +13,7 @@ const Dashboard = ({ children }: DashboardProps) => {
         <SidebarNavigation />
         <S.DashboardRightSection>
           <TopBar />
-          <div style={{ border: "1px solid red" }}>{children}</div>
+          <div>{children}</div>
         </S.DashboardRightSection>
       </S.DashboardWrapper>
     </>

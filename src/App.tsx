@@ -7,6 +7,7 @@ import SetNewPasswordEnd from "pages/SetNewPasswordEnd"
 import DashboardPage from "pages/DashboardPage"
 import Register from "pages/Register"
 import Pets from "pages/Pets"
+import Messages from "pages/Messages"
 import { ThemeProvider } from "styled-components"
 import theme from "./layout/theme"
 import GlobalStyles from "layout/GlobalStyles"
@@ -30,8 +31,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <Routes>
             <Route element={<ProtectedRoutes />}>
-              <Route path={ROUTES.home} element={<DashboardPage />} />
+              <Route path="dashboard" element={<DashboardPage />} />
               <Route path="pets" element={<Pets />} />
+              <Route path="Messages" element={<Messages />} />
             </Route>
             <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
             <Route path={ROUTES.setnewpassword} element={<SetNewPassword />} />

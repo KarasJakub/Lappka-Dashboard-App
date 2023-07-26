@@ -1,6 +1,5 @@
 import Typography from "components/global/Typography/Typography"
 import * as S from "./DashboardNavElement.styled"
-import { NavLink } from "react-router-dom"
 
 interface DashboardNavElementProps {
   image: JSX.Element

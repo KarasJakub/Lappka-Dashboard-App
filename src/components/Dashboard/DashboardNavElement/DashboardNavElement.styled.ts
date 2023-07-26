@@ -15,5 +15,8 @@ export const StyledNavLink = styled(NavLink)`
 
         &.active {
         background-color: ${({ theme }) => theme.colors.primaryPr200};
+        & svg {
+            stroke: ${({ isActive, theme }: any) => (isActive ? "" : theme.colors.primaryPr500 )}
+        }
     }
 `
