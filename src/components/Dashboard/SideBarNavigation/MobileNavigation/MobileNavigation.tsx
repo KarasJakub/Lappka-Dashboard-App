@@ -1,5 +1,4 @@
 import * as SS from "./MobileNavigation.styled"
-import SidebarNavigation from "../SidebarNavigation"
 import * as S from "components/Dashboard/SideBarNavigation/SidebarNavigation.styled"
 import { ReactComponent as CompanyLogo } from "assets/icons/CompanyLogo.svg"
 import DashboardNavElement from "components/Dashboard/DashboardNavElement/DashboardNavElement"
@@ -72,15 +71,6 @@ const MobileNavigation = (props: Props) => {
             />
           </S.NavigationList>
         </S.NavigationWrapper>
-        <div>adasd</div>
-        {/* {NavigationContent.map((item, index) => (
-          <DashboardNavElement
-            key={index}
-            image={item.icon}
-            text={item.name}
-            path={item.path}
-          />
-        ))} */}
       </S.NavigationList>
     </SS.MobileNavigationWrapper>
   )

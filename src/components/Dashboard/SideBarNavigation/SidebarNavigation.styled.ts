@@ -8,10 +8,12 @@ export const DashboardSideBar = styled.div`
     border-right: 1px solid ${({ theme }) => theme.colors.lightGray3};
     display: flex;
     flex-direction: column;
+    position: relative;
+    /* justify-content: space-between; */
     display: none;
 
     ${({ theme }) => theme.MQ.tablet} {
-        display: unset;
+        display: flex;
     }
 `
 

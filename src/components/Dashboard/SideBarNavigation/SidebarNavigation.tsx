@@ -7,6 +7,7 @@ import { ReactComponent as SmillingFaceIcon } from "assets/icons/SimllingFaceIco
 import { ReactComponent as HeartIcon } from "assets/icons/HeartIcon.svg"
 import { ReactComponent as UsersIcon } from "assets/icons/UsersIcon.svg"
 import Typography from "components/global/Typography/Typography"
+import UserCard from "../UserCard/UserCard"
 import theme from "layout/theme"
 
 const NavigationContent = [
@@ -65,7 +66,7 @@ const SidebarNavigation = () => {
             />
           </S.NavigationList>
         </S.NavigationWrapper>
-        <div>adasd</div>
+        <UserCard />
       </S.DashboardSideBar>
     </>
   )
