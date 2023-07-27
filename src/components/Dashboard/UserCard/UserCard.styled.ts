@@ -30,5 +30,5 @@ export const ToggleMenu = styled.div`
     box-shadow: 0px 12px 24px 0px #5B68713D;
     box-shadow: 0px 0px 1px 0px #1A202452;
     border-radius: 0%.7rem;
-    border: 1px solid #F6F7F9
+    border: 1px solid ${({ theme }) => theme.colors.lightGray5}
 `
