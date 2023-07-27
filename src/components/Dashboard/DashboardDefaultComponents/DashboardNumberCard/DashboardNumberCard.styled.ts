@@ -11,6 +11,14 @@ export const CardWrapper = styled.div`
     gap: 1.2rem;
     box-shadow: 0px 1px 2px 0px #1018280F;
     box-shadow: 0px 1px 3px 0px #1018281A;
+
+    ${({ theme }) => theme.MQ.tablet} {
+        max-width: 45%;
+    }
+
+    ${({ theme }) => theme.MQ.largeLaptop} {
+        max-width: unset;
+    }
 `
 
 export const GreenCircle = styled.div`

@@ -8,6 +8,11 @@ export const DashboardSideBar = styled.div`
     border-right: 1px solid ${({ theme }) => theme.colors.lightGray3};
     display: flex;
     flex-direction: column;
+    display: none;
+
+    ${({ theme }) => theme.MQ.tablet} {
+        display: unset;
+    }
 `
 
 export const NavigationWrapper = styled.nav`

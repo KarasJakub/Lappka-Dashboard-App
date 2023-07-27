@@ -9,5 +9,14 @@ export const DashboardInitialSubpageWrapper = styled.section`
 
 export const NumberCardsWrapper = styled.div`
     display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
     gap: 1.6rem;
+    ${({ theme }) => theme.MQ.tablet} {
+        flex-direction: initial;
+    }
+
+    ${({ theme }) => theme.MQ.largeLaptop} {
+        flex-wrap: unset;
+    }
 `
