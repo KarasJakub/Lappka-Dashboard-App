@@ -1,11 +1,11 @@
-import Dashboard from "components/Dashboard/DashboardLayout"
-import DashboardDefaultRootWrapper from "components/Dashboard/DashboardDefaultComponents/DashboardDefaultRootWrapper/DashboardDefaultRootWrapper"
+import DashboardLayout from "components/Dashboard/DashboardLayout"
+import DashboardInitialSubpage from "components/Dashboard/DashboardDefaultComponents/DashboardDefaultRootWrapper/DashboardInitialSubpage"
 
 const DashboardPage = () => {
   return (
-    <Dashboard>
-      <DashboardDefaultRootWrapper />
-    </Dashboard>
+    <DashboardLayout>
+      <DashboardInitialSubpage />
+    </DashboardLayout>
   )
 }
 

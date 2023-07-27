@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <SidebarNavigation />
         <S.DashboardRightSection>
           <TopBar />
-          <div style={{ height: "100%" }}>{children}</div>
+          <S.ChildrenContentWrapper>{children}</S.ChildrenContentWrapper>
         </S.DashboardRightSection>
       </S.DashboardWrapper>
     </>

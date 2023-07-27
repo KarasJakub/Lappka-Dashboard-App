@@ -1,9 +1,9 @@
-import * as S from "./DashboardDefaultRootWrapper.styled"
+import * as S from "./DashboardInitialSubpage.styled"
 import DashboardNumberCard from "../DashboardNumberCard/DashboardNumberCard"
 import { ReactComponent as IdentifierCardIcon } from "assets/icons/IdentifierCardIcon.svg"
 import { ReactComponent as GlassIcon } from "assets/icons/GlassIcon.svg"
 import { ReactComponent as UserIcon } from "assets/icons/UserIcon.svg"
-import { ReactComponent as HeartIcon } from "assets/icons/HeartIcon.svg"
+import { ReactComponent as HeartIcon } from "assets/icons/HeartDashboardIcon.svg"
 
 const CardsContent = [
   {
@@ -28,18 +28,21 @@ const CardsContent = [
   },
 ]
 
-const DashboardDefaultRootWrapper = () => {
+const DashboardInitialSubpage = () => {
   return (
-    <S.DashboardDefaultRootWrapper>
-      {CardsContent.map((card) => (
-        <DashboardNumberCard
-          icon={card.icon}
-          title={card.title}
-          price={card.price}
-        />
-      ))}
-    </S.DashboardDefaultRootWrapper>
+    <S.DashboardInitialSubpageWrapper>
+      <S.NumberCardsWrapper>
+        {CardsContent.map((card, index) => (
+          <DashboardNumberCard
+            key={index}
+            icon={card.icon}
+            title={card.title}
+            price={card.price}
+          />
+        ))}
+      </S.NumberCardsWrapper>
+    </S.DashboardInitialSubpageWrapper>
   )
 }
 
-export default DashboardDefaultRootWrapper
+export default DashboardInitialSubpage
