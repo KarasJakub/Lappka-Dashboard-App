@@ -5,7 +5,7 @@ interface RadioInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string
 }
 
-export const RadioInput = ({ name, label, ...props }: RadioInputProps) => {
+const RadioInput = ({ name, label, ...props }: RadioInputProps) => {
   return (
     <S.RadioLabel>
       <S.RadioInput type="radio" name={name} {...props} />
@@ -13,3 +13,5 @@ export const RadioInput = ({ name, label, ...props }: RadioInputProps) => {
     </S.RadioLabel>
   )
 }
+
+export default RadioInput
