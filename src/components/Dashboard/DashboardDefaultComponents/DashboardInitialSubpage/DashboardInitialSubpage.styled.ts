@@ -35,6 +35,5 @@ export const RechartsVoluntaryWrapper = styled.section`
 
 export const PetsWrapper = styled.section`
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
 `
