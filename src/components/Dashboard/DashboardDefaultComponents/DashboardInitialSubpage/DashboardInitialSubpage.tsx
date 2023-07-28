@@ -6,8 +6,7 @@ import { ReactComponent as UserIcon } from "assets/icons/UserIcon.svg"
 import { ReactComponent as HeartIcon } from "assets/icons/HeartDashboardIcon.svg"
 import TableStats from "components/Dashboard/DashboardDefaultComponents/TableStats/TableStats"
 import VoluntaryCard from "../VoluntaryCard/VoluntaryCard"
-import { ReactComponent as StatusIcon } from "assets/icons/StatusIcon.svg"
-import theme from "layout/theme"
+import NewestPetsCards from "../NewestPetsCards/NewestPetsCards"
 
 const CardsContent = [
   {
@@ -49,6 +48,9 @@ const DashboardInitialSubpage = () => {
         <TableStats />
         <VoluntaryCard />
       </S.RechartsVoluntaryWrapper>
+      <S.PetsWrapper>
+        <NewestPetsCards />
+      </S.PetsWrapper>
     </S.DashboardInitialSubpageWrapper>
   )
 }

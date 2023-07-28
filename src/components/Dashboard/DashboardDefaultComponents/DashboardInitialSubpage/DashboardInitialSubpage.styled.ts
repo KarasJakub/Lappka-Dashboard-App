@@ -23,6 +23,18 @@ export const NumberCardsWrapper = styled.div`
 
 export const RechartsVoluntaryWrapper = styled.section`
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 1.6rem;
+    margin-bottom: 1.6rem;
+
+    ${({ theme }) => theme.MQ.largeLaptop} {
+        flex-direction: row;
+    }
+`
+
+export const PetsWrapper = styled.section`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `
