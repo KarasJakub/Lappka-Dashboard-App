@@ -4,7 +4,7 @@ import { ReactComponent as IdentifierCardIcon } from "assets/icons/IdentifierCar
 import { ReactComponent as GlassIcon } from "assets/icons/GlassIcon.svg"
 import { ReactComponent as UserIcon } from "assets/icons/UserIcon.svg"
 import { ReactComponent as HeartIcon } from "assets/icons/HeartDashboardIcon.svg"
-import TableStats from "components/Dashboard/TableStats/TableStats"
+import TableStats from "components/Dashboard/DashboardDefaultComponents/TableStats/TableStats"
 import VoluntaryCard from "../VoluntaryCard/VoluntaryCard"
 import { ReactComponent as StatusIcon } from "assets/icons/StatusIcon.svg"
 import theme from "layout/theme"

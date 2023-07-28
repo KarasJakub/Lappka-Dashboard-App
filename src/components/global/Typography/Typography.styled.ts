@@ -11,6 +11,7 @@ const TypographyComponent = styled.p<StylingProps>`
     font-family: ${({ theme }) => theme.font.primary};
     color: ${({ color }) => color};
     margin: ${({ margin }) => getTypographyMarginSize(margin)};
+    display: flex;
 
     &.Heading30Semi {
         font-weight: ${({ theme }) => theme.weight.semiBold};

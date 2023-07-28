@@ -1,16 +1,16 @@
-import ButtonComponent from "./ButtonComponent.styled";
-import theme from "layout/theme";
-import { ReactComponent as ArrowRightIcon } from "assets/icons/ArrowRightIcon.svg";
-import { useState } from "react";
+import ButtonComponent from "./ButtonComponent.styled"
+import theme from "layout/theme"
+import { ReactComponent as ArrowRightIcon } from "assets/icons/ArrowRightIcon.svg"
+import { useState } from "react"
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  size?: "XLarge" | "Large" | "Medium";
-  margin?: "XLarge" | "Large" | "Medium";
-  arrow?: boolean;
-  disabled?: boolean;
-  variant?: string;
+  children: React.ReactNode
+  size?: "XLarge" | "Large" | "Medium"
+  margin?: "XLarge" | "Large" | "Medium"
+  arrow?: boolean
+  disabled?: boolean
+  variant?: "primary" | "secondary"
 }
 const Button = ({
   children,
@@ -20,11 +20,11 @@ const Button = ({
   margin,
   ...props
 }: ButtonProps) => {
-  const [toggleState, setToggleState] = useState(false);
+  const [toggleState, setToggleState] = useState(false)
 
   const handleToggle = () => {
-    setToggleState(!toggleState);
-  };
+    setToggleState(!toggleState)
+  }
 
   return (
     <ButtonComponent
@@ -40,7 +40,7 @@ const Button = ({
         style={{ display: arrow ? "block" : "none" }}
       />
     </ButtonComponent>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button
