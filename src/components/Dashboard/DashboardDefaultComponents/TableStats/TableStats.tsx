@@ -38,45 +38,42 @@ const TableStats = () => {
   return (
     <>
       <S.TableWrapper>
-        <CardHeading
-          title="Liczba wyświetleń podopiecznych"
-          action={
-            <ButtonComponent
-              className="secondary"
-              onClick={filterButtonHandler}
-              style={{ maxWidth: "9rem" }}
-              size="Medium"
-            >
-              <CalendarIcon />
-              <Typography tag="p" margin="Medium">
-                {filterSetting}
-              </Typography>
-              <ArrowDownIcon />
-              {openFilterModal && (
-                <S.SelectModal ref={ref}>
-                  <RadioInput
-                    name="filterSetting"
-                    label="Tydzień"
-                    value="week"
-                    onClick={() => setFilterSetting("Tydzień")}
-                  />
-                  <RadioInput
-                    name="filterSetting"
-                    label="Miesiąc"
-                    value="month"
-                    onClick={() => setFilterSetting("Miesiąc")}
-                  />
-                  <RadioInput
-                    name="filterSetting"
-                    label="Rok"
-                    value="year"
-                    onClick={() => setFilterSetting("Rok")}
-                  />
-                </S.SelectModal>
-              )}
-            </ButtonComponent>
-          }
-        />
+        <CardHeading title="Liczba wyświetleń podopiecznych">
+          <ButtonComponent
+            className="secondary"
+            onClick={filterButtonHandler}
+            style={{ maxWidth: "9rem" }}
+            size="Medium"
+          >
+            <CalendarIcon />
+            <Typography tag="p" margin="Medium">
+              {filterSetting}
+            </Typography>
+            <ArrowDownIcon />
+            {openFilterModal && (
+              <S.SelectModal ref={ref}>
+                <RadioInput
+                  name="filterSetting"
+                  label="Tydzień"
+                  value="week"
+                  onClick={() => setFilterSetting("Tydzień")}
+                />
+                <RadioInput
+                  name="filterSetting"
+                  label="Miesiąc"
+                  value="month"
+                  onClick={() => setFilterSetting("Miesiąc")}
+                />
+                <RadioInput
+                  name="filterSetting"
+                  label="Rok"
+                  value="year"
+                  onClick={() => setFilterSetting("Rok")}
+                />
+              </S.SelectModal>
+            )}
+          </ButtonComponent>
+        </CardHeading>
         <S.ResponsiveContainerWrapper>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart

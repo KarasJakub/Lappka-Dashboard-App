@@ -3,16 +3,16 @@ import * as S from "./CardHeading.styled"
 
 interface CardHeadingProps {
   title: string
-  action?: React.ReactNode
+  children?: React.ReactNode
 }
 
-const CardHeading = ({ title, action }: CardHeadingProps) => {
+const CardHeading = ({ title, children }: CardHeadingProps) => {
   return (
     <S.CardHeadingWrapper>
       <Typography tag="p" variant="UIText16SemiBold">
         {title}
       </Typography>
-      {action}
+      {children}
     </S.CardHeadingWrapper>
   )
 }
