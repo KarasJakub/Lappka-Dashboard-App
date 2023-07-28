@@ -9,9 +9,9 @@ export const DashboardInitialSubpageWrapper = styled.section`
 
 export const NumberCardsWrapper = styled.div`
     display: flex;
-    /* flex-direction: column; */
     flex-wrap: wrap;
     gap: 1.6rem;
+    margin-bottom: 1.6rem;
     ${({ theme }) => theme.MQ.tablet} {
         flex-direction: initial;
     }
@@ -19,4 +19,10 @@ export const NumberCardsWrapper = styled.div`
     ${({ theme }) => theme.MQ.largeLaptop} {
         flex-wrap: unset;
     }
+`
+
+export const RechartsVoluntaryWrapper = styled.section`
+    display: flex;
+    justify-content: space-between;
+    gap: 1.6rem;
 `

@@ -1,7 +1,25 @@
 import Typography from "components/global/Typography/Typography"
 import * as S from "./VoluntaryCard.styled"
-import theme from "layout/theme"
 import { ReactComponent as StatusIcon } from "assets/icons/StatusIcon.svg"
+import theme from "layout/theme"
+
+const VoluntaryCardContent = [
+  {
+    text: "Wpłać darowiznę",
+    status: "Włączone",
+    statusIcon: <StatusIcon fill={theme.colors.statusSuccess} />,
+  },
+  {
+    text: "Codzienna pomoc",
+    status: "Wyłączone",
+    statusIcon: <StatusIcon fill={theme.colors.lightGray1} />,
+  },
+  {
+    text: "Wyprowadzanie psów",
+    status: "Włączone",
+    statusIcon: <StatusIcon fill={theme.colors.statusSuccess} />,
+  },
+]
 
 const VoluntaryCard = () => {
   return (
@@ -11,51 +29,23 @@ const VoluntaryCard = () => {
           Wolontariat
         </Typography>
       </S.Title>
-      <S.SubCard>
-        <Typography
-          tag="p"
-          variant="UIText12SemiBold"
-          color={theme.colors.midGray2}
-        >
-          Wpłać darowiznę
-        </Typography>
-        <S.StatusWrapper>
-          <StatusIcon />
-          <Typography tag="p" variant="UIText14Reg">
-            Włączone
+      {VoluntaryCardContent.map((card, index) => (
+        <S.SubCard key={index}>
+          <Typography
+            tag="p"
+            variant="UIText12SemiBold"
+            color={theme.colors.midGray2}
+          >
+            {card.text}
           </Typography>
-        </S.StatusWrapper>
-      </S.SubCard>
-      <S.SubCard>
-        <Typography
-          tag="p"
-          variant="UIText12SemiBold"
-          color={theme.colors.midGray2}
-        >
-          Codzienna pomoc
-        </Typography>
-        <S.StatusWrapper>
-          <StatusIcon />
-          <Typography tag="p" variant="UIText14Reg">
-            Wyłączone
-          </Typography>
-        </S.StatusWrapper>
-      </S.SubCard>
-      <S.SubCard>
-        <Typography
-          tag="p"
-          variant="UIText12SemiBold"
-          color={theme.colors.midGray2}
-        >
-          Wyprowadzanie psów
-        </Typography>
-        <S.StatusWrapper>
-          <StatusIcon />
-          <Typography tag="p" variant="UIText14Reg">
-            Włączone
-          </Typography>
-        </S.StatusWrapper>
-      </S.SubCard>
+          <S.StatusWrapper>
+            {card.statusIcon}
+            <Typography tag="p" variant="UIText14Reg">
+              {card.status}
+            </Typography>
+          </S.StatusWrapper>
+        </S.SubCard>
+      ))}
     </S.CardWrapper>
   )
 }
