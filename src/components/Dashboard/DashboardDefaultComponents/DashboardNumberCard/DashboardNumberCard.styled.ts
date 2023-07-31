@@ -2,7 +2,6 @@ import styled from "styled-components"
 
 export const CardWrapper = styled.div`
     width: 100%;
-    /* max-width: 27rem; */
     background-color: ${({ theme }) => theme.colors.white};
     padding: 1.6rem;
     border-radius: .8rem;
@@ -16,10 +15,6 @@ export const CardWrapper = styled.div`
     ${({ theme }) => theme.MQ.tablet} {
         max-width: 45%;
     }
-
-    /* ${({ theme }) => theme.MQ.laptop} {
-        max-width: 45%;
-    } */
 
     ${({ theme }) => theme.MQ.largeLaptop} {
         max-width: unset;

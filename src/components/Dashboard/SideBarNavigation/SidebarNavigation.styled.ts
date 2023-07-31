@@ -9,7 +9,6 @@ export const DashboardSideBar = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
-    /* justify-content: space-between; */
     display: none;
 
     ${({ theme }) => theme.MQ.tablet} {
