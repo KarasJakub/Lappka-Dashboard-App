@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom"
 import HamburgerButton from "../SideBarNavigation/HamburgerButton/HamburgerButton"
 import { useState } from "react"
 import MobileNavigation from "../SideBarNavigation/MobileNavigation/MobileNavigation"
+import { ReactComponent as BellIcon } from "assets/icons/BellIcon.svg"
+import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 
 const TopBar = () => {
   const location = useLocation()
@@ -27,6 +29,9 @@ const TopBar = () => {
           ? "Dashboard"
           : removeSlashFromString(location.pathname)}
       </Typography>
+      <ButtonComponent style={{ width: "unset" }}>
+        <BellIcon />
+      </ButtonComponent>
       <HamburgerButton
         toggleNavigation={toggleNavigation}
         isMobileNavOpen={isMobileNavOpen}

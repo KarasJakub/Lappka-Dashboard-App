@@ -15,21 +15,25 @@ const NavigationContent = [
     icon: <HomeIcon stroke={theme.colors.midGray4} />,
     name: "Dashboard",
     path: "/",
+    notifications: "0",
   },
   {
     icon: <MessageIcon stroke={theme.colors.midGray4} />,
     name: "Wiadomości",
     path: "/messages",
+    notifications: "0",
   },
   {
     icon: <SmillingFaceIcon stroke={theme.colors.midGray4} />,
     name: "Karty zwierząt",
     path: "/pets",
+    notifications: "56",
   },
   {
     icon: <HeartIcon stroke={theme.colors.midGray4} />,
     name: "Wolontariat",
     path: "/",
+    notifications: "0",
   },
 ]
 
@@ -46,6 +50,7 @@ const SidebarNavigation = () => {
                 image={item.icon}
                 text={item.name}
                 path={item.path}
+                notifications={item.notifications}
               />
             ))}
             <S.OrganizationPositionWrapper>
@@ -63,6 +68,7 @@ const SidebarNavigation = () => {
               image={<UsersIcon stroke={theme.colors.midGray4} />}
               text="Pracownicy"
               path="/"
+              notifications="0"
             />
           </S.NavigationList>
         </S.NavigationWrapper>

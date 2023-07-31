@@ -7,7 +7,6 @@ export const UserCardWrapper = styled.div`
     width: 100%;
     max-width: 23rem;
     margin-top: 2rem;
-    /* position: absolute; */
     bottom: 3rem;
 
     ${({ theme }) => theme.MQ.largeLaptop} {

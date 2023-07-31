@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import * as S from "./TableStats.styled"
-import Button from "components/global/Button/ButtonComponent"
 import {
   BarChart,
   Bar,

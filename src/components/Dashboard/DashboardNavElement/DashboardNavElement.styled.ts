@@ -5,8 +5,14 @@ export const NavigationItem = styled.li`
     display: flex;
     align-items: center;
     gap: 1.5rem;
-
 `
+
+export const NotificationItem = styled.div`
+    background-color: ${({ theme }) => theme.colors.redR600};
+    padding: .2rem .5rem;
+    border-radius: 1rem;
+`
+
 export const StyledNavLink = styled(NavLink)`
     width: 100%;
     max-width: 23rem;

@@ -16,7 +16,10 @@ const UserCard = () => {
           <Typography tag="p" variant="UIText14Med">
             Jan Kowalski
           </Typography>
-          <ButtonComponent onClick={() => setIsUserCardOpen(!isUserCardOpen)}>
+          <ButtonComponent
+            onClick={() => setIsUserCardOpen(!isUserCardOpen)}
+            style={{ width: "unset" }}
+          >
             <ArrowDownIcon
               style={{
                 rotate: isUserCardOpen ? "180deg" : "",
@@ -39,8 +42,8 @@ const UserCard = () => {
                 Ustawienia konta
               </Typography>
             </ButtonComponent>
-            <ButtonComponent>
-              <Typography tag="p" variant="UIText14Reg">
+            <ButtonComponent style={{ width: "unset" }}>
+              <Typography tag="p" variant="UIText14Reg" align="left">
                 Wyloguj się
               </Typography>
             </ButtonComponent>

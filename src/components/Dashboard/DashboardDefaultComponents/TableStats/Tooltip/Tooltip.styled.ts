@@ -17,7 +17,7 @@ export const Tooltip = styled.div`
     width: 1.5rem;
     height: 1.5rem;
     transform: translateX(-50%) rotate(45deg);
-    top: 12px;
+    top: 1.2rem;
     left: 50%;
     z-index: -1;
     }

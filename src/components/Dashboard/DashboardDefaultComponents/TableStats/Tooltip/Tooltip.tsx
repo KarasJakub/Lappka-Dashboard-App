@@ -1,13 +1,17 @@
 import Typography from "components/global/Typography/Typography"
 import * as S from "./Tooltip.styled"
 
-interface TooltipProps {
-  isActive?: boolean
-  payload?: any
-}
+import { TooltipProps } from "recharts"
+import {
+  ValueType,
+  NameType,
+} from "recharts/types/component/DefaultTooltipContent"
 
-const CustomTooltip = ({ isActive, payload }: TooltipProps) => {
-  if (isActive && payload && payload.length) {
+const CustomTooltip = ({
+  active,
+  payload,
+}: TooltipProps<ValueType, NameType>) => {
+  if (active && payload && payload.length) {
     return (
       <S.Tooltip>
         <Typography tag="p" variant="UIText12Reg">

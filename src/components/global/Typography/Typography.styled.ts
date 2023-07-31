@@ -5,11 +5,13 @@ interface StylingProps {
     color?: string
     margin?: string
     className?: string
+    align?: string
 }
 
 const TypographyComponent = styled.p<StylingProps>`
     font-family: ${({ theme }) => theme.font.primary};
     color: ${({ color }) => color};
+    text-align: ${({ align }) => align};
     margin: ${({ margin }) => getTypographyMarginSize(margin)};
     display: flex;
 
