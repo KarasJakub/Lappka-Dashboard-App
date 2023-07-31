@@ -109,7 +109,6 @@ const TableStats = () => {
                   fill: "#9AA6AC",
                 }}
               />
-              {/* <Tooltip /> */}
               <Tooltip
                 content={<CustomTooltip />}
                 cursor={false}

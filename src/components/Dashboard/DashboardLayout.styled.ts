@@ -13,5 +13,10 @@ export const DashboardRightSection = styled.main`
 
 export const ChildrenContentWrapper = styled.section`
     width: 100%;
-    height: calc(100% - 56px);
+    height: auto;
+    overflow: hidden;
+
+    ${({ theme }) => theme.MQ.largeLaptop} {
+        height: calc(100% - 56px);
+    }
 `

@@ -1,35 +1,39 @@
 import * as S from "./PopularPetsCards.styled"
 import CardHeading from "components/global/CardHeading/CardHeading"
 import PopularPetCard from "./PopularPetCard/PopularPetCard"
-import DogPhoto from "assets/photos/DogPhoto.png"
+import WhiteCatPhoto from "assets/photos/WhiteCatPhoto.png"
+import BlackWhiteCatPhoto from "assets/photos/BlackWhiteCatPhoto.png"
+import DogHudsonPhoto from "assets/photos/DogHudsonPhoto.png"
+import DogFrankPhoto from "assets/photos/DogFrankPhoto.png"
+import DogJazzyPhoto from "assets/photos/DogJazzyPhoto.png"
 
 const PopularPetsCardsContent = [
   {
-    image: DogPhoto,
+    image: WhiteCatPhoto,
     name: "Ninka",
     race: "Kot",
     views: "11,2",
   },
   {
-    image: DogPhoto,
+    image: BlackWhiteCatPhoto,
     name: "Ninka",
     race: "Kot",
     views: "1,1",
   },
   {
-    image: DogPhoto,
+    image: DogHudsonPhoto,
     name: "Hudson",
     race: "Pies",
     views: "1,0",
   },
   {
-    image: DogPhoto,
+    image: DogFrankPhoto,
     name: "Frank",
     race: "Pies",
     views: "0,5",
   },
   {
-    image: DogPhoto,
+    image: DogJazzyPhoto,
     name: "Jazzy",
     race: "Pies",
     views: "0,2",

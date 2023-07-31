@@ -10,6 +10,7 @@ export const DashboardInitialSubpageWrapper = styled.section`
 export const NumberCardsWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 1.6rem;
     margin-bottom: 1.6rem;
     ${({ theme }) => theme.MQ.tablet} {
@@ -35,5 +36,11 @@ export const RechartsVoluntaryWrapper = styled.section`
 
 export const PetsWrapper = styled.section`
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    gap: 1.6rem;
+
+    ${({ theme }) => theme.MQ.largeLaptop} {
+        flex-direction: row;
+    }
 `

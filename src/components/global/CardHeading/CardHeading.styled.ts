@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const CardHeadingWrapper = styled.div`
     width: 100%;
+    max-height: 5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

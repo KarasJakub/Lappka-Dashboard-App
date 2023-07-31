@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const TableWrapper = styled.div`
     width: 100%;
     height: 100%;
-    max-width: 135rem;
+    /* max-width: 135rem; */
     background-color: white;
     border-radius: .7rem;
     box-shadow: 0px 1px 2px 0px #1018280F;

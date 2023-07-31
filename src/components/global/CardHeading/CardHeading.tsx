@@ -9,7 +9,7 @@ interface CardHeadingProps {
 const CardHeading = ({ title, children }: CardHeadingProps) => {
   return (
     <S.CardHeadingWrapper>
-      <Typography tag="p" variant="UIText16SemiBold">
+      <Typography tag="p" variant="Heading18SemiBold">
         {title}
       </Typography>
       {children}

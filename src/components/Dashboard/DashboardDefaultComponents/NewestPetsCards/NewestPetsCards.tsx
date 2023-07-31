@@ -5,7 +5,6 @@ import NewPetCard from "./NewPetCard/NewPetCard"
 import WhiteCatPhoto from "assets/photos/WhiteCatPhoto.png"
 import DogPhoto from "assets/photos/DogPhoto.png"
 import BlackWhiteCatPhoto from "assets/photos/BlackWhiteCatPhoto.png"
-import Typography from "components/global/Typography/Typography"
 
 const PetsCardsContent = [
   {
@@ -41,8 +40,9 @@ const NewestPetsCards = () => {
         </ButtonComponent>
       </CardHeading>
       <S.NewestPetsInnerWrapper>
-        {PetsCardsContent.slice(0, 3).map((pet) => (
+        {PetsCardsContent.slice(0, 3).map((pet, index) => (
           <NewPetCard
+            key={index}
             image={pet.image}
             name={pet.name}
             race={pet.race}

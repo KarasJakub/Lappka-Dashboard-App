@@ -6,6 +6,10 @@ export const CardWrapper = styled.div`
     justify-content: space-between;
     padding: .7rem 0 1rem 0;
     border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray3};
+
+    &:nth-last-child(1) {
+        border-bottom: unset;
+    }
 `
 
 export const CardImage = styled.img`
@@ -23,6 +27,7 @@ export const RightWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: .7rem;
+    width: 9rem;
 `
 
 export const TypographyWrapper = styled.div`

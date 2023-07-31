@@ -6,8 +6,13 @@ export const UserCardWrapper = styled.div`
     gap: .8rem;
     width: 100%;
     max-width: 23rem;
-    position: absolute;
+    margin-top: 2rem;
+    /* position: absolute; */
     bottom: 3rem;
+
+    ${({ theme }) => theme.MQ.largeLaptop} {
+        position: absolute;
+    }
 `
 
 export const UserCardImage = styled.img`

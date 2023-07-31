@@ -1,6 +1,7 @@
 import Typography from "components/global/Typography/Typography"
 import * as S from "./PopularPetCard.styled"
 import { ReactComponent as EyeIcon } from "assets/icons/EyeIcon.svg"
+import theme from "layout/theme"
 
 interface PopularPerCardProps {
   image: string
@@ -18,7 +19,11 @@ const PopularPetCard = ({ image, name, race, views }: PopularPerCardProps) => {
           <Typography tag="h5" variant="UIText14Reg">
             {name}
           </Typography>
-          <Typography tag="p" variant="UIText12Reg">
+          <Typography
+            tag="p"
+            variant="UIText12Reg"
+            color={theme.colors.midGray3}
+          >
             {race}
           </Typography>
         </S.TypographyWrapper>
