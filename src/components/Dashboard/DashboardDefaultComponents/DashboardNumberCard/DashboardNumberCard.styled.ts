@@ -28,7 +28,7 @@ export const GreenCircle = styled.div`
     border-radius: 2rem;
     display: grid;
     place-items: center;
-    background-color: ${({ theme }) => theme.colors.primaryPr200};
+    background-color: ${({ theme }) => theme.colors.primaryPr50};
 `
 
 export const TextWrapper = styled.div``

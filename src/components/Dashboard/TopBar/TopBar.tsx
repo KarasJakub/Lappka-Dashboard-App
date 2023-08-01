@@ -6,6 +6,7 @@ import { useState } from "react"
 import MobileNavigation from "../SideBarNavigation/MobileNavigation/MobileNavigation"
 import { ReactComponent as BellIcon } from "assets/icons/BellIcon.svg"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import BreadCrumbs from "../DashboardDefaultComponents/BreadCrumbs/BreadCrumbs"
 
 const TopBar = () => {
   const location = useLocation()
@@ -15,19 +16,10 @@ const TopBar = () => {
     setIsMobileNavOpen((prevState) => !prevState)
   }
 
-  const removeSlashFromString = (input: string) => {
-    const ReplacedBeforeCapitalization = input.replace(/\//g, "")
-    const AfterChanges =
-      ReplacedBeforeCapitalization.charAt(0).toUpperCase() +
-      ReplacedBeforeCapitalization.slice(1)
-    return AfterChanges
-  }
   return (
     <S.TopBarWrapper>
       <Typography variant="Heading20SemiBold" tag="h5">
-        {location.pathname === "/"
-          ? "Dashboard"
-          : removeSlashFromString(location.pathname)}
+        {location.pathname === "/" ? "Dashboard" : <BreadCrumbs />}
       </Typography>
       <ButtonComponent style={{ width: "unset" }}>
         <BellIcon />
