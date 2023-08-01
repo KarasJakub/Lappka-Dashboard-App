@@ -15,6 +15,7 @@ import { Routes, Route } from "react-router-dom"
 import ROUTES from "helpers/utils/routes"
 import { AuthContextProvider } from "context/AuthProvider"
 import { ProtectedRoutes } from "protectedRoutes"
+import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
 
 function App() {
   return (
@@ -33,7 +34,9 @@ function App() {
             <Route element={<ProtectedRoutes />}>
               <Route path={ROUTES.home} element={<DashboardPage />} />
               <Route path={ROUTES.pets} element={<Pets />} />
-              <Route path={ROUTES.messages} element={<Messages />} />
+              <Route path={ROUTES.messages} element={<Messages />}>
+                <Route path=":userId" element={<Conversation />} />
+              </Route>
             </Route>
             <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
             <Route path={ROUTES.setnewpassword} element={<SetNewPassword />} />

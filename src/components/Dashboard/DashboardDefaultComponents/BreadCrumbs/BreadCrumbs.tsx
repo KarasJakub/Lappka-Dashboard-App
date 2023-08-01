@@ -23,7 +23,7 @@ const BreadCrumbs = () => {
         index === 0 && crumb === "" ? "Dashboard" : pathMapping[crumb] || crumb
 
       return (
-        <div className="crumb" key={crumb}>
+        <div key={crumb}>
           <Link to={currentLink} style={{ textDecoration: "none" }}>
             {label}
           </Link>

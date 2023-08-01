@@ -1,6 +1,5 @@
 import Typography from "components/global/Typography/Typography"
 import * as S from "./ContactItem.styled"
-
 import theme from "layout/theme"
 
 interface ContactItemProps {
@@ -9,6 +8,7 @@ interface ContactItemProps {
   message: string
   time: string
   messagesCounter: string
+  path: string
 }
 
 const ContactItem = ({
@@ -17,10 +17,11 @@ const ContactItem = ({
   message,
   time,
   messagesCounter,
+  path,
 }: ContactItemProps) => {
   return (
     <S.ContactItemWrapper
-      to=""
+      to={path}
       className={({ isActive }: any) => (isActive ? "active" : "")}
     >
       <S.LeftWrapper>

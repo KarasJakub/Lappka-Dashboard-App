@@ -9,46 +9,172 @@ import SecondKRystynaPhoto from "assets/photos/Messages/SecondKrystynaPhoto.png"
 
 const ContactsListDummyData = [
   {
-    name: "Artur Pączkowski",
+    userName: "Artur Pączkowski",
     image: ArturPhoto,
-    message: "Hahahaha 😜😜",
+    lastMessage: "hahahahah :D",
+    path: "/messages/artur-paczkowski",
     time: "08:43",
     newMessages: "+2",
+    conversation: [
+      {
+        user: "me",
+        id: 1,
+        message:
+          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+      },
+      {
+        user: "Artur Pączkowski",
+        id: 2,
+        message:
+          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+      },
+      { user: "me", id: 3, message: "Świetnie!" },
+      {
+        user: "Artur Pączkowski",
+        id: 4,
+        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+      },
+    ],
   },
   {
-    name: "Remigiusz Wątroba",
+    userName: "Remigiusz Wątroba",
     image: RemigiuszPhoto,
-    message: "Świetnie!",
+    lastMessage: "Świetnie!",
+    path: "/messages/remigiusz-watroba",
     time: "08:43",
-    newMessages: "+5",
+    newMessages: "+2",
+    conversation: [
+      {
+        user: "me",
+        id: 1,
+        message:
+          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+      },
+      {
+        user: "Remigiusz Wątroba",
+        id: 2,
+        message:
+          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+      },
+      { user: "me", id: 3, message: "Świetnie!" },
+      {
+        user: "Remigiusz Wątroba",
+        id: 4,
+        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+      },
+    ],
   },
   {
-    name: "Krystyna Nowak",
+    userName: "Krystyna Nowak",
     image: KrystynaPhoto,
-    message: "Ta karma jest super...",
+    lastMessage: "Ta kamra jest super...",
+    path: "/messages/krystyna-nowak",
     time: "Pon",
     newMessages: "+2",
+    conversation: [
+      {
+        user: "me",
+        id: 1,
+        message:
+          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+      },
+      {
+        user: "Krystyna Nowak",
+        id: 2,
+        message:
+          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+      },
+      { user: "me", id: 3, message: "Świetnie!" },
+      {
+        user: "Krystyna Nowak",
+        id: 4,
+        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+      },
+    ],
   },
   {
-    name: "Artur Pączkowski",
+    userName: "Ziemowit Kowalski",
     image: SecondArturPhoto,
-    message: "Hahahaha 😜😜",
+    lastMessage: "hahaha",
+    path: "/messages/ziemowit-kowalski",
     time: "08:43",
     newMessages: "+2",
+    conversation: [
+      {
+        user: "me",
+        id: 1,
+        message:
+          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+      },
+      {
+        user: "Ziemowit Kowalski",
+        id: 2,
+        message:
+          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+      },
+      { user: "me", id: 3, message: "Świetnie!" },
+      {
+        user: "Ziemowit Kowalski",
+        id: 4,
+        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+      },
+    ],
   },
   {
-    name: "Remigiusz Wątroba",
+    userName: "Zygfryd Opiela",
     image: SecondRemigiuszPhoto,
-    message: "Świetnie!",
+    lastMessage: "Świetnie!",
+    path: "/messages/zygfryd-opiela",
     time: "08:43",
-    newMessages: "+5",
+    newMessages: "+2",
+    conversation: [
+      {
+        user: "me",
+        id: 1,
+        message:
+          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+      },
+      {
+        user: "Zygfryd Opiela",
+        id: 2,
+        message:
+          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+      },
+      { user: "me", id: 3, message: "Świetnie!" },
+      {
+        user: "Zygfryd Opiela",
+        id: 4,
+        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+      },
+    ],
   },
   {
-    name: "Krystyna Nowak",
+    userName: "Hanna Orzeszek",
     image: SecondKRystynaPhoto,
-    message: "Ta karma jest super...",
+    lastMessage: "Ta karma jest super...",
+    path: "/messages/hanna-orzeszek",
     time: "Pon",
     newMessages: "",
+    conversation: [
+      {
+        user: "me",
+        id: 1,
+        message:
+          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+      },
+      {
+        user: "Hanna Orzeszek",
+        id: 2,
+        message:
+          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+      },
+      { user: "me", id: 3, message: "Świetnie!" },
+      {
+        user: "Hanna Orzeszek",
+        id: 4,
+        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+      },
+    ],
   },
 ]
 
@@ -58,10 +184,11 @@ const ContactsList = () => {
       {ContactsListDummyData.map((item) => (
         <ContactItem
           image={item.image}
-          name={item.name}
-          message={item.message}
+          name={item.userName}
+          message={item.lastMessage}
           time={item.time}
           messagesCounter={item.newMessages}
+          path={item.path}
         />
       ))}
     </S.ContactsListWrapper>
