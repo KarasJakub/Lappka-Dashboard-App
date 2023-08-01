@@ -31,9 +31,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <Routes>
             <Route element={<ProtectedRoutes />}>
-              <Route path="/" element={<DashboardPage />} />
-              <Route path="pets" element={<Pets />} />
-              <Route path="Messages" element={<Messages />} />
+              <Route path={ROUTES.home} element={<DashboardPage />} />
+              <Route path={ROUTES.pets} element={<Pets />} />
+              <Route path={ROUTES.messages} element={<Messages />} />
             </Route>
             <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
             <Route path={ROUTES.setnewpassword} element={<SetNewPassword />} />
