@@ -12,31 +12,31 @@ const PopularPetsCardsContent = [
     image: WhiteCatPhoto,
     name: "Ninka",
     race: "Kot",
-    views: "11,2",
+    views: "11200",
   },
   {
     image: BlackWhiteCatPhoto,
     name: "Ninka",
     race: "Kot",
-    views: "1,1",
+    views: "1100",
   },
   {
     image: DogHudsonPhoto,
     name: "Hudson",
     race: "Pies",
-    views: "1,0",
+    views: "1000",
   },
   {
     image: DogFrankPhoto,
     name: "Frank",
     race: "Pies",
-    views: "0,5",
+    views: "500",
   },
   {
     image: DogJazzyPhoto,
     name: "Jazzy",
     race: "Pies",
-    views: "0,2",
+    views: "200",
   },
 ]
 
