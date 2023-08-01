@@ -6,6 +6,8 @@ const ROUTES = {
   setnewpassword: "/setnewpassword",
   setnewpasswordend: "/setnewpasswordend",
   register: "/register",
-};
+  pets: "/pets",
+  messages: "/messages",
+}
 
-export default ROUTES;
+export default ROUTES

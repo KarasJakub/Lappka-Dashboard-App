@@ -2,12 +2,10 @@ import styled from "styled-components"
 
 export const NewestPetsRootWrapper = styled.div`
     width: 100%;
-    max-height: 36rem;
     background-color: ${({ theme }) => theme.colors.white};
     box-shadow: 0px 1px 2px 0px #1018280F;
     box-shadow: 0px 1px 3px 0px #1018281A;
     border-radius: .8rem;
-
 `
 
 export const NewestPetsInnerWrapper = styled.div`

@@ -9,30 +9,31 @@ import { ReactComponent as UsersIcon } from "assets/icons/UsersIcon.svg"
 import Typography from "components/global/Typography/Typography"
 import UserCard from "../UserCard/UserCard"
 import theme from "layout/theme"
+import ROUTES from "helpers/utils/routes"
 
-const NavigationContent = [
+export const NavigationContent = [
   {
     icon: <HomeIcon stroke={theme.colors.midGray4} />,
     name: "Dashboard",
-    path: "/",
+    path: `${ROUTES.home}`,
     notifications: "0",
   },
   {
     icon: <MessageIcon stroke={theme.colors.midGray4} />,
     name: "Wiadomości",
-    path: "/messages",
+    path: `${ROUTES.messages}`,
     notifications: "0",
   },
   {
     icon: <SmillingFaceIcon stroke={theme.colors.midGray4} />,
     name: "Karty zwierząt",
-    path: "/pets",
+    path: `${ROUTES.pets}`,
     notifications: "56",
   },
   {
     icon: <HeartIcon stroke={theme.colors.midGray4} />,
     name: "Wolontariat",
-    path: "/",
+    path: `${ROUTES.home}`,
     notifications: "0",
   },
 ]
@@ -67,7 +68,7 @@ const SidebarNavigation = () => {
             <DashboardNavElement
               image={<UsersIcon stroke={theme.colors.midGray4} />}
               text="Pracownicy"
-              path="/"
+              path={ROUTES.home}
               notifications="0"
             />
           </S.NavigationList>
