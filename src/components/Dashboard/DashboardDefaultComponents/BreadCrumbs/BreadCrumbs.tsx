@@ -23,11 +23,17 @@ const BreadCrumbs = () => {
       .map((crumb, index) => {
         currentLink += `/${crumb}`
 
-        const label = crumb === "" ? "Dashboard" : pathMapping[crumb] || crumb
+        let label = crumb === "" ? "Dashboard" : pathMapping[crumb] || crumb
+
+        // Replacing "-" into empty space
+        label = label.replace(/-/g, " ")
+
+        // Changing first letter to upper case
+        label = label.replace(/(?<=\s|^)(\w)/g, (match) => match.toUpperCase())
 
         return (
           <Link to={currentLink} style={{ textDecoration: "none" }} key={crumb}>
-            {label}
+            {label + " "}
           </Link>
         )
       })

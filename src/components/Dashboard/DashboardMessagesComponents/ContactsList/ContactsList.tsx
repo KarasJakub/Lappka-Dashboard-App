@@ -7,7 +7,7 @@ import SecondArturPhoto from "assets/photos/Messages/SecondArturPhoto.png"
 import SecondRemigiuszPhoto from "assets/photos/Messages/SecondRemigiuszPhoto.png"
 import SecondKRystynaPhoto from "assets/photos/Messages/SecondKrystynaPhoto.png"
 
-const ContactsListDummyData = [
+export const ContactsListDummyData = [
   {
     userName: "Artur Pączkowski",
     image: ArturPhoto,
@@ -47,20 +47,18 @@ const ContactsListDummyData = [
       {
         user: "me",
         id: 1,
-        message:
-          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+        message: "Mam twojego psa",
       },
       {
         user: "Remigiusz Wątroba",
         id: 2,
-        message:
-          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+        message: "Przedstawcie swoje żądania",
       },
       { user: "me", id: 3, message: "Świetnie!" },
       {
         user: "Remigiusz Wątroba",
         id: 4,
-        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+        message: "50kg ziemaniaków",
       },
     ],
   },
@@ -75,20 +73,18 @@ const ContactsListDummyData = [
       {
         user: "me",
         id: 1,
-        message:
-          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+        message: "Piesek aktualny?",
       },
       {
         user: "Krystyna Nowak",
         id: 2,
-        message:
-          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+        message: "Nie",
       },
       { user: "me", id: 3, message: "Świetnie!" },
       {
         user: "Krystyna Nowak",
         id: 4,
-        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+        message: "Mam chora córkę, da pani pieska",
       },
     ],
   },
@@ -103,20 +99,18 @@ const ContactsListDummyData = [
       {
         user: "me",
         id: 1,
-        message:
-          "Cześć! Znalazłem Twojego pupila. Jest u mnie w domu zdrowy i uśmiechnięty. Kiedy mógłbyś go odebrać?",
+        message: "Można wyprowadzac psy",
       },
       {
         user: "Ziemowit Kowalski",
         id: 2,
-        message:
-          "TAK! Super! Ale się cieszę! Czy mogę do Pana dzisiaj podjechać?",
+        message: "Pewnie",
       },
       { user: "me", id: 3, message: "Świetnie!" },
       {
         user: "Ziemowit Kowalski",
         id: 4,
-        message: "Proszę o podanie adresu i będę jeszcze dzisiaj.",
+        message: "Pgit",
       },
     ],
   },
