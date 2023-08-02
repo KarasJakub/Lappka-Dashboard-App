@@ -1,18 +1,20 @@
-import { Helmet } from "react-helmet";
-import Login from "pages/Login";
-import ResetPassword from "pages/ResetPassword";
-import ResetPasswordThanks from "pages/ResetPasswordThanks";
-import SetNewPassword from "pages/SetNewPassword";
-import SetNewPasswordEnd from "pages/SetNewPasswordEnd";
-import Dashboard from "pages/Dashboard";
-import Register from "pages/Register";
-import { ThemeProvider } from "styled-components";
-import theme from "./layout/theme";
-import GlobalStyles from "layout/GlobalStyles";
-import { Routes, Route } from "react-router-dom";
-import ROUTES from "helpers/utils/routes";
-import { AuthContextProvider } from "context/AuthProvider";
-import { ProtectedRoutes } from "protectedRoutes";
+import { Helmet } from "react-helmet"
+import Login from "pages/Login"
+import ResetPassword from "pages/ResetPassword"
+import ResetPasswordThanks from "pages/ResetPasswordThanks"
+import SetNewPassword from "pages/SetNewPassword"
+import SetNewPasswordEnd from "pages/SetNewPasswordEnd"
+import DashboardPage from "pages/DashboardPage"
+import Register from "pages/Register"
+import Pets from "pages/Pets"
+import Messages from "pages/Messages"
+import { ThemeProvider } from "styled-components"
+import theme from "./layout/theme"
+import GlobalStyles from "layout/GlobalStyles"
+import { Routes, Route } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
+import { AuthContextProvider } from "context/AuthProvider"
+import { ProtectedRoutes } from "protectedRoutes"
 
 function App() {
   return (
@@ -29,7 +31,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <Routes>
             <Route element={<ProtectedRoutes />}>
-              <Route path={ROUTES.home} element={<Dashboard />} />
+              <Route path={ROUTES.home} element={<DashboardPage />} />
+              <Route path={ROUTES.pets} element={<Pets />} />
+              <Route path={ROUTES.messages} element={<Messages />} />
             </Route>
             <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
             <Route path={ROUTES.setnewpassword} element={<SetNewPassword />} />
@@ -42,13 +46,13 @@ function App() {
               element={<ResetPasswordThanks />}
             />
             <Route path={ROUTES.login} element={<Login />} />
+            <Route path={ROUTES.home} element={<DashboardPage />} />
             <Route path={ROUTES.home} element={<Dashboard />} />
-            <Route path={ROUTES.register} element={<Register />} />
           </Routes>
         </ThemeProvider>
       </AuthContextProvider>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
