@@ -179,7 +179,8 @@ const ContactsList = () => {
         <ContactItem
           image={item.image}
           name={item.userName}
-          message={item.lastMessage}
+          conversation={item.conversation}
+          // message={item.conversation.}
           time={item.time}
           messagesCounter={item.newMessages}
           path={item.path}

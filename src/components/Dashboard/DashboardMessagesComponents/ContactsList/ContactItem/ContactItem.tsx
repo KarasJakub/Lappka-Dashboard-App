@@ -2,13 +2,22 @@ import Typography from "components/global/Typography/Typography"
 import * as S from "./ContactItem.styled"
 import theme from "layout/theme"
 
+type Message = {
+  user: string
+  id: number
+  message: string
+}
+
+type Conversation = Message[]
+
 interface ContactItemProps {
   image: string
   name: string
-  message: string
+  message?: string
   time: string
   messagesCounter: string
   path: string
+  conversation: Conversation
 }
 
 const ContactItem = ({
@@ -18,7 +27,15 @@ const ContactItem = ({
   time,
   messagesCounter,
   path,
+  conversation,
 }: ContactItemProps) => {
+  // Logic for dynamiclly displaying last message in left list and added logic for truncatec text
+  const lastIndex = conversation.length - 1
+  const lastMessage = conversation[lastIndex].message
+
+  const truncatedMessage =
+    lastMessage.length > 15 ? lastMessage.slice(0, 15) + "..." : lastMessage
+
   return (
     <S.ContactItemWrapper
       to={path}
@@ -35,7 +52,7 @@ const ContactItem = ({
             variant="UIText12Reg"
             color={theme.colors.darkGray2}
           >
-            {message}
+            {truncatedMessage}
           </Typography>
         </S.TextWrapper>
       </S.LeftWrapper>
