@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const RadioLabel = styled.label`
+export const RadioWrapper = styled.div`
   display: flex;
   cursor: pointer;
 `
@@ -35,4 +35,8 @@ export const RadioInput = styled.input`
         background-color: white;
         border-radius: 100%;
     }
+`
+
+export const RadioLabel = styled.label`
+    cursor: pointer;
 `

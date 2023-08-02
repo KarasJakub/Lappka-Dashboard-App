@@ -1,35 +1,38 @@
 import { useLocation, Link } from "react-router-dom"
+import { useEffect, useMemo, useState } from "react"
 
 const BreadCrumbs = () => {
   const location = useLocation()
-  console.log(location)
+  const [crumbs, setCrumbs] = useState<JSX.Element[]>([])
 
-  const pathMapping: { [key: string]: string } = {
-    messages: "Wiadomości",
-    pets: "Karty zwierząt",
-    voluntary: "Wolontariat",
-    workers: "Pracownicy",
-  }
+  const pathMapping: { [key: string]: string } = useMemo(
+    () => ({
+      messages: "Wiadomości",
+      pets: "Karty zwierząt",
+      voluntary: "Wolontariat",
+      workers: "Pracownicy",
+    }),
+    []
+  )
 
-  let currentLink = ""
+  useEffect(() => {
+    let currentLink = ""
+    const breadcrumbElements = location.pathname
+      .split("/")
+      .filter((crumb) => crumb !== "")
+      .map((crumb, index) => {
+        currentLink += `/${crumb}`
 
-  const crumbs = location.pathname
-    .split("/")
-    .filter((crumb) => crumb !== "")
-    .map((crumb, index) => {
-      currentLink += `/${crumb}`
+        const label = crumb === "" ? "Dashboard" : pathMapping[crumb] || crumb
 
-      const label =
-        index === 0 && crumb === "" ? "Dashboard" : pathMapping[crumb] || crumb
-
-      return (
-        <div key={crumb}>
-          <Link to={currentLink} style={{ textDecoration: "none" }}>
+        return (
+          <Link to={currentLink} style={{ textDecoration: "none" }} key={crumb}>
             {label}
           </Link>
-        </div>
-      )
-    })
+        )
+      })
+    setCrumbs(breadcrumbElements)
+  }, [location.pathname, pathMapping])
 
   return <div>{crumbs}</div>
 }
