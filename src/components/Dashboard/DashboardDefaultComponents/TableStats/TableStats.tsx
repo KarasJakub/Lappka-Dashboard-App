@@ -56,18 +56,21 @@ const TableStats = () => {
                   label="Tydzień"
                   value="week"
                   onClick={() => setFilterSetting("Tydzień")}
+                  id="week"
                 />
                 <RadioInput
                   name="filterSetting"
                   label="Miesiąc"
                   value="month"
                   onClick={() => setFilterSetting("Miesiąc")}
+                  id="month"
                 />
                 <RadioInput
                   name="filterSetting"
                   label="Rok"
                   value="year"
                   onClick={() => setFilterSetting("Rok")}
+                  id="year"
                 />
               </S.SelectModal>
             )}
