@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const BubbleWrapper = styled.div`
-    /* width: 100%; */
     padding-bottom: 3.2rem;
     display: flex;
 
@@ -19,6 +18,8 @@ export const BubblePhoto = styled.img`
 export const BubbleItem = styled.div`
     padding: 1.4rem;
     max-width: 27rem;
+    display: flex;
+    gap: 1.4rem;
 
     &.isMe {
         background-color: ${({ theme }) => theme.colors.primaryPr500};

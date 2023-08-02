@@ -6,12 +6,14 @@ interface ConversationBubbleProps {
   isMe?: string
   message: string
   photo: string
+  time: string
 }
 
 const ConversationBubble = ({
   isMe,
   message,
   photo,
+  time,
 }: ConversationBubbleProps) => {
   return (
     <>
@@ -25,6 +27,9 @@ const ConversationBubble = ({
             >
               {message}
             </Typography>
+            <Typography tag="p" variant="UIText12Reg" color="#CCCCCC">
+              {time}
+            </Typography>
           </S.BubbleItem>
         </S.BubbleWrapper>
       ) : (
@@ -33,6 +38,9 @@ const ConversationBubble = ({
           <S.BubbleItem className="isNotMe">
             <Typography tag="p" variant="UIText14Med" color="#616161">
               {message}
+            </Typography>
+            <Typography tag="p" variant="UIText12Reg" color="#CCCCCC">
+              {time}
             </Typography>
           </S.BubbleItem>
         </S.BubbleWrapper>
