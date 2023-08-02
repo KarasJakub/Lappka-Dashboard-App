@@ -47,7 +47,7 @@ function App() {
             />
             <Route path={ROUTES.login} element={<Login />} />
             <Route path={ROUTES.home} element={<DashboardPage />} />
-            <Route path={ROUTES.register} element={<Register />} />
+            <Route path={ROUTES.home} element={<Dashboard />} />
           </Routes>
         </ThemeProvider>
       </AuthContextProvider>
