@@ -4,6 +4,7 @@ import { getButtonPaddingSize, getButtonMarginSize } from 'helpers/utils/getStyl
   interface StylingProps {
     size?: string
     margin?: string
+    maxWidth?: string
   }
 
 const ButtonComponent = styled.button<StylingProps>`
@@ -19,6 +20,7 @@ const ButtonComponent = styled.button<StylingProps>`
   cursor: pointer;
   padding: ${({ size }) => getButtonPaddingSize(size)};
   margin: ${({ margin }) => getButtonMarginSize(margin)};
+  max-width: ${({ maxWidth }) => maxWidth};
   font-size: ${({ size }) => size === "Medium" ? "1.4rem" : "1.6rem"};
 
   &.primary {
