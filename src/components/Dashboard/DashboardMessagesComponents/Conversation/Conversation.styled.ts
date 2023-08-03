@@ -27,4 +27,8 @@ export const HeadingWrapper = styled.div`
 export const ConversationMobileNavWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
+
+    ${({ theme }) => theme.MQ.tablet} {
+        display: none;
+    }
 `
