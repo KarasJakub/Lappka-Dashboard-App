@@ -6,6 +6,10 @@ import { useParams } from "react-router-dom"
 import { ContactsListDummyData } from "../ContactsList/ContactsList"
 import ConversationBubble from "./ConversationBubble/ConversationBubble"
 import { useLocation } from "react-router-dom"
+import HamburgerButton from "components/Dashboard/SideBarNavigation/HamburgerButton/HamburgerButton"
+import ContactListMobileNav from "../ContactsList/ContactListMobileNav/ContactListMobileNav"
+import { useState } from "react"
+import NavButton from "../ContactsList/ContactListMobileNav/MobileNavButton"
 
 const Conversation = () => {
   const { userId } = useParams()
@@ -16,9 +20,24 @@ const Conversation = () => {
   const desiredContact = ContactsListDummyData.find(
     (contact) => contact.path === desiredPath
   )
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+
+  const toggleNavigation = () => {
+    setIsMobileNavOpen((prevState) => !prevState)
+  }
 
   return (
     <S.ConverstionWrapper>
+      <S.ConversationMobileNavWrapper>
+        <NavButton
+          toggleNavigation={toggleNavigation}
+          isMobileNavOpen={isMobileNavOpen}
+        />
+        <ContactListMobileNav
+          isMobileNavOpen={isMobileNavOpen}
+          disableNavigation={() => setIsMobileNavOpen(false)}
+        />
+      </S.ConversationMobileNavWrapper>
       <S.ConversationInnerWrapper>
         <S.HeadingWrapper>
           <Typography
@@ -42,6 +61,7 @@ const Conversation = () => {
             ))
           : ""}
       </S.ConversationInnerWrapper>
+
       {location.pathname === "/messages" ? "" : <ConversationForm />}
     </S.ConverstionWrapper>
   )

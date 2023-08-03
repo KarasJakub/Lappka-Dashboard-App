@@ -13,7 +13,6 @@ type Conversation = Message[]
 interface ContactItemProps {
   image: string
   name: string
-  message?: string
   time: string
   messagesCounter: string
   path: string
@@ -23,13 +22,12 @@ interface ContactItemProps {
 const ContactItem = ({
   image,
   name,
-  message,
   time,
   messagesCounter,
   path,
   conversation,
 }: ContactItemProps) => {
-  // Logic for dynamiclly displaying last message in left list and added logic for truncatec text
+  // Logic for dynamiclly displaying last message in left list and added logic for truncatecd text
   const lastIndex = conversation.length - 1
   const lastMessage = conversation[lastIndex].message
 

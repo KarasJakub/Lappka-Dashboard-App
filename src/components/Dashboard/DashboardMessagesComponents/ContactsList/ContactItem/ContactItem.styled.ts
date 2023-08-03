@@ -10,9 +10,11 @@ export const ContactItemWrapper = styled(NavLink)`
     border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray4};
     text-decoration: none;
 
+
     &.active {
         background-color: ${({ theme }) => theme.colors.primaryPr50};
         color: ${({ theme }) => theme.colors.primaryPr700};
+
     }
 `
 

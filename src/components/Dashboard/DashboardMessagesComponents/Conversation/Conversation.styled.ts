@@ -15,7 +15,6 @@ export const ConversationInnerWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    overflow: scroll;
 `
 
 export const HeadingWrapper = styled.div`
@@ -23,4 +22,9 @@ export const HeadingWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`
+
+export const ConversationMobileNavWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
 `

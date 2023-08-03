@@ -13,14 +13,16 @@ const ConversationForm = () => {
     <S.FormWrapper>
       <FormProvider {...methods}>
         <S.Form>
-          <InputComponent
-            variant="Large"
-            placeholder="Wpisz wiadomość..."
-            type="text"
-            style={{
-              backgroundColor: "rgba(238, 240, 242, 1)",
-            }}
-          />
+          <S.InputWrapper>
+            <InputComponent
+              variant="Large"
+              placeholder="Wpisz wiadomość..."
+              type="text"
+              style={{
+                backgroundColor: "rgba(238, 240, 242, 1)",
+              }}
+            />
+          </S.InputWrapper>
           <ButtonComponent type="submit" style={{ maxWidth: "4rem" }}>
             <MessageSendIcon />
           </ButtonComponent>

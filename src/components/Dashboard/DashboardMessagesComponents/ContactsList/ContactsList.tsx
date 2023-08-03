@@ -47,18 +47,18 @@ export const ContactsListDummyData = [
       {
         user: "me",
         id: 1,
-        message: "Mam twojego psa",
+        message: "Mamy twojego psa",
       },
       {
         user: "Remigiusz Wątroba",
         id: 2,
         message: "Przedstawcie swoje żądania",
       },
-      { user: "me", id: 3, message: "Świetnie!" },
+      { user: "me", id: 3, message: "50kg ziemaniaków" },
       {
         user: "Remigiusz Wątroba",
         id: 4,
-        message: "50kg ziemaniaków",
+        message: "okej",
       },
     ],
   },
@@ -172,15 +172,18 @@ export const ContactsListDummyData = [
   },
 ]
 
-const ContactsList = () => {
+interface MobileNavProps {
+  isMobile?: boolean
+}
+
+const ContactsList = ({ isMobile }: MobileNavProps) => {
   return (
-    <S.ContactsListWrapper>
+    <S.ContactsListWrapper isMobile={isMobile}>
       {ContactsListDummyData.map((item) => (
         <ContactItem
           image={item.image}
           name={item.userName}
           conversation={item.conversation}
-          // message={item.conversation.}
           time={item.time}
           messagesCounter={item.newMessages}
           path={item.path}

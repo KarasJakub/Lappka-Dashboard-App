@@ -13,3 +13,8 @@ export const Form = styled.form`
     justify-content: space-between;
     align-items: center;
 `
+
+export const InputWrapper = styled.div`
+    width: 90%;
+    margin-right: 1rem;
+`
