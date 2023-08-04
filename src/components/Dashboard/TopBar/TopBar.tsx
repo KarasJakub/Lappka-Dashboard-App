@@ -7,14 +7,12 @@ import MobileNavigation from "../SideBarNavigation/MobileNavigation/MobileNaviga
 import { ReactComponent as BellIcon } from "assets/icons/BellIcon.svg"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import BreadCrumbs from "../DashboardDefaultComponents/BreadCrumbs/BreadCrumbs"
-import useResponsiveProps from "helpers/hooks/useResponsiveProps"
 import { ReactComponent as AddIcon } from "assets/icons/AddIcon.svg"
 import theme from "layout/theme"
 
 const TopBar = () => {
   const location = useLocation()
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
-  const ResponsiveString = useResponsiveProps()
 
   const toggleNavigation = () => {
     setIsMobileNavOpen((prevState) => !prevState)

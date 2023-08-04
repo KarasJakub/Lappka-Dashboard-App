@@ -1,6 +1,7 @@
 import * as S from "./DashboardPetsCardsSubpage.styled"
 import DashboardNumberCard from "../DashboardDefaultComponents/DashboardNumberCard/DashboardNumberCard"
 import { CardsContent } from "../DashboardDefaultComponents/DashboardInitialSubpage/DashboardInitialSubpage"
+import PetsTable from "./PetsTable/PetsTable"
 
 const DashboardPetsCardsSubpage = () => {
   return (
@@ -14,6 +15,7 @@ const DashboardPetsCardsSubpage = () => {
           />
         ))}
       </S.NumberCardsWrapper>
+      <PetsTable />
     </S.DashboardPetsSubpageWrapper>
   )
 }
