@@ -5,6 +5,8 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table"
+import CardHeading from "components/global/CardHeading/CardHeading"
+import * as S from "./PetsTable.styled"
 
 const PetsTable = () => {
   const data = useMemo(() => PetsContentData, [])
@@ -16,13 +18,14 @@ const PetsTable = () => {
     getCoreRowModel: getCoreRowModel<Animal>(),
   })
   return (
-    <div>
-      <table>
+    <S.PetsTableWrapper style={{ width: "100%" }}>
+      <CardHeading title="Karty zwierząt" />
+      <S.PetsTable style={{ width: "100%" }}>
         {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
+          <S.PetsTableHeadingTr key={headerGroup.id}>
             {headerGroup.headers.map((header) => {
               return (
-                <th
+                <S.PetsTableHeadingTh
                   key={header.id}
                   onClick={header.column.getToggleSortingHandler()}
                 >
@@ -33,26 +36,26 @@ const PetsTable = () => {
                         header.getContext()
                       )}
                   {{}[header.column.getIsSorted() as string] ?? null}
-                </th>
+                </S.PetsTableHeadingTh>
               )
             })}
-          </tr>
+          </S.PetsTableHeadingTr>
         ))}
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <S.PetsTableContentTr key={row.id}>
               {row.getVisibleCells().map((cell) => {
                 return (
-                  <td key={cell.id}>
+                  <S.PetsTableContentTd key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
+                  </S.PetsTableContentTd>
                 )
               })}
-            </tr>
+            </S.PetsTableContentTr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </S.PetsTable>
+    </S.PetsTableWrapper>
   )
 }
 

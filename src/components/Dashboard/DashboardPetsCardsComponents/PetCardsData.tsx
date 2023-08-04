@@ -1,8 +1,17 @@
 import { createColumnHelper } from "@tanstack/react-table"
 import Typography from "components/global/Typography/Typography"
+import theme from "layout/theme"
+import { ReactComponent as TableStatusIcon } from "assets/icons/TableStatusIcon.svg"
+import NinkaPhoto from "assets/photos/TablePhotos/Ninka.png"
+import BellaPhoto from "assets/photos/TablePhotos/Bella.png"
+import CandyPhoto from "assets/photos/TablePhotos/Candy.png"
+import HudsonPhoto from "assets/photos/TablePhotos/Hudson.png"
+import FrankPhoto from "assets/photos/TablePhotos/Frank.png"
+import JazzyPhoto from "assets/photos/TablePhotos/Jazzy.png"
 
 export interface Animal {
   name: string
+  image: string
   added: string
   category: string
   gender: string
@@ -16,58 +25,132 @@ const columnHelper = createColumnHelper<Animal>()
 
 export const columns = [
   columnHelper.accessor("name", {
-    header: () => <Typography variant="UIText13Med">Imię zwierzaka</Typography>,
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.midGray2}>
+        Imię zwierzaka
+      </Typography>
+    ),
     cell: (props) => (
-      <Typography variant="UIText14Reg">{props.getValue()}</Typography>
+      <Typography variant="UIText14Reg">
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src={props.row.original.image}
+            alt={"Zwierzę: " + props.getValue()}
+            style={{ paddingRight: "1.2rem" }}
+          />
+          {props.getValue()}
+        </div>
+      </Typography>
     ),
   }),
   columnHelper.accessor("added", {
-    header: () => <Typography variant="UIText13Med">Data dodania</Typography>,
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.midGray2}>
+        Data dodania
+      </Typography>
+    ),
     cell: (props) => (
       <Typography variant="UIText14Reg">{props.getValue()}</Typography>
     ),
   }),
   columnHelper.accessor("category", {
-    header: () => <Typography variant="UIText13Med">Gatunek</Typography>,
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.darkGray2}>
+        Gatunek
+      </Typography>
+    ),
     cell: (props) => (
       <Typography variant="UIText14Reg">{props.getValue()}</Typography>
     ),
   }),
   columnHelper.accessor("gender", {
-    header: () => <Typography variant="UIText13Med">Płeć</Typography>,
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.midGray2}>
+        Płeć
+      </Typography>
+    ),
     cell: (props) => (
       <Typography variant="UIText14Reg">{props.getValue()}</Typography>
     ),
   }),
   columnHelper.accessor("color", {
-    header: () => <Typography variant="UIText13Med">Umaszczenie</Typography>,
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.midGray2}>
+        Umaszczenie
+      </Typography>
+    ),
     cell: (props) => (
       <Typography variant="UIText14Reg">{props.getValue()}</Typography>
     ),
   }),
   columnHelper.accessor("weight", {
-    header: () => <Typography variant="UIText13Med">Płeć</Typography>,
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.midGray2}>
+        Waga
+      </Typography>
+    ),
     cell: (props) => (
       <Typography variant="UIText14Reg">{props.getValue()}</Typography>
     ),
   }),
   columnHelper.accessor("sterilization", {
-    header: () => <Typography variant="UIText13Med">Sterylizacja</Typography>,
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.midGray2}>
+        Sterylizacja
+      </Typography>
+    ),
     cell: (props) => (
-      <Typography variant="UIText14Reg">{props.getValue()}</Typography>
+      <Typography variant="UIText14Reg">
+        {props.getValue() === "Tak" ? (
+          <div>
+            <TableStatusIcon fill={theme.colors.statusSuccess} />{" "}
+            {props.getValue()}
+          </div>
+        ) : (
+          <div>
+            <TableStatusIcon fill={theme.colors.redR500} /> {props.getValue()}
+          </div>
+        )}
+      </Typography>
     ),
   }),
   columnHelper.accessor("visible", {
-    header: () => <Typography variant="UIText13Med">Widoczny</Typography>,
-    cell: (props) => (
-      <Typography variant="UIText14Reg">{props.getValue()}</Typography>
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.midGray2}>
+        Widoczny
+      </Typography>
     ),
+    cell: (props) => (
+      <Typography variant="UIText14Reg">
+        {" "}
+        {props.getValue() === "Tak" ? (
+          <div>
+            <TableStatusIcon fill={theme.colors.statusSuccess} />{" "}
+            {props.getValue()}
+          </div>
+        ) : (
+          <div>
+            <TableStatusIcon fill={theme.colors.redR500} /> {props.getValue()}
+          </div>
+        )}
+      </Typography>
+    ),
+  }),
+  columnHelper.display({
+    id: "actions",
+    header: () => (
+      <Typography variant="UIText13Med" color={theme.colors.midGray2}>
+        Akcja
+      </Typography>
+    ),
+    cell: (props) => <p>tooltip</p>,
   }),
 ]
 
 export const PetsContentData = [
   {
     name: "Ninka",
+    image: NinkaPhoto,
     added: "06.08.2022",
     category: "Kot",
     gender: "Samiczka",
@@ -78,6 +161,7 @@ export const PetsContentData = [
   },
   {
     name: "Bella",
+    image: BellaPhoto,
     added: "06.08.2022",
     category: "Pies",
     gender: "Samiczka",
@@ -88,6 +172,7 @@ export const PetsContentData = [
   },
   {
     name: "Candy",
+    image: CandyPhoto,
     added: "06.08.2022",
     category: "Kot",
     gender: "Samiec",
@@ -98,6 +183,7 @@ export const PetsContentData = [
   },
   {
     name: "Hudson",
+    image: HudsonPhoto,
     added: "29.07.2022",
     category: "Pies",
     gender: "Samiec",
@@ -108,6 +194,7 @@ export const PetsContentData = [
   },
   {
     name: "Frank",
+    image: FrankPhoto,
     added: "29.07.2022",
     category: "Pies",
     gender: "Samiec",
@@ -118,6 +205,7 @@ export const PetsContentData = [
   },
   {
     name: "Jazzy",
+    image: JazzyPhoto,
     added: "29.07.2022",
     category: "Pies",
     gender: "Samiczka",
@@ -128,6 +216,7 @@ export const PetsContentData = [
   },
   {
     name: "Frank",
+    image: FrankPhoto,
     added: "29.07.2022",
     category: "Kot",
     gender: "Samiczka",
@@ -138,6 +227,7 @@ export const PetsContentData = [
   },
   {
     name: "Jazzy",
+    image: JazzyPhoto,
     added: "29.07.2022",
     category: "Pies",
     gender: "Samiec",
@@ -148,6 +238,7 @@ export const PetsContentData = [
   },
   {
     name: "Frank",
+    image: FrankPhoto,
     added: "29.07.2022",
     category: "Pies",
     gender: "Samiczka",
