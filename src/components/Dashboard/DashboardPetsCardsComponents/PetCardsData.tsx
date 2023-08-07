@@ -1,7 +1,9 @@
 import { createColumnHelper } from "@tanstack/react-table"
 import Typography from "components/global/Typography/Typography"
+import { TableGenderWrapper } from "./DashboardPetsCardsSubpage.styled"
 import theme from "layout/theme"
 import { ReactComponent as TableStatusIcon } from "assets/icons/TableStatusIcon.svg"
+import ActionButton from "./PetsTable/ActionButton/ActionButton"
 import NinkaPhoto from "assets/photos/TablePhotos/Ninka.png"
 import BellaPhoto from "assets/photos/TablePhotos/Bella.png"
 import CandyPhoto from "assets/photos/TablePhotos/Candy.png"
@@ -70,7 +72,21 @@ export const columns = [
       </Typography>
     ),
     cell: (props) => (
-      <Typography variant="UIText14Reg">{props.getValue()}</Typography>
+      <>
+        {props.getValue() === "Samiec" ? (
+          <TableGenderWrapper className="male">
+            <Typography variant="UIText14SemiBold" color={theme.colors.white}>
+              {props.getValue()}
+            </Typography>
+          </TableGenderWrapper>
+        ) : (
+          <TableGenderWrapper className="female">
+            <Typography variant="UIText14SemiBold" color={theme.colors.white}>
+              {props.getValue()}
+            </Typography>
+          </TableGenderWrapper>
+        )}
+      </>
     ),
   }),
   columnHelper.accessor("color", {
@@ -143,7 +159,11 @@ export const columns = [
         Akcja
       </Typography>
     ),
-    cell: (props) => <p>tooltip</p>,
+    cell: (props) => (
+      <div style={{ marginLeft: "1rem" }}>
+        <ActionButton />
+      </div>
+    ),
   }),
 ]
 

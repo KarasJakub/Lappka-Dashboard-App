@@ -13,3 +13,19 @@ export const NumberCardsWrapper = styled.div`
     gap: 1.6rem;
     margin-bottom: 1.6rem;
 `
+
+export const TableGenderWrapper = styled.div`
+    padding: 0 .8rem;
+    border-radius: .7rem;
+    max-width: 8rem;
+    display: flex;
+    justify-content: center;
+
+    &.male {
+        background-color: ${({ theme }) => theme.colors.midGray4};
+    }
+
+    &.female {
+        background-color: ${({ theme }) => theme.colors.primaryPr500};
+    }
+`
