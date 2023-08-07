@@ -8,7 +8,6 @@ const DashboardMessagesSubpge = () => {
       <S.ContactListWrapper>
         <ContactsList />
       </S.ContactListWrapper>
-
       <Conversation />
     </S.MessagesSubpageWrapper>
   )

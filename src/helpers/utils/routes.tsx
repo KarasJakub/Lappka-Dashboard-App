@@ -7,6 +7,7 @@ const ROUTES = {
   setnewpasswordend: "/setnewpasswordend",
   register: "/register",
   pets: "/pets",
+  petsNewCard: "/pets/new-card",
   messages: "/messages",
 }
 
