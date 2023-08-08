@@ -7,5 +7,5 @@ const Messages = () => {
       <DashboardMessagesSubpage />
     </DashboardLayout>
   )
-
+}
 export default Messages
