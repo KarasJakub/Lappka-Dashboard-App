@@ -3,6 +3,7 @@ import * as S from "./PetsNewPetCard.styled"
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import InputComponent from "components/global/Input/InputComponent"
 import TextAreaInput from "components/global/Input/TextAreaInput/TextAreaInput"
+import SelectInput from "components/global/Input/SelectInput/SelectInput"
 
 const defaultValues = {
   name: "",
@@ -35,6 +36,7 @@ const PetsNewPetCard = () => {
   const handleValue = (name: handleFormValues, value: string) => {
     setValue(name, value, { shouldTouch: true, shouldDirty: true })
   }
+
   return (
     <S.NetPetFormWrapper>
       <FormProvider {...methods}>
@@ -58,6 +60,25 @@ const PetsNewPetCard = () => {
             placeholder="Wpisz opis zwierzaka"
             margin="Medium"
             // {...register("name")}
+          />
+          <Typography tag="p" variant="UIText13Med" margin="Medium">
+            Gatunek
+          </Typography>
+          <SelectInput
+            name="category"
+            displayValue={watch("category")}
+            setValue={handleValue}
+            placeholder="Wybierz z listy"
+            // errorMessage={errors.category?.message}
+            options={["Kot", "Pies"]}
+          />
+          <SelectInput
+            name="category"
+            displayValue={watch("category")}
+            setValue={handleValue}
+            placeholder="Wybierz z listy"
+            // errorMessage={errors.category?.message}
+            options={["Kot", "Pies"]}
           />
         </S.Form>
       </FormProvider>
