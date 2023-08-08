@@ -8,5 +8,4 @@ const Messages = () => {
     </DashboardLayout>
   )
 }
-
 export default Messages

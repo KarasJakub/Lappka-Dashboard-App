@@ -15,7 +15,8 @@ import { Routes, Route } from "react-router-dom"
 import ROUTES from "helpers/utils/routes"
 import PetsNewPetCard from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/NewPetCard/PetsNewPetCard"
 import { AuthContextProvider } from "context/AuthProvider"
-import { ProtectedRoutes } from "protectedRoutes"
+import ProtectedRoutes from "additionalRoutes/protectedRoutes"
+import UnprotectedRoutes from "additionalRoutes/unprotectedRoutes"
 import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
 
 function App() {
@@ -34,26 +35,28 @@ function App() {
           <Routes>
             <Route element={<ProtectedRoutes />}>
               <Route path={ROUTES.home} element={<DashboardPage />} />
-              <Route path={ROUTES.pets} element={<Pets />}>
-                <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
-              </Route>
+              <Route path={ROUTES.pets} element={<Pets />} />
               <Route path={ROUTES.messages} element={<Messages />}>
                 <Route path=":userId" element={<Conversation />} />
               </Route>
             </Route>
-            <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
-            <Route path={ROUTES.setnewpassword} element={<SetNewPassword />} />
-            <Route
-              path={ROUTES.setnewpasswordend}
-              element={<SetNewPasswordEnd />}
-            />
-            <Route
-              path={ROUTES.resetpasswordthanks}
-              element={<ResetPasswordThanks />}
-            />
-            <Route path={ROUTES.login} element={<Login />} />
-            <Route path={ROUTES.home} element={<DashboardPage />} />
-            <Route path={ROUTES.register} element={<Register />} />
+            <Route element={<UnprotectedRoutes />}>
+              <Route path={ROUTES.login} element={<Login />} />
+              <Route path={ROUTES.resetpassword} element={<ResetPassword />} />
+              <Route
+                path={ROUTES.setnewpassword}
+                element={<SetNewPassword />}
+              />
+              <Route
+                path={ROUTES.setnewpasswordend}
+                element={<SetNewPasswordEnd />}
+              />
+              <Route
+                path={ROUTES.resetpasswordthanks}
+                element={<ResetPasswordThanks />}
+              />
+              <Route path={ROUTES.register} element={<Register />} />
+            </Route>
           </Routes>
         </ThemeProvider>
       </AuthContextProvider>

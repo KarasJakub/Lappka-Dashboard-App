@@ -1,19 +1,9 @@
-import LoginRegisterWrapper from "components/LoginRegisterWrapper/LoginRegisterWrapper";
-import ParentCardComponent from "components/LoginRegisterWrapper/SubComponents/ParentComponent/ParentCardComponent";
-import { ReactComponent as ManOnHammock } from "assets/photos/ManOnHammock.svg";
-import FormContentSetNewPasswordEnd from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentResetPassword/FormContentSetNewPasswordEnd";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "context/AuthProvider";
-import ROUTES from "helpers/utils/routes";
-import { useNavigate } from "react-router-dom";
+import LoginRegisterWrapper from "components/LoginRegisterWrapper/LoginRegisterWrapper"
+import ParentCardComponent from "components/LoginRegisterWrapper/SubComponents/ParentComponent/ParentCardComponent"
+import { ReactComponent as ManOnHammock } from "assets/photos/ManOnHammock.svg"
+import FormContentSetNewPasswordEnd from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentResetPassword/FormContentSetNewPasswordEnd"
 
 const SetNewPasswordEnd = () => {
-  const { isLoggedIn } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    isLoggedIn && navigate(ROUTES.home);
-  });
   return (
     <LoginRegisterWrapper photo={<ManOnHammock />}>
       <ParentCardComponent
@@ -23,7 +13,7 @@ const SetNewPasswordEnd = () => {
         <FormContentSetNewPasswordEnd />
       </ParentCardComponent>
     </LoginRegisterWrapper>
-  );
-};
+  )
+}
 
-export default SetNewPasswordEnd;
+export default SetNewPasswordEnd
