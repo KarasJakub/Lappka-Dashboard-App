@@ -1,17 +1,17 @@
-import * as S from "./InputComponent.styled";
-import React from "react";
-import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin/FormContentLogin";
-import { UseFormRegister } from "react-hook-form";
-import Typography from "../Typography/Typography";
+import * as S from "./InputComponent.styled"
+import React from "react"
+import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin/FormContentLogin"
+import { UseFormRegister } from "react-hook-form"
+import Typography from "../Typography/Typography"
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  variant?: "XLarge" | "Large" | "Medium";
-  margin?: "XLarge" | "Large" | "Medium";
-  disabled?: boolean;
-  maxWidth?: string;
-  register?: UseFormRegister<FormData>;
-  error?: string;
+  variant?: "XLarge" | "Large" | "Medium"
+  margin?: "XLarge" | "Large" | "Medium"
+  disabled?: boolean
+  maxWidth?: string
+  register?: UseFormRegister<FormData>
+  error?: string
 }
 
 const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
@@ -34,6 +34,6 @@ const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
       </S.StyledInputComponentWrapper>
     </>
   )
-);
+)
 
-export default InputComponent;
+export default InputComponent

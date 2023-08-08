@@ -10,8 +10,15 @@ export const DashboardPetsSubpageWrapper = styled.section`
 export const NumberCardsWrapper = styled.div`
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     gap: 1.6rem;
     margin-bottom: 1.6rem;
+
+    ${({ theme }) => theme.MQ.tablet} {
+        flex-direction: initial;
+        flex-wrap: initial;
+    }
 `
 
 export const TableGenderWrapper = styled.div`

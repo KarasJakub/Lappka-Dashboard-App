@@ -39,6 +39,9 @@ function App() {
               <Route path={ROUTES.messages} element={<Messages />}>
                 <Route path=":userId" element={<Conversation />} />
               </Route>
+              <Route path={ROUTES.pets} element={<Pets />}>
+                <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
+              </Route>
             </Route>
             <Route element={<UnprotectedRoutes />}>
               <Route path={ROUTES.login} element={<Login />} />
