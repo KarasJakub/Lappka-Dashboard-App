@@ -21,7 +21,7 @@ const TopBar = () => {
       <Typography variant="Heading20SemiBold" tag="h5">
         {location.pathname === "/" ? "Dashboard" : <BreadCrumbs />}
       </Typography>
-      <ButtonComponent style={{ width: "unset" }}>
+      <ButtonComponent style={{ width: "unset", marginRight: "1rem" }}>
         <BellIcon />
       </ButtonComponent>
       <HamburgerButton
