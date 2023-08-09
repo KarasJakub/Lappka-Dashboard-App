@@ -4,6 +4,12 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import InputComponent from "components/global/Input/InputComponent"
 import TextAreaInput from "components/global/Input/TextAreaInput/TextAreaInput"
 import SelectInput from "components/global/Input/SelectInput/SelectInput"
+import { ReactComponent as AddNewFileIcon } from "assets/icons/AddNewFileIcon.svg"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import CardFooter from "components/global/CardFooter/CardFooter"
+import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import theme from "layout/theme"
 
 const defaultValues = {
   name: "",
@@ -14,14 +20,27 @@ const defaultValues = {
   weight: 0,
   sterilized: "",
   visible: "",
-  images: [],
 }
+
+export const newPetValidation = yup.object({
+  name: yup.string().required("Imię zwierzaka jest wymagane"),
+  description: yup.string().required("Opis jest wymagany"),
+  category: yup.string().required("Gatunek jest wymagany"),
+  color: yup.string().required("Kolor jest wymagany"),
+  gender: yup.string().required("Płeć jest wymagana"),
+  weight: yup.number().required("Waga jest wymagana"),
+  sterilized: yup.string().required("Sterylizacja jest wymagana"),
+  visible: yup.string().required("Sterylizacja jest wymagana"),
+})
 
 type defaultFormValuesTypes = typeof defaultValues
 export type handleFormValues = keyof defaultFormValuesTypes
 
 const PetsNewPetCard = () => {
-  const methods = useForm({})
+  const methods = useForm({
+    defaultValues,
+    resolver: yupResolver(newPetValidation),
+  })
   const {
     formState: { errors, touchedFields },
     setValue,
@@ -49,9 +68,8 @@ const PetsNewPetCard = () => {
             placeholder="Wpisz"
             type="text"
             margin="Medium"
-            isAdditionalUnit
             {...register("name")}
-            // error={errors.email ? errors.email.message : ""}
+            error={errors.name?.message}
           />
           <Typography tag="p" variant="UIText13Med" margin="Medium">
             Opis
@@ -60,33 +78,34 @@ const PetsNewPetCard = () => {
             variant="XLarge"
             placeholder="Wpisz opis zwierzaka"
             margin="Medium"
-            // {...register("name")}
+            {...register("description")}
+            error={errors.description?.message}
           />
           <Typography tag="p" variant="UIText13Med" margin="Medium">
             Gatunek
           </Typography>
           <SelectInput
             name="category"
+            variant="Large"
+            margin="Medium"
+            placeholder="Wybierz z listy"
             displayValue={watch("category")}
             setValue={handleValue}
-            placeholder="Wybierz z listy"
-            // errorMessage={errors.category?.message}
             options={["Kot", "Pies"]}
-            margin="Medium"
-            variant="Large"
+            error={errors.category?.message}
           />
           <Typography tag="p" variant="UIText13Med" margin="Medium">
             Umaszczenie
           </Typography>
           <SelectInput
             name="color"
+            variant="Large"
+            margin="Medium"
+            placeholder="Wybierz z listy"
             displayValue={watch("color")}
             setValue={handleValue}
-            placeholder="Wybierz z listy"
-            // errorMessage={errors.color?.message}
             options={["Jasny", "Ciemny"]}
-            margin="Medium"
-            variant="Large"
+            error={errors.color?.message}
           />
           <S.FormListWrapper>
             <S.FormListItem style={{ width: "50%" }}>
@@ -98,10 +117,10 @@ const PetsNewPetCard = () => {
                 displayValue={watch("gender")}
                 setValue={handleValue}
                 placeholder="Wybierz z listy"
-                // errorMessage={errors.color?.message}
                 options={["Samiec", "Samiczka"]}
                 margin="Medium"
                 variant="Large"
+                error={errors.gender?.message}
               />
             </S.FormListItem>
             <S.FormListItem>
@@ -113,9 +132,10 @@ const PetsNewPetCard = () => {
                 placeholder="Wpisz"
                 type="number"
                 margin="Medium"
-                {...register("weight")}
                 isAdditionalUnit
-                // error={errors.email ? errors.email.message : ""}
+                additionalUnitValue="KG"
+                {...register("weight")}
+                error={errors.weight?.message}
               />
             </S.FormListItem>
           </S.FormListWrapper>
@@ -129,10 +149,10 @@ const PetsNewPetCard = () => {
                 displayValue={watch("sterilized")}
                 setValue={handleValue}
                 placeholder="Wybierz z listy"
-                // errorMessage={errors.color?.message}
                 options={["Tak", "Nie"]}
                 margin="Medium"
                 variant="Large"
+                error={errors.sterilized?.message}
               />
             </S.FormListItem>
             <S.FormListItem>
@@ -144,13 +164,51 @@ const PetsNewPetCard = () => {
                 displayValue={watch("visible")}
                 setValue={handleValue}
                 placeholder="Wybierz z listy"
-                // errorMessage={errors.color?.message}
                 options={["Tak", "Nie"]}
                 margin="Medium"
                 variant="Large"
+                error={errors.sterilized?.message}
               />
             </S.FormListItem>
           </S.FormListWrapper>
+          <Typography tag="p" variant="UIText13Med" margin="Medium">
+            Dodaj zdjęcia
+          </Typography>
+          <InputComponent
+            variant="XLarge"
+            placeholder="Upload"
+            type="file"
+            margin="Medium"
+            isAdditionalUnit
+            additionalUnitValue={<AddNewFileIcon />}
+            error={errors.sterilized?.message}
+          />
+          <CardFooter>
+            <ButtonComponent className="secondary" size="Large" maxWidth="8rem">
+              <Typography
+                tag="p"
+                variant="UIText16MediumButton"
+                color={theme.colors.black}
+              >
+                Anuluj
+              </Typography>
+            </ButtonComponent>
+            <ButtonComponent
+              className="primary"
+              size="Large"
+              maxWidth="8rem"
+              type="submit"
+              onClick={methods.handleSubmit(onSubmit)}
+            >
+              <Typography
+                tag="p"
+                variant="UIText16MediumButton"
+                color={theme.colors.white}
+              >
+                Zapisz
+              </Typography>
+            </ButtonComponent>
+          </CardFooter>
         </S.Form>
       </FormProvider>
     </S.NetPetFormWrapper>

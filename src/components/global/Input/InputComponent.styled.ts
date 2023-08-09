@@ -31,7 +31,7 @@ export const StyledInputComponent = styled.input<StylingProps>`
   width: 100%;
   max-width: ${({ maxWidth }) => maxWidth};
   position: relative;
-  z-index: 20;
+  z-index: 2;
 
   &:placeholder {
     color: ${({ theme }) => theme.colors.midGray4};

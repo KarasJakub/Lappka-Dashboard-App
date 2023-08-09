@@ -74,4 +74,8 @@ export const ListElement = styled.li`
   align-items: center;
 `
 
+export const Information = styled.div`
+  margin: -1rem 0 1rem 0;
+`
+
 // removed animations in progress because css stacking is making me nervous

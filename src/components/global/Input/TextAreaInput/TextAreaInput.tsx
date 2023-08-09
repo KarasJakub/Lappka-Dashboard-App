@@ -14,21 +14,23 @@ interface TextareaProps
 
 const TextAreaInput = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ variant, maxWidth, margin, error, ...props }, ref) => (
-    <S.TextAreaComponentWrapper>
+    <>
       <S.TextAreaComponentWrapper>
-        <S.TextAreaComponent
-          ref={ref}
-          variant={variant}
-          maxWidth={maxWidth}
-          margin={margin}
-          rows={3}
-          {...props}
-        />
-        <S.Information>
-          <Typography variant="UIText12Reg">{error}</Typography>
-        </S.Information>
+        <S.TextAreaComponentWrapper>
+          <S.TextAreaComponent
+            ref={ref}
+            variant={variant}
+            maxWidth={maxWidth}
+            margin={margin}
+            rows={3}
+            {...props}
+          />
+        </S.TextAreaComponentWrapper>
       </S.TextAreaComponentWrapper>
-    </S.TextAreaComponentWrapper>
+      <S.Information>
+        <Typography variant="UIText12Reg">{error}</Typography>
+      </S.Information>
+    </>
   )
 )
 

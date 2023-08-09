@@ -50,4 +50,3 @@ export const TextAreaComponent = styled.textarea<StylingProps>`
     background-color: pink;
   }
 `
-

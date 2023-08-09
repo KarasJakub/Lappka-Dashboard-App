@@ -14,11 +14,21 @@ export interface InputProps
   register?: UseFormRegister<FormData>
   error?: string
   isAdditionalUnit?: boolean
+  additionalUnitValue?: string | JSX.Element
 }
 
 const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { variant, maxWidth, margin, register, error, isAdditionalUnit, ...props },
+    {
+      variant,
+      maxWidth,
+      margin,
+      register,
+      error,
+      isAdditionalUnit,
+      additionalUnitValue,
+      ...props
+    },
     ref
   ) => (
     <>
@@ -39,7 +49,7 @@ const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
                 variant="UIText14Reg"
                 color={theme.colors.midGray2}
               >
-                KG
+                {additionalUnitValue}
               </Typography>
             </S.Unit>
           </S.UnitWrapper>

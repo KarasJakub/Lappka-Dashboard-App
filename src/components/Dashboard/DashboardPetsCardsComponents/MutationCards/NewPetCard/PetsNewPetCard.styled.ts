@@ -5,6 +5,7 @@ export const NetPetFormWrapper = styled.div`
     max-width: 56rem;
     background-color: ${({ theme }) => theme.colors.white};
     padding: 4rem 2.4rem 1.6rem 2.4rem;
+    border-radius: .8rem;
 `
 
 export const Form = styled.form``
