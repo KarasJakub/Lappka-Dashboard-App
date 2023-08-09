@@ -76,6 +76,11 @@ const GlobalStyles = createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 `
 
 export default GlobalStyles

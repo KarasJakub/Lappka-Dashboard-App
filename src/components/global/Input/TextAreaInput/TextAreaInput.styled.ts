@@ -33,17 +33,21 @@ export const TextAreaComponent = styled.textarea<StylingProps>`
   max-width: ${({ maxWidth }) => maxWidth};
   resize: none;
 
-    &:focus {
-        outline: none;
-        border: 1px solid ${({ theme }) => theme.colors.statusFocus};
-    }
+  &:placeholder {
+    color: ${({ theme }) => theme.colors.midGray4};
+  }
 
-    &:disabled {
-        background-color: ${({ theme }) => theme.colors.lightGray4};
-    }
+  &:focus {
+      outline: none;
+      border: 1px solid ${({ theme }) => theme.colors.statusFocus};
+  }
 
-    &:checked {
-      background-color: pink;
-    }
+  &:disabled {
+      background-color: ${({ theme }) => theme.colors.lightGray4};
+  }
+
+  &:checked {
+    background-color: pink;
+  }
 `
 

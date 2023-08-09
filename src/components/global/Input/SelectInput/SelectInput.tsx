@@ -4,8 +4,8 @@ import { handleFormValues } from "components/Dashboard/DashboardPetsCardsCompone
 import { ReactComponent as ArrowDownIcon } from "assets/icons/ArrowDownIcon.svg"
 import { ReactComponent as ApproveIcon } from "assets/icons/PetsApproveIcon.svg"
 import { useOutsideClick } from "helpers/hooks/useOutsideClick"
-import classNames from "classnames"
 import Typography from "components/global/Typography/Typography"
+import theme from "layout/theme"
 
 type CustomSelectProps = {
   options: string[]
@@ -14,6 +14,8 @@ type CustomSelectProps = {
   errorMessage?: string
   setValue: (name: handleFormValues, value: string) => void
   displayValue: string | boolean
+  variant?: "XLarge" | "Large" | "Medium"
+  margin?: "XLarge" | "Large" | "Medium"
 }
 
 const SelectInput = ({
@@ -23,14 +25,10 @@ const SelectInput = ({
   errorMessage,
   setValue,
   displayValue,
+  variant,
+  margin,
 }: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
-
-  const placeholderClasses = classNames(displayValue ? "" : "placeholder")
-
-  const selectMenuClasses = classNames("selectMenu", isOpen ? "open" : "")
-
-  const customArrowClasses = classNames("customArrow", isOpen ? "rotate" : "")
 
   const openMenuHandler = () => {
     setIsOpen((prevState) => !prevState)
@@ -43,27 +41,39 @@ const SelectInput = ({
 
   const ref = useOutsideClick(() => setIsOpen(false))
   return (
-    <S.SelectWrapper className="customSelect">
+    <S.SelectWrapper variant={variant} margin={margin} ref={ref}>
       <S.TopSection onClick={() => openMenuHandler()}>
         <Typography tag="p" variant="UIText14Reg">
-          <S.TextContent className={displayValue ? "" : "placeholder"}>
-            {displayValue ? displayValue : placeholder}
+          <S.TextContent>
+            <Typography
+              tag="p"
+              variant="UIText14Reg"
+              color={displayValue ? "" : theme.colors.midGray4}
+            >
+              {displayValue ? displayValue : placeholder}
+            </Typography>
           </S.TextContent>
         </Typography>
 
-        <S.IconWrapper className={customArrowClasses}>
-          <ArrowDownIcon />
+        <S.IconWrapper className={isOpen ? " rotate" : ""}>
+          <ArrowDownIcon stroke={theme.colors.midGray2} />
         </S.IconWrapper>
       </S.TopSection>
-      <S.BottomSection ref={ref} className={selectMenuClasses}>
-        <ul>
+      <S.BottomSection className={isOpen ? "open" : ""}>
+        <S.List>
           {options.map((option) => (
-            <li key={option} onClick={() => selectOptionHandler(option)}>
-              {option}
+            <S.ListElement
+              key={option}
+              onClick={() => selectOptionHandler(option)}
+            >
+              <Typography tag="p" variant="UIText14Reg">
+                {option}
+              </Typography>
+
               {displayValue === option ? <ApproveIcon /> : null}
-            </li>
+            </S.ListElement>
           ))}
-        </ul>
+        </S.List>
       </S.BottomSection>
       {errorMessage ? `${errorMessage}` : null}
     </S.SelectWrapper>

@@ -3,6 +3,7 @@ import React from "react"
 import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormContents/FormContentLogin/FormContentLogin"
 import { UseFormRegister } from "react-hook-form"
 import Typography from "../Typography/Typography"
+import theme from "layout/theme"
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -12,21 +13,36 @@ export interface InputProps
   maxWidth?: string
   register?: UseFormRegister<FormData>
   error?: string
+  isAdditionalUnit?: boolean
 }
 
 const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ variant, maxWidth, margin, register, error, ...props }, ref) => (
+  (
+    { variant, maxWidth, margin, register, error, isAdditionalUnit, ...props },
+    ref
+  ) => (
     <>
       <S.StyledInputComponentWrapper>
         <S.StyledInputTextWrapper>
-          <S.StyledInputComponent
-            ref={ref}
-            variant={variant}
-            maxWidth={maxWidth}
-            margin={margin}
-            {...register}
-            {...props}
-          />
+          <S.UnitWrapper>
+            <S.StyledInputComponent
+              ref={ref}
+              variant={variant}
+              maxWidth={maxWidth}
+              margin={margin}
+              {...register}
+              {...props}
+            />
+            <S.Unit style={{ display: isAdditionalUnit ? "grid" : "none" }}>
+              <Typography
+                tag="p"
+                variant="UIText14Reg"
+                color={theme.colors.midGray2}
+              >
+                KG
+              </Typography>
+            </S.Unit>
+          </S.UnitWrapper>
           <S.Information>
             <Typography variant="UIText12Reg">{error}</Typography>
           </S.Information>

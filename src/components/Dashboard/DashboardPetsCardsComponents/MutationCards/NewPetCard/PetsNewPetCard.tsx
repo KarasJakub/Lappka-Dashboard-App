@@ -49,6 +49,7 @@ const PetsNewPetCard = () => {
             placeholder="Wpisz"
             type="text"
             margin="Medium"
+            isAdditionalUnit
             {...register("name")}
             // error={errors.email ? errors.email.message : ""}
           />
@@ -71,15 +72,85 @@ const PetsNewPetCard = () => {
             placeholder="Wybierz z listy"
             // errorMessage={errors.category?.message}
             options={["Kot", "Pies"]}
+            margin="Medium"
+            variant="Large"
           />
+          <Typography tag="p" variant="UIText13Med" margin="Medium">
+            Umaszczenie
+          </Typography>
           <SelectInput
-            name="category"
-            displayValue={watch("category")}
+            name="color"
+            displayValue={watch("color")}
             setValue={handleValue}
             placeholder="Wybierz z listy"
-            // errorMessage={errors.category?.message}
-            options={["Kot", "Pies"]}
+            // errorMessage={errors.color?.message}
+            options={["Jasny", "Ciemny"]}
+            margin="Medium"
+            variant="Large"
           />
+          <S.FormListWrapper>
+            <S.FormListItem style={{ width: "50%" }}>
+              <Typography tag="p" variant="UIText13Med" margin="Medium">
+                Płeć
+              </Typography>
+              <SelectInput
+                name="gender"
+                displayValue={watch("gender")}
+                setValue={handleValue}
+                placeholder="Wybierz z listy"
+                // errorMessage={errors.color?.message}
+                options={["Samiec", "Samiczka"]}
+                margin="Medium"
+                variant="Large"
+              />
+            </S.FormListItem>
+            <S.FormListItem>
+              <Typography tag="p" variant="UIText13Med" margin="Medium">
+                Waga
+              </Typography>
+              <InputComponent
+                variant="XLarge"
+                placeholder="Wpisz"
+                type="number"
+                margin="Medium"
+                {...register("weight")}
+                isAdditionalUnit
+                // error={errors.email ? errors.email.message : ""}
+              />
+            </S.FormListItem>
+          </S.FormListWrapper>
+          <S.FormListWrapper>
+            <S.FormListItem style={{ width: "50%" }}>
+              <Typography tag="p" variant="UIText13Med" margin="Medium">
+                Sterylizaca
+              </Typography>
+              <SelectInput
+                name="sterilized"
+                displayValue={watch("sterilized")}
+                setValue={handleValue}
+                placeholder="Wybierz z listy"
+                // errorMessage={errors.color?.message}
+                options={["Tak", "Nie"]}
+                margin="Medium"
+                variant="Large"
+              />
+            </S.FormListItem>
+            <S.FormListItem>
+              <Typography tag="p" variant="UIText13Med" margin="Medium">
+                Widoczność
+              </Typography>
+              <SelectInput
+                name="visible"
+                displayValue={watch("visible")}
+                setValue={handleValue}
+                placeholder="Wybierz z listy"
+                // errorMessage={errors.color?.message}
+                options={["Tak", "Nie"]}
+                margin="Medium"
+                variant="Large"
+              />
+            </S.FormListItem>
+          </S.FormListWrapper>
         </S.Form>
       </FormProvider>
     </S.NetPetFormWrapper>

@@ -8,3 +8,13 @@ export const NetPetFormWrapper = styled.div`
 `
 
 export const Form = styled.form``
+
+export const FormListWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 1.6rem;
+`
+
+export const FormListItem = styled.div`
+    width: 50%;
+`
