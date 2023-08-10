@@ -54,7 +54,9 @@ const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
             </S.Unit>
           </S.UnitWrapper>
           <S.Information>
-            <Typography variant="UIText12Reg">{error}</Typography>
+            <Typography variant="UIText12Reg">
+              {error ? error : null}
+            </Typography>
           </S.Information>
         </S.StyledInputTextWrapper>
       </S.StyledInputComponentWrapper>

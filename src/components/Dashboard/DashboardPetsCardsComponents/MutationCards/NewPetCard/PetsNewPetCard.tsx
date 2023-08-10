@@ -10,6 +10,7 @@ import * as yup from "yup"
 import CardFooter from "components/global/CardFooter/CardFooter"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import theme from "layout/theme"
+import { useState } from "react"
 
 const defaultValues = {
   name: "",
@@ -28,7 +29,10 @@ export const newPetValidation = yup.object({
   category: yup.string().required("Gatunek jest wymagany"),
   color: yup.string().required("Kolor jest wymagany"),
   gender: yup.string().required("Płeć jest wymagana"),
-  weight: yup.number().required("Waga jest wymagana"),
+  weight: yup
+    .number()
+    .min(1, "Waga musi być dodatnia")
+    .required("Waga jest wymagana"),
   sterilized: yup.string().required("Sterylizacja jest wymagana"),
   visible: yup.string().required("Sterylizacja jest wymagana"),
 })
@@ -56,6 +60,21 @@ const PetsNewPetCard = () => {
     setValue(name, value, { shouldTouch: true, shouldDirty: true })
   }
 
+  const [weight, setWeight] = useState(0)
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value
+    // If value is empty, set actual value
+    if (inputValue === "") {
+      return
+    }
+    // If value is not a number, also set the actual value
+    if (isNaN(Number(inputValue))) {
+      return
+    }
+    // Otherwise actuallize field value
+    setWeight(Number(inputValue))
+  }
   return (
     <S.NetPetFormWrapper>
       <FormProvider {...methods}>
@@ -136,6 +155,8 @@ const PetsNewPetCard = () => {
                 additionalUnitValue="KG"
                 {...register("weight")}
                 error={errors.weight?.message}
+                value={weight}
+                onChange={handleInputChange}
               />
             </S.FormListItem>
           </S.FormListWrapper>
