@@ -11,6 +11,8 @@ import CardFooter from "components/global/CardFooter/CardFooter"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import theme from "layout/theme"
 import { useState } from "react"
+import FileInput from "components/global/Input/FileInput/FileInput"
+import PetImagesUpload from "./PetImagesUpload/PetImagesUpload"
 
 const defaultValues = {
   name: "",
@@ -195,15 +197,15 @@ const PetsNewPetCard = () => {
           <Typography tag="p" variant="UIText13Med" margin="Medium">
             Dodaj zdjęcia
           </Typography>
-          <InputComponent
-            variant="XLarge"
-            placeholder="Upload"
-            type="file"
+          {/* <FileInput
             margin="Medium"
+            variant="XLarge"
             isAdditionalUnit
-            additionalUnitValue={<AddNewFileIcon />}
-            error={errors.sterilized?.message}
-          />
+            additionalUnitValue="KG"
+            name="images"
+            placeholder="Upload"
+          /> */}
+          <PetImagesUpload />
           <CardFooter>
             <ButtonComponent className="secondary" size="Large" maxWidth="8rem">
               <Typography
