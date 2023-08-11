@@ -21,10 +21,6 @@ export const ImageContainer = styled.div`
     border-radius: .8rem;
     box-shadow: 0px 24px 32px 0px rgba(91, 104, 113, 0.24);
     box-shadow: 0px 0px 1px 0px rgba(26, 32, 36, 0.32);
-
-    &ReactCrop {
-        &.ReactCrop__drag-handle ord-ne {
-            display: none;
-        }
-    }
+    position: relative;
+    z-index: 2;
 `

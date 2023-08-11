@@ -23,6 +23,7 @@ const defaultValues = {
   weight: 0,
   sterilized: "",
   visible: "",
+  images: [] as string[] | Array<any>,
 }
 
 export const newPetValidation = yup.object({
@@ -37,6 +38,7 @@ export const newPetValidation = yup.object({
     .required("Waga jest wymagana"),
   sterilized: yup.string().required("Sterylizacja jest wymagana"),
   visible: yup.string().required("Sterylizacja jest wymagana"),
+  images: yup.array().required("Zdjęcie jest wymagane"),
 })
 
 type defaultFormValuesTypes = typeof defaultValues
@@ -78,11 +80,11 @@ const PetsNewPetCard = () => {
     setWeight(Number(inputValue))
   }
   return (
-    <S.NetPetFormWrapper>
+    <S.NewPetFormWrapper>
       <FormProvider {...methods}>
         <S.Form action="">
           <Typography tag="p" variant="UIText13Med" margin="Medium">
-            E-mail
+            Imie zwierzaka
           </Typography>
           <InputComponent
             variant="XLarge"
@@ -197,14 +199,6 @@ const PetsNewPetCard = () => {
           <Typography tag="p" variant="UIText13Med" margin="Medium">
             Dodaj zdjęcia
           </Typography>
-          {/* <FileInput
-            margin="Medium"
-            variant="XLarge"
-            isAdditionalUnit
-            additionalUnitValue="KG"
-            name="images"
-            placeholder="Upload"
-          /> */}
           <PetImagesUpload />
           <CardFooter>
             <ButtonComponent className="secondary" size="Large" maxWidth="8rem">
@@ -234,7 +228,7 @@ const PetsNewPetCard = () => {
           </CardFooter>
         </S.Form>
       </FormProvider>
-    </S.NetPetFormWrapper>
+    </S.NewPetFormWrapper>
   )
 }
 

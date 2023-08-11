@@ -105,7 +105,6 @@ const ImageCropModal = ({
               alt="Crop me"
               src={images[imageIndex]}
               onLoad={onImageLoad}
-              style={{ objectFit: "scale-down" }}
             />
           </ReactCrop>
         }

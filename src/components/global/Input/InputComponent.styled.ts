@@ -30,7 +30,6 @@ export const StyledInputComponent = styled.input<StylingProps>`
   border-radius: .5rem;
   width: 100%;
   max-width: ${({ maxWidth }) => maxWidth};
-  position: relative;
   z-index: 2;
 
   &:placeholder {
@@ -66,4 +65,6 @@ export const Unit = styled.div`
   display: grid;
   place-items: center;
   z-index: 1;
+  border: 1px solid ${({ theme }) => theme.colors.lightGray1};
+  border-left: unset;
 `

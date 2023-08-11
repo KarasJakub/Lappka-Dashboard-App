@@ -1,4 +1,3 @@
-import * as S from "./PetsImagesUpload.styled"
 import { useState, useEffect } from "react"
 import FileInput from "components/global/Input/FileInput/FileInput"
 import PetsThumbnails from "./PetsThumbnails/PetsThumbnails"
