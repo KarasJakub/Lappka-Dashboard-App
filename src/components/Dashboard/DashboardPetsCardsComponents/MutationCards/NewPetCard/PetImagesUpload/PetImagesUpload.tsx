@@ -1,7 +1,7 @@
 import * as S from "./PetsImagesUpload.styled"
 import { useState, useEffect } from "react"
 import FileInput from "components/global/Input/FileInput/FileInput"
-// import { PetsImagesThumbnails } from "./PetsImagesThumbnails"
+import PetsThumbnails from "./PetsThumbnails/PetsThumbnails"
 import ImageCropModal from "./ImageCropModal/ImageCropModal"
 import { PixelCrop } from "react-image-crop"
 
@@ -118,13 +118,14 @@ const PetImagesUpload = () => {
         name="images"
         placeholder="Upload"
         uploadImage={uploadImageHandler}
+        margin="Medium"
+        variant="XLarge"
       />
       {thumbnail.length ? (
-        // <PetsImagesThumbnails
-        //   removeThumbnailHandler={removeThumbnailHandler}
-        //   images={[...thumbnail]}
-        // />
-        <p>test</p>
+        <PetsThumbnails
+          removeThumbnailHandler={removeThumbnailHandler}
+          images={[...thumbnail]}
+        />
       ) : null}
       {modalIsVisibe && (
         <ImageCropModal

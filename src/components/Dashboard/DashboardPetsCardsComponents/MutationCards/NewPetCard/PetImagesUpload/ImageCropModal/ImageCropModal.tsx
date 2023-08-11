@@ -10,7 +10,7 @@ import ReactCrop, {
 import "react-image-crop/dist/ReactCrop.css"
 import CardHeading from "components/global/CardHeading/CardHeading"
 import CardFooter from "components/global/CardFooter/CardFooter"
-import { ReactComponent as XIcon } from "../../../assets/icons/x-icon.svg"
+import { ReactComponent as CloseButtonIcon } from "assets/icons/CloseButtonIcon.svg"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 
 function centerAspectCrop(
@@ -87,8 +87,9 @@ const ImageCropModal = ({
             type="button"
             onClick={onCancelCrop}
             className="secondary"
+            maxWidth="3.2rem"
           >
-            <p>Icon X</p>
+            <CloseButtonIcon />
           </ButtonComponent>
         </CardHeading>
         {
@@ -104,14 +105,25 @@ const ImageCropModal = ({
               alt="Crop me"
               src={images[imageIndex]}
               onLoad={onImageLoad}
+              style={{ objectFit: "scale-down" }}
             />
           </ReactCrop>
         }
         <CardFooter>
-          <ButtonComponent className="secondary" onClick={onCancelCrop}>
+          <ButtonComponent
+            className="secondary"
+            onClick={onCancelCrop}
+            maxWidth="8rem"
+            size="Large"
+          >
             Anuluj
           </ButtonComponent>
-          <ButtonComponent className="primary" onClick={nextImageHandler}>
+          <ButtonComponent
+            className="primary"
+            size="Large"
+            onClick={nextImageHandler}
+            maxWidth="16rem"
+          >
             Dodaj zdjęcie
           </ButtonComponent>
         </CardFooter>

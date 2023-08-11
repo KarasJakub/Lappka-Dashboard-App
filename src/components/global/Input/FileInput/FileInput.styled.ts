@@ -7,18 +7,41 @@ import { getInputPaddingSize, getInputMarginSize } from 'helpers/utils/getStyles
     margin?: string
   }
 
-export const StyledInputTextWrapper = styled.div`
-  width: 100%;
-`
-
-export const Information = styled.div`
-  margin: -1rem 0 1rem 0;
-`
-
-export const StyledInputComponentWrapper = styled.div`
+export const InputWrapper = styled.div`
   display: flex;
-  align-items: center;
-  position: relative;
+  flex-direction: column;
+
+`
+
+export const InputContainer = styled.div`
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1px solid rgba(213, 218, 221, 1);
+    border-radius: .6rem;
+    cursor: pointer;
+`
+
+export const IconContainer = styled.div`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: ${({ theme }) => theme.colors.lightGray5};
+      border-radius: 0 .6rem .6rem 0;
+      border-left: 1px solid ${({ theme }) => theme.colors.lightGray1};
+      max-width: 4rem;
+      height: 100%;
+      padding: 1.4rem;
+`
+
+export const InnerWrapper = styled.div`
+      padding: .8rem 1.6rem;
+      width: 100%;
+      height: 100%;
 `
 
 export const StyledInputComponent = styled.input<StylingProps>`
@@ -32,6 +55,10 @@ export const StyledInputComponent = styled.input<StylingProps>`
   max-width: ${({ maxWidth }) => maxWidth};
   position: relative;
   z-index: 2;
+    cursor: pointer;
+  &[type="file"] {
+    display: none;
+  }
 
   &:placeholder {
     color: ${({ theme }) => theme.colors.midGray4};
@@ -47,23 +74,10 @@ export const StyledInputComponent = styled.input<StylingProps>`
   }
 
   &:checked {
-      background-color: pink;
+      background-color: gray;
   }
 `
 
-export const UnitWrapper = styled.div`
-  position: relative;
-`
-
-export const Unit = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: calc(100% - 1.6rem);
-  background-color: ${({ theme }) => theme.colors.lightGray5};
-  border-radius: 0 .5rem .5rem 0;
-  padding: .8rem 1.6rem;
-  display: grid;
-  place-items: center;
-  z-index: 1;
+export const Information = styled.div`
+  margin: .7rem 0;
 `

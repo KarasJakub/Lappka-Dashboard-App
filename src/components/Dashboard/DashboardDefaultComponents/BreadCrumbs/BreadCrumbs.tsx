@@ -11,6 +11,7 @@ const BreadCrumbs = () => {
       pets: "Karty zwierząt",
       voluntary: "Wolontariat",
       workers: "Pracownicy",
+      "new-card": "Nowa karta",
     }),
     []
   )

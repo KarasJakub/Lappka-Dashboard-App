@@ -2,6 +2,7 @@ import Typography from "components/global/Typography/Typography"
 import * as S from "./FileInput.styled"
 import { useFormContext } from "react-hook-form"
 import theme from "layout/theme"
+import { ReactComponent as AddNewFileIcon } from "assets/icons/AddNewFileIcon.svg"
 
 interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -12,8 +13,6 @@ interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean
   maxWidth?: string
   error?: string
-  isAdditionalUnit?: boolean
-  additionalUnitValue?: string | JSX.Element
 }
 
 const FileInput = ({
@@ -24,44 +23,45 @@ const FileInput = ({
   maxWidth,
   margin,
   error,
-  isAdditionalUnit,
-  additionalUnitValue,
   ...props
 }: FileInputProps) => {
   const { register } = useFormContext()
   return (
     <>
-      <S.StyledInputComponentWrapper>
-        <S.StyledInputTextWrapper>
-          <S.UnitWrapper>
-            <S.StyledInputComponent
-              variant={variant}
-              maxWidth={maxWidth}
-              margin={margin}
-              multiple
-              accept="images/*"
-              type="file"
-              {...register("image")}
-              {...props}
-              onChange={(e: any) => uploadImage(e.target.files)}
-            />
-            <S.Unit style={{ display: isAdditionalUnit ? "grid" : "none" }}>
+      <S.InputWrapper>
+        <label htmlFor="file">
+          <S.InputContainer>
+            <S.InnerWrapper>
               <Typography
                 tag="p"
                 variant="UIText14Reg"
-                color={theme.colors.midGray2}
+                color={theme.colors.midGray4}
               >
-                something
+                {placeholder}
               </Typography>
-            </S.Unit>
-          </S.UnitWrapper>
+              <S.StyledInputComponent
+                {...register("image")}
+                {...props}
+                type="file"
+                id="file"
+                multiple
+                accept="images/*"
+                variant={variant}
+                margin={margin}
+                onChange={(e: any) => uploadImage(e.target.files)}
+              />
+            </S.InnerWrapper>
+            <S.IconContainer>
+              <AddNewFileIcon />
+            </S.IconContainer>
+          </S.InputContainer>
           <S.Information>
             <Typography variant="UIText12Reg">
               {error ? error : "Zdjęcia maksymalnie 1MB"}
             </Typography>
           </S.Information>
-        </S.StyledInputTextWrapper>
-      </S.StyledInputComponentWrapper>
+        </label>
+      </S.InputWrapper>
     </>
   )
 }
