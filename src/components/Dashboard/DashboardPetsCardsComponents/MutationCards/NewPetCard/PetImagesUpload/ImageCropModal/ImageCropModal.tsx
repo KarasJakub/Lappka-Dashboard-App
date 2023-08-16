@@ -12,6 +12,8 @@ import CardHeading from "components/global/CardHeading/CardHeading"
 import CardFooter from "components/global/CardFooter/CardFooter"
 import { ReactComponent as CloseButtonIcon } from "assets/icons/CloseButtonIcon.svg"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import { ReactComponent as PetsApproveIcon } from "assets/icons/PetsApproveIcon.svg"
+import theme from "layout/theme"
 
 function centerAspectCrop(
   mediaWidth: number,
@@ -60,9 +62,10 @@ const ImageCropModal = ({
     }
   }
 
-  const nextImageHandler = () => {
+  const nextImageHandler = (e: any) => {
     increaseImageIndex()
     onImageCrop(imageIndex, completedCrop!)
+    e.preventDefault()
 
     if (isLastImage) {
       handleCompleteCrop()
@@ -102,7 +105,7 @@ const ImageCropModal = ({
           >
             <img
               ref={imgRef}
-              alt="Crop me"
+              alt="Zdjęcie zwierzaka"
               src={images[imageIndex]}
               onLoad={onImageLoad}
             />
@@ -123,6 +126,10 @@ const ImageCropModal = ({
             onClick={nextImageHandler}
             maxWidth="16rem"
           >
+            <PetsApproveIcon
+              fill={theme.colors.white}
+              style={{ marginRight: "0.4rem" }}
+            />
             Dodaj zdjęcie
           </ButtonComponent>
         </CardFooter>

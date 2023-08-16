@@ -49,6 +49,17 @@ const TopBar = () => {
             <Typography>Nowa karta</Typography>
           </ButtonComponent>
         )}
+
+        {location.pathname === ROUTES.petsNewCard && (
+          <ButtonComponent
+            className="secondary"
+            maxWidth="8rem"
+            size="Large"
+            onClick={() => navigate(ROUTES.pets)}
+          >
+            Anuluj
+          </ButtonComponent>
+        )}
       </S.RightSideWrapper>
     </S.TopBarWrapper>
   )

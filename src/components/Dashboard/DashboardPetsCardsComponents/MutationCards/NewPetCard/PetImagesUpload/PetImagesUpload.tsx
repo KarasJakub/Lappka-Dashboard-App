@@ -99,6 +99,7 @@ const PetImagesUpload = () => {
         const newFile = new File([arrayBuffer], fileNames[imageIndex], {
           type: "image/jpeg",
         })
+
         const reader = new FileReader()
         reader.readAsDataURL(newFile)
 

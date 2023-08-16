@@ -71,7 +71,9 @@ const SelectInput = ({
                   {option}
                 </Typography>
 
-                {displayValue === option ? <ApproveIcon /> : null}
+                {displayValue === option ? (
+                  <ApproveIcon fill="#43BE8D" />
+                ) : null}
               </S.ListElement>
             ))}
           </S.List>
