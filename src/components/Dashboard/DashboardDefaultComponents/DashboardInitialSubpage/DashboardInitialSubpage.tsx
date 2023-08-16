@@ -8,6 +8,9 @@ import TableStats from "components/Dashboard/DashboardDefaultComponents/TableSta
 import VoluntaryCard from "../VoluntaryCard/VoluntaryCard"
 import NewestPetsCards from "../NewestPetsCards/NewestPetsCards"
 import PopularPetsCards from "../PopularPetsCards/PopularPetsCards"
+import { useQuery } from "@tanstack/react-query"
+import { wait } from "@testing-library/user-event/dist/utils"
+import { GetCards } from "api/ShelterStats"
 
 export const CardsContent = [
   {
@@ -33,10 +36,15 @@ export const CardsContent = [
 ]
 
 const DashboardInitialSubpage = () => {
+  const CardsQuery = useQuery({
+    queryKey: ["cards"],
+    queryFn: () => GetCards(),
+  })
+
   return (
     <S.DashboardInitialSubpageWrapper>
       <S.NumberCardsWrapper>
-        {CardsContent.map((card, index) => (
+        {CardsQuery.data?.map((card: any, index: number) => (
           <DashboardNumberCard
             key={index}
             icon={card.icon}
