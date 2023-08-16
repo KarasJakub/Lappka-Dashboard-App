@@ -21,7 +21,7 @@ const defaultValues = {
   weight: 0,
   sterilized: "",
   visible: "",
-  images: [] as string[] | Array<any>,
+  // images: [] as string[] | Array<any>,
 }
 
 export const newPetValidation = yup.object({
@@ -36,7 +36,7 @@ export const newPetValidation = yup.object({
     .required("Waga jest wymagana"),
   sterilized: yup.string().required("Sterylizacja jest wymagana"),
   visible: yup.string().required("Sterylizacja jest wymagana"),
-  images: yup.array().required("Zdjęcie jest wymagane"),
+  // images: yup.array().required("Zdjęcie jest wymagane"),
 })
 
 type defaultFormValuesTypes = typeof defaultValues
@@ -80,7 +80,10 @@ const PetsNewPetCard = () => {
   return (
     <S.NewPetFormWrapper>
       <FormProvider {...methods}>
-        <S.Form action="">
+        <S.Form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          encType="multipart/form-data"
+        >
           <Typography tag="p" variant="UIText13Med" margin="Medium">
             Imie zwierzaka
           </Typography>

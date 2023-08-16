@@ -15,8 +15,8 @@ export const Wrapper = styled.div`
 export const ImageContainer = styled.div`
     display: flex;
     flex-direction: column;
-    max-height: 51.3rem;
     max-width: 68.4rem;
+    max-height: 51.3rem;
     background-color: ${({ theme }) => theme.colors.white};
     border-radius: .8rem;
     box-shadow: 0px 24px 32px 0px rgba(91, 104, 113, 0.24);
