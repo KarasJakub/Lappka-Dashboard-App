@@ -10,9 +10,10 @@ import NewestPetsCards from "../NewestPetsCards/NewestPetsCards"
 import PopularPetsCards from "../PopularPetsCards/PopularPetsCards"
 import { useQuery } from "@tanstack/react-query"
 import { shelterDataHandler } from "api/DashboardCalls/DashboardCalls"
+import Typography from "components/global/Typography/Typography"
 
 const DashboardInitialSubpage = () => {
-  const { isSuccess, data } = useQuery({
+  const { isSuccess, data, isError } = useQuery({
     queryKey: ["shelterStats"],
     queryFn: () => shelterDataHandler(),
   })
@@ -43,6 +44,12 @@ const DashboardInitialSubpage = () => {
               count={data.volunteerCount}
             />
           </>
+        )}
+        {isError && (
+          <Typography tag="p" variant="Heading18SemiBold">
+            Nie udało sie pobrać danych statystycznych schroniska, skontakuj się
+            z administratorem
+          </Typography>
         )}
       </S.NumberCardsWrapper>
       <S.RechartsVoluntaryWrapper>

@@ -5,7 +5,7 @@ import theme from "layout/theme"
 interface DashboardNumberCardProps {
   icon: JSX.Element
   title: string
-  count: number
+  count: number | string
 }
 
 const DashboardNumberCard = ({
