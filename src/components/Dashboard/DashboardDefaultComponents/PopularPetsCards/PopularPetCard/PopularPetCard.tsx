@@ -8,7 +8,7 @@ interface PopularPerCardProps {
   image: string
   name: string
   race: string
-  views: string
+  views: number
 }
 
 const PopularPetCard = ({ image, name, race, views }: PopularPerCardProps) => {
