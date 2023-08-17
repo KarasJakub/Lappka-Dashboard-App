@@ -5,6 +5,8 @@ import NewPetCard from "./NewPetCard/NewPetCard"
 import WhiteCatPhoto from "assets/photos/WhiteCatPhoto.png"
 import DogPhoto from "assets/photos/DogPhoto.png"
 import BlackWhiteCatPhoto from "assets/photos/BlackWhiteCatPhoto.png"
+import { newestPetsHandler } from "api/DashboardCalls/DashboardCalls"
+import { useQuery } from "@tanstack/react-query"
 
 const PetsCardsContent = [
   {
@@ -28,6 +30,10 @@ const PetsCardsContent = [
 ]
 
 const NewestPetsCards = () => {
+  // const { isSuccess, data } = useQuery({
+  //   queryKey: ["shelterNewestPets"],
+  //   queryFn: () => newestPetsHandler(),
+  // })
   return (
     <S.NewestPetsRootWrapper>
       <CardHeading title="Najnowsze karty zwierząt">
@@ -40,15 +46,19 @@ const NewestPetsCards = () => {
         </ButtonComponent>
       </CardHeading>
       <S.NewestPetsInnerWrapper>
-        {PetsCardsContent.slice(0, 3).map((pet, index) => (
-          <NewPetCard
-            key={index}
-            image={pet.image}
-            name={pet.name}
-            race={pet.race}
-            date={pet.date}
-          />
-        ))}
+        {/* {isSuccess &&
+          data &&
+          data.items
+            .slice(0, 3)
+            .map((pet, index) => (
+              <NewPetCard
+                key={index}
+                image={pet.image}
+                name={pet.name}
+                race={pet.race}
+                date={pet.date}
+              />
+            ))} */}
       </S.NewestPetsInnerWrapper>
     </S.NewestPetsRootWrapper>
   )

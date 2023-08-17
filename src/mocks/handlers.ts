@@ -5,6 +5,7 @@ import { resetPasswordHandler } from "./handlers/resetPasswordHandler"
 import { setNewPasswordHandler } from "./handlers/setNewPasswordHandler"
 import { shelterStatsHandler } from "./handlers/shelterStatsHandler"
 import { mostPopularPetsHandler } from "./handlers/mostPopularPetsHandler"
+import { newestPetsHandler } from "./handlers/newestPetsHandler"
 
 
 export const user = {
@@ -19,5 +20,6 @@ export const handlers = [
   resetPasswordHandler,
   setNewPasswordHandler,
   shelterStatsHandler,
-  mostPopularPetsHandler
+  mostPopularPetsHandler,
+  newestPetsHandler
 ]

@@ -19,3 +19,12 @@ export const shelterDataHandler = async () => {
       console.log(error)
     }
   }
+
+  export const newestPetsHandler = async () => {
+    try {
+      const response = await axios.get<mostPopularPetsHandlerTypes>('/shelters/newestPets')
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
