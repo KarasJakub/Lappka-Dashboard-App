@@ -5,13 +5,13 @@ import theme from "layout/theme"
 interface DashboardNumberCardProps {
   icon: JSX.Element
   title: string
-  price: string
+  count: number
 }
 
 const DashboardNumberCard = ({
   icon,
   title,
-  price,
+  count,
 }: DashboardNumberCardProps) => {
   return (
     <S.CardWrapper>
@@ -25,7 +25,7 @@ const DashboardNumberCard = ({
           {title}
         </Typography>
         <Typography tag="h5" variant="Heading30Semi">
-          {price}
+          {count}
         </Typography>
       </S.TextWrapper>
     </S.CardWrapper>

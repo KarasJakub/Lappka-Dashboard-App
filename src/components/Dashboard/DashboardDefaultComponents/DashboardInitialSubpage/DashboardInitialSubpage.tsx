@@ -9,49 +9,41 @@ import VoluntaryCard from "../VoluntaryCard/VoluntaryCard"
 import NewestPetsCards from "../NewestPetsCards/NewestPetsCards"
 import PopularPetsCards from "../PopularPetsCards/PopularPetsCards"
 import { useQuery } from "@tanstack/react-query"
-import { wait } from "@testing-library/user-event/dist/utils"
-import { GetCards } from "api/ShelterStats"
-
-export const CardsContent = [
-  {
-    icon: <IdentifierCardIcon />,
-    title: "Karty zwierząt",
-    price: "235",
-  },
-  {
-    icon: <GlassIcon />,
-    title: "Szuka właściciela",
-    price: "35",
-  },
-  {
-    icon: <UserIcon />,
-    title: "Z właścicielem",
-    price: "200",
-  },
-  {
-    icon: <HeartIcon />,
-    title: "Wolontariat (ilość osób)",
-    price: "25",
-  },
-]
+import { shelterDataHandler } from "api/DashboardCalls/DashboardCalls"
 
 const DashboardInitialSubpage = () => {
-  const CardsQuery = useQuery({
-    queryKey: ["cards"],
-    queryFn: () => GetCards(),
+  const { isSuccess, data } = useQuery({
+    queryKey: ["shelterStats"],
+    queryFn: () => shelterDataHandler(),
   })
 
   return (
     <S.DashboardInitialSubpageWrapper>
       <S.NumberCardsWrapper>
-        {CardsQuery.data?.map((card: any, index: number) => (
-          <DashboardNumberCard
-            key={index}
-            icon={card.icon}
-            title={card.title}
-            price={card.price}
-          />
-        ))}
+        {isSuccess && data && (
+          <>
+            <DashboardNumberCard
+              icon={<IdentifierCardIcon />}
+              title="Karty zwierząt"
+              count={data.cardCount}
+            />
+            <DashboardNumberCard
+              icon={<GlassIcon />}
+              title="Szuka właściciela"
+              count={data.toAdoptCount}
+            />
+            <DashboardNumberCard
+              icon={<UserIcon />}
+              title="Z właścicielem"
+              count={data.adoptedCount}
+            />
+            <DashboardNumberCard
+              icon={<HeartIcon />}
+              title="Wolontariat (ilość osób)"
+              count={data.volunteerCount}
+            />
+          </>
+        )}
       </S.NumberCardsWrapper>
       <S.RechartsVoluntaryWrapper>
         <TableStats />
