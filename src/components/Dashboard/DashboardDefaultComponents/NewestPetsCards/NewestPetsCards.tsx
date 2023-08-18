@@ -27,12 +27,13 @@ const NewestPetsCards = () => {
           data &&
           data.items
             .slice(0, 3)
-            .map((pet) => (
+            .map((pet, index) => (
               <NewPetCard
                 image={pet.image}
                 name={pet.name}
                 race={pet.race}
                 date={pet.date}
+                key={index}
               />
             ))}
         {isError && (

@@ -18,12 +18,13 @@ const PopularPetsCards = () => {
           data &&
           data.items
             .slice(0, 5)
-            .map((pet) => (
+            .map((pet, index) => (
               <PopularPetCard
                 image={pet.image}
                 name={pet.name}
                 race={pet.race}
                 views={pet.views}
+                key={index}
               />
             ))}
         {isError && (
