@@ -2,38 +2,15 @@ import * as S from "./NewestPetsCards.styled"
 import CardHeading from "components/global/CardHeading/CardHeading"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import NewPetCard from "./NewPetCard/NewPetCard"
-import WhiteCatPhoto from "assets/photos/WhiteCatPhoto.png"
-import DogPhoto from "assets/photos/DogPhoto.png"
-import BlackWhiteCatPhoto from "assets/photos/BlackWhiteCatPhoto.png"
 import { newestPetsHandler } from "api/DashboardCalls/DashboardCalls"
 import { useQuery } from "@tanstack/react-query"
-
-const PetsCardsContent = [
-  {
-    image: WhiteCatPhoto,
-    name: "Ninka",
-    race: "Kot",
-    date: "06.08.2022",
-  },
-  {
-    image: DogPhoto,
-    name: "Bella",
-    race: "Pies",
-    date: "06.08.2022",
-  },
-  {
-    image: BlackWhiteCatPhoto,
-    name: "Candy",
-    race: "Kot",
-    date: "06.08.2022",
-  },
-]
+import Typography from "components/global/Typography/Typography"
 
 const NewestPetsCards = () => {
-  // const { isSuccess, data } = useQuery({
-  //   queryKey: ["shelterNewestPets"],
-  //   queryFn: () => newestPetsHandler(),
-  // })
+  const { isSuccess, data, isError } = useQuery({
+    queryKey: ["shelterNewestPets"],
+    queryFn: () => newestPetsHandler(),
+  })
   return (
     <S.NewestPetsRootWrapper>
       <CardHeading title="Najnowsze karty zwierząt">
@@ -46,19 +23,24 @@ const NewestPetsCards = () => {
         </ButtonComponent>
       </CardHeading>
       <S.NewestPetsInnerWrapper>
-        {/* {isSuccess &&
+        {isSuccess &&
           data &&
           data.items
             .slice(0, 3)
-            .map((pet, index) => (
+            .map((pet) => (
               <NewPetCard
-                key={index}
                 image={pet.image}
                 name={pet.name}
                 race={pet.race}
                 date={pet.date}
               />
-            ))} */}
+            ))}
+        {isError && (
+          <Typography tag="p" variant="Heading18SemiBold">
+            Nie udało sie pobrać danych najnowszych zwierząt schroniska,
+            skontakuj się z administratorem
+          </Typography>
+        )}
       </S.NewestPetsInnerWrapper>
     </S.NewestPetsRootWrapper>
   )

@@ -18,7 +18,7 @@ export interface mostPopularPetsHandlerTypes {
   ]
 }
 
-const PopularPetsCardsContent = [
+export const PopularPetsCardsContent = [
   {
     image: WhiteCatPhoto,
     name: "Ninka",
