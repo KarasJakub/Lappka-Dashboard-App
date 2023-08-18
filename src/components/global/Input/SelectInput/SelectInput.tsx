@@ -6,6 +6,7 @@ import { ReactComponent as ApproveIcon } from "assets/icons/PetsApproveIcon.svg"
 import { useOutsideClick } from "helpers/hooks/useOutsideClick"
 import Typography from "components/global/Typography/Typography"
 import theme from "layout/theme"
+import { SizeVariant } from "types/types"
 
 type CustomSelectProps = {
   options: string[]
@@ -14,8 +15,8 @@ type CustomSelectProps = {
   error?: string
   setValue: (name: handleFormValues, value: string) => void
   displayValue: string | boolean
-  variant?: "XLarge" | "Large" | "Medium"
-  margin?: "XLarge" | "Large" | "Medium"
+  variant?: SizeVariant
+  margin?: SizeVariant
 }
 
 const SelectInput = ({

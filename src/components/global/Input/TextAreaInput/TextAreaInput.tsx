@@ -1,11 +1,12 @@
 import Typography from "components/global/Typography/Typography"
 import * as S from "./TextAreaInput.styled"
 import React from "react"
+import { SizeVariant } from "types/types"
 
 interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  variant?: "XLarge" | "Large" | "Medium"
-  margin?: "XLarge" | "Large" | "Medium"
+  variant?: SizeVariant
+  margin?: SizeVariant
   disabled?: boolean
   maxWidth?: string
   //   register?: UseFormRegister<FormData>

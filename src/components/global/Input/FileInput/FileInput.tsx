@@ -3,13 +3,14 @@ import * as S from "./FileInput.styled"
 import { useFormContext } from "react-hook-form"
 import theme from "layout/theme"
 import { ReactComponent as AddNewFileIcon } from "assets/icons/AddNewFileIcon.svg"
+import { SizeVariant } from "types/types"
 
 interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string
   placeholder: string
   uploadImage: (images: any) => void
-  variant?: "XLarge" | "Large" | "Medium"
-  margin?: "XLarge" | "Large" | "Medium"
+  variant?: SizeVariant
+  margin?: SizeVariant
   disabled?: boolean
   maxWidth?: string
   error?: string

@@ -4,11 +4,12 @@ import { FormData } from "components/LoginRegisterWrapper/SubComponents/FormCont
 import { UseFormRegister } from "react-hook-form"
 import Typography from "../Typography/Typography"
 import theme from "layout/theme"
+import { SizeVariant } from "types/types"
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  variant?: "XLarge" | "Large" | "Medium"
-  margin?: "XLarge" | "Large" | "Medium"
+  variant?: SizeVariant
+  margin?: SizeVariant
   disabled?: boolean
   maxWidth?: string
   register?: UseFormRegister<FormData>

@@ -1,13 +1,14 @@
 import React from "react"
 import TypographyComponent from "./Typography.styled"
+import { SizeVariant } from "types/types"
 
 export interface TypographyProps {
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p"
   variant?: string
   children: React.ReactNode
   color?: string
-  margin?: "XLarge" | "Large" | "Medium"
-  align?: "left" | "center" | "right"
+  margin?: SizeVariant
+  align?: SizeVariant
   className?: string
 }
 
