@@ -8,7 +8,6 @@ export interface TypographyProps {
   children: React.ReactNode
   color?: string
   margin?: SizeVariant
-  align?: SizeVariant
   className?: string
 }
 
@@ -18,7 +17,6 @@ const Typography = ({
   children,
   color,
   margin,
-  align,
 }: TypographyProps) => {
   return (
     <TypographyComponent
@@ -26,7 +24,6 @@ const Typography = ({
       className={variant}
       color={color}
       margin={margin}
-      align={align}
     >
       {children}
     </TypographyComponent>

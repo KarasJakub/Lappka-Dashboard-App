@@ -43,7 +43,7 @@ const UserCard = () => {
               </Typography>
             </ButtonComponent>
             <ButtonComponent style={{ width: "unset" }}>
-              <Typography tag="p" variant="UIText14Reg" align="left">
+              <Typography tag="p" variant="UIText14Reg">
                 Wyloguj się
               </Typography>
             </ButtonComponent>
