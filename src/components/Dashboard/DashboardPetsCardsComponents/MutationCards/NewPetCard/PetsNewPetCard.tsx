@@ -116,6 +116,7 @@ const PetsNewPetCard = () => {
             displayValue={watch("category")}
             setValue={handleValue}
             options={["Kot", "Pies"]}
+            isAllowed
             error={errors.category?.message}
           />
           <Typography tag="p" variant="UIText13Med" margin="Medium">
@@ -129,6 +130,7 @@ const PetsNewPetCard = () => {
             displayValue={watch("color")}
             setValue={handleValue}
             options={["Jasny", "Ciemny"]}
+            isAllowed
             error={errors.color?.message}
           />
           <S.FormListWrapper>
@@ -144,6 +146,7 @@ const PetsNewPetCard = () => {
                 options={["Samiec", "Samiczka"]}
                 margin="Medium"
                 variant="Large"
+                isAllowed
                 error={errors.gender?.message}
               />
             </S.FormListItem>
@@ -178,6 +181,7 @@ const PetsNewPetCard = () => {
                 options={["Tak", "Nie"]}
                 margin="Medium"
                 variant="Large"
+                isAllowed
                 error={errors.sterilized?.message}
               />
             </S.FormListItem>
@@ -193,6 +197,7 @@ const PetsNewPetCard = () => {
                 options={["Tak", "Nie"]}
                 margin="Medium"
                 variant="Large"
+                isAllowed
                 error={errors.sterilized?.message}
               />
             </S.FormListItem>

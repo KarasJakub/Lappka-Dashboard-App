@@ -30,3 +30,17 @@ export const ContentEditSection = styled.div`
     width: 100%;
     margin-top: 3.2rem;
 `
+
+export const Form = styled.form``
+
+export const ContentRowWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+`
+
+export const InputStylingWrapper = styled.div`
+    width: 100%;
+    max-width: 25.4rem;
+`

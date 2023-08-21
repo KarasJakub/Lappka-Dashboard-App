@@ -7,8 +7,9 @@ import { useOutsideClick } from "helpers/hooks/useOutsideClick"
 import Typography from "components/global/Typography/Typography"
 import theme from "layout/theme"
 import { SizeVariant } from "types/types"
+import { HTMLProps } from "react"
 
-type CustomSelectProps = {
+interface CustomSelectProps extends HTMLProps<HTMLDivElement> {
   options: string[]
   placeholder: string
   name: handleFormValues
@@ -17,6 +18,7 @@ type CustomSelectProps = {
   displayValue: string | boolean
   variant?: SizeVariant
   margin?: SizeVariant
+  isAllowed?: boolean
 }
 
 const SelectInput = ({
@@ -28,6 +30,8 @@ const SelectInput = ({
   variant,
   margin,
   error,
+  isAllowed,
+  ...rest
 }: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -43,8 +47,8 @@ const SelectInput = ({
   const ref = useOutsideClick(() => setIsOpen(false))
   return (
     <>
-      <S.SelectWrapper variant={variant} margin={margin} ref={ref}>
-        <S.TopSection onClick={() => openMenuHandler()}>
+      <S.SelectWrapper variant={variant} margin={margin} ref={ref} {...rest}>
+        <S.TopSection onClick={isAllowed ? () => openMenuHandler() : undefined}>
           <Typography tag="p" variant="UIText14Reg">
             <S.TextContent>
               <Typography
@@ -58,7 +62,10 @@ const SelectInput = ({
           </Typography>
 
           <S.IconWrapper className={isOpen ? " rotate" : ""}>
-            <ArrowDownIcon stroke={theme.colors.midGray2} />
+            <ArrowDownIcon
+              stroke={theme.colors.midGray2}
+              style={{ display: isAllowed ? "block" : "none" }}
+            />
           </S.IconWrapper>
         </S.TopSection>
         <S.BottomSection className={isOpen ? "open" : ""}>
@@ -73,7 +80,7 @@ const SelectInput = ({
                 </Typography>
 
                 {displayValue === option ? (
-                  <ApproveIcon fill="#43BE8D" />
+                  <ApproveIcon fill={theme.colors.primaryPr500} />
                 ) : null}
               </S.ListElement>
             ))}
