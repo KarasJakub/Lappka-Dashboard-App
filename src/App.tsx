@@ -18,6 +18,7 @@ import { AuthContextProvider } from "context/AuthProvider"
 import ProtectedRoutes from "additionalRoutes/protectedRoutes"
 import UnprotectedRoutes from "additionalRoutes/unprotectedRoutes"
 import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
+import PetEditCard from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/PetEditCard/PetEditCard"
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <Route path=":userId" element={<Conversation />} />
               </Route>
               <Route path={ROUTES.pets} element={<Pets />}>
+                <Route path=":petId" element={<PetEditCard />} />
                 <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
               </Route>
             </Route>

@@ -8,12 +8,12 @@ const Pets = () => {
   const location = useLocation()
   return (
     <Dashboard>
-      {location.pathname === ROUTES.petsNewCard ? (
+      {location.pathname === ROUTES.pets ? (
+        <DashboardPetsCardsSubpage />
+      ) : (
         <DashboardPetsSubpageWrapper>
           <Outlet />
         </DashboardPetsSubpageWrapper>
-      ) : (
-        <DashboardPetsCardsSubpage />
       )}
     </Dashboard>
   )
