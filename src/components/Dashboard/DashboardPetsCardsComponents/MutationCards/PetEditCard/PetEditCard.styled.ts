@@ -4,10 +4,10 @@ export const EditCardWrapper = styled.div`
     width: 100%;
     max-width: 56rem;
     background-color: ${({ theme }) => theme.colors.white};
-    border-radius: .8rem .8rem 0 0;
+    border-radius: .8rem;
     box-shadow: 0px 1px 2px 0px #1018280F;
     box-shadow: 0px 1px 3px 0px #1018281A;
-    padding: 2.4rem 2.4rem 3.6rem 2.4rem;
+    padding: 2.4rem 2.4rem 0 2.4rem;
 `
 
 export const TopButtonsWrapper = styled.div`
@@ -19,6 +19,11 @@ export const TopButtonsWrapper = styled.div`
 export const ImagesSectionWrapper = styled.div`
     display: flex;
     gap: 1.6rem;
+    overflow-x: scroll;
+
+    ${({theme }) => theme.MQ.tablet} {
+        overflow-x: unset;
+    }
 `
 
 export const Image = styled.img`
