@@ -12,6 +12,7 @@ export interface ButtonProps
   arrow?: boolean
   disabled?: boolean
   variant?: "primary" | "secondary"
+  color?: string
 }
 const Button = ({
   children,
