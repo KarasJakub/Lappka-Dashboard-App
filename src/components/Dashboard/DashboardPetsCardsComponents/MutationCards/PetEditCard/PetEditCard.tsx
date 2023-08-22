@@ -127,7 +127,7 @@ const PetEditCard = () => {
                   {...register("name")}
                   error={isEditActive ? errors.name?.message : ""}
                   readOnly={!isEditActive}
-                  style={{ border: isEditActive ? "" : "none" }}
+                  isCustomPlaceholder={!isEditActive}
                 />
               </S.InputStylingWrapper>
             </S.ContentRowWrapper>
@@ -148,6 +148,7 @@ const PetEditCard = () => {
                   error={isEditActive ? errors.description?.message : ""}
                   readOnly={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
+                  isCustomPlaceholder={!isEditActive}
                 />
               </S.InputStylingWrapper>
             </S.ContentRowWrapper>
@@ -170,6 +171,7 @@ const PetEditCard = () => {
                   options={["Kot", "Pies"]}
                   isAllowed={isEditActive}
                   error={isEditActive ? errors.category?.message : ""}
+                  isCustomPlaceholder={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
@@ -193,6 +195,7 @@ const PetEditCard = () => {
                   options={["Jasny", "Ciemny"]}
                   isAllowed={isEditActive}
                   error={isEditActive ? errors.color?.message : ""}
+                  isCustomPlaceholder={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
@@ -216,6 +219,7 @@ const PetEditCard = () => {
                   options={["Samiec", "Samiczka"]}
                   isAllowed={isEditActive}
                   error={isEditActive ? errors.gender?.message : ""}
+                  isCustomPlaceholder={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
@@ -263,6 +267,7 @@ const PetEditCard = () => {
                   variant="Large"
                   isAllowed={isEditActive}
                   error={isEditActive ? errors.sterilized?.message : ""}
+                  isCustomPlaceholder={!isEditActive}
                   style={{
                     border: isEditActive ? "" : "none",
                     maxWidth: "25.4rem",
@@ -289,6 +294,7 @@ const PetEditCard = () => {
                   variant="Large"
                   isAllowed={isEditActive}
                   error={isEditActive ? errors.visible?.message : ""}
+                  isCustomPlaceholder={!isEditActive}
                   style={{
                     border: isEditActive ? "" : "none",
                     maxWidth: "25.4rem",

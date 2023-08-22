@@ -19,6 +19,7 @@ interface CustomSelectProps extends HTMLProps<HTMLDivElement> {
   variant?: SizeVariant
   margin?: SizeVariant
   isAllowed?: boolean
+  isCustomPlaceholder?: boolean
 }
 
 const SelectInput = ({
@@ -31,6 +32,7 @@ const SelectInput = ({
   margin,
   error,
   isAllowed,
+  isCustomPlaceholder,
   ...rest
 }: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -54,7 +56,7 @@ const SelectInput = ({
               <Typography
                 tag="p"
                 variant="UIText14Reg"
-                color={displayValue ? "" : theme.colors.midGray4}
+                color={theme.colors.black}
               >
                 {displayValue ? displayValue : placeholder}
               </Typography>

@@ -1,10 +1,12 @@
 import {  styled } from 'styled-components'
 import { getInputPaddingSize, getInputMarginSize } from 'helpers/utils/getStyles'
+import theme from 'layout/theme'
 
   interface StylingProps {
     variant?: string
     maxWidth?: string
     margin?: string
+    isCustomPlaceholder?: boolean
   }
 
 export const StyledInputTextWrapper = styled.div`
@@ -26,14 +28,14 @@ export const StyledInputComponent = styled.input<StylingProps>`
   margin: ${({ margin }) => getInputMarginSize(margin)};
   font-size: 1.4rem;
   border: none;
-  border: 1px solid ${({ theme }) => theme.colors.lightGray1};
+  border: ${props => (props.isCustomPlaceholder ? "none" : `1px solid ${theme.colors.lightGray1}` )};
   border-radius: .5rem;
   width: 100%;
   max-width: ${({ maxWidth }) => maxWidth};
   z-index: 2;
 
-  &:placeholder {
-    color: ${({ theme }) => theme.colors.midGray4};
+  &::placeholder {
+    color: ${props => (props.isCustomPlaceholder ? theme.colors.black : theme.colors.midGray4)};
   }
 
   &:focus {

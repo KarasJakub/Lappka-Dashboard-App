@@ -41,8 +41,12 @@ export const Form = styled.form``
 export const ContentRowWrapper = styled.div`
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    /* align-items: center; */
+
+    ${({theme }) => theme.MQ.tablet} {
+        flex-direction: initial;
+    }
 `
 
 export const InputStylingWrapper = styled.div`
