@@ -13,11 +13,11 @@ import theme from "./layout/theme"
 import GlobalStyles from "layout/GlobalStyles"
 import { Routes, Route } from "react-router-dom"
 import ROUTES from "helpers/utils/routes"
+import PetsNewPetCard from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/NewPetCard/PetsNewPetCard"
 import { AuthContextProvider } from "context/AuthProvider"
 import ProtectedRoutes from "additionalRoutes/protectedRoutes"
 import UnprotectedRoutes from "additionalRoutes/unprotectedRoutes"
 import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
-
 
 function App() {
   return (
@@ -38,6 +38,9 @@ function App() {
               <Route path={ROUTES.pets} element={<Pets />} />
               <Route path={ROUTES.messages} element={<Messages />}>
                 <Route path=":userId" element={<Conversation />} />
+              </Route>
+              <Route path={ROUTES.pets} element={<Pets />}>
+                <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
               </Route>
             </Route>
             <Route element={<UnprotectedRoutes />}>

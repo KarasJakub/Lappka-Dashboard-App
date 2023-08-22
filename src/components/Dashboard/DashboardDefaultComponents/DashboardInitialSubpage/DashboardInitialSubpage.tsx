@@ -9,7 +9,7 @@ import VoluntaryCard from "../VoluntaryCard/VoluntaryCard"
 import NewestPetsCards from "../NewestPetsCards/NewestPetsCards"
 import PopularPetsCards from "../PopularPetsCards/PopularPetsCards"
 
-const CardsContent = [
+export const CardsContent = [
   {
     icon: <IdentifierCardIcon />,
     title: "Karty zwierząt",

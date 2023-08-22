@@ -10,3 +10,8 @@ export const TopBarWrapper = styled.aside`
     box-shadow: 0px 8px 4px 0px rgba(0, 0, 0, .1);
     box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, .1);
 `
+
+export const RightSideWrapper = styled.div`
+    display: flex;
+    gap: 4rem;
+`

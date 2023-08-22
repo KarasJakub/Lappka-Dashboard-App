@@ -9,7 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts"
-import RadioInput from "components/global/Input/RadioInput"
+import RadioInput from "components/global/Input/RadioInput/RadioInput"
 import { ReactComponent as ArrowDownIcon } from "assets/icons/ArrowDownIcon.svg"
 import { useOutsideClick } from "helpers/hooks/useOutsideClick"
 import { TableDataContent } from "./TableData"

@@ -26,7 +26,6 @@ export const Button = styled.button<HamburgerProps>`
   gap: 1rem;
   z-index: 22;
 
-
   ${({ theme }) => theme.MQ.tablet} {
     display: none;
   }
