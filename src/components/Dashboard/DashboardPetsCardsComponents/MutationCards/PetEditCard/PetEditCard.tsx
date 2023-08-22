@@ -12,6 +12,8 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import CardFooter from "components/global/CardFooter/CardFooter"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
 
 const defaultValues = {
   name: "",
@@ -45,6 +47,7 @@ export type handleFormValues = keyof defaultFormValuesTypes
 const PetEditCard = () => {
   const [isEditActive, setIsEditActive] = useState(false)
   console.log(isEditActive)
+  const navigate = useNavigate()
 
   const methods = useForm({
     defaultValues,
@@ -65,26 +68,18 @@ const PetEditCard = () => {
     setValue(name, value, { shouldTouch: true, shouldDirty: true })
   }
 
-  // const [weight, setWeight] = useState(0)
-
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const inputValue = event.target.value
-  //   // If value is empty, set actual value
-  //   if (inputValue === "") {
-  //     return
-  //   }
-  //   // If value is not a number, also set the actual value
-  //   if (isNaN(Number(inputValue))) {
-  //     return
-  //   }
-  //   // Otherwise actuallize field value
-  //   setWeight(Number(inputValue))
-  // }
+  const handleReturn = () => {
+    if (isEditActive) {
+      setIsEditActive(false)
+    } else {
+      navigate(ROUTES.pets)
+    }
+  }
 
   return (
     <S.EditCardWrapper>
       <S.TopButtonsWrapper>
-        <ButtonComponent maxWidth="5rem" onClick={() => setIsEditActive(false)}>
+        <ButtonComponent maxWidth="5rem" onClick={() => handleReturn()}>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <PetEditReturnIcon />
             <Typography
@@ -130,7 +125,7 @@ const PetEditCard = () => {
                   margin="Medium"
                   placeholder="Bella"
                   {...register("name")}
-                  error={errors.name?.message}
+                  error={isEditActive ? errors.name?.message : ""}
                   readOnly={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
@@ -150,7 +145,7 @@ const PetEditCard = () => {
                   margin="Medium"
                   placeholder="Rudy kotek, reaguje na imię Bella,  lubi drapanie za uchem"
                   {...register("description")}
-                  error={errors.description?.message}
+                  error={isEditActive ? errors.description?.message : ""}
                   readOnly={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
@@ -174,7 +169,7 @@ const PetEditCard = () => {
                   setValue={handleValue}
                   options={["Kot", "Pies"]}
                   isAllowed={isEditActive}
-                  error={errors.category?.message}
+                  error={isEditActive ? errors.category?.message : ""}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
@@ -197,7 +192,7 @@ const PetEditCard = () => {
                   setValue={handleValue}
                   options={["Jasny", "Ciemny"]}
                   isAllowed={isEditActive}
-                  error={errors.color?.message}
+                  error={isEditActive ? errors.color?.message : ""}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
@@ -220,7 +215,7 @@ const PetEditCard = () => {
                   setValue={handleValue}
                   options={["Samiec", "Samiczka"]}
                   isAllowed={isEditActive}
-                  error={errors.gender?.message}
+                  error={isEditActive ? errors.gender?.message : ""}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
@@ -236,19 +231,15 @@ const PetEditCard = () => {
               <S.InputStylingWrapper>
                 <InputComponent
                   variant="XLarge"
-                  // placeholder={"4"}
                   type="number"
                   margin="Medium"
                   isAdditionalUnit={isEditActive}
                   additionalUnitValue={isEditActive ? "KG" : ""}
-                  // value={weight}
                   readOnly={!isEditActive}
                   {...register("weight", {
                     valueAsNumber: true,
-                    required: true,
                   })}
-                  error={errors.weight?.message}
-                  // onChange={handleInputChange}
+                  error={isEditActive ? errors.weight?.message : ""}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
@@ -271,7 +262,7 @@ const PetEditCard = () => {
                   margin="Medium"
                   variant="Large"
                   isAllowed={isEditActive}
-                  error={errors.sterilized?.message}
+                  error={isEditActive ? errors.sterilized?.message : ""}
                   style={{
                     border: isEditActive ? "" : "none",
                     maxWidth: "25.4rem",
@@ -297,7 +288,7 @@ const PetEditCard = () => {
                   margin="Medium"
                   variant="Large"
                   isAllowed={isEditActive}
-                  error={errors.visible?.message}
+                  error={isEditActive ? errors.visible?.message : ""}
                   style={{
                     border: isEditActive ? "" : "none",
                     maxWidth: "25.4rem",
