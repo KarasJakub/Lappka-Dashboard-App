@@ -22,13 +22,9 @@ const defaultValues = {
   weight: 0,
   sterilized: "",
   visible: "",
-  // images: [] as string[] | Array<any>,
 }
 
-type defaultFormValuesTypes = typeof defaultValues
-export type handleFormValues = keyof defaultFormValuesTypes
-
-export const newPetValidation = yup.object({
+export const EditPetValidation = yup.object({
   name: yup.string().required("Imię zwierzaka jest wymagane"),
   description: yup.string().required("Opis jest wymagany"),
   category: yup.string().required("Gatunek jest wymagany"),
@@ -36,12 +32,15 @@ export const newPetValidation = yup.object({
   gender: yup.string().required("Płeć jest wymagana"),
   weight: yup
     .number()
-    .min(1, "Waga musi być dodatnia")
-    .required("Waga jest wymagana"),
+    .min(1, "Waga musi być dodatnia")
+    .required("Waga jest wymagana")
+    .typeError("Waga jest wymagana"),
   sterilized: yup.string().required("Sterylizacja jest wymagana"),
   visible: yup.string().required("Sterylizacja jest wymagana"),
-  // images: yup.array().required("Zdjęcie jest wymagane"),
 })
+
+type defaultFormValuesTypes = typeof defaultValues
+export type handleFormValues = keyof defaultFormValuesTypes
 
 const PetEditCard = () => {
   const [isEditActive, setIsEditActive] = useState(false)
@@ -49,7 +48,7 @@ const PetEditCard = () => {
 
   const methods = useForm({
     defaultValues,
-    resolver: yupResolver(newPetValidation),
+    resolver: yupResolver(EditPetValidation),
   })
   const {
     formState: { errors, touchedFields },
@@ -58,33 +57,30 @@ const PetEditCard = () => {
     register,
   } = methods
 
-  const handleReadOnly = () => {
-    setIsEditActive(false)
+  const onSubmit: SubmitHandler<defaultFormValuesTypes> = (data) => {
+    console.log(data)
   }
 
   const handleValue = (name: handleFormValues, value: string) => {
     setValue(name, value, { shouldTouch: true, shouldDirty: true })
   }
 
-  const [weight, setWeight] = useState(0)
+  // const [weight, setWeight] = useState(0)
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value
-    // If value is empty, set actual value
-    if (inputValue === "") {
-      return
-    }
-    // If value is not a number, also set the actual value
-    if (isNaN(Number(inputValue))) {
-      return
-    }
-    // Otherwise actuallize field value
-    setWeight(Number(inputValue))
-  }
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const inputValue = event.target.value
+  //   // If value is empty, set actual value
+  //   if (inputValue === "") {
+  //     return
+  //   }
+  //   // If value is not a number, also set the actual value
+  //   if (isNaN(Number(inputValue))) {
+  //     return
+  //   }
+  //   // Otherwise actuallize field value
+  //   setWeight(Number(inputValue))
+  // }
 
-  const onSubmit: SubmitHandler<defaultFormValuesTypes> = (data) => {
-    console.log(data)
-  }
   return (
     <S.EditCardWrapper>
       <S.TopButtonsWrapper>
@@ -120,7 +116,11 @@ const PetEditCard = () => {
         <FormProvider {...methods}>
           <S.Form onSubmit={methods.handleSubmit(onSubmit)}>
             <S.ContentRowWrapper>
-              <Typography tag="p" variant="UIText12Reg">
+              <Typography
+                tag="p"
+                variant="UIText12Reg"
+                color={theme.colors.midGray1}
+              >
                 Imię zwierzaka
               </Typography>
               <S.InputStylingWrapper>
@@ -131,13 +131,17 @@ const PetEditCard = () => {
                   placeholder="Bella"
                   {...register("name")}
                   error={errors.name?.message}
-                  readOnly={isEditActive ? false : true}
+                  readOnly={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
             </S.ContentRowWrapper>
             <S.ContentRowWrapper>
-              <Typography tag="p" variant="UIText12Reg">
+              <Typography
+                tag="p"
+                variant="UIText12Reg"
+                color={theme.colors.midGray1}
+              >
                 Opis
               </Typography>
               <S.InputStylingWrapper>
@@ -147,15 +151,17 @@ const PetEditCard = () => {
                   placeholder="Rudy kotek, reaguje na imię Bella,  lubi drapanie za uchem"
                   {...register("description")}
                   error={errors.description?.message}
-                  readOnly={isEditActive ? false : true}
-                  style={{
-                    border: isEditActive ? "" : "none",
-                  }}
+                  readOnly={!isEditActive}
+                  style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
             </S.ContentRowWrapper>
             <S.ContentRowWrapper>
-              <Typography tag="p" variant="UIText12Reg">
+              <Typography
+                tag="p"
+                variant="UIText12Reg"
+                color={theme.colors.midGray1}
+              >
                 Gatunek
               </Typography>
               <S.InputStylingWrapper>
@@ -167,16 +173,18 @@ const PetEditCard = () => {
                   displayValue={watch("category")}
                   setValue={handleValue}
                   options={["Kot", "Pies"]}
-                  isAllowed={isEditActive ? true : false}
+                  isAllowed={isEditActive}
                   error={errors.category?.message}
-                  style={{
-                    border: isEditActive ? "" : "none",
-                  }}
+                  style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
             </S.ContentRowWrapper>
             <S.ContentRowWrapper>
-              <Typography tag="p" variant="UIText12Reg">
+              <Typography
+                tag="p"
+                variant="UIText12Reg"
+                color={theme.colors.midGray1}
+              >
                 Umaszczenie
               </Typography>
               <S.InputStylingWrapper>
@@ -188,16 +196,18 @@ const PetEditCard = () => {
                   displayValue={watch("color")}
                   setValue={handleValue}
                   options={["Jasny", "Ciemny"]}
-                  isAllowed={isEditActive ? true : false}
+                  isAllowed={isEditActive}
                   error={errors.color?.message}
-                  style={{
-                    border: isEditActive ? "" : "none",
-                  }}
+                  style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
             </S.ContentRowWrapper>
             <S.ContentRowWrapper>
-              <Typography tag="p" variant="UIText12Reg">
+              <Typography
+                tag="p"
+                variant="UIText12Reg"
+                color={theme.colors.midGray1}
+              >
                 Płeć
               </Typography>
               <S.InputStylingWrapper>
@@ -209,39 +219,46 @@ const PetEditCard = () => {
                   displayValue={watch("gender")}
                   setValue={handleValue}
                   options={["Samiec", "Samiczka"]}
-                  isAllowed={isEditActive ? true : false}
+                  isAllowed={isEditActive}
                   error={errors.gender?.message}
-                  style={{
-                    border: isEditActive ? "" : "none",
-                  }}
+                  style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
             </S.ContentRowWrapper>
             <S.ContentRowWrapper>
-              <Typography tag="p" variant="UIText12Reg">
+              <Typography
+                tag="p"
+                variant="UIText12Reg"
+                color={theme.colors.midGray1}
+              >
                 Waga
               </Typography>
               <S.InputStylingWrapper>
                 <InputComponent
                   variant="XLarge"
-                  placeholder={"4" + isEditActive ? " kg" : ""}
+                  // placeholder={"4"}
                   type="number"
                   margin="Medium"
-                  isAdditionalUnit={isEditActive ? true : false}
+                  isAdditionalUnit={isEditActive}
                   additionalUnitValue={isEditActive ? "KG" : ""}
-                  value={weight}
-                  readOnly={isEditActive ? false : true}
-                  {...register("weight")}
+                  // value={weight}
+                  readOnly={!isEditActive}
+                  {...register("weight", {
+                    valueAsNumber: true,
+                    required: true,
+                  })}
                   error={errors.weight?.message}
-                  onChange={handleInputChange}
-                  style={{
-                    border: isEditActive ? "" : "none",
-                  }}
+                  // onChange={handleInputChange}
+                  style={{ border: isEditActive ? "" : "none" }}
                 />
               </S.InputStylingWrapper>
             </S.ContentRowWrapper>
             <S.ContentRowWrapper>
-              <Typography tag="p" variant="UIText12Reg">
+              <Typography
+                tag="p"
+                variant="UIText12Reg"
+                color={theme.colors.midGray1}
+              >
                 Sterylizacja
               </Typography>
               <S.InputStylingWrapper>
@@ -253,8 +270,34 @@ const PetEditCard = () => {
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
-                  isAllowed={isEditActive ? true : false}
+                  isAllowed={isEditActive}
                   error={errors.sterilized?.message}
+                  style={{
+                    border: isEditActive ? "" : "none",
+                    maxWidth: "25.4rem",
+                  }}
+                />
+              </S.InputStylingWrapper>
+            </S.ContentRowWrapper>
+            <S.ContentRowWrapper>
+              <Typography
+                tag="p"
+                variant="UIText12Reg"
+                color={theme.colors.midGray1}
+              >
+                Widoczność
+              </Typography>
+              <S.InputStylingWrapper>
+                <SelectInput
+                  name="visible"
+                  displayValue={watch("visible")}
+                  setValue={handleValue}
+                  placeholder="Tak"
+                  options={["Tak", "Nie"]}
+                  margin="Medium"
+                  variant="Large"
+                  isAllowed={isEditActive}
+                  error={errors.visible?.message}
                   style={{
                     border: isEditActive ? "" : "none",
                     maxWidth: "25.4rem",
@@ -268,6 +311,8 @@ const PetEditCard = () => {
                   className="secondary"
                   size="Large"
                   maxWidth="8rem"
+                  type="button"
+                  onClick={() => setIsEditActive(false)}
                 >
                   <Typography
                     tag="p"
@@ -282,7 +327,6 @@ const PetEditCard = () => {
                   size="Large"
                   maxWidth="8rem"
                   type="submit"
-                  onClick={methods.handleSubmit(onSubmit)}
                 >
                   <Typography
                     tag="p"
