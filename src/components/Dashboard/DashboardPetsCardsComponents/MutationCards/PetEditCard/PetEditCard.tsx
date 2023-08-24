@@ -46,7 +46,6 @@ export type handleFormValues = keyof defaultFormValuesTypes
 
 const PetEditCard = () => {
   const [isEditActive, setIsEditActive] = useState(false)
-  console.log(isEditActive)
   const navigate = useNavigate()
 
   const methods = useForm({
@@ -54,7 +53,7 @@ const PetEditCard = () => {
     resolver: yupResolver(EditPetValidation),
   })
   const {
-    formState: { errors, touchedFields },
+    formState: { errors },
     setValue,
     watch,
     register,
