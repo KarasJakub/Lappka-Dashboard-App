@@ -40,7 +40,7 @@ const ToggleButton = ({
       {label && (
         <Typography
           tag="label"
-          variant="UIText14Med"
+          variant="UIText14Reg"
           color={isActive ? theme.colors.black : theme.colors.midGray4}
         >
           {label}
