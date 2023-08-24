@@ -10,6 +10,7 @@ const ROUTES = {
   petsNewCard: "/pets/new-card",
   messages: "/messages",
   workers: "/workers",
+  newWorker: "/workers/new",
 }
 
 export default ROUTES

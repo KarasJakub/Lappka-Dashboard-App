@@ -60,6 +60,16 @@ const TopBar = () => {
             Anuluj
           </ButtonComponent>
         )}
+        {location.pathname === ROUTES.workers && (
+          <ButtonComponent
+            className="primary"
+            maxWidth=""
+            size="Large"
+            onClick={() => navigate(ROUTES.newWorker)}
+          >
+            Dodaj pracownika
+          </ButtonComponent>
+        )}
       </S.RightSideWrapper>
     </S.TopBarWrapper>
   )
