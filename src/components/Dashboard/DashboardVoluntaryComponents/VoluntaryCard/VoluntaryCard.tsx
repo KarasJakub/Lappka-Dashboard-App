@@ -34,8 +34,6 @@ const VoluntaryCard = () => {
   })
   const {
     formState: { errors },
-    setValue,
-    watch,
     register,
   } = methods
 
