@@ -8,6 +8,7 @@ import DashboardPage from "pages/DashboardPage"
 import Register from "pages/Register"
 import Pets from "pages/Pets"
 import Messages from "pages/Messages"
+import Workers from "pages/Workers"
 import { ThemeProvider } from "styled-components"
 import theme from "./layout/theme"
 import GlobalStyles from "layout/GlobalStyles"
@@ -42,6 +43,7 @@ function App() {
               <Route path={ROUTES.pets} element={<Pets />}>
                 <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
               </Route>
+              <Route path={ROUTES.workers} element={<Workers />} />
             </Route>
             <Route element={<UnprotectedRoutes />}>
               <Route path={ROUTES.login} element={<Login />} />
