@@ -3,8 +3,11 @@ import { useState } from "react"
 import { ReactComponent as DotsActionIcon } from "assets/icons/DotsActionIcon.svg"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import Typography from "components/global/Typography/Typography"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
 
 const ActionButton = () => {
+  const navigate = useNavigate()
   const [isActionButtonOpen, setIsActionButtonOpen] = useState(false)
   return (
     <S.ActionButtonWrapper>
@@ -16,7 +19,7 @@ const ActionButton = () => {
       </ButtonComponent>
       {isActionButtonOpen && (
         <S.ActionToggleMenu>
-          <ButtonComponent>
+          <ButtonComponent onClick={() => navigate(ROUTES.settings)}>
             <Typography tag="p" variant="UIText14Reg">
               Szczegóły
             </Typography>
