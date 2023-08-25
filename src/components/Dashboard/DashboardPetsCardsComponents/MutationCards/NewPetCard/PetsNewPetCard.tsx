@@ -84,123 +84,125 @@ const PetsNewPetCard = () => {
           onSubmit={methods.handleSubmit(onSubmit)}
           encType="multipart/form-data"
         >
-          <Typography tag="p" variant="UIText13Med" margin="Medium">
-            Imie zwierzaka
-          </Typography>
-          <InputComponent
-            variant="XLarge"
-            placeholder="Wpisz"
-            type="text"
-            margin="Medium"
-            {...register("name")}
-            error={errors.name?.message}
-          />
-          <Typography tag="p" variant="UIText13Med" margin="Medium">
-            Opis
-          </Typography>
-          <TextAreaInput
-            variant="XLarge"
-            placeholder="Wpisz opis zwierzaka"
-            margin="Medium"
-            {...register("description")}
-            error={errors.description?.message}
-          />
-          <Typography tag="p" variant="UIText13Med" margin="Medium">
-            Gatunek
-          </Typography>
-          <SelectInput
-            name="category"
-            variant="Large"
-            margin="Medium"
-            placeholder="Wybierz z listy"
-            displayValue={watch("category")}
-            setValue={handleValue}
-            options={["Kot", "Pies"]}
-            error={errors.category?.message}
-          />
-          <Typography tag="p" variant="UIText13Med" margin="Medium">
-            Umaszczenie
-          </Typography>
-          <SelectInput
-            name="color"
-            variant="Large"
-            margin="Medium"
-            placeholder="Wybierz z listy"
-            displayValue={watch("color")}
-            setValue={handleValue}
-            options={["Jasny", "Ciemny"]}
-            error={errors.color?.message}
-          />
-          <S.FormListWrapper>
-            <S.FormListItem style={{ width: "50%" }}>
-              <Typography tag="p" variant="UIText13Med" margin="Medium">
-                Płeć
-              </Typography>
-              <SelectInput
-                name="gender"
-                displayValue={watch("gender")}
-                setValue={handleValue}
-                placeholder="Wybierz z listy"
-                options={["Samiec", "Samiczka"]}
-                margin="Medium"
-                variant="Large"
-                error={errors.gender?.message}
-              />
-            </S.FormListItem>
-            <S.FormListItem>
-              <Typography tag="p" variant="UIText13Med" margin="Medium">
-                Waga
-              </Typography>
-              <InputComponent
-                variant="XLarge"
-                placeholder="Wpisz"
-                type="number"
-                margin="Medium"
-                isAdditionalUnit
-                additionalUnitValue="KG"
-                {...register("weight")}
-                error={errors.weight?.message}
-                value={weight}
-                onChange={handleInputChange}
-              />
-            </S.FormListItem>
-          </S.FormListWrapper>
-          <S.FormListWrapper>
-            <S.FormListItem style={{ width: "50%" }}>
-              <Typography tag="p" variant="UIText13Med" margin="Medium">
-                Sterylizaca
-              </Typography>
-              <SelectInput
-                name="sterilized"
-                displayValue={watch("sterilized")}
-                setValue={handleValue}
-                placeholder="Wybierz z listy"
-                options={["Tak", "Nie"]}
-                margin="Medium"
-                variant="Large"
-                error={errors.sterilized?.message}
-              />
-            </S.FormListItem>
-            <S.FormListItem>
-              <Typography tag="p" variant="UIText13Med" margin="Medium">
-                Widoczność
-              </Typography>
-              <SelectInput
-                name="visible"
-                displayValue={watch("visible")}
-                setValue={handleValue}
-                placeholder="Wybierz z listy"
-                options={["Tak", "Nie"]}
-                margin="Medium"
-                variant="Large"
-                error={errors.sterilized?.message}
-              />
-            </S.FormListItem>
-          </S.FormListWrapper>
-          <Typography tag="p" variant="UIText13Med" margin="Medium">
-            Dodaj zdjęcia
-          </Typography>
-          <PetImagesUpload />
+          <S.InnerWrapper>
+            <Typography tag="p" variant="UIText13Med" margin="Medium">
+              Imie zwierzaka
+            </Typography>
+            <InputComponent
+              variant="XLarge"
+              placeholder="Wpisz"
+              type="text"
+              margin="Medium"
+              {...register("name")}
+              error={errors.name?.message}
+            />
+            <Typography tag="p" variant="UIText13Med" margin="Medium">
+              Opis
+            </Typography>
+            <TextAreaInput
+              variant="XLarge"
+              placeholder="Wpisz opis zwierzaka"
+              margin="Medium"
+              {...register("description")}
+              error={errors.description?.message}
+            />
+            <Typography tag="p" variant="UIText13Med" margin="Medium">
+              Gatunek
+            </Typography>
+            <SelectInput
+              name="category"
+              variant="Large"
+              margin="Medium"
+              placeholder="Wybierz z listy"
+              displayValue={watch("category")}
+              setValue={handleValue}
+              options={["Kot", "Pies"]}
+              error={errors.category?.message}
+            />
+            <Typography tag="p" variant="UIText13Med" margin="Medium">
+              Umaszczenie
+            </Typography>
+            <SelectInput
+              name="color"
+              variant="Large"
+              margin="Medium"
+              placeholder="Wybierz z listy"
+              displayValue={watch("color")}
+              setValue={handleValue}
+              options={["Jasny", "Ciemny"]}
+              error={errors.color?.message}
+            />
+            <S.FormListWrapper>
+              <S.FormListItem style={{ width: "50%" }}>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Płeć
+                </Typography>
+                <SelectInput
+                  name="gender"
+                  displayValue={watch("gender")}
+                  setValue={handleValue}
+                  placeholder="Wybierz z listy"
+                  options={["Samiec", "Samiczka"]}
+                  margin="Medium"
+                  variant="Large"
+                  error={errors.gender?.message}
+                />
+              </S.FormListItem>
+              <S.FormListItem>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Waga
+                </Typography>
+                <InputComponent
+                  variant="XLarge"
+                  placeholder="Wpisz"
+                  type="number"
+                  margin="Medium"
+                  isAdditionalUnit
+                  additionalUnitValue="KG"
+                  {...register("weight")}
+                  error={errors.weight?.message}
+                  value={weight}
+                  onChange={handleInputChange}
+                />
+              </S.FormListItem>
+            </S.FormListWrapper>
+            <S.FormListWrapper>
+              <S.FormListItem style={{ width: "50%" }}>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Sterylizaca
+                </Typography>
+                <SelectInput
+                  name="sterilized"
+                  displayValue={watch("sterilized")}
+                  setValue={handleValue}
+                  placeholder="Wybierz z listy"
+                  options={["Tak", "Nie"]}
+                  margin="Medium"
+                  variant="Large"
+                  error={errors.sterilized?.message}
+                />
+              </S.FormListItem>
+              <S.FormListItem>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Widoczność
+                </Typography>
+                <SelectInput
+                  name="visible"
+                  displayValue={watch("visible")}
+                  setValue={handleValue}
+                  placeholder="Wybierz z listy"
+                  options={["Tak", "Nie"]}
+                  margin="Medium"
+                  variant="Large"
+                  error={errors.sterilized?.message}
+                />
+              </S.FormListItem>
+            </S.FormListWrapper>
+            <Typography tag="p" variant="UIText13Med" margin="Medium">
+              Dodaj zdjęcia
+            </Typography>
+            <PetImagesUpload />
+          </S.InnerWrapper>
           <CardFooter>
             <ButtonComponent className="secondary" size="Large" maxWidth="8rem">
               <Typography
