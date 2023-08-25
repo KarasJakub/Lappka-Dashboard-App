@@ -5,8 +5,11 @@ import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import { ReactComponent as ArrowDownIcon } from "assets/icons/ArrowDownIcon.svg"
 import theme from "layout/theme"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
 
 const UserCard = () => {
+  const navigate = useNavigate()
   const [isUserCardOpen, setIsUserCardOpen] = useState(false)
   return (
     <S.UserCardWrapper>
@@ -37,7 +40,7 @@ const UserCard = () => {
         </Typography>
         {isUserCardOpen && (
           <S.ToggleMenu>
-            <ButtonComponent>
+            <ButtonComponent onClick={() => navigate(ROUTES.settings)}>
               <Typography tag="p" variant="UIText14Reg">
                 Ustawienia konta
               </Typography>
