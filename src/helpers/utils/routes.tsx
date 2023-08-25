@@ -11,6 +11,7 @@ const ROUTES = {
   messages: "/messages",
   workers: "/workers",
   newWorker: "/workers/new",
+  settings: "/settings",
 }
 
 export default ROUTES

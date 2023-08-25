@@ -7,6 +7,8 @@ import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
 
 const defaultValues = {
   email: "",
@@ -22,6 +24,8 @@ export const newWorkerValidation = yup.object({
 type defaultFormValuesTypes = typeof defaultValues
 export type handleFormValues = keyof defaultFormValuesTypes
 const NewWorker = () => {
+  const navigate = useNavigate()
+
   const methods = useForm({
     defaultValues,
     resolver: yupResolver(newWorkerValidation),
@@ -68,7 +72,12 @@ const NewWorker = () => {
           </FormProvider>
         </S.TopWrapper>
         <CardFooter>
-          <ButtonComponent className="secondary" size="Large" maxWidth="8rem">
+          <ButtonComponent
+            className="secondary"
+            size="Large"
+            maxWidth="8rem"
+            onClick={() => navigate(ROUTES.workers)}
+          >
             <Typography
               tag="p"
               variant="UIText16MediumButton"

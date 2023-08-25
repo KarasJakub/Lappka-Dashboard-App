@@ -60,6 +60,16 @@ const TopBar = () => {
             Anuluj
           </ButtonComponent>
         )}
+        {location.pathname === ROUTES.settings && (
+          <ButtonComponent
+            className="secondary"
+            maxWidth="8rem"
+            size="Large"
+            onClick={() => navigate(ROUTES.pets)}
+          >
+            Anuluj
+          </ButtonComponent>
+        )}
         {location.pathname === ROUTES.workers && (
           <ButtonComponent
             className="primary"

@@ -88,66 +88,8 @@ const ButtonComponent = styled.button<StylingProps>`
     width: unset;
   }
 
-  &.toggle {
-    color: ${({ theme }) => theme.colors.black};
-    background-color: ${({ theme }) => theme.colors.white};
-    border: 1px solid ${({ theme }) => theme.colors.lightGray2};
-
-    &:hover {
-      background-color: ${({ theme }) => theme.colors.lightGray2};
-    }
-
-    &:disabled {
-      background-color: ${({ theme }) => theme.colors.darkGray2};
-    }
-  }
-
-  &.toggle {
-    position: relative;
-    padding: 0;
-    width: 60px;
-    height: 34px;
-    background-color: ${({ theme }) => theme.colors.midGray5};
-    border-radius: 34px;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-
-    &:focus {
-      outline: none;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      width: 26px;
-      height: 26px;
-      background-color: #fff;
-      border-radius: 50%;
-      top: 4px;
-      left: 4px;
-      transition: transform 0.2s ease-in-out;
-    }
-
-    &.on {
-      background-color: ${({ theme }) => theme.colors.primaryPr600};
-    }
-
-    &.on::before {
-      transform: translateX(26px);
-    }
-
-    &.off {
-      background-color: ${({ theme }) => theme.colors.midGray5};
-    }
-
-    &.off::before {
-      transform: translateX(0);
-    }
-
-    &:disabled {
-      background-color: ${({ theme }) => theme.colors.lightGray2};
-    }
+  &.delete {
+    background-color: ${({ theme }) => theme.colors.redR500};
   }
 `
 

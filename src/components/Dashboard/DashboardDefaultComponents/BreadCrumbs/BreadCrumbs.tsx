@@ -13,6 +13,7 @@ const BreadCrumbs = () => {
       workers: "Pracownicy",
       "new-card": "Nowa karta",
       new: "Nowa Karta",
+      settings: "Ustawienia konta",
     }),
     []
   )
