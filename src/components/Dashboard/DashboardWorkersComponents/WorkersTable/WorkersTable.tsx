@@ -8,6 +8,7 @@ import {
   PaginationState,
 } from "@tanstack/react-table"
 import CardHeading from "components/global/CardHeading/CardHeading"
+import CardFooter from "components/global/CardFooter/CardFooter"
 import * as S from "./WorkersTable.styled"
 
 const WorkersTable = () => {
@@ -17,11 +18,6 @@ const WorkersTable = () => {
     pageIndex: 0,
     pageSize: 10,
   })
-
-  const handlePageSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const optionValue = event.target.value
-    setPagination({ ...pagination, pageSize: +optionValue })
-  }
 
   const table = useReactTable({
     data,
@@ -73,6 +69,7 @@ const WorkersTable = () => {
           ))}
         </tbody>
       </S.WorkersTable>
+      <CardFooter />
     </S.WorkersTableWrapper>
   )
 }

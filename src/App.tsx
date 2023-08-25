@@ -19,6 +19,7 @@ import { AuthContextProvider } from "context/AuthProvider"
 import ProtectedRoutes from "additionalRoutes/protectedRoutes"
 import UnprotectedRoutes from "additionalRoutes/unprotectedRoutes"
 import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
+import NewWorker from "components/Dashboard/DashboardWorkersComponents/NewWorker/NewWorker"
 
 function App() {
   return (
@@ -43,7 +44,9 @@ function App() {
               <Route path={ROUTES.pets} element={<Pets />}>
                 <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
               </Route>
-              <Route path={ROUTES.workers} element={<Workers />} />
+              <Route path={ROUTES.workers} element={<Workers />}>
+                <Route path={ROUTES.newWorker} element={<NewWorker />} />
+              </Route>
             </Route>
             <Route element={<UnprotectedRoutes />}>
               <Route path={ROUTES.login} element={<Login />} />

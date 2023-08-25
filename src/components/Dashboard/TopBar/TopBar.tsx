@@ -67,6 +67,7 @@ const TopBar = () => {
             size="Large"
             onClick={() => navigate(ROUTES.newWorker)}
           >
+            <AddIcon fill="white" />
             Dodaj pracownika
           </ButtonComponent>
         )}
