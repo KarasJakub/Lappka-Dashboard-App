@@ -4,8 +4,36 @@ import Typography from "components/global/Typography/Typography"
 import CardFooter from "components/global/CardFooter/CardFooter"
 import InputComponent from "components/global/Input/InputComponent"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 
+const defaultValues = {
+  email: "",
+}
+
+export const newWorkerValidation = yup.object({
+  email: yup
+    .string()
+    .email("Nieprawidłowy adres email")
+    .required("Email jest wymagany"),
+})
+
+type defaultFormValuesTypes = typeof defaultValues
+export type handleFormValues = keyof defaultFormValuesTypes
 const NewWorker = () => {
+  const methods = useForm({
+    defaultValues,
+    resolver: yupResolver(newWorkerValidation),
+  })
+  const {
+    formState: { errors },
+    register,
+  } = methods
+
+  const onSubmit: SubmitHandler<defaultFormValuesTypes> = (data) => {
+    console.log(data)
+  }
   return (
     <S.NewWorkerRootWrapper>
       <S.NewWorkerInnerWrapper>
@@ -23,17 +51,21 @@ const NewWorker = () => {
               swojej organizacji.
             </Typography>
           </S.TextWrapper>
-          <Typography tag="p" variant="UIText13Med" margin="Medium">
-            Adres email
-          </Typography>
-          <InputComponent
-            variant="XLarge"
-            placeholder="Wpisz adres email"
-            type="text"
-            margin="Medium"
-            //   {...register("name")}
-            //   error={errors.name?.message}
-          />
+          <FormProvider {...methods}>
+            <form>
+              <Typography tag="p" variant="UIText13Med" margin="Medium">
+                Adres email
+              </Typography>
+              <InputComponent
+                variant="XLarge"
+                placeholder="Wpisz adres email"
+                type="text"
+                margin="Medium"
+                {...register("email")}
+                error={errors.email?.message}
+              />
+            </form>
+          </FormProvider>
         </S.TopWrapper>
         <CardFooter>
           <ButtonComponent className="secondary" size="Large" maxWidth="8rem">
@@ -50,6 +82,7 @@ const NewWorker = () => {
             size="Large"
             maxWidth="8rem"
             type="submit"
+            onClick={methods.handleSubmit(onSubmit)}
           >
             <Typography
               tag="p"
