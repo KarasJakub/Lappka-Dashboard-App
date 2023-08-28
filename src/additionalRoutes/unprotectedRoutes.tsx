@@ -4,9 +4,9 @@ import { AuthContext } from "context/AuthProvider"
 import ROUTES from "helpers/utils/routes"
 
 const UnprotectedRoutes = () => {
-  const { isLoggedIn } = useContext(AuthContext)
+  // const { isLoggedIn } = useContext(AuthContext)
 
-  return !isLoggedIn ? <Outlet /> : <Navigate to={ROUTES.home} />
+  return <Outlet />
 }
 
 export default UnprotectedRoutes

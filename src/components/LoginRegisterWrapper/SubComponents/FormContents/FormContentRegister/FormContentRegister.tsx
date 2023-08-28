@@ -1,8 +1,9 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import RegisterShelter from "./RegisterShelter"
 import RegisterUser from "./RegisterUser"
 import axios from "axios"
 import RegisterSuccess from "./RegisterSuccess"
+import { productionClient } from "api/client"
 
 const defaultMultiFormValues = {
   shelter: {
@@ -38,24 +39,23 @@ export const RegisterForm = () => {
     setStep((prevState) => prevState - 1)
   }
 
-  const onFinalSubmit = () => {
-    sendFormData()
-  }
+  // const onFinalSubmit = () => {
+  //   sendFormData()
+  // }
 
-  const handleMultiFormValues = useCallback(
-    (values: Partial<defaultMultiFormValuesTypes>) => {
-      setMultiFormValues({
-        ...multiFormValues,
-        ...values,
-      })
-    },
-    [multiFormValues]
-  )
+  const handleMultiFormValues = (
+    values: Partial<defaultMultiFormValuesTypes>
+  ) => {
+    setMultiFormValues({
+      ...multiFormValues,
+      ...values,
+    })
+  }
 
   const sendFormData = useCallback(async () => {
     try {
-      const response = await axios.post("/Auth/shelterRegister", {
-        multiFormValues,
+      const response = await productionClient.post("Auth/shelterRegister", {
+        ...multiFormValues,
       })
 
       if (response.status === 200) {
@@ -65,6 +65,24 @@ export const RegisterForm = () => {
       console.log(error)
     }
   }, [multiFormValues])
+
+  const onFinalSubmit = useCallback(() => {
+    sendFormData()
+  }, [sendFormData])
+
+  useEffect(() => {
+    const isShelterRequestEmpty = Object.values(multiFormValues.shelter).some(
+      (value) => value === ""
+    )
+
+    const isUserRequestEmpty = Object.values(multiFormValues.user).some(
+      (value) => value === ""
+    )
+
+    if (!isShelterRequestEmpty && !isUserRequestEmpty) {
+      onFinalSubmit()
+    }
+  }, [multiFormValues, onFinalSubmit])
 
   if (isSuccess) {
     return <RegisterSuccess />

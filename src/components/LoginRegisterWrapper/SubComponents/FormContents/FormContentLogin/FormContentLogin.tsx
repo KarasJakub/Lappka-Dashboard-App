@@ -1,23 +1,23 @@
-import * as S from "./FormContentLogin.syled";
-import InputComponent from "components/global/Input/InputComponent";
-import Typography from "components/global/Typography/Typography";
-import ButtonComponent from "components/global/Button/ButtonComponent.styled";
-import theme from "layout/theme";
-import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg";
-import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg";
-import useResponsiveProps from "helpers/hooks/useResponsiveProps";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "context/AuthProvider";
-import { useContext } from "react";
-import ROUTES from "helpers/utils/routes";
+import * as S from "./FormContentLogin.syled"
+import InputComponent from "components/global/Input/InputComponent"
+import Typography from "components/global/Typography/Typography"
+import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import theme from "layout/theme"
+import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg"
+import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg"
+import useResponsiveProps from "helpers/hooks/useResponsiveProps"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { useNavigate } from "react-router-dom"
+import { AuthContext } from "context/AuthProvider"
+import { useContext } from "react"
+import ROUTES from "helpers/utils/routes"
 
 export interface FormData {
-  email: string;
-  password: string;
-  checkbox?: boolean;
+  email: string
+  password: string
+  checkbox?: boolean
 }
 
 const schema = yup.object({
@@ -30,13 +30,13 @@ const schema = yup.object({
     .min(8, "Hasło musi zawierac co najmniej 8 znaków")
     .max(32, "Hasło nie może zawierać więcej jak 32 znaki")
     .required("Hasło jest wymagane"),
-});
+})
 
 const FormContentLogin = () => {
-  const ResponsiveString = useResponsiveProps();
-  const navigate = useNavigate();
+  const ResponsiveString = useResponsiveProps()
+  const navigate = useNavigate()
 
-  const { loginHandler, setRememberMe } = useContext(AuthContext);
+  const { loginHandler, setRememberMe } = useContext(AuthContext)
 
   const {
     setError,
@@ -50,16 +50,16 @@ const FormContentLogin = () => {
       checkbox: true,
     },
     resolver: yupResolver(schema),
-  });
+  })
 
   const onSubmit = (data: FormData) => {
     if (data.checkbox) {
-      setRememberMe(true);
+      setRememberMe(true)
     }
-    console.log(data);
+    console.log(data)
 
-    loginHandler(data, setError);
-  };
+    loginHandler(data, setError)
+  }
 
   return (
     <>
@@ -149,7 +149,7 @@ const FormContentLogin = () => {
         </S.SocialButtonWrapper>
       </S.ButtonsWrapper>
     </>
-  );
-};
+  )
+}
 
-export default FormContentLogin;
+export default FormContentLogin
