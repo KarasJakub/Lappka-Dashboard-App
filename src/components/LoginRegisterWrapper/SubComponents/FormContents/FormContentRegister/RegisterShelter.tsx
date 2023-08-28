@@ -55,14 +55,14 @@ const RegisterShelter = ({
     return digitsOnly
   }
   const onSubmit: SubmitHandler<RegisterOrganizationFieldValues> = (data) => {
-    const collectedData = {
-      ...data,
-      longitude: 12.34,
-      latitude: 45.42,
-      phoneNumber: formatPhoneNumber(data.phoneNumber),
-    }
+    // const collectedData = {
+    //   ...data,
+    //   longitude: 12.45,
+    //   latitude: 45.42,
+    //   phoneNumber: formatPhoneNumber(data.phoneNumber),
+    // }
 
-    onMultiFormSubmit({ shelterRequest: collectedData })
+    // onMultiFormSubmit({ shelterRequest: collectedData })
     onNextStep()
   }
 

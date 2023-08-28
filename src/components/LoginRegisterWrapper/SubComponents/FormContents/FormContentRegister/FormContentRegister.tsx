@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from "react"
 import RegisterShelter from "./RegisterShelter"
 import RegisterUser from "./RegisterUser"
-import axios from "axios"
 import RegisterSuccess from "./RegisterSuccess"
 import { productionClient } from "api/client"
 
@@ -15,7 +14,7 @@ const defaultMultiFormValues = {
     zipCode: "",
     nip: "",
     krs: "",
-    phoneNumber: "",
+    phoneNumber: "123456789",
   },
   userRequest: {
     firstName: "",
