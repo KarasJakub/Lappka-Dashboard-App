@@ -24,7 +24,7 @@ const createAxiosInstance = (baseURL: string) => {
 }
 
 export const productionClient = createAxiosInstance(
-  process.env.REACT_BACKEND_API_URL || ""
+  "https://lapka-api-dev.azurewebsites.net/" || ""
 )
 export const mockClient = createAxiosInstance(
   process.env.REACT_MOCK_API_URL || ""

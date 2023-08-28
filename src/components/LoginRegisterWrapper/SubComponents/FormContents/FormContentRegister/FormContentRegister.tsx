@@ -6,19 +6,23 @@ import RegisterSuccess from "./RegisterSuccess"
 import { productionClient } from "api/client"
 
 const defaultMultiFormValues = {
-  shelter: {
+  shelterRequest: {
     organizationName: "",
-    street: "",
-    postalCode: "",
+    longitude: 0,
+    latitude: 0,
     city: "",
+    street: "",
+    zipCode: "",
     nip: "",
     krs: "",
+    phoneNumber: "",
   },
-  user: {
-    fullName: "",
-    email: "",
+  userRequest: {
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
     password: "",
-    repeatPassword: "",
+    confirmPassword: "",
   },
 }
 
@@ -71,11 +75,11 @@ export const RegisterForm = () => {
   }, [sendFormData])
 
   useEffect(() => {
-    const isShelterRequestEmpty = Object.values(multiFormValues.shelter).some(
-      (value) => value === ""
-    )
+    const isShelterRequestEmpty = Object.values(
+      multiFormValues.shelterRequest
+    ).some((value) => value === "")
 
-    const isUserRequestEmpty = Object.values(multiFormValues.user).some(
+    const isUserRequestEmpty = Object.values(multiFormValues.userRequest).some(
       (value) => value === ""
     )
 

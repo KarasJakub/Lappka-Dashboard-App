@@ -6,18 +6,24 @@ import theme from "layout/theme"
 import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg"
 import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg"
 import useResponsiveProps from "helpers/hooks/useResponsiveProps"
-import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "context/AuthProvider"
 import { useContext } from "react"
 import ROUTES from "helpers/utils/routes"
+import { useLoginHandler } from "api/auth/AuthHooks"
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 
 export interface FormData {
   email: string
   password: string
   checkbox?: boolean
+}
+
+export interface setErrorHandlerTypes {
+  type: string
+  message: string
 }
 
 const schema = yup.object({
@@ -52,13 +58,27 @@ const FormContentLogin = () => {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data: FormData) => {
-    if (data.checkbox) {
-      setRememberMe(true)
-    }
-    console.log(data)
+  const setErrorHandler = ({ type, message }: setErrorHandlerTypes) => {
+    setError("email", { type, message })
+  }
 
-    loginHandler(data, setError)
+  const navigateHandler = () => {
+    navigate(ROUTES.home, { replace: true })
+  }
+
+  const { mutate } = useLoginHandler()
+
+  // const onSubmit = (data: FormData) => {
+  //   if (data.checkbox) {
+  //     setRememberMe(true)
+  //   }
+  //   console.log(data)
+
+  //   loginHandler(data, setError)
+  // }
+
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    mutate({ data, setErrorHandler, navigateHandler })
   }
 
   return (

@@ -1,40 +1,42 @@
-import InputComponent from "components/global/Input/InputComponent";
-import Typography from "components/global/Typography/Typography";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import * as S from "./FormContentRegister.styled";
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { defaultMultiFormValuesTypes } from "./FormContentRegister";
-import ParentCardComponent from "../../ParentComponent/ParentCardComponent";
-import ButtonComponent from "components/global/Button/ButtonComponent.styled";
-import useResponsiveProps from "helpers/hooks/useResponsiveProps";
-import { ReactComponent as ArrowRightIcon } from "assets/icons/ArrowRightIcon.svg";
+import InputComponent from "components/global/Input/InputComponent"
+import Typography from "components/global/Typography/Typography"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import * as S from "./FormContentRegister.styled"
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
+import { defaultMultiFormValuesTypes } from "./FormContentRegister"
+import ParentCardComponent from "../../ParentComponent/ParentCardComponent"
+import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import useResponsiveProps from "helpers/hooks/useResponsiveProps"
+import { ReactComponent as ArrowRightIcon } from "assets/icons/ArrowRightIcon.svg"
 
 type RegisterOrganizationFormProps = {
-  onNextStep: () => void;
-  onMultiFormSubmit: (values: Partial<defaultMultiFormValuesTypes>) => void;
-};
+  onNextStep: () => void
+  onMultiFormSubmit: (values: Partial<defaultMultiFormValuesTypes>) => void
+}
+
+export type RegisterOrganizationFieldValues = {
+  organizationName: string
+  city: string
+  street: string
+  zipCode: string
+  nip: string
+  krs: string
+  phoneNumber: string
+}
 
 const registerOrganizationValidation = yup.object({
   organizationName: yup.string().required("Nazwa organizacji jest wymagana"),
+  city: yup.string().required("Miasto jest wymagany"),
   street: yup.string().required("Ulica jest wymagana"),
-  postalCode: yup
+  zipCode: yup
     .string()
     .matches(/^\d{2}-\d{3}$/, "Kod pocztowy powinien być w formacie XX-XXX")
     .required("Kod pocztowy jest wymagany"),
-  city: yup.string().required("Miasto jest wymagany"),
   nip: yup.string().required("NIP jest wymagany"),
   krs: yup.string().required("KRS jest wymagany"),
-});
-
-export type RegisterOrganizationFieldValues = {
-  organizationName: string;
-  street: string;
-  postalCode: string;
-  city: string;
-  nip: string;
-  krs: string;
-};
+  phoneNumber: yup.string().required("Numer telefonu jest wymagany"),
+})
 
 const RegisterShelter = ({
   onNextStep,
@@ -42,18 +44,29 @@ const RegisterShelter = ({
 }: RegisterOrganizationFormProps) => {
   const methods = useForm<RegisterOrganizationFieldValues>({
     resolver: yupResolver(registerOrganizationValidation),
-  });
+  })
   const {
     register,
     formState: { errors },
-  } = methods;
+  } = methods
 
+  const formatPhoneNumber = (phoneNumber: string) => {
+    const digitsOnly = phoneNumber.replace(/\D/g, "")
+    return digitsOnly
+  }
   const onSubmit: SubmitHandler<RegisterOrganizationFieldValues> = (data) => {
-    onMultiFormSubmit({ shelter: data });
-    onNextStep();
-  };
+    const collectedData = {
+      ...data,
+      longitude: 12.34,
+      latitude: 45.42,
+      phoneNumber: formatPhoneNumber(data.phoneNumber),
+    }
 
-  const ResponsiveString = useResponsiveProps();
+    onMultiFormSubmit({ shelterRequest: collectedData })
+    onNextStep()
+  }
+
+  const ResponsiveString = useResponsiveProps()
   return (
     <>
       <ParentCardComponent
@@ -113,8 +126,8 @@ const RegisterShelter = ({
                   placeholder="00-000"
                   type="text"
                   margin="Medium"
-                  {...register("postalCode")}
-                  error={errors.postalCode ? errors.postalCode.message : ""}
+                  {...register("zipCode")}
+                  error={errors.zipCode ? errors.zipCode.message : ""}
                 />
               </S.InputTypographyVerticalWrapper>
               <S.InputTypographyVerticalWrapper>
@@ -168,7 +181,7 @@ const RegisterShelter = ({
         </FormProvider>
       </ParentCardComponent>
     </>
-  );
-};
+  )
+}
 
-export default RegisterShelter;
+export default RegisterShelter

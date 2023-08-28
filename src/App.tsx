@@ -18,11 +18,17 @@ import { AuthContextProvider } from "context/AuthProvider"
 import ProtectedRoutes from "additionalRoutes/protectedRoutes"
 import UnprotectedRoutes from "additionalRoutes/unprotectedRoutes"
 import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { RefreshHandler } from "api/auth/RefreshHandler"
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <>
-      <AuthContextProvider>
+      {/* <AuthContextProvider> */}
+      <QueryClientProvider client={queryClient}>
+        <RefreshHandler />
         <Helmet>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
@@ -62,7 +68,8 @@ function App() {
             </Route>
           </Routes>
         </ThemeProvider>
-      </AuthContextProvider>
+      </QueryClientProvider>
+      {/* </AuthContextProvider> */}
     </>
   )
 }
