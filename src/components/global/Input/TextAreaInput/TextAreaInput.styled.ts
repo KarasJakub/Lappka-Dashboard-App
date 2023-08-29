@@ -1,10 +1,12 @@
 import { styled } from 'styled-components'
 import { getInputPaddingSize, getInputMarginSize } from 'helpers/utils/getStyles'
+import theme from 'layout/theme'
 
   interface StylingProps {
     variant?: string
     maxWidth?: string
     margin?: string
+    isCustomPlaceholder?: boolean
   }
 
 export const TextAreaWrapper = styled.div`
@@ -33,8 +35,8 @@ export const TextAreaComponent = styled.textarea<StylingProps>`
   max-width: ${({ maxWidth }) => maxWidth};
   resize: none;
 
-  &:placeholder {
-    color: ${({ theme }) => theme.colors.midGray4};
+  &::placeholder {
+    color: ${props => (props.isCustomPlaceholder ? theme.colors.black : theme.colors.midGray4)};
   }
 
   &:focus {

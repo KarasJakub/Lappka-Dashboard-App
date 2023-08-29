@@ -16,6 +16,7 @@ export interface InputProps
   error?: string
   isAdditionalUnit?: boolean
   additionalUnitValue?: string | JSX.Element
+  isCustomPlaceholder?: boolean
 }
 
 const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
@@ -28,6 +29,7 @@ const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
       error,
       isAdditionalUnit,
       additionalUnitValue,
+      isCustomPlaceholder,
       ...props
     },
     ref
@@ -41,6 +43,7 @@ const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
               variant={variant}
               maxWidth={maxWidth}
               margin={margin}
+              isCustomPlaceholder={isCustomPlaceholder}
               {...register}
               {...props}
             />

@@ -9,12 +9,15 @@ interface TextareaProps
   margin?: SizeVariant
   disabled?: boolean
   maxWidth?: string
-  //   register?: UseFormRegister<FormData>
   error?: string
+  isCustomPlaceholder?: boolean
 }
 
 const TextAreaInput = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ variant, maxWidth, margin, error, ...props }, ref) => (
+  (
+    { variant, maxWidth, margin, error, isCustomPlaceholder, ...props },
+    ref
+  ) => (
     <>
       <S.TextAreaComponentWrapper>
         <S.TextAreaComponentWrapper>
@@ -24,6 +27,7 @@ const TextAreaInput = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             maxWidth={maxWidth}
             margin={margin}
             rows={3}
+            isCustomPlaceholder={isCustomPlaceholder}
             {...props}
           />
         </S.TextAreaComponentWrapper>
