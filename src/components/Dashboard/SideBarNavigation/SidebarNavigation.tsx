@@ -42,8 +42,8 @@ const SidebarNavigation = () => {
   return (
     <>
       <S.DashboardSideBar>
-        <CompanyLogo style={{ marginLeft: "1rem" }} />
         <S.NavigationWrapper>
+          <CompanyLogo style={{ marginLeft: "1rem" }} />
           <S.NavigationList>
             {NavigationContent.map((item, index) => (
               <DashboardNavElement

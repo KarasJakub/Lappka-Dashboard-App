@@ -15,27 +15,39 @@ import PetImagesUpload from "./PetImagesUpload/PetImagesUpload"
 const defaultValues = {
   name: "",
   description: "",
-  category: "",
+  animalCategory: "",
   color: "",
-  gender: "",
+  breed: "",
   weight: 0,
-  sterilized: "",
-  visible: "",
+  isSterilized: "",
+  isVisible: "",
   // images: [] as string[] | Array<any>,
 }
 
 export const newPetValidation = yup.object({
-  name: yup.string().required("Imię zwierzaka jest wymagane"),
-  description: yup.string().required("Opis jest wymagany"),
-  category: yup.string().required("Gatunek jest wymagany"),
-  color: yup.string().required("Kolor jest wymagany"),
-  gender: yup.string().required("Płeć jest wymagana"),
+  name: yup
+    .string()
+    .max(50, "Imie zwierzaka nie może być dłuższe niż 50 znaków")
+    .required("Imię zwierzaka jest wymagane"),
+  description: yup
+    .string()
+    .max(200, "Opis nie może być dłuższy niz 200 słów")
+    .required("Opis jest wymagany"),
+  animalCategory: yup.string().required("Gatunek jest wymagany"),
+  color: yup
+    .string()
+    .max(50, "Kolor nie może być dłuższy niuz 50 słow")
+    .required("Kolor jest wymagany"),
+  breed: yup
+    .string()
+    .max(50, "Rasa nie może byc dłuższa niż 50 słów")
+    .required("Rasa jest wymagana"),
   weight: yup
     .number()
     .min(1, "Waga musi być dodatnia")
     .required("Waga jest wymagana"),
-  sterilized: yup.string().required("Sterylizacja jest wymagana"),
-  visible: yup.string().required("Sterylizacja jest wymagana"),
+  isSterilized: yup.string().required("Sterylizacja jest wymagana"),
+  isVisible: yup.string().required("Sterylizacja jest wymagana"),
   // images: yup.array().required("Zdjęcie jest wymagane"),
 })
 
@@ -110,14 +122,14 @@ const PetsNewPetCard = () => {
               Gatunek
             </Typography>
             <SelectInput
-              name="category"
+              name="animalCategory"
               variant="Large"
               margin="Medium"
               placeholder="Wybierz z listy"
-              displayValue={watch("category")}
+              displayValue={watch("animalCategory")}
               setValue={handleValue}
               options={["Kot", "Pies"]}
-              error={errors.category?.message}
+              error={errors.animalCategory?.message}
             />
             <Typography tag="p" variant="UIText13Med" margin="Medium">
               Umaszczenie
@@ -138,14 +150,14 @@ const PetsNewPetCard = () => {
                   Płeć
                 </Typography>
                 <SelectInput
-                  name="gender"
-                  displayValue={watch("gender")}
+                  name="breed"
+                  displayValue={watch("breed")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
                   options={["Samiec", "Samiczka"]}
                   margin="Medium"
                   variant="Large"
-                  error={errors.gender?.message}
+                  error={errors.breed?.message}
                 />
               </S.FormListItem>
               <S.FormListItem>
@@ -172,14 +184,14 @@ const PetsNewPetCard = () => {
                   Sterylizaca
                 </Typography>
                 <SelectInput
-                  name="sterilized"
-                  displayValue={watch("sterilized")}
+                  name="isSterilized"
+                  displayValue={watch("isSterilized")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
-                  error={errors.sterilized?.message}
+                  error={errors.isSterilized?.message}
                 />
               </S.FormListItem>
               <S.FormListItem>
@@ -187,14 +199,14 @@ const PetsNewPetCard = () => {
                   Widoczność
                 </Typography>
                 <SelectInput
-                  name="visible"
-                  displayValue={watch("visible")}
+                  name="isVisible"
+                  displayValue={watch("isVisible")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
-                  error={errors.sterilized?.message}
+                  error={errors.isVisible?.message}
                 />
               </S.FormListItem>
             </S.FormListWrapper>

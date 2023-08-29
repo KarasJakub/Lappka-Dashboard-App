@@ -30,10 +30,7 @@ const TopBar = () => {
         <ButtonComponent style={{ width: "unset" }}>
           <BellIcon />
         </ButtonComponent>
-        <HamburgerButton
-          toggleNavigation={toggleNavigation}
-          isMobileNavOpen={isMobileNavOpen}
-        />
+
         <MobileNavigation
           isMobileNavOpen={isMobileNavOpen}
           disableNavigation={() => setIsMobileNavOpen(false)}
@@ -73,7 +70,6 @@ const TopBar = () => {
         {location.pathname === ROUTES.workers && (
           <ButtonComponent
             className="primary"
-            maxWidth=""
             size="Large"
             onClick={() => navigate(ROUTES.newWorker)}
           >
@@ -81,6 +77,10 @@ const TopBar = () => {
             Dodaj pracownika
           </ButtonComponent>
         )}
+        <HamburgerButton
+          toggleNavigation={toggleNavigation}
+          isMobileNavOpen={isMobileNavOpen}
+        />
       </S.RightSideWrapper>
     </S.TopBarWrapper>
   )

@@ -4,14 +4,18 @@ import TopBar from "./TopBar/TopBar"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
+  isSettingsExpanded?: boolean
 }
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = ({
+  children,
+  isSettingsExpanded,
+}: DashboardLayoutProps) => {
   return (
     <>
       <S.DashboardWrapper>
         <SidebarNavigation />
-        <S.DashboardRightSection>
+        <S.DashboardRightSection isSettingsExpanded={isSettingsExpanded}>
           <TopBar />
           <S.ChildrenContentWrapper>{children}</S.ChildrenContentWrapper>
         </S.DashboardRightSection>

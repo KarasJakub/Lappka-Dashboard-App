@@ -2,7 +2,7 @@ import Dashboard from "components/Dashboard/DashboardLayout"
 import AccountSettingsPage from "components/Dashboard/AccountSettings/AccountSettings"
 const AccountSettings = () => {
   return (
-    <Dashboard>
+    <Dashboard isSettingsExpanded>
       <AccountSettingsPage />
     </Dashboard>
   )
