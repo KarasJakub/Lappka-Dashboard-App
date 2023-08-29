@@ -8,6 +8,7 @@ import DashboardPage from "pages/DashboardPage"
 import Register from "pages/Register"
 import Pets from "pages/Pets"
 import Messages from "pages/Messages"
+import Voluntary from "pages/Voluntary"
 import { ThemeProvider } from "styled-components"
 import theme from "./layout/theme"
 import GlobalStyles from "layout/GlobalStyles"
@@ -44,6 +45,7 @@ function App() {
                 <Route path=":petId" element={<PetEditCard />} />
                 <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
               </Route>
+              <Route path={ROUTES.voluntary} element={<Voluntary />} />
             </Route>
             <Route element={<UnprotectedRoutes />}>
               <Route path={ROUTES.login} element={<Login />} />
