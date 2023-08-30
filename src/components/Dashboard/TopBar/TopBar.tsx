@@ -36,15 +36,17 @@ const TopBar = () => {
           disableNavigation={() => setIsMobileNavOpen(false)}
         />
         {location.pathname === ROUTES.pets && (
-          <ButtonComponent
-            className="primary"
-            maxWidth="15rem"
-            size="Large"
-            onClick={() => navigate(ROUTES.petsNewCard)}
-          >
-            <AddIcon fill={theme.colors.white} />
-            <Typography>Nowa karta</Typography>
-          </ButtonComponent>
+          <S.MobileButtonWrapper>
+            <ButtonComponent
+              className="primary"
+              maxWidth="15rem"
+              size="Large"
+              onClick={() => navigate(ROUTES.petsNewCard)}
+            >
+              <AddIcon fill={theme.colors.white} />
+              <Typography>Nowa karta</Typography>
+            </ButtonComponent>
+          </S.MobileButtonWrapper>
         )}
 
         {location.pathname === ROUTES.petsNewCard && (
@@ -68,14 +70,16 @@ const TopBar = () => {
           </ButtonComponent>
         )}
         {location.pathname === ROUTES.workers && (
-          <ButtonComponent
-            className="primary"
-            size="Large"
-            onClick={() => navigate(ROUTES.newWorker)}
-          >
-            <AddIcon fill="white" />
-            Dodaj pracownika
-          </ButtonComponent>
+          <S.MobileButtonWrapper>
+            <ButtonComponent
+              className="primary"
+              size="Large"
+              onClick={() => navigate(ROUTES.newWorker)}
+            >
+              <AddIcon fill="white" />
+              Dodaj pracownika
+            </ButtonComponent>
+          </S.MobileButtonWrapper>
         )}
         <HamburgerButton
           toggleNavigation={toggleNavigation}

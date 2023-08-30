@@ -15,3 +15,10 @@ export const RightSideWrapper = styled.div`
     display: flex;
     gap: 4rem;
 `
+
+export const MobileButtonWrapper = styled.div`
+    display: none;
+    ${({ theme }) => theme.MQ.tablet} {
+        display: block;
+    }
+`
