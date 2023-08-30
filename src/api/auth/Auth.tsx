@@ -1,29 +1,5 @@
 import { productionClient } from "../client"
-import {
-  RefreshTokenHandlerTypes,
-  loginHandlerProps,
-  resetPasswordHandlerProps,
-} from "./AuthTypes"
-
-export const resetPasswordHandler = async ({
-  email,
-  onNextStep,
-  setErrorHandler,
-}: resetPasswordHandlerProps) => {
-  try {
-    const response = await productionClient.post("Auth/resetPassword", {
-      email: email,
-    })
-    if (response.status === 204) {
-      onNextStep()
-    }
-  } catch (error: any) {
-    const { Code } = error.response.data.errors[0]
-    if (Code === "invalid_mail") {
-      setErrorHandler(Code)
-    }
-  }
-}
+import { RefreshTokenHandlerTypes, loginHandlerProps } from "./AuthTypes"
 
 export const loginHandler = async ({
   data,

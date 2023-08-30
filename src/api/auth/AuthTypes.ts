@@ -8,12 +8,6 @@ type setErrorHandlerTypes = {
     password: string;
 }
 
-  export type resetPasswordHandlerProps = {
-    email: string;
-    onNextStep: () => void;
-    setErrorHandler: (code: string) => void;
-}
-
   export type loginHandlerProps = {
     data: DataTypes;
     setErrorHandler: ({ type, message }: setErrorHandlerTypes) => void;

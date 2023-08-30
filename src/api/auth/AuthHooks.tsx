@@ -1,9 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { resetPasswordHandler, loginHandler, refreshTokenHandler } from "./Auth"
-
-export const useResetPasswordHandler = () => {
-  return useMutation(resetPasswordHandler)
-}
+import { loginHandler, refreshTokenHandler } from "./Auth"
 
 export const useLoginHandler = () => {
   return useMutation(loginHandler)
