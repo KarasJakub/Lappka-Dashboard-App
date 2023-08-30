@@ -9,11 +9,9 @@ import useResponsiveProps from "helpers/hooks/useResponsiveProps"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from "react-router-dom"
-import { AuthContext } from "context/AuthProvider"
-import { useContext } from "react"
 import ROUTES from "helpers/utils/routes"
 import { useLoginHandler } from "api/auth/AuthHooks"
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
+import { useForm, SubmitHandler } from "react-hook-form"
 
 export interface FormData {
   email: string
@@ -41,8 +39,6 @@ const schema = yup.object({
 const FormContentLogin = () => {
   const ResponsiveString = useResponsiveProps()
   const navigate = useNavigate()
-
-  const { loginHandler, setRememberMe } = useContext(AuthContext)
 
   const {
     setError,
