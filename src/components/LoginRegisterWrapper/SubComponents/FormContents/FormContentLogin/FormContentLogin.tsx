@@ -68,15 +68,6 @@ const FormContentLogin = () => {
 
   const { mutate } = useLoginHandler()
 
-  // const onSubmit = (data: FormData) => {
-  //   if (data.checkbox) {
-  //     setRememberMe(true)
-  //   }
-  //   console.log(data)
-
-  //   loginHandler(data, setError)
-  // }
-
   const onSubmit: SubmitHandler<FormData> = (data) => {
     mutate({ data, setErrorHandler, navigateHandler })
   }

@@ -14,7 +14,6 @@ import GlobalStyles from "layout/GlobalStyles"
 import { Routes, Route } from "react-router-dom"
 import ROUTES from "helpers/utils/routes"
 import PetsNewPetCard from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/NewPetCard/PetsNewPetCard"
-import { AuthContextProvider } from "context/AuthProvider"
 import ProtectedRoutes from "additionalRoutes/protectedRoutes"
 import UnprotectedRoutes from "additionalRoutes/unprotectedRoutes"
 import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
@@ -26,7 +25,6 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <>
-      {/* <AuthContextProvider> */}
       <QueryClientProvider client={queryClient}>
         <RefreshHandler />
         <Helmet>
@@ -69,7 +67,6 @@ function App() {
           </Routes>
         </ThemeProvider>
       </QueryClientProvider>
-      {/* </AuthContextProvider> */}
     </>
   )
 }
