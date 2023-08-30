@@ -50,19 +50,14 @@ const RegisterShelter = ({
     formState: { errors },
   } = methods
 
-  const formatPhoneNumber = (phoneNumber: string) => {
-    const digitsOnly = phoneNumber.replace(/\D/g, "")
-    return digitsOnly
-  }
   const onSubmit: SubmitHandler<RegisterOrganizationFieldValues> = (data) => {
-    // const collectedData = {
-    //   ...data,
-    //   longitude: 12.45,
-    //   latitude: 45.42,
-    //   phoneNumber: formatPhoneNumber(data.phoneNumber),
-    // }
+    const collectedData = {
+      ...data,
+      longitude: 24,
+      latitude: 50,
+    }
 
-    // onMultiFormSubmit({ shelterRequest: collectedData })
+    onMultiFormSubmit({ shelterRequest: collectedData })
     onNextStep()
   }
 
@@ -165,6 +160,17 @@ const RegisterShelter = ({
               margin="Medium"
               {...register("krs")}
               error={errors.krs ? errors.krs.message : ""}
+            />
+            <Typography tag="p" variant="UIText13Med" margin="Medium">
+              Numer telefonu
+            </Typography>
+            <InputComponent
+              variant="XLarge"
+              placeholder="Wpisz"
+              type="text"
+              margin="Medium"
+              {...register("phoneNumber")}
+              error={errors.phoneNumber ? errors.phoneNumber.message : ""}
             />
             <ButtonComponent
               className="primary"

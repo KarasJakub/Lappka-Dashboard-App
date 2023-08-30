@@ -14,7 +14,7 @@ const defaultMultiFormValues = {
     zipCode: "",
     nip: "",
     krs: "",
-    phoneNumber: "123456789",
+    phoneNumber: "",
   },
   userRequest: {
     firstName: "",
@@ -41,10 +41,6 @@ export const RegisterForm = () => {
   const prevStepHandler = () => {
     setStep((prevState) => prevState - 1)
   }
-
-  // const onFinalSubmit = () => {
-  //   sendFormData()
-  // }
 
   const handleMultiFormValues = (
     values: Partial<defaultMultiFormValuesTypes>
@@ -84,6 +80,7 @@ export const RegisterForm = () => {
 
     if (!isShelterRequestEmpty && !isUserRequestEmpty) {
       onFinalSubmit()
+      console.log(multiFormValues)
     }
   }, [multiFormValues, onFinalSubmit])
 
