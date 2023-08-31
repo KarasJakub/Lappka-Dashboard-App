@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom"
 import ROUTES from "helpers/utils/routes"
 import { useLoginHandler } from "api/auth/AuthHooks"
 import { useForm, SubmitHandler } from "react-hook-form"
+import errorTranslations from "helpers/utils/errorTranslations"
 
 export interface FormData {
   email: string
@@ -55,7 +56,13 @@ const FormContentLogin = () => {
   })
 
   const setErrorHandler = ({ type, message }: setErrorHandlerTypes) => {
-    setError("email", { type, message })
+    const translatedMessage = errorTranslations[type] || message
+    if (type === "invalid_email") {
+      setError("email", { type, message: translatedMessage })
+    }
+    if (type === "invalid_password") {
+      setError("password", { type, message: translatedMessage })
+    }
   }
 
   const navigateHandler = () => {

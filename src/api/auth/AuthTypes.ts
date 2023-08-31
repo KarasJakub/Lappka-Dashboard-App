@@ -3,23 +3,28 @@ type setErrorHandlerTypes = {
     message: string;
 }
 
-  type DataTypes = {
+type DataTypes = {
     email: string;
     password: string;
 }
 
-  export type loginHandlerProps = {
+export type resetPasswordHandlerProps = {
+  email: string;
+  setErrorHandler: (code: string) => void;
+};
+
+export type loginHandlerProps = {
     data: DataTypes;
     setErrorHandler: ({ type, message }: setErrorHandlerTypes) => void;
     navigateHandler: () => void;
 }
 
-  export type RefreshTokenHandlerTypes = {
+export type RefreshTokenHandlerTypes = {
     tokenIsExpired: boolean;
     setTokenExpiredHandler: () => void;
 }
 
-  export interface DecodedAccessToken {
+export interface DecodedAccessToken {
     iss: string;
     iat: number;
     exp: number;

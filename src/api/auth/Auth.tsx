@@ -1,5 +1,15 @@
 import { productionClient } from "../client"
-import { RefreshTokenHandlerTypes, loginHandlerProps } from "./AuthTypes"
+import {
+  RefreshTokenHandlerTypes,
+  loginHandlerProps,
+  resetPasswordHandlerProps,
+} from "./AuthTypes"
+
+type setNewPasswordHandlerProps = {
+  password: string
+  confirmPassword: string
+  onNextStep: () => void
+}
 
 export const loginHandler = async ({
   data,
@@ -17,12 +27,12 @@ export const loginHandler = async ({
 
     navigateHandler()
   } catch (error: any) {
-    const { type, message } = error.response.data
-    if (type === "email") {
-      setErrorHandler({ type, message })
+    const { Code, Description } = error.response.data
+    if (Code === "invalid_email") {
+      setErrorHandler({ type: Code, message: Description })
     }
-    if (type === "password") {
-      setErrorHandler({ type, message })
+    if (Code === "invalid_password") {
+      setErrorHandler({ type: Code, message: Description })
     }
   }
 }
@@ -47,5 +57,43 @@ export const refreshTokenHandler = async ({
     if (tokenIsExpired) {
       setTokenExpiredHandler()
     }
+  }
+}
+
+export const resetPasswordHandler = async ({
+  email,
+  // onNextStep,
+  setErrorHandler,
+}: resetPasswordHandlerProps) => {
+  try {
+    const response = await productionClient.post("Auth/resetPassword", {
+      email: email,
+    })
+    if (response.status === 204) {
+      // onNextStep()
+    }
+  } catch (error: any) {
+    const { Code } = error.response.data.errors[0]
+    if (Code === "invalid_mail") {
+      setErrorHandler(Code)
+    }
+  }
+}
+
+export const setNewPasswordHandler = async ({
+  password,
+  confirmPassword,
+  onNextStep,
+}: setNewPasswordHandlerProps) => {
+  try {
+    const response = await productionClient.post("Auth/setPassword/000000000", {
+      password: password,
+      confirmPassword: confirmPassword,
+    })
+    if (response.status === 204) {
+      onNextStep()
+    }
+  } catch (error: any) {
+    console.log(error)
   }
 }
