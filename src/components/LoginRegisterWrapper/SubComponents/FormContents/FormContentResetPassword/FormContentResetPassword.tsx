@@ -1,15 +1,13 @@
-import * as S from "./FormContentResetPassword.styled";
-import InputComponent from "components/global/Input/InputComponent";
-import Typography from "components/global/Typography/Typography";
-import ButtonComponent from "components/global/Button/ButtonComponent.styled";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { AuthContext } from "context/AuthProvider";
-import { useContext } from "react";
+import * as S from "./FormContentResetPassword.styled"
+import InputComponent from "components/global/Input/InputComponent"
+import Typography from "components/global/Typography/Typography"
+import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 
 export interface ResetPasswordFormData {
-  email: string;
+  email: string
 }
 
 const schema = yup.object({
@@ -17,11 +15,9 @@ const schema = yup.object({
     .string()
     .required("Email jest wymagany")
     .email("Nieprawidłowy adres email"),
-});
+})
 
 const FormContentResetPassword = () => {
-  const { resetPasswordEmailSendHandler } = useContext(AuthContext);
-
   const {
     setError,
     register,
@@ -32,12 +28,11 @@ const FormContentResetPassword = () => {
       email: "",
     },
     resolver: yupResolver(schema),
-  });
+  })
 
   const onSubmit = (data: ResetPasswordFormData) => {
-    console.log(data);
-    resetPasswordEmailSendHandler(data, setError);
-  };
+    console.log(data)
+  }
 
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
@@ -63,7 +58,7 @@ const FormContentResetPassword = () => {
         </Typography>
       </ButtonComponent>
     </S.Form>
-  );
-};
+  )
+}
 
-export default FormContentResetPassword;
+export default FormContentResetPassword
