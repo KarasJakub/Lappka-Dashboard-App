@@ -33,9 +33,29 @@ const registerOrganizationValidation = yup.object({
     .string()
     .matches(/^\d{2}-\d{3}$/, "Kod pocztowy powinien być w formacie XX-XXX")
     .required("Kod pocztowy jest wymagany"),
-  nip: yup.string().required("NIP jest wymagany"),
-  krs: yup.string().required("KRS jest wymagany"),
-  phoneNumber: yup.string().required("Numer telefonu jest wymagany"),
+  nip: yup
+    .string()
+    .required("Numer NIP jest wymagany")
+    .matches(
+      /^\d{10}$/,
+      'Pole "Numer NIP" musi składać się z dokładnie 10 cyfr'
+    ),
+  krs: yup
+    .string()
+    .required("Numer KRS telefonu jest wymagany")
+    .test(
+      "length",
+      'Pole "Numer KRS" musi mieć dokładnie 10 znaków',
+      (val) => val.length === 10
+    ),
+  phoneNumber: yup
+    .string()
+    .matches(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/, {
+      message:
+        "Numer telefonu powinien składać się z 9 cyfr i może zawierać opcjonalnie myślniki lub spacje po trzeciej i szóstej cyfrze",
+      excludeEmptyString: true,
+    })
+    .required("Numer telefonu jest wymagany"),
 })
 
 const RegisterShelter = ({
