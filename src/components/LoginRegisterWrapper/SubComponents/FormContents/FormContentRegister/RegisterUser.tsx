@@ -25,15 +25,30 @@ export interface RegisterUserFieldValues {
 }
 
 const registerUserValidation = yup.object({
-  firstName: yup.string().required("Imię jest wymagane"),
-  lastName: yup.string().required("Nazwisko jest wymagane"),
+  firstName: yup
+    .string()
+    .matches(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/, {
+      message: "Imię może zawierać tylko litery",
+      excludeEmptyString: true,
+    })
+    .required("Imię jest wymagane"),
+  lastName: yup
+    .string()
+    .matches(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/, {
+      message: "Nazwisko może zawierać tylko litery",
+      excludeEmptyString: true,
+    })
+    .required("Nazwisko jest wymagane"),
   emailAddress: yup
     .string()
     .email("Nieprawidłowy adres email")
     .required("Email jest wymagany"),
   password: yup
     .string()
-    .min(8, "Hasło musi zawierac co najmniej 8 znaków")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/,
+      "Hasło musi zawierać co najmniej 8 znaków, przynajmniej 1 znak nie alfanumeryczny, 1 cyfrę, 1 wielką literę i 1 małą literę"
+    )
     .max(32, "Hasło nie może zawierać więcej jak 32 znaki")
     .required("Hasło jest wymagane"),
   confirmPassword: yup
