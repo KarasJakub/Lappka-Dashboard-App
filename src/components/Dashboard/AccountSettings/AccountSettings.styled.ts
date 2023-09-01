@@ -2,8 +2,10 @@ import styled from "styled-components"
 
 export const AccountSettingsRootWrapper = styled.section`
     width: 100%;
+    height: calc(100vh - 56px);
     background-color: ${({ theme }) => theme.colors.lightGray5};
     padding: 2.5rem;
+    overflow-y: scroll;
 `
 
 export const AccountSettingsComponent = styled.div`

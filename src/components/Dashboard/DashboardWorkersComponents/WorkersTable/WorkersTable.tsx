@@ -48,7 +48,7 @@ const WorkersTable = () => {
                           header.column.columnDef.header,
                           header.getContext()
                         )}
-                    {{}[header.column.getIsSorted() as string] ?? null}
+                    {[header.column.getIsSorted() as string] ?? null}
                   </S.WorkersTableHeadingTh>
                 )
               })}

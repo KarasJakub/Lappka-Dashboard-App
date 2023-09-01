@@ -1,18 +1,14 @@
 import styled from "styled-components"
 
-interface StylingProps {
-    isSettingsExpanded?: boolean
-}
-
 export const DashboardWrapper = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
     overflow-x: hidden;
 `
-export const DashboardRightSection = styled.main<StylingProps>`
+export const DashboardRightSection = styled.main`
     width: 100%;
-    height: ${({ isSettingsExpanded }) => (isSettingsExpanded ? "initial" : "100vh")};
+    height: 100vh;
 `
 
 export const ChildrenContentWrapper = styled.section`

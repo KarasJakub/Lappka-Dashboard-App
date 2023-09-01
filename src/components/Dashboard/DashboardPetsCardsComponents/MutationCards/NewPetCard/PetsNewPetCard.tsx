@@ -19,8 +19,8 @@ const defaultValues = {
   color: "",
   breed: "",
   weight: 0,
-  isSterilized: "",
-  isVisible: "",
+  isSterilized: true,
+  isVisible: true,
   // images: [] as string[] | Array<any>,
 }
 
@@ -57,7 +57,7 @@ export type handleFormValues = keyof defaultFormValuesTypes
 const PetsNewPetCard = () => {
   const methods = useForm({
     defaultValues,
-    resolver: yupResolver(newPetValidation),
+    // resolver: yupResolver(newPetValidation),
   })
   const {
     formState: { errors, touchedFields },
