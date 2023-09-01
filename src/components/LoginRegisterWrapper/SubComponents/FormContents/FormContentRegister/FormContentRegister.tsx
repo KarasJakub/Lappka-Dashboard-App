@@ -60,7 +60,16 @@ export const RegisterForm = () => {
       if (response.status === 200) {
         setIsSuccess(true)
       }
-    } catch (error) {
+      // } catch (error: any) {
+      //   const { Code, Description } = error.response.data
+      //   if (Code === "invalid_email") {
+      //     setErrorHandler({ type: Code, message: Description })
+      //   }
+      //   if (Code === "invalid_password") {
+      //     setErrorHandler({ type: Code, message: Description })
+      //   }
+      // }
+    } catch (error: any) {
       console.log(error)
     }
   }, [multiFormValues])

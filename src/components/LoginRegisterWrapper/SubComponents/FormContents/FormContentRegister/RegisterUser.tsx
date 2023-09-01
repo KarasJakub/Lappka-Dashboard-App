@@ -78,7 +78,6 @@ const RegisterUser = ({
 
   const onSubmit: SubmitHandler<RegisterUserFieldValues> = (data) => {
     onMultiFormSubmit({ userRequest: data })
-    // console.log(data)
     onFinalSubmit()
   }
 
