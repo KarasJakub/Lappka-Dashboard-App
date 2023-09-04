@@ -54,13 +54,10 @@ export const RegisterForm = () => {
 
   const sendFormData = useCallback(async () => {
     try {
-      const response = await productionClient.post("Auth/shelterRegister", {
+      await productionClient.post("Auth/shelterRegister", {
         ...multiFormValues,
       })
-
-      if (response.status === 200) {
-        setIsSuccess(true)
-      }
+      setIsSuccess(true)
     } catch (error: any) {
       const { Code } = error.response.data
       if (Code === "invalid_email") {
