@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from "react-router-dom"
 import ROUTES from "helpers/utils/routes"
+import { productionClient } from "api/client"
 
 export interface FormData {
   password: string
@@ -36,6 +37,7 @@ const FormContentSetNewPassword = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
@@ -45,9 +47,24 @@ const FormContentSetNewPassword = () => {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     console.log(data)
-    navigate(ROUTES.setnewpasswordend)
+    try {
+      await productionClient.post(`Auth/setPassword/${"token"}`, {
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      })
+      navigate(ROUTES.setnewpasswordend)
+    } catch (error: any) {
+      const { Code } = error.response.data
+      if (Code === "invalid_token") {
+        setError("password", {
+          type: "password",
+          message:
+            "Nieprawdiłowy token dostępu. Skontakuj się z administratorem witryny",
+        })
+      }
+    }
   }
 
   return (
