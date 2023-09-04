@@ -28,6 +28,7 @@ const defaultMultiFormValues = {
 export type defaultMultiFormValuesTypes = typeof defaultMultiFormValues
 
 export const RegisterForm = () => {
+  const [emailError, setEmailError] = useState("")
   const [multiFormValues, setMultiFormValues] =
     useState<defaultMultiFormValuesTypes>(defaultMultiFormValues)
 
@@ -60,17 +61,11 @@ export const RegisterForm = () => {
       if (response.status === 200) {
         setIsSuccess(true)
       }
-      // } catch (error: any) {
-      //   const { Code, Description } = error.response.data
-      //   if (Code === "invalid_email") {
-      //     setErrorHandler({ type: Code, message: Description })
-      //   }
-      //   if (Code === "invalid_password") {
-      //     setErrorHandler({ type: Code, message: Description })
-      //   }
-      // }
     } catch (error: any) {
-      console.log(error)
+      const { Code } = error.response.data
+      if (Code === "invalid_email") {
+        setEmailError("Użytkownik o podanym mailu już istnieje")
+      }
     }
   }, [multiFormValues])
 
@@ -89,7 +84,6 @@ export const RegisterForm = () => {
 
     if (!isShelterRequestEmpty && !isUserRequestEmpty) {
       onFinalSubmit()
-      console.log(multiFormValues)
     }
   }, [multiFormValues, onFinalSubmit])
 
@@ -109,6 +103,7 @@ export const RegisterForm = () => {
           onPrevStep={prevStepHandler}
           onMultiFormSubmit={handleMultiFormValues}
           onFinalSubmit={onFinalSubmit}
+          emailError={emailError}
         />
       )}
     </>

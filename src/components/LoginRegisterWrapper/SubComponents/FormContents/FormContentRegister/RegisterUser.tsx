@@ -14,6 +14,7 @@ type RegisterUserFormProps = {
   onPrevStep: () => void
   onMultiFormSubmit: (values: Partial<defaultMultiFormValuesTypes>) => void
   onFinalSubmit: () => void
+  emailError: string
 }
 
 export interface RegisterUserFieldValues {
@@ -67,16 +68,24 @@ const RegisterUser = ({
   onPrevStep,
   onMultiFormSubmit,
   onFinalSubmit,
+  emailError,
 }: RegisterUserFormProps) => {
   const methods = useForm<RegisterUserFieldValues>({
     resolver: yupResolver(registerUserValidation),
   })
   const {
     register,
+    setError,
     formState: { errors },
   } = methods
 
   const onSubmit: SubmitHandler<RegisterUserFieldValues> = (data) => {
+    if (emailError && emailError !== "") {
+      setError("emailAddress", {
+        type: "",
+        message: emailError,
+      })
+    }
     onMultiFormSubmit({ userRequest: data })
     onFinalSubmit()
   }
