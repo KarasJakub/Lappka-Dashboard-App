@@ -5,6 +5,9 @@ import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { productionClient } from "api/client"
+import { useNavigate } from "react-router"
+import ROUTES from "helpers/utils/routes"
 
 export interface ResetPasswordFormData {
   email: string
@@ -18,6 +21,7 @@ const schema = yup.object({
 })
 
 const FormContentResetPassword = () => {
+  const navigate = useNavigate()
   const {
     setError,
     register,
@@ -30,8 +34,22 @@ const FormContentResetPassword = () => {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data: ResetPasswordFormData) => {
+  const onSubmit = async (data: ResetPasswordFormData) => {
     console.log(data)
+    try {
+      await productionClient.post("Auth/resetPassword", {
+        email: data.email,
+      })
+      navigate(ROUTES.resetpasswordthanks)
+    } catch (error: any) {
+      const { Code } = error.response.data
+      if (Code === "invalid_email") {
+        setError("email", {
+          type: "email",
+          message: "Użytkownik o podanym mailu nie istnieje",
+        })
+      }
+    }
   }
 
   return (
