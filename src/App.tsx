@@ -20,7 +20,10 @@ import UnprotectedRoutes from "additionalRoutes/unprotectedRoutes"
 import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { RefreshHandler } from "api/auth/RefreshHandler"
+import Workers from "pages/Workers"
 import PetEditCard from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/PetEditCard/PetEditCard"
+import NewWorker from "components/Dashboard/DashboardWorkersComponents/NewWorker/NewWorker"
+import AccountSettings from "pages/AccountSettings"
 
 const queryClient = new QueryClient()
 function App() {
@@ -48,6 +51,10 @@ function App() {
                 <Route path=":petId" element={<PetEditCard />} />
                 <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
               </Route>
+              <Route path={ROUTES.workers} element={<Workers />}>
+                <Route path={ROUTES.newWorker} element={<NewWorker />} />
+              </Route>
+              <Route path={ROUTES.settings} element={<AccountSettings />} />
               <Route path={ROUTES.voluntary} element={<Voluntary />} />
             </Route>
             <Route element={<UnprotectedRoutes />}>
