@@ -68,7 +68,7 @@ const SidebarNavigation = () => {
             <DashboardNavElement
               image={<UsersIcon stroke={theme.colors.midGray4} />}
               text="Pracownicy"
-              path={ROUTES.home}
+              path={ROUTES.workers}
               notifications="0"
             />
           </S.NavigationList>

@@ -87,6 +87,10 @@ const ButtonComponent = styled.button<StylingProps>`
     text-decoration-color: ${({ theme }) => theme.colors.primaryPr500};
     width: unset;
   }
+
+  &.delete {
+    background-color: ${({ theme }) => theme.colors.redR500};
+  }
 `
 
 export const ToggleButtonContainer = styled.div<{ disabled?: boolean }>`
