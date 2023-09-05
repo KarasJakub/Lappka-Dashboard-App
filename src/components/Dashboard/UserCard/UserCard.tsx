@@ -2,11 +2,14 @@ import * as S from "./UserCard.styled"
 import ShelterSmallPhoto from "assets/photos/ShelterSmallPhoto.png"
 import Typography from "components/global/Typography/Typography"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
-import { ReactComponent as ArrowDownIcon } from "assets/icons/ArrowDownIcon.svg"
 import theme from "layout/theme"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
+import { ReactComponent as ArrowDownUserCardIcon } from "assets/icons/ArrowDownUserCardIcon.svg"
 
 const UserCard = () => {
+  const navigate = useNavigate()
   const [isUserCardOpen, setIsUserCardOpen] = useState(false)
   return (
     <S.UserCardWrapper>
@@ -20,10 +23,11 @@ const UserCard = () => {
             onClick={() => setIsUserCardOpen(!isUserCardOpen)}
             style={{ width: "unset" }}
           >
-            <ArrowDownIcon
+            <ArrowDownUserCardIcon
               style={{
                 rotate: isUserCardOpen ? "180deg" : "",
                 transition: "rotate .2s",
+                marginLeft: "0.5rem",
               }}
             />
           </ButtonComponent>
@@ -37,7 +41,7 @@ const UserCard = () => {
         </Typography>
         {isUserCardOpen && (
           <S.ToggleMenu>
-            <ButtonComponent>
+            <ButtonComponent onClick={() => navigate(ROUTES.settings)}>
               <Typography tag="p" variant="UIText14Reg">
                 Ustawienia konta
               </Typography>

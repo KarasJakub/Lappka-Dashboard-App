@@ -87,63 +87,9 @@ const ButtonComponent = styled.button<StylingProps>`
     text-decoration-color: ${({ theme }) => theme.colors.primaryPr500};
     width: unset;
   }
-`
 
-export const ToggleButtonContainer = styled.div<{ disabled?: boolean }>`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
-`
-
-export const ToggleContainer = styled.label<{ disabled?: boolean }>`
-  display: inline-block;
-  position: relative;
-  width: 40px;
-  height: 20px;
-  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
-`
-
-export const ToggleInput = styled.input`
-  opacity: 0;
-  width: 0;
-  height: 0;
-  outline: none;
-
-  &:checked + span {
-    background-color: ${({ theme }) => theme.colors.primaryPr600};
-  }
-
-  &:focus + span {
-    box-shadow: ${({ theme }) => theme.colors.primaryPr600};
-  }
-
-  &:checked + span:before {
-    transform: translateX(20px);
-  }
-`
-
-export const ToggleSlider = styled.span`
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: background-color 0.4s;
-  border-radius: 20px;
-
-  &:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 2px;
-    bottom: 2px;
-    background-color: white;
-    transition: transform 0.4s;
-    border-radius: 50%;
+  &.delete {
+    background-color: ${({ theme }) => theme.colors.redR500};
   }
 `
 
