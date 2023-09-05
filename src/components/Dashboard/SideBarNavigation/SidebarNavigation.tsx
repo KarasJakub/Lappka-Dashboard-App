@@ -42,8 +42,8 @@ const SidebarNavigation = () => {
   return (
     <>
       <S.DashboardSideBar>
-        <CompanyLogo style={{ marginLeft: "1rem" }} />
         <S.NavigationWrapper>
+          <CompanyLogo style={{ marginLeft: "1rem" }} />
           <S.NavigationList>
             {NavigationContent.map((item, index) => (
               <DashboardNavElement
@@ -68,7 +68,7 @@ const SidebarNavigation = () => {
             <DashboardNavElement
               image={<UsersIcon stroke={theme.colors.midGray4} />}
               text="Pracownicy"
-              path={ROUTES.home}
+              path={ROUTES.workers}
               notifications="0"
             />
           </S.NavigationList>

@@ -9,6 +9,7 @@ import Register from "pages/Register"
 import Pets from "pages/Pets"
 import Messages from "pages/Messages"
 import Voluntary from "pages/Voluntary"
+import Workers from "pages/Workers"
 import { ThemeProvider } from "styled-components"
 import theme from "./layout/theme"
 import GlobalStyles from "layout/GlobalStyles"
@@ -22,6 +23,8 @@ import Conversation from "components/Dashboard/DashboardMessagesComponents/Conve
 import PetEditCard from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/PetEditCard/PetEditCard"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import NewWorker from "components/Dashboard/DashboardWorkersComponents/NewWorker/NewWorker"
+import AccountSettings from "pages/AccountSettings"
 
 const queryClient = new QueryClient()
 
@@ -54,6 +57,10 @@ function App() {
                   />
                 </Route>
                 <Route path={ROUTES.voluntary} element={<Voluntary />} />
+                <Route path={ROUTES.workers} element={<Workers />}>
+                  <Route path={ROUTES.newWorker} element={<NewWorker />} />
+                </Route>
+                <Route path={ROUTES.settings} element={<AccountSettings />} />
               </Route>
               <Route element={<UnprotectedRoutes />}>
                 <Route path={ROUTES.login} element={<Login />} />
