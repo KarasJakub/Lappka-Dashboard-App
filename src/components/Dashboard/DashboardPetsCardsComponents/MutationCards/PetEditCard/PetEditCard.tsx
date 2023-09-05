@@ -18,27 +18,38 @@ import ROUTES from "helpers/utils/routes"
 const defaultValues = {
   name: "",
   description: "",
-  category: "",
+  animalCategory: "",
   color: "",
-  gender: "",
+  breed: "",
   weight: 0,
-  sterilized: "",
-  visible: "",
+  isSterilized: true,
+  isVisible: true,
 }
 
 export const EditPetValidation = yup.object({
-  name: yup.string().required("Imię zwierzaka jest wymagane"),
-  description: yup.string().required("Opis jest wymagany"),
-  category: yup.string().required("Gatunek jest wymagany"),
-  color: yup.string().required("Kolor jest wymagany"),
-  gender: yup.string().required("Płeć jest wymagana"),
+  name: yup
+    .string()
+    .max(50, "Imie zwierzaka nie może być dłuższe niż 50 znaków")
+    .required("Imię zwierzaka jest wymagane"),
+  description: yup
+    .string()
+    .max(200, "Opis nie może być dłuższy niz 200 słów")
+    .required("Opis jest wymagany"),
+  animalCategory: yup.string().required("Gatunek jest wymagany"),
+  color: yup
+    .string()
+    .max(50, "Kolor nie może być dłuższy niuz 50 słow")
+    .required("Kolor jest wymagany"),
+  breed: yup
+    .string()
+    .max(50, "Rasa nie może byc dłuższa niż 50 słów")
+    .required("Rasa jest wymagana"),
   weight: yup
     .number()
-    .min(1, "Waga musi być dodatnia")
-    .required("Waga jest wymagana")
-    .typeError("Waga jest wymagana"),
-  sterilized: yup.string().required("Sterylizacja jest wymagana"),
-  visible: yup.string().required("Sterylizacja jest wymagana"),
+    .min(1, "Waga musi być dodatnia")
+    .required("Waga jest wymagana"),
+  isSterilized: yup.string().required("Sterylizacja jest wymagana"),
+  isVisible: yup.string().required("Sterylizacja jest wymagana"),
 })
 
 type defaultFormValuesTypes = typeof defaultValues
@@ -50,7 +61,7 @@ const PetEditCard = () => {
 
   const methods = useForm({
     defaultValues,
-    resolver: yupResolver(EditPetValidation),
+    // resolver: yupResolver(EditPetValidation),
   })
   const {
     formState: { errors },
@@ -161,15 +172,15 @@ const PetEditCard = () => {
               </Typography>
               <S.InputStylingWrapper>
                 <SelectInput
-                  name="category"
+                  name="animalCategory"
                   variant="Large"
                   margin="Medium"
                   placeholder="Kot"
-                  displayValue={watch("category")}
+                  displayValue={watch("animalCategory")}
                   setValue={handleValue}
                   options={["Kot", "Pies"]}
                   isAllowed={isEditActive}
-                  error={isEditActive ? errors.category?.message : ""}
+                  error={isEditActive ? errors.animalCategory?.message : ""}
                   isCustomPlaceholder={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
@@ -209,15 +220,15 @@ const PetEditCard = () => {
               </Typography>
               <S.InputStylingWrapper>
                 <SelectInput
-                  name="gender"
+                  name="breed"
                   variant="Large"
                   margin="Medium"
                   placeholder="Samiczka"
-                  displayValue={watch("gender")}
+                  displayValue={watch("breed")}
                   setValue={handleValue}
                   options={["Samiec", "Samiczka"]}
                   isAllowed={isEditActive}
-                  error={isEditActive ? errors.gender?.message : ""}
+                  error={isEditActive ? errors.breed?.message : ""}
                   isCustomPlaceholder={!isEditActive}
                   style={{ border: isEditActive ? "" : "none" }}
                 />
@@ -257,15 +268,15 @@ const PetEditCard = () => {
               </Typography>
               <S.InputStylingWrapper>
                 <SelectInput
-                  name="sterilized"
-                  displayValue={watch("sterilized")}
+                  name="isSterilized"
+                  displayValue={watch("isSterilized")}
                   setValue={handleValue}
                   placeholder="Tak"
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
                   isAllowed={isEditActive}
-                  error={isEditActive ? errors.sterilized?.message : ""}
+                  error={isEditActive ? errors.isSterilized?.message : ""}
                   isCustomPlaceholder={!isEditActive}
                   style={{
                     border: isEditActive ? "" : "none",
@@ -284,15 +295,15 @@ const PetEditCard = () => {
               </Typography>
               <S.InputStylingWrapper>
                 <SelectInput
-                  name="visible"
-                  displayValue={watch("visible")}
+                  name="isVisible"
+                  displayValue={watch("isVisible")}
                   setValue={handleValue}
                   placeholder="Tak"
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
                   isAllowed={isEditActive}
-                  error={isEditActive ? errors.visible?.message : ""}
+                  error={isEditActive ? errors.isVisible?.message : ""}
                   isCustomPlaceholder={!isEditActive}
                   style={{
                     border: isEditActive ? "" : "none",
