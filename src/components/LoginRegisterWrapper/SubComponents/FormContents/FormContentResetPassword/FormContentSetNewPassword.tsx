@@ -1,16 +1,17 @@
-import * as S from "./FormContentResetPassword.styled";
-import InputComponent from "components/global/Input/InputComponent";
-import Typography from "components/global/Typography/Typography";
-import ButtonComponent from "components/global/Button/ButtonComponent.styled";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import ROUTES from "helpers/utils/routes";
+import * as S from "./FormContentResetPassword.styled"
+import InputComponent from "components/global/Input/InputComponent"
+import Typography from "components/global/Typography/Typography"
+import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
+import { productionClient } from "api/client"
 
 export interface FormData {
-  password: string;
-  confirmPassword: string;
+  password: string
+  confirmPassword: string
 }
 
 const schema = yup.object({
@@ -26,16 +27,17 @@ const schema = yup.object({
       name: "password-match",
       message: "Hasła nie są takie same",
       test: function (value) {
-        return this.parent.password === value;
+        return this.parent.password === value
       },
     }),
-});
+})
 
 const FormContentSetNewPassword = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
@@ -43,12 +45,27 @@ const FormContentSetNewPassword = () => {
       confirmPassword: "",
     },
     resolver: yupResolver(schema),
-  });
+  })
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    navigate(ROUTES.setnewpasswordend);
-  };
+  const onSubmit = async (data: FormData) => {
+    console.log(data)
+    try {
+      await productionClient.post(`Auth/setPassword/${"token"}`, {
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      })
+      navigate(ROUTES.setnewpasswordend)
+    } catch (error: any) {
+      const { Code } = error.response.data
+      if (Code === "invalid_token") {
+        setError("password", {
+          type: "password",
+          message:
+            "Nieprawdiłowy token dostępu. Skontakuj się z administratorem witryny",
+        })
+      }
+    }
+  }
 
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
@@ -85,7 +102,7 @@ const FormContentSetNewPassword = () => {
         </Typography>
       </ButtonComponent>
     </S.Form>
-  );
-};
+  )
+}
 
-export default FormContentSetNewPassword;
+export default FormContentSetNewPassword

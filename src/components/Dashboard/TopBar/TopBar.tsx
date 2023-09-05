@@ -30,23 +30,24 @@ const TopBar = () => {
         <ButtonComponent style={{ width: "unset" }}>
           <BellIcon />
         </ButtonComponent>
-
+        <HamburgerButton
+          toggleNavigation={toggleNavigation}
+          isMobileNavOpen={isMobileNavOpen}
+        />
         <MobileNavigation
           isMobileNavOpen={isMobileNavOpen}
           disableNavigation={() => setIsMobileNavOpen(false)}
         />
         {location.pathname === ROUTES.pets && (
-          <S.MobileButtonWrapper>
-            <ButtonComponent
-              className="primary"
-              maxWidth="15rem"
-              size="Large"
-              onClick={() => navigate(ROUTES.petsNewCard)}
-            >
-              <AddIcon fill={theme.colors.white} />
-              <Typography>Nowa karta</Typography>
-            </ButtonComponent>
-          </S.MobileButtonWrapper>
+          <ButtonComponent
+            className="primary"
+            maxWidth="15rem"
+            size="Large"
+            onClick={() => navigate(ROUTES.petsNewCard)}
+          >
+            <AddIcon fill={theme.colors.white} />
+            <Typography>Nowa karta</Typography>
+          </ButtonComponent>
         )}
 
         {location.pathname === ROUTES.petsNewCard && (
@@ -59,32 +60,6 @@ const TopBar = () => {
             Anuluj
           </ButtonComponent>
         )}
-        {location.pathname === ROUTES.settings && (
-          <ButtonComponent
-            className="secondary"
-            maxWidth="8rem"
-            size="Large"
-            onClick={() => navigate(ROUTES.pets)}
-          >
-            Anuluj
-          </ButtonComponent>
-        )}
-        {location.pathname === ROUTES.workers && (
-          <S.MobileButtonWrapper>
-            <ButtonComponent
-              className="primary"
-              size="Large"
-              onClick={() => navigate(ROUTES.newWorker)}
-            >
-              <AddIcon fill="white" />
-              Dodaj pracownika
-            </ButtonComponent>
-          </S.MobileButtonWrapper>
-        )}
-        <HamburgerButton
-          toggleNavigation={toggleNavigation}
-          isMobileNavOpen={isMobileNavOpen}
-        />
       </S.RightSideWrapper>
     </S.TopBarWrapper>
   )

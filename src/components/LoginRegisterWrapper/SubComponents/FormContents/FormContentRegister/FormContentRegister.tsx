@@ -1,29 +1,34 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import RegisterShelter from "./RegisterShelter"
 import RegisterUser from "./RegisterUser"
-import axios from "axios"
 import RegisterSuccess from "./RegisterSuccess"
+import { productionClient } from "api/client"
 
 const defaultMultiFormValues = {
-  shelter: {
+  shelterRequest: {
     organizationName: "",
-    street: "",
-    postalCode: "",
+    longitude: 0,
+    latitude: 0,
     city: "",
+    street: "",
+    zipCode: "",
     nip: "",
     krs: "",
+    phoneNumber: "",
   },
-  user: {
-    fullName: "",
-    email: "",
+  userRequest: {
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
     password: "",
-    repeatPassword: "",
+    confirmPassword: "",
   },
 }
 
 export type defaultMultiFormValuesTypes = typeof defaultMultiFormValues
 
 export const RegisterForm = () => {
+  const [emailError, setEmailError] = useState("")
   const [multiFormValues, setMultiFormValues] =
     useState<defaultMultiFormValuesTypes>(defaultMultiFormValues)
 
@@ -38,33 +43,46 @@ export const RegisterForm = () => {
     setStep((prevState) => prevState - 1)
   }
 
-  const onFinalSubmit = () => {
-    sendFormData()
+  const handleMultiFormValues = (
+    values: Partial<defaultMultiFormValuesTypes>
+  ) => {
+    setMultiFormValues({
+      ...multiFormValues,
+      ...values,
+    })
   }
-
-  const handleMultiFormValues = useCallback(
-    (values: Partial<defaultMultiFormValuesTypes>) => {
-      setMultiFormValues({
-        ...multiFormValues,
-        ...values,
-      })
-    },
-    [multiFormValues]
-  )
 
   const sendFormData = useCallback(async () => {
     try {
-      const response = await axios.post("/Auth/shelterRegister", {
-        multiFormValues,
+      await productionClient.post("Auth/shelterRegister", {
+        ...multiFormValues,
       })
-
-      if (response.status === 200) {
-        setIsSuccess(true)
+      setIsSuccess(true)
+    } catch (error: any) {
+      const { Code } = error.response.data
+      if (Code === "invalid_email") {
+        setEmailError("Użytkownik o podanym mailu już istnieje")
       }
-    } catch (error) {
-      console.log(error)
     }
   }, [multiFormValues])
+
+  const onFinalSubmit = useCallback(() => {
+    sendFormData()
+  }, [sendFormData])
+
+  useEffect(() => {
+    const isShelterRequestEmpty = Object.values(
+      multiFormValues.shelterRequest
+    ).some((value) => value === "")
+
+    const isUserRequestEmpty = Object.values(multiFormValues.userRequest).some(
+      (value) => value === ""
+    )
+
+    if (!isShelterRequestEmpty && !isUserRequestEmpty) {
+      onFinalSubmit()
+    }
+  }, [multiFormValues, onFinalSubmit])
 
   if (isSuccess) {
     return <RegisterSuccess />
@@ -82,6 +100,7 @@ export const RegisterForm = () => {
           onPrevStep={prevStepHandler}
           onMultiFormSubmit={handleMultiFormValues}
           onFinalSubmit={onFinalSubmit}
+          emailError={emailError}
         />
       )}
     </>

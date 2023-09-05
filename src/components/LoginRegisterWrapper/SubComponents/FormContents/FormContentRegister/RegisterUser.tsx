@@ -1,70 +1,96 @@
-import InputComponent from "components/global/Input/InputComponent";
-import Typography from "components/global/Typography/Typography";
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { defaultMultiFormValuesTypes } from "./FormContentRegister";
-import ParentCardComponent from "../../ParentComponent/ParentCardComponent";
-import * as S from "./FormContentRegister.styled";
-import ButtonComponent from "components/global/Button/ButtonComponent.styled";
-import useResponsiveProps from "helpers/hooks/useResponsiveProps";
-import { ReactComponent as ArrowLeftIcon } from "assets/icons/ArrowLeftIcon.svg";
+import InputComponent from "components/global/Input/InputComponent"
+import Typography from "components/global/Typography/Typography"
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { defaultMultiFormValuesTypes } from "./FormContentRegister"
+import ParentCardComponent from "../../ParentComponent/ParentCardComponent"
+import * as S from "./FormContentRegister.styled"
+import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import useResponsiveProps from "helpers/hooks/useResponsiveProps"
+import { ReactComponent as ArrowLeftIcon } from "assets/icons/ArrowLeftIcon.svg"
 
 type RegisterUserFormProps = {
-  onPrevStep: () => void;
-  onMultiFormSubmit: (values: Partial<defaultMultiFormValuesTypes>) => void;
-  onFinalSubmit: () => void;
-};
+  onPrevStep: () => void
+  onMultiFormSubmit: (values: Partial<defaultMultiFormValuesTypes>) => void
+  onFinalSubmit: () => void
+  emailError: string
+}
 
 export interface RegisterUserFieldValues {
-  fullName: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
+  firstName: string
+  lastName: string
+  emailAddress: string
+  password: string
+  confirmPassword: string
 }
 
 const registerUserValidation = yup.object({
-  fullName: yup.string().required("Imię i Nazwisko są wymagane"),
-  email: yup
+  firstName: yup
+    .string()
+    .matches(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/, {
+      message: "Imię może zawierać tylko litery",
+      excludeEmptyString: true,
+    })
+    .required("Imię jest wymagane"),
+  lastName: yup
+    .string()
+    .matches(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/, {
+      message: "Nazwisko może zawierać tylko litery",
+      excludeEmptyString: true,
+    })
+    .required("Nazwisko jest wymagane"),
+  emailAddress: yup
     .string()
     .email("Nieprawidłowy adres email")
     .required("Email jest wymagany"),
   password: yup
     .string()
-    .min(8, "Hasło musi zawierac co najmniej 8 znaków")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/,
+      "Hasło musi zawierać co najmniej 8 znaków, przynajmniej 1 znak nie alfanumeryczny, 1 cyfrę, 1 wielką literę i 1 małą literę"
+    )
     .max(32, "Hasło nie może zawierać więcej jak 32 znaki")
     .required("Hasło jest wymagane"),
-  repeatPassword: yup
+  confirmPassword: yup
     .string()
     .required("Hasło jest wymagane")
     .test({
       name: "password-match",
       message: "Hasła nie są takie same",
       test: function (value) {
-        return this.parent.password === value;
+        return this.parent.password === value
       },
     }),
-});
+})
 
 const RegisterUser = ({
   onPrevStep,
   onMultiFormSubmit,
   onFinalSubmit,
+  emailError,
 }: RegisterUserFormProps) => {
   const methods = useForm<RegisterUserFieldValues>({
     resolver: yupResolver(registerUserValidation),
-  });
+  })
   const {
     register,
+    setError,
     formState: { errors },
-  } = methods;
+  } = methods
 
   const onSubmit: SubmitHandler<RegisterUserFieldValues> = (data) => {
-    onMultiFormSubmit({ user: data });
-    onFinalSubmit();
-  };
+    if (emailError && emailError !== "") {
+      setError("emailAddress", {
+        type: "",
+        message: emailError,
+      })
+    }
+    onMultiFormSubmit({ userRequest: data })
+    onFinalSubmit()
+  }
 
-  const ResponsiveString = useResponsiveProps();
+  const ResponsiveString = useResponsiveProps()
   return (
     <>
       <ParentCardComponent
@@ -91,15 +117,26 @@ const RegisterUser = ({
         <FormProvider {...methods}>
           <S.Form onSubmit={methods.handleSubmit(onSubmit)}>
             <Typography tag="p" variant="UIText13Med" margin="Medium">
-              Imie i Nazwisko
+              Imię
             </Typography>
             <InputComponent
               variant="XLarge"
               placeholder="Wpisz"
               type="text"
               margin="Medium"
-              {...register("fullName")}
-              error={errors.fullName ? errors.fullName.message : ""}
+              {...register("firstName")}
+              error={errors.firstName ? errors.firstName.message : ""}
+            />
+            <Typography tag="p" variant="UIText13Med" margin="Medium">
+              Nazwisko
+            </Typography>
+            <InputComponent
+              variant="XLarge"
+              placeholder="Wpisz"
+              type="text"
+              margin="Medium"
+              {...register("lastName")}
+              error={errors.lastName ? errors.lastName.message : ""}
             />
             <Typography tag="p" variant="UIText13Med" margin="Medium">
               Adres e-mail
@@ -109,8 +146,8 @@ const RegisterUser = ({
               placeholder="Wpisz"
               type="text"
               margin="Medium"
-              {...register("email")}
-              error={errors.email ? errors.email.message : ""}
+              {...register("emailAddress")}
+              error={errors.emailAddress ? errors.emailAddress.message : ""}
             />
             <Typography tag="p" variant="UIText13Med" margin="Medium">
               Hasło
@@ -131,8 +168,10 @@ const RegisterUser = ({
               placeholder="Wpisz"
               type="password"
               margin="Medium"
-              {...register("repeatPassword")}
-              error={errors.repeatPassword ? errors.repeatPassword.message : ""}
+              {...register("confirmPassword")}
+              error={
+                errors.confirmPassword ? errors.confirmPassword.message : ""
+              }
             />
             <S.RegisterButtonsWrapper>
               <ButtonComponent
@@ -163,7 +202,7 @@ const RegisterUser = ({
         </FormProvider>
       </ParentCardComponent>
     </>
-  );
-};
+  )
+}
 
-export default RegisterUser;
+export default RegisterUser

@@ -1,23 +1,28 @@
-import * as S from "./FormContentLogin.syled";
-import InputComponent from "components/global/Input/InputComponent";
-import Typography from "components/global/Typography/Typography";
-import ButtonComponent from "components/global/Button/ButtonComponent.styled";
-import theme from "layout/theme";
-import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg";
-import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg";
-import useResponsiveProps from "helpers/hooks/useResponsiveProps";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "context/AuthProvider";
-import { useContext } from "react";
-import ROUTES from "helpers/utils/routes";
+import * as S from "./FormContentLogin.syled"
+import InputComponent from "components/global/Input/InputComponent"
+import Typography from "components/global/Typography/Typography"
+import ButtonComponent from "components/global/Button/ButtonComponent.styled"
+import theme from "layout/theme"
+import { ReactComponent as GoogleIcon } from "assets/icons/GoogleIcon.svg"
+import { ReactComponent as FacebookIcon } from "assets/icons/FacebookIcon.svg"
+import useResponsiveProps from "helpers/hooks/useResponsiveProps"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
+import { useLoginHandler } from "api/auth/AuthHooks"
+import { useForm, SubmitHandler } from "react-hook-form"
+import errorTranslations from "helpers/utils/errorTranslations"
 
 export interface FormData {
-  email: string;
-  password: string;
-  checkbox?: boolean;
+  email: string
+  password: string
+  checkbox?: boolean
+}
+
+export interface setErrorHandlerTypes {
+  type: string
+  message: string
 }
 
 const schema = yup.object({
@@ -30,13 +35,11 @@ const schema = yup.object({
     .min(8, "Hasło musi zawierac co najmniej 8 znaków")
     .max(32, "Hasło nie może zawierać więcej jak 32 znaki")
     .required("Hasło jest wymagane"),
-});
+})
 
 const FormContentLogin = () => {
-  const ResponsiveString = useResponsiveProps();
-  const navigate = useNavigate();
-
-  const { loginHandler, setRememberMe } = useContext(AuthContext);
+  const ResponsiveString = useResponsiveProps()
+  const navigate = useNavigate()
 
   const {
     setError,
@@ -50,16 +53,27 @@ const FormContentLogin = () => {
       checkbox: true,
     },
     resolver: yupResolver(schema),
-  });
+  })
 
-  const onSubmit = (data: FormData) => {
-    if (data.checkbox) {
-      setRememberMe(true);
+  const setErrorHandler = ({ type, message }: setErrorHandlerTypes) => {
+    const translatedMessage = errorTranslations[type] || message
+    if (type === "invalid_email") {
+      setError("email", { type, message: translatedMessage })
     }
-    console.log(data);
+    if (type === "invalid_password") {
+      setError("password", { type, message: translatedMessage })
+    }
+  }
 
-    loginHandler(data, setError);
-  };
+  const navigateHandler = () => {
+    navigate(ROUTES.home, { replace: true })
+  }
+
+  const { mutate } = useLoginHandler()
+
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    mutate({ data, setErrorHandler, navigateHandler })
+  }
 
   return (
     <>
@@ -149,7 +163,7 @@ const FormContentLogin = () => {
         </S.SocialButtonWrapper>
       </S.ButtonsWrapper>
     </>
-  );
-};
+  )
+}
 
-export default FormContentLogin;
+export default FormContentLogin
