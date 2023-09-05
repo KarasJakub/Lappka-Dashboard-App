@@ -33,7 +33,7 @@ export const NavigationContent = [
   {
     icon: <HeartIcon stroke={theme.colors.midGray4} />,
     name: "Wolontariat",
-    path: `${ROUTES.home}`,
+    path: `${ROUTES.voluntary}`,
     notifications: "0",
   },
 ]

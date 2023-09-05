@@ -87,67 +87,63 @@ const ButtonComponent = styled.button<StylingProps>`
     text-decoration-color: ${({ theme }) => theme.colors.primaryPr500};
     width: unset;
   }
+`
 
-  &.toggle {
-    color: ${({ theme }) => theme.colors.black};
-    background-color: ${({ theme }) => theme.colors.white};
-    border: 1px solid ${({ theme }) => theme.colors.lightGray2};
+export const ToggleButtonContainer = styled.div<{ disabled?: boolean }>`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+`
 
-    &:hover {
-      background-color: ${({ theme }) => theme.colors.lightGray2};
-    }
+export const ToggleContainer = styled.label<{ disabled?: boolean }>`
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 20px;
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+`
 
-    &:disabled {
-      background-color: ${({ theme }) => theme.colors.darkGray2};
-    }
+export const ToggleInput = styled.input`
+  opacity: 0;
+  width: 0;
+  height: 0;
+  outline: none;
+
+  &:checked + span {
+    background-color: ${({ theme }) => theme.colors.primaryPr600};
   }
 
-  &.toggle {
-    position: relative;
-    padding: 0;
-    width: 60px;
-    height: 34px;
-    background-color: ${({ theme }) => theme.colors.midGray5};
-    border-radius: 34px;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
+  &:focus + span {
+    box-shadow: ${({ theme }) => theme.colors.primaryPr600};
+  }
 
-    &:focus {
-      outline: none;
-    }
+  &:checked + span:before {
+    transform: translateX(20px);
+  }
+`
 
-    &::before {
-      content: '';
-      position: absolute;
-      width: 26px;
-      height: 26px;
-      background-color: #fff;
-      border-radius: 50%;
-      top: 4px;
-      left: 4px;
-      transition: transform 0.2s ease-in-out;
-    }
+export const ToggleSlider = styled.span`
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: background-color 0.4s;
+  border-radius: 20px;
 
-    &.on {
-      background-color: ${({ theme }) => theme.colors.primaryPr600};
-    }
-
-    &.on::before {
-      transform: translateX(26px);
-    }
-
-    &.off {
-      background-color: ${({ theme }) => theme.colors.midGray5};
-    }
-
-    &.off::before {
-      transform: translateX(0);
-    }
-
-    &:disabled {
-      background-color: ${({ theme }) => theme.colors.lightGray2};
-    }
+  &:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: transform 0.4s;
+    border-radius: 50%;
   }
 `
 

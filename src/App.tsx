@@ -8,6 +8,7 @@ import DashboardPage from "pages/DashboardPage"
 import Register from "pages/Register"
 import Pets from "pages/Pets"
 import Messages from "pages/Messages"
+import Voluntary from "pages/Voluntary"
 import { ThemeProvider } from "styled-components"
 import theme from "./layout/theme"
 import GlobalStyles from "layout/GlobalStyles"
@@ -19,9 +20,9 @@ import UnprotectedRoutes from "additionalRoutes/unprotectedRoutes"
 import Conversation from "components/Dashboard/DashboardMessagesComponents/Conversation/Conversation"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { RefreshHandler } from "api/auth/RefreshHandler"
+import PetEditCard from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/PetEditCard/PetEditCard"
 
 const queryClient = new QueryClient()
-
 function App() {
   return (
     <>
@@ -44,8 +45,10 @@ function App() {
                 <Route path=":userId" element={<Conversation />} />
               </Route>
               <Route path={ROUTES.pets} element={<Pets />}>
+                <Route path=":petId" element={<PetEditCard />} />
                 <Route path={ROUTES.petsNewCard} element={<PetsNewPetCard />} />
               </Route>
+              <Route path={ROUTES.voluntary} element={<Voluntary />} />
             </Route>
             <Route element={<UnprotectedRoutes />}>
               <Route path={ROUTES.login} element={<Login />} />
