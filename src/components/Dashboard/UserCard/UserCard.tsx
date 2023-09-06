@@ -7,6 +7,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ROUTES from "helpers/utils/routes"
 import { ReactComponent as ArrowDownUserCardIcon } from "assets/icons/ArrowDownUserCardIcon.svg"
+import { logoutHandler } from "api/auth/Auth"
 
 const UserCard = () => {
   const navigate = useNavigate()
@@ -46,7 +47,10 @@ const UserCard = () => {
                 Ustawienia konta
               </Typography>
             </ButtonComponent>
-            <ButtonComponent style={{ width: "unset" }}>
+            <ButtonComponent
+              style={{ width: "unset" }}
+              onClick={() => logoutHandler()}
+            >
               <Typography tag="p" variant="UIText14Reg">
                 Wyloguj się
               </Typography>

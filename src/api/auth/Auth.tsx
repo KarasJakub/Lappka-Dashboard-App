@@ -4,6 +4,8 @@ import {
   loginHandlerProps,
   resetPasswordHandlerProps,
 } from "./AuthTypes"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
 
 type setNewPasswordHandlerProps = {
   password: string
@@ -62,7 +64,6 @@ export const refreshTokenHandler = async ({
 
 export const resetPasswordHandler = async ({
   email,
-  // onNextStep,
   setErrorHandler,
 }: resetPasswordHandlerProps) => {
   try {
@@ -70,7 +71,6 @@ export const resetPasswordHandler = async ({
       email: email,
     })
     if (response.status === 204) {
-      // onNextStep()
     }
   } catch (error: any) {
     const { Code } = error.response.data.errors[0]
@@ -83,7 +83,6 @@ export const resetPasswordHandler = async ({
 export const setNewPasswordHandler = async ({
   password,
   confirmPassword,
-  onNextStep,
 }: setNewPasswordHandlerProps) => {
   try {
     const response = await productionClient.post("Auth/setPassword/000000000", {
@@ -91,9 +90,23 @@ export const setNewPasswordHandler = async ({
       confirmPassword: confirmPassword,
     })
     if (response.status === 204) {
-      onNextStep()
     }
   } catch (error: any) {
+    console.log(error)
+  }
+}
+
+export const logoutHandler = async () => {
+  try {
+    const response = await productionClient.post("Auth/revokeToken", {
+      refreshToken: localStorage.getItem("refreshToken"),
+    })
+    if (response.status === 204) {
+      localStorage.removeItem("accessToken")
+      localStorage.removeItem("refreshToken")
+      window.location.reload()
+    }
+  } catch (error) {
     console.log(error)
   }
 }
