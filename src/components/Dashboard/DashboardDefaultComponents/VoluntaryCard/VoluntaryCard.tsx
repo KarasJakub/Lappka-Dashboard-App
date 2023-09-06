@@ -1,27 +1,10 @@
 import Typography from "components/global/Typography/Typography"
 import * as S from "./VoluntaryCard.styled"
-import { ReactComponent as StatusIcon } from "assets/icons/StatusIcon.svg"
-import theme from "layout/theme"
-
-const VoluntaryCardContent = [
-  {
-    text: "Wpłać darowiznę",
-    status: "Włączone",
-    statusIcon: <StatusIcon fill={theme.colors.statusSuccess} />,
-  },
-  {
-    text: "Codzienna pomoc",
-    status: "Wyłączone",
-    statusIcon: <StatusIcon fill={theme.colors.lightGray1} />,
-  },
-  {
-    text: "Wyprowadzanie psów",
-    status: "Włączone",
-    statusIcon: <StatusIcon fill={theme.colors.statusSuccess} />,
-  },
-]
+import { useVolunteeringStatsHandler } from "api/volunteering/volunteeringHooks"
+import VoluntaryCardItem from "./VoluntaryCardItem"
 
 const VoluntaryCard = () => {
+  const { data, isSuccess, isError } = useVolunteeringStatsHandler()
   return (
     <S.CardWrapper>
       <S.Title>
@@ -29,23 +12,30 @@ const VoluntaryCard = () => {
           Wolontariat
         </Typography>
       </S.Title>
-      {VoluntaryCardContent.map((card, index) => (
-        <S.SubCard key={index}>
-          <Typography
-            tag="p"
-            variant="UIText12SemiBold"
-            color={theme.colors.midGray2}
-          >
-            {card.text}
+      {isSuccess && (
+        <>
+          <VoluntaryCardItem
+            title="Wpłać darowiżnę"
+            active={data.isDonationActive}
+          />
+          <VoluntaryCardItem
+            title="Codzienna pomoc"
+            active={data.isDailyHelpActive}
+          />
+          <VoluntaryCardItem
+            title="Wyprowadzanie psów"
+            active={data.isTakingDogsOutActive}
+          />
+        </>
+      )}
+      {isError && (
+        <div style={{ padding: "1rem" }}>
+          <Typography tag="p" variant="Heading18SemiBold" margin="Medium">
+            Nie udało sie pobrać danych popularnych zwierząt schroniska,
+            skontakuj się z administratorem
           </Typography>
-          <S.StatusWrapper>
-            {card.statusIcon}
-            <Typography tag="p" variant="UIText14Reg">
-              {card.status}
-            </Typography>
-          </S.StatusWrapper>
-        </S.SubCard>
-      ))}
+        </div>
+      )}
     </S.CardWrapper>
   )
 }
