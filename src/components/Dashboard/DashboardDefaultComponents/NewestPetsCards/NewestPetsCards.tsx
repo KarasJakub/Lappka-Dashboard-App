@@ -2,18 +2,14 @@ import * as S from "./NewestPetsCards.styled"
 import CardHeading from "components/global/CardHeading/CardHeading"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import NewPetCard from "./NewPetCard/NewPetCard"
-import { newestPetsHandler } from "api/DashboardCalls/DashboardCalls"
-import { useQuery } from "@tanstack/react-query"
 import Typography from "components/global/Typography/Typography"
 import { useNavigate } from "react-router-dom"
 import ROUTES from "helpers/utils/routes"
+import { useNewestPetsHandler } from "api/pets/petsHooks"
 
 const NewestPetsCards = () => {
+  const { data, isSuccess, isError } = useNewestPetsHandler()
   const navigate = useNavigate()
-  const { isSuccess, data, isError } = useQuery({
-    queryKey: ["shelterNewestPets"],
-    queryFn: () => newestPetsHandler(),
-  })
   return (
     <S.NewestPetsRootWrapper>
       <CardHeading title="Najnowsze karty zwierząt">

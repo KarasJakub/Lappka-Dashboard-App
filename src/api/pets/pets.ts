@@ -1,6 +1,6 @@
 import { mostPopularPetsHandlerTypes } from "mocks/handlers/mostPopularPetsHandler"
 import { newestPetsHandlerTypes } from "mocks/handlers/newestPetsHandler"
-import {  mockClient } from "api/client"
+import { mockClient } from "api/client"
 
   export const mostPopularPetsHandler = async () => {
     try {
