@@ -1,16 +1,6 @@
-import { ShelterStatsTypes } from "mocks/handlers/shelterStatsHandler"
 import { mostPopularPetsHandlerTypes } from "mocks/handlers/mostPopularPetsHandler"
 import { newestPetsHandlerTypes } from "mocks/handlers/newestPetsHandler"
-import { productionClient, mockClient } from "api/client"
-
-export const shelterDataHandler = async () => {
-    try {
-      const response = await mockClient.get<ShelterStatsTypes>('/shelters/stats')
-      return response.data
-    } catch (error) {
-      console.log(error)
-    }
-  }
+import {  mockClient } from "api/client"
 
   export const mostPopularPetsHandler = async () => {
     try {
