@@ -19,8 +19,8 @@ const defaultValues = {
   color: "",
   breed: "",
   weight: 0,
-  isSterilized: true,
-  isVisible: true,
+  isSterilized: "",
+  isVisible: "",
   // images: [] as string[] | Array<any>,
 }
 
