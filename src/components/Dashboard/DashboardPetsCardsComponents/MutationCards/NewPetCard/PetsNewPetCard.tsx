@@ -9,7 +9,6 @@ import * as yup from "yup"
 import CardFooter from "components/global/CardFooter/CardFooter"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import theme from "layout/theme"
-import { useState } from "react"
 import PetImagesUpload from "./PetImagesUpload/PetImagesUpload"
 
 const defaultValues = {
@@ -45,7 +44,8 @@ export const newPetValidation = yup.object({
   weight: yup
     .number()
     .min(1, "Waga musi być dodatnia")
-    .required("Waga jest wymagana"),
+    .required("Waga jest wymagana")
+    .typeError("Waga jest wymagana"),
   isSterilized: yup.string().required("Sterylizacja jest wymagana"),
   isVisible: yup.string().required("Sterylizacja jest wymagana"),
   // images: yup.array().required("Zdjęcie jest wymagane"),
@@ -57,10 +57,10 @@ export type handleFormValues = keyof defaultFormValuesTypes
 const PetsNewPetCard = () => {
   const methods = useForm({
     defaultValues,
-    // resolver: yupResolver(newPetValidation),
+    resolver: yupResolver(newPetValidation),
   })
   const {
-    formState: { errors, touchedFields },
+    formState: { errors },
     setValue,
     watch,
     register,
@@ -72,22 +72,6 @@ const PetsNewPetCard = () => {
 
   const handleValue = (name: handleFormValues, value: string) => {
     setValue(name, value, { shouldTouch: true, shouldDirty: true })
-  }
-
-  const [weight, setWeight] = useState(0)
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value
-    // If value is empty, set actual value
-    if (inputValue === "") {
-      return
-    }
-    // If value is not a number, also set the actual value
-    if (isNaN(Number(inputValue))) {
-      return
-    }
-    // Otherwise actuallize field value
-    setWeight(Number(inputValue))
   }
 
   return (
@@ -127,6 +111,7 @@ const PetsNewPetCard = () => {
               variant="Large"
               margin="Medium"
               placeholder="Wybierz z listy"
+              isAllowed={true}
               displayValue={watch("animalCategory")}
               setValue={handleValue}
               options={["Kot", "Pies"]}
@@ -140,6 +125,7 @@ const PetsNewPetCard = () => {
               variant="Large"
               margin="Medium"
               placeholder="Wybierz z listy"
+              isAllowed={true}
               displayValue={watch("color")}
               setValue={handleValue}
               options={["Jasny", "Ciemny"]}
@@ -155,6 +141,7 @@ const PetsNewPetCard = () => {
                   displayValue={watch("breed")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
+                  isAllowed={true}
                   options={["Samiec", "Samiczka"]}
                   margin="Medium"
                   variant="Large"
@@ -167,15 +154,14 @@ const PetsNewPetCard = () => {
                 </Typography>
                 <InputComponent
                   variant="XLarge"
-                  placeholder="Wpisz"
                   type="number"
                   margin="Medium"
                   isAdditionalUnit
                   additionalUnitValue="KG"
-                  {...register("weight")}
+                  {...register("weight", {
+                    valueAsNumber: true,
+                  })}
                   error={errors.weight?.message}
-                  value={weight}
-                  onChange={handleInputChange}
                 />
               </S.FormListItem>
             </S.FormListWrapper>
@@ -189,6 +175,7 @@ const PetsNewPetCard = () => {
                   displayValue={watch("isSterilized")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
+                  isAllowed={true}
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
@@ -204,6 +191,7 @@ const PetsNewPetCard = () => {
                   displayValue={watch("isVisible")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
+                  isAllowed={true}
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
