@@ -87,268 +87,269 @@ const PetEditCard = () => {
   }
 
   return (
-    <S.EditCardWrapper>
-      <S.TopButtonsWrapper>
-        <ButtonComponent maxWidth="5rem" onClick={() => handleReturn()}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <PetEditReturnIcon />
-            <Typography
-              tag="p"
-              variant="UIText16MediumButton"
-              color={theme.colors.midGray1}
-            >
-              Wróć
-            </Typography>
-          </div>
-        </ButtonComponent>
-        <ButtonComponent maxWidth="5rem" onClick={() => setIsEditActive(true)}>
-          <Typography
-            tag="p"
-            variant="UIText16MediumButton"
-            color={theme.colors.primaryPr600}
-          >
-            Edytuj
-          </Typography>
-        </ButtonComponent>
-      </S.TopButtonsWrapper>
-      <S.ImagesSectionWrapper>
-        <S.Image src={EditPetDummyImage} alt="cat image" />
-        <S.Image src={EditPetDummyImage} alt="cat image" />
-        <S.Image src={EditPetDummyImage} alt="cat image" />
-        <S.Image src={EditPetDummyImage} alt="cat image" />
-      </S.ImagesSectionWrapper>
-      <S.ContentEditSection>
-        <FormProvider {...methods}>
-          <S.Form onSubmit={methods.handleSubmit(onSubmit)}>
-            <S.ContentRowWrapper>
-              <Typography
-                tag="p"
-                variant="UIText12Reg"
-                color={theme.colors.midGray1}
-              >
-                Imię zwierzaka
-              </Typography>
-              <S.InputStylingWrapper>
-                <InputComponent
-                  variant="XLarge"
-                  type="text"
-                  margin="Medium"
-                  placeholder="Bella"
-                  {...register("name")}
-                  error={isEditActive ? errors.name?.message : ""}
-                  readOnly={!isEditActive}
-                  isCustomPlaceholder={!isEditActive}
-                />
-              </S.InputStylingWrapper>
-            </S.ContentRowWrapper>
-            <S.ContentRowWrapper>
-              <Typography
-                tag="p"
-                variant="UIText12Reg"
-                color={theme.colors.midGray1}
-              >
-                Opis
-              </Typography>
-              <S.InputStylingWrapper>
-                <TextAreaInput
-                  variant="XLarge"
-                  margin="Medium"
-                  placeholder="Rudy kotek, reaguje na imię Bella,  lubi drapanie za uchem"
-                  {...register("description")}
-                  error={isEditActive ? errors.description?.message : ""}
-                  readOnly={!isEditActive}
-                  style={{ border: isEditActive ? "" : "none" }}
-                  isCustomPlaceholder={!isEditActive}
-                />
-              </S.InputStylingWrapper>
-            </S.ContentRowWrapper>
-            <S.ContentRowWrapper>
-              <Typography
-                tag="p"
-                variant="UIText12Reg"
-                color={theme.colors.midGray1}
-              >
-                Gatunek
-              </Typography>
-              <S.InputStylingWrapper>
-                <SelectInput
-                  name="animalCategory"
-                  variant="Large"
-                  margin="Medium"
-                  placeholder="Kot"
-                  displayValue={watch("animalCategory")}
-                  setValue={handleValue}
-                  options={["Kot", "Pies"]}
-                  isAllowed={isEditActive}
-                  error={isEditActive ? errors.animalCategory?.message : ""}
-                  isCustomPlaceholder={!isEditActive}
-                  style={{ border: isEditActive ? "" : "none" }}
-                />
-              </S.InputStylingWrapper>
-            </S.ContentRowWrapper>
-            <S.ContentRowWrapper>
-              <Typography
-                tag="p"
-                variant="UIText12Reg"
-                color={theme.colors.midGray1}
-              >
-                Umaszczenie
-              </Typography>
-              <S.InputStylingWrapper>
-                <SelectInput
-                  name="color"
-                  variant="Large"
-                  margin="Medium"
-                  placeholder="Rude"
-                  displayValue={watch("color")}
-                  setValue={handleValue}
-                  options={["Jasny", "Ciemny"]}
-                  isAllowed={isEditActive}
-                  error={isEditActive ? errors.color?.message : ""}
-                  isCustomPlaceholder={!isEditActive}
-                  style={{ border: isEditActive ? "" : "none" }}
-                />
-              </S.InputStylingWrapper>
-            </S.ContentRowWrapper>
-            <S.ContentRowWrapper>
-              <Typography
-                tag="p"
-                variant="UIText12Reg"
-                color={theme.colors.midGray1}
-              >
-                Płeć
-              </Typography>
-              <S.InputStylingWrapper>
-                <SelectInput
-                  name="breed"
-                  variant="Large"
-                  margin="Medium"
-                  placeholder="Samiczka"
-                  displayValue={watch("breed")}
-                  setValue={handleValue}
-                  options={["Samiec", "Samiczka"]}
-                  isAllowed={isEditActive}
-                  error={isEditActive ? errors.breed?.message : ""}
-                  isCustomPlaceholder={!isEditActive}
-                  style={{ border: isEditActive ? "" : "none" }}
-                />
-              </S.InputStylingWrapper>
-            </S.ContentRowWrapper>
-            <S.ContentRowWrapper>
-              <Typography
-                tag="p"
-                variant="UIText12Reg"
-                color={theme.colors.midGray1}
-              >
-                Waga
-              </Typography>
-              <S.InputStylingWrapper>
-                <InputComponent
-                  variant="XLarge"
-                  type="number"
-                  margin="Medium"
-                  isAdditionalUnit={isEditActive}
-                  additionalUnitValue={isEditActive ? "KG" : ""}
-                  readOnly={!isEditActive}
-                  {...register("weight", {
-                    valueAsNumber: true,
-                  })}
-                  error={isEditActive ? errors.weight?.message : ""}
-                  style={{ border: isEditActive ? "" : "none" }}
-                />
-              </S.InputStylingWrapper>
-            </S.ContentRowWrapper>
-            <S.ContentRowWrapper>
-              <Typography
-                tag="p"
-                variant="UIText12Reg"
-                color={theme.colors.midGray1}
-              >
-                Sterylizacja
-              </Typography>
-              <S.InputStylingWrapper>
-                <SelectInput
-                  name="isSterilized"
-                  displayValue={watch("isSterilized")}
-                  setValue={handleValue}
-                  placeholder="Tak"
-                  options={["Tak", "Nie"]}
-                  margin="Medium"
-                  variant="Large"
-                  isAllowed={isEditActive}
-                  error={isEditActive ? errors.isSterilized?.message : ""}
-                  isCustomPlaceholder={!isEditActive}
-                  style={{
-                    border: isEditActive ? "" : "none",
-                    maxWidth: "25.4rem",
-                  }}
-                />
-              </S.InputStylingWrapper>
-            </S.ContentRowWrapper>
-            <S.ContentRowWrapper>
-              <Typography
-                tag="p"
-                variant="UIText12Reg"
-                color={theme.colors.midGray1}
-              >
-                Widoczność
-              </Typography>
-              <S.InputStylingWrapper>
-                <SelectInput
-                  name="isVisible"
-                  displayValue={watch("isVisible")}
-                  setValue={handleValue}
-                  placeholder="Tak"
-                  options={["Tak", "Nie"]}
-                  margin="Medium"
-                  variant="Large"
-                  isAllowed={isEditActive}
-                  error={isEditActive ? errors.isVisible?.message : ""}
-                  isCustomPlaceholder={!isEditActive}
-                  style={{
-                    border: isEditActive ? "" : "none",
-                    maxWidth: "25.4rem",
-                  }}
-                />
-              </S.InputStylingWrapper>
-            </S.ContentRowWrapper>
-            {isEditActive && (
-              <CardFooter>
-                <ButtonComponent
-                  className="secondary"
-                  size="Large"
-                  maxWidth="8rem"
-                  type="button"
-                  onClick={() => setIsEditActive(false)}
-                >
-                  <Typography
-                    tag="p"
-                    variant="UIText16MediumButton"
-                    color={theme.colors.black}
-                  >
-                    Anuluj
-                  </Typography>
-                </ButtonComponent>
-                <ButtonComponent
-                  className="primary"
-                  size="Large"
-                  maxWidth="8rem"
-                  type="submit"
-                >
-                  <Typography
-                    tag="p"
-                    variant="UIText16MediumButton"
-                    color={theme.colors.white}
-                  >
-                    Zapisz
-                  </Typography>
-                </ButtonComponent>
-              </CardFooter>
-            )}
-          </S.Form>
-        </FormProvider>
-      </S.ContentEditSection>
-    </S.EditCardWrapper>
+    // <S.EditCardWrapper>
+    //   <S.TopButtonsWrapper>
+    //     <ButtonComponent maxWidth="5rem" onClick={() => handleReturn()}>
+    //       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+    //         <PetEditReturnIcon />
+    //         <Typography
+    //           tag="p"
+    //           variant="UIText16MediumButton"
+    //           color={theme.colors.midGray1}
+    //         >
+    //           Wróć
+    //         </Typography>
+    //       </div>
+    //     </ButtonComponent>
+    //     <ButtonComponent maxWidth="5rem" onClick={() => setIsEditActive(true)}>
+    //       <Typography
+    //         tag="p"
+    //         variant="UIText16MediumButton"
+    //         color={theme.colors.primaryPr600}
+    //       >
+    //         Edytuj
+    //       </Typography>
+    //     </ButtonComponent>
+    //   </S.TopButtonsWrapper>
+    //   <S.ImagesSectionWrapper>
+    //     <S.Image src={EditPetDummyImage} alt="cat image" />
+    //     <S.Image src={EditPetDummyImage} alt="cat image" />
+    //     <S.Image src={EditPetDummyImage} alt="cat image" />
+    //     <S.Image src={EditPetDummyImage} alt="cat image" />
+    //   </S.ImagesSectionWrapper>
+    //   <S.ContentEditSection>
+    //     <FormProvider {...methods}>
+    //       <S.Form onSubmit={methods.handleSubmit(onSubmit)}>
+    //         <S.ContentRowWrapper>
+    //           <Typography
+    //             tag="p"
+    //             variant="UIText12Reg"
+    //             color={theme.colors.midGray1}
+    //           >
+    //             Imię zwierzaka
+    //           </Typography>
+    //           <S.InputStylingWrapper>
+    //             <InputComponent
+    //               variant="XLarge"
+    //               type="text"
+    //               margin="Medium"
+    //               placeholder="Bella"
+    //               {...register("name")}
+    //               error={isEditActive ? errors.name?.message : ""}
+    //               readOnly={!isEditActive}
+    //               isCustomPlaceholder={!isEditActive}
+    //             />
+    //           </S.InputStylingWrapper>
+    //         </S.ContentRowWrapper>
+    //         <S.ContentRowWrapper>
+    //           <Typography
+    //             tag="p"
+    //             variant="UIText12Reg"
+    //             color={theme.colors.midGray1}
+    //           >
+    //             Opis
+    //           </Typography>
+    //           <S.InputStylingWrapper>
+    //             <TextAreaInput
+    //               variant="XLarge"
+    //               margin="Medium"
+    //               placeholder="Rudy kotek, reaguje na imię Bella,  lubi drapanie za uchem"
+    //               {...register("description")}
+    //               error={isEditActive ? errors.description?.message : ""}
+    //               readOnly={!isEditActive}
+    //               style={{ border: isEditActive ? "" : "none" }}
+    //               isCustomPlaceholder={!isEditActive}
+    //             />
+    //           </S.InputStylingWrapper>
+    //         </S.ContentRowWrapper>
+    //         <S.ContentRowWrapper>
+    //           <Typography
+    //             tag="p"
+    //             variant="UIText12Reg"
+    //             color={theme.colors.midGray1}
+    //           >
+    //             Gatunek
+    //           </Typography>
+    //           <S.InputStylingWrapper>
+    //             <SelectInput
+    //               name="animalCategory"
+    //               variant="Large"
+    //               margin="Medium"
+    //               placeholder="Kot"
+    //               displayValue={watch("animalCategory")}
+    //               setValue={handleValue}
+    //               options={["Kot", "Pies"]}
+    //               isAllowed={isEditActive}
+    //               error={isEditActive ? errors.animalCategory?.message : ""}
+    //               isCustomPlaceholder={!isEditActive}
+    //               style={{ border: isEditActive ? "" : "none" }}
+    //             />
+    //           </S.InputStylingWrapper>
+    //         </S.ContentRowWrapper>
+    //         <S.ContentRowWrapper>
+    //           <Typography
+    //             tag="p"
+    //             variant="UIText12Reg"
+    //             color={theme.colors.midGray1}
+    //           >
+    //             Umaszczenie
+    //           </Typography>
+    //           <S.InputStylingWrapper>
+    //             <SelectInput
+    //               name="color"
+    //               variant="Large"
+    //               margin="Medium"
+    //               placeholder="Rude"
+    //               displayValue={watch("color")}
+    //               setValue={handleValue}
+    //               options={["Jasny", "Ciemny"]}
+    //               isAllowed={isEditActive}
+    //               error={isEditActive ? errors.color?.message : ""}
+    //               isCustomPlaceholder={!isEditActive}
+    //               style={{ border: isEditActive ? "" : "none" }}
+    //             />
+    //           </S.InputStylingWrapper>
+    //         </S.ContentRowWrapper>
+    //         <S.ContentRowWrapper>
+    //           <Typography
+    //             tag="p"
+    //             variant="UIText12Reg"
+    //             color={theme.colors.midGray1}
+    //           >
+    //             Płeć
+    //           </Typography>
+    //           <S.InputStylingWrapper>
+    //             <SelectInput
+    //               name="breed"
+    //               variant="Large"
+    //               margin="Medium"
+    //               placeholder="Samiczka"
+    //               displayValue={watch("breed")}
+    //               setValue={handleValue}
+    //               options={["Samiec", "Samiczka"]}
+    //               isAllowed={isEditActive}
+    //               error={isEditActive ? errors.breed?.message : ""}
+    //               isCustomPlaceholder={!isEditActive}
+    //               style={{ border: isEditActive ? "" : "none" }}
+    //             />
+    //           </S.InputStylingWrapper>
+    //         </S.ContentRowWrapper>
+    //         <S.ContentRowWrapper>
+    //           <Typography
+    //             tag="p"
+    //             variant="UIText12Reg"
+    //             color={theme.colors.midGray1}
+    //           >
+    //             Waga
+    //           </Typography>
+    //           <S.InputStylingWrapper>
+    //             <InputComponent
+    //               variant="XLarge"
+    //               type="number"
+    //               margin="Medium"
+    //               isAdditionalUnit={isEditActive}
+    //               additionalUnitValue={isEditActive ? "KG" : ""}
+    //               readOnly={!isEditActive}
+    //               {...register("weight", {
+    //                 valueAsNumber: true,
+    //               })}
+    //               error={isEditActive ? errors.weight?.message : ""}
+    //               style={{ border: isEditActive ? "" : "none" }}
+    //             />
+    //           </S.InputStylingWrapper>
+    //         </S.ContentRowWrapper>
+    //         <S.ContentRowWrapper>
+    //           <Typography
+    //             tag="p"
+    //             variant="UIText12Reg"
+    //             color={theme.colors.midGray1}
+    //           >
+    //             Sterylizacja
+    //           </Typography>
+    //           <S.InputStylingWrapper>
+    //             <SelectInput
+    //               name="isSterilized"
+    //               displayValue={watch("isSterilized")}
+    //               setValue={handleValue}
+    //               placeholder="Tak"
+    //               options={["Tak", "Nie"]}
+    //               margin="Medium"
+    //               variant="Large"
+    //               isAllowed={isEditActive}
+    //               error={isEditActive ? errors.isSterilized?.message : ""}
+    //               isCustomPlaceholder={!isEditActive}
+    //               style={{
+    //                 border: isEditActive ? "" : "none",
+    //                 maxWidth: "25.4rem",
+    //               }}
+    //             />
+    //           </S.InputStylingWrapper>
+    //         </S.ContentRowWrapper>
+    //         <S.ContentRowWrapper>
+    //           <Typography
+    //             tag="p"
+    //             variant="UIText12Reg"
+    //             color={theme.colors.midGray1}
+    //           >
+    //             Widoczność
+    //           </Typography>
+    //           <S.InputStylingWrapper>
+    //             <SelectInput
+    //               name="isVisible"
+    //               displayValue={watch("isVisible")}
+    //               setValue={handleValue}
+    //               placeholder="Tak"
+    //               options={["Tak", "Nie"]}
+    //               margin="Medium"
+    //               variant="Large"
+    //               isAllowed={isEditActive}
+    //               error={isEditActive ? errors.isVisible?.message : ""}
+    //               isCustomPlaceholder={!isEditActive}
+    //               style={{
+    //                 border: isEditActive ? "" : "none",
+    //                 maxWidth: "25.4rem",
+    //               }}
+    //             />
+    //           </S.InputStylingWrapper>
+    //         </S.ContentRowWrapper>
+    //         {isEditActive && (
+    //           <CardFooter>
+    //             <ButtonComponent
+    //               className="secondary"
+    //               size="Large"
+    //               maxWidth="8rem"
+    //               type="button"
+    //               onClick={() => setIsEditActive(false)}
+    //             >
+    //               <Typography
+    //                 tag="p"
+    //                 variant="UIText16MediumButton"
+    //                 color={theme.colors.black}
+    //               >
+    //                 Anuluj
+    //               </Typography>
+    //             </ButtonComponent>
+    //             <ButtonComponent
+    //               className="primary"
+    //               size="Large"
+    //               maxWidth="8rem"
+    //               type="submit"
+    //             >
+    //               <Typography
+    //                 tag="p"
+    //                 variant="UIText16MediumButton"
+    //                 color={theme.colors.white}
+    //               >
+    //                 Zapisz
+    //               </Typography>
+    //             </ButtonComponent>
+    //           </CardFooter>
+    //         )}
+    //       </S.Form>
+    //     </FormProvider>
+    //   </S.ContentEditSection>
+    // </S.EditCardWrapper>
+    <h1>dupa</h1>
   )
 }
 

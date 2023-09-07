@@ -10,17 +10,21 @@ import CardFooter from "components/global/CardFooter/CardFooter"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import theme from "layout/theme"
 import PetImagesUpload from "./PetImagesUpload/PetImagesUpload"
+import { useCreateNewPethandler } from "api/pets/petsHooks"
 
 const defaultValues = {
   name: "",
   description: "",
   animalCategory: "",
-  color: "",
-  breed: "",
+  marking: "",
+  gender: "",
   weight: 0,
   isSterilized: "",
   isVisible: "",
-  // images: [] as string[] | Array<any>,
+  species: "",
+  months: 0,
+  profilePhoto: "",
+  photos: [""],
 }
 
 export const newPetValidation = yup.object({
@@ -33,11 +37,11 @@ export const newPetValidation = yup.object({
     .max(200, "Opis nie może być dłuższy niz 200 słów")
     .required("Opis jest wymagany"),
   animalCategory: yup.string().required("Gatunek jest wymagany"),
-  color: yup
+  marking: yup
     .string()
     .max(50, "Kolor nie może być dłuższy niuz 50 słow")
     .required("Kolor jest wymagany"),
-  breed: yup
+  gender: yup
     .string()
     .max(50, "Rasa nie może byc dłuższa niż 50 słów")
     .required("Rasa jest wymagana"),
@@ -48,16 +52,21 @@ export const newPetValidation = yup.object({
     .typeError("Waga jest wymagana"),
   isSterilized: yup.string().required("Sterylizacja jest wymagana"),
   isVisible: yup.string().required("Sterylizacja jest wymagana"),
-  // images: yup.array().required("Zdjęcie jest wymagane"),
+  species: yup.string().required("Rasa jest wymagana"),
+  months: yup
+    .number()
+    .min(1, "Wiek musi być dodatki")
+    .required("Wiek jest wymagany")
+    .typeError("Wiek jest wymagany"),
 })
 
-type defaultFormValuesTypes = typeof defaultValues
-export type handleFormValues = keyof defaultFormValuesTypes
+export type defaultNewPetTypes = typeof defaultValues
+export type handleFormValues = keyof defaultNewPetTypes
 
 const PetsNewPetCard = () => {
   const methods = useForm({
     defaultValues,
-    resolver: yupResolver(newPetValidation),
+    // resolver: yupResolver(newPetValidation),
   })
   const {
     formState: { errors },
@@ -66,8 +75,17 @@ const PetsNewPetCard = () => {
     register,
   } = methods
 
-  const onSubmit: SubmitHandler<defaultFormValuesTypes> = (data) => {
-    console.log(data)
+  const { mutate } = useCreateNewPethandler()
+
+  const onSubmit: SubmitHandler<defaultNewPetTypes> = (data) => {
+    // console.log(data)
+    const dupa = {
+      ...data,
+      profilePhoto: "dupa",
+      photos: ["dupa"],
+    }
+    mutate(dupa)
+    console.log(dupa)
   }
 
   const handleValue = (name: handleFormValues, value: string) => {
@@ -121,15 +139,15 @@ const PetsNewPetCard = () => {
               Umaszczenie
             </Typography>
             <SelectInput
-              name="color"
+              name="marking"
               variant="Large"
               margin="Medium"
               placeholder="Wybierz z listy"
               isAllowed={true}
-              displayValue={watch("color")}
+              displayValue={watch("marking")}
               setValue={handleValue}
               options={["Jasny", "Ciemny"]}
-              error={errors.color?.message}
+              error={errors.marking?.message}
             />
             <S.FormListWrapper>
               <S.FormListItem style={{ width: "50%" }}>
@@ -137,15 +155,15 @@ const PetsNewPetCard = () => {
                   Płeć
                 </Typography>
                 <SelectInput
-                  name="breed"
-                  displayValue={watch("breed")}
+                  name="gender"
+                  displayValue={watch("gender")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
                   isAllowed={true}
                   options={["Samiec", "Samiczka"]}
                   margin="Medium"
                   variant="Large"
-                  error={errors.breed?.message}
+                  error={errors.gender?.message}
                 />
               </S.FormListItem>
               <S.FormListItem>
@@ -196,6 +214,36 @@ const PetsNewPetCard = () => {
                   margin="Medium"
                   variant="Large"
                   error={errors.isVisible?.message}
+                />
+              </S.FormListItem>
+            </S.FormListWrapper>
+            <S.FormListWrapper>
+              <S.FormListItem>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Rasa
+                </Typography>
+                <InputComponent
+                  variant="XLarge"
+                  placeholder="Wpisz"
+                  type="text"
+                  margin="Medium"
+                  {...register("species")}
+                  error={errors.species?.message}
+                />
+              </S.FormListItem>
+              <S.FormListItem>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Wiek (w miesiącach)
+                </Typography>
+                <InputComponent
+                  variant="XLarge"
+                  placeholder="Wpisz"
+                  type="text"
+                  margin="Medium"
+                  {...register("months", {
+                    valueAsNumber: true,
+                  })}
+                  error={errors.months?.message}
                 />
               </S.FormListItem>
             </S.FormListWrapper>

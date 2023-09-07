@@ -115,7 +115,7 @@ const PetImagesUpload = () => {
   return (
     <>
       <FileInput
-        name="images"
+        name="photos"
         placeholder="Upload"
         uploadImage={uploadImageHandler}
         margin="Medium"

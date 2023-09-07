@@ -1,6 +1,7 @@
 import { mostPopularPetsHandlerTypes } from "mocks/handlers/mostPopularPetsHandler"
 import { newestPetsHandlerTypes } from "mocks/handlers/newestPetsHandler"
-import { mockClient } from "api/client"
+import { mockClient, productionClient } from "api/client"
+import { defaultNewPetTypes } from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/NewPetCard/PetsNewPetCard"
 
   export const mostPopularPetsHandler = async () => {
     try {
@@ -20,3 +21,11 @@ import { mockClient } from "api/client"
     }
   }
 
+  export const createNewPetHandler = async (newPetData: defaultNewPetTypes) => {
+    try {
+      const response = await productionClient.post('/shelters/cards/createpet', newPetData);
+      console.log(response.data)
+    } catch(error) {
+      console.log(error)
+    }
+  }
