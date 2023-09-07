@@ -19,13 +19,59 @@ const defaultValues = {
   marking: "",
   gender: "",
   weight: 0,
-  isSterilized: "",
-  isVisible: "",
+  isSterilized: true,
+  isVisible: true,
   species: "",
   months: 0,
   profilePhoto: "",
   photos: [""],
 }
+
+const genderOptions = [
+  {
+    value: "Undefined",
+    name: "Niezidentyfikowany",
+  },
+  {
+    value: "Male",
+    name: "Samiec",
+  },
+  {
+    value: "Female",
+    name: "Samiczka",
+  },
+  {
+    value: "Other",
+    name: "Inna",
+  },
+]
+const animalCategoryOptions = [
+  {
+    value: "Undefined",
+    name: "Niezidentyfikowany",
+  },
+  {
+    value: "Other",
+    name: "Inna",
+  },
+  {
+    value: "Dog",
+    name: "Pies",
+  },
+  {
+    value: "Cat",
+    name: "Kot",
+  },
+  {
+    value: "Rabbit",
+    name: "Królik",
+  },
+]
+
+const booleanOptions = [
+  { value: true, name: "Tak" },
+  { value: false, name: "Nie" },
+]
 
 export const newPetValidation = yup.object({
   name: yup
@@ -52,12 +98,15 @@ export const newPetValidation = yup.object({
     .typeError("Waga jest wymagana"),
   isSterilized: yup.string().required("Sterylizacja jest wymagana"),
   isVisible: yup.string().required("Sterylizacja jest wymagana"),
-  species: yup.string().required("Rasa jest wymagana"),
+  species: yup
+    .string()
+    .required("Rasa jest wymagana")
+    .typeError("Rasa nie może zawierać liczb"),
   months: yup
     .number()
     .min(1, "Wiek musi być dodatki")
     .required("Wiek jest wymagany")
-    .typeError("Wiek jest wymagany"),
+    .typeError("Wiek jest wymagany i musi byc liczbą"),
 })
 
 export type defaultNewPetTypes = typeof defaultValues
@@ -80,7 +129,16 @@ const PetsNewPetCard = () => {
   const onSubmit: SubmitHandler<defaultNewPetTypes> = (data) => {
     // console.log(data)
     const dupa = {
-      ...data,
+      name: "dupa",
+      description: "dupa",
+      animalCategory: "Dog",
+      marking: "dupa",
+      gender: "Male",
+      weight: 22,
+      isSterilized: true,
+      isVisible: true,
+      species: "dupa",
+      months: 22,
       profilePhoto: "dupa",
       photos: ["dupa"],
     }
@@ -132,7 +190,7 @@ const PetsNewPetCard = () => {
               isAllowed={true}
               displayValue={watch("animalCategory")}
               setValue={handleValue}
-              options={["Kot", "Pies"]}
+              options={animalCategoryOptions.map(({ name }) => name)}
               error={errors.animalCategory?.message}
             />
             <Typography tag="p" variant="UIText13Med" margin="Medium">
@@ -160,7 +218,7 @@ const PetsNewPetCard = () => {
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
                   isAllowed={true}
-                  options={["Samiec", "Samiczka"]}
+                  options={genderOptions.map(({ name }) => name)}
                   margin="Medium"
                   variant="Large"
                   error={errors.gender?.message}
