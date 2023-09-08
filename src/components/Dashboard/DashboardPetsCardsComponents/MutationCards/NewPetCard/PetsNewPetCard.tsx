@@ -10,7 +10,11 @@ import CardFooter from "components/global/CardFooter/CardFooter"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import theme from "layout/theme"
 import PetImagesUpload from "./PetImagesUpload/PetImagesUpload"
-import { useCreateNewPethandler } from "api/pets/petsHooks"
+import { useCreateNewPetHandler } from "api/pets/petsHooks"
+import { useConvertImagesToUrls } from "helpers/hooks/useConvertImagesToUrls"
+import { useCallback, useEffect, useState } from "react"
+import ROUTES from "helpers/utils/routes"
+import { useNavigate } from "react-router-dom"
 
 const defaultValues = {
   name: "",
@@ -20,7 +24,7 @@ const defaultValues = {
   gender: "",
   weight: 0,
   isSterilized: true,
-  isVisible: true,
+  isVisible: false,
   species: "",
   months: 0,
   profilePhoto: "",
@@ -68,11 +72,6 @@ const animalCategoryOptions = [
   },
 ]
 
-const booleanOptions = [
-  { value: true, name: "Tak" },
-  { value: false, name: "Nie" },
-]
-
 export const newPetValidation = yup.object({
   name: yup
     .string()
@@ -85,7 +84,7 @@ export const newPetValidation = yup.object({
   animalCategory: yup.string().required("Gatunek jest wymagany"),
   marking: yup
     .string()
-    .max(50, "Kolor nie może być dłuższy niuz 50 słow")
+    .max(50, "Kolor nie może być dłuższy niż 50 słow")
     .required("Kolor jest wymagany"),
   gender: yup
     .string()
@@ -111,8 +110,12 @@ export const newPetValidation = yup.object({
 
 export type defaultNewPetTypes = typeof defaultValues
 export type handleFormValues = keyof defaultNewPetTypes
+export type genderOptionsTypes = typeof genderOptions
 
 const PetsNewPetCard = () => {
+  const navigate = useNavigate()
+  const [croppedImages, setCroppedImages] = useState<File[]>([])
+
   const methods = useForm({
     defaultValues,
     // resolver: yupResolver(newPetValidation),
@@ -124,31 +127,69 @@ const PetsNewPetCard = () => {
     register,
   } = methods
 
-  const { mutate } = useCreateNewPethandler()
+  const { newImageUrls, getImageUrl, imagesIds } = useConvertImagesToUrls()
+  const { mutate } = useCreateNewPetHandler()
 
-  const onSubmit: SubmitHandler<defaultNewPetTypes> = (data) => {
-    // console.log(data)
-    const dupa = {
-      name: "dupa",
-      description: "dupa",
-      animalCategory: "Dog",
-      marking: "dupa",
-      gender: "Male",
-      weight: 22,
-      isSterilized: true,
-      isVisible: true,
-      species: "dupa",
-      months: 22,
-      profilePhoto: "dupa",
-      photos: ["dupa"],
+  const handleConvertImages = () => {
+    if (croppedImages.length > 0) {
+      getImageUrl(croppedImages)
     }
-    mutate(dupa)
-    console.log(dupa)
   }
 
-  const handleValue = (name: handleFormValues, value: string) => {
+  // const convertStringToBoolean = (value: string) => {
+  //   if (value === "Tak") {
+  //     return true
+  //   }
+  //   return false
+  // }
+
+  const convertNameToFormValue = (
+    options: genderOptionsTypes,
+    formName: string
+  ) => {
+    const name = options.filter(({ name }) => name === formName)[0]
+    return name.value
+  }
+
+  const onSubmit: SubmitHandler<defaultNewPetTypes> = useCallback(
+    async (data) => {
+      const revertGender = convertNameToFormValue(genderOptions, data.gender)
+      const revertAnimalCategory = convertNameToFormValue(
+        animalCategoryOptions,
+        data.animalCategory
+      )
+
+      const dupa = {
+        ...data,
+        animalCategory: revertAnimalCategory,
+        marking: "Jasny",
+        gender: revertGender,
+        isSterilized: true,
+        isVisible: false,
+        photos: imagesIds,
+        profilePhoto: imagesIds,
+        // profilePhoto: "dupa",
+        // photos: ["dupa"],
+      }
+      console.log(dupa)
+      mutate(dupa)
+    },
+    [newImageUrls, mutate]
+  )
+
+  const handleValue = (name: handleFormValues, value: string | boolean) => {
     setValue(name, value, { shouldTouch: true, shouldDirty: true })
   }
+
+  const handleCroppedImages = (file: File[]) => {
+    setCroppedImages((prevState) => [...prevState, ...file])
+  }
+
+  useEffect(() => {
+    if (newImageUrls.length > 0) {
+      methods.handleSubmit(onSubmit)()
+    }
+  }, [newImageUrls, methods, onSubmit])
 
   return (
     <S.NewPetFormWrapper>
@@ -308,10 +349,15 @@ const PetsNewPetCard = () => {
             <Typography tag="p" variant="UIText13Med" margin="Medium">
               Dodaj zdjęcia
             </Typography>
-            <PetImagesUpload />
+            <PetImagesUpload handleCroppedImages={handleCroppedImages} />
           </S.InnerWrapper>
           <CardFooter>
-            <ButtonComponent className="secondary" size="Large" maxWidth="8rem">
+            <ButtonComponent
+              className="secondary"
+              size="Large"
+              maxWidth="8rem"
+              onClick={() => navigate(ROUTES.pets)}
+            >
               <Typography
                 tag="p"
                 variant="UIText16MediumButton"
@@ -325,7 +371,7 @@ const PetsNewPetCard = () => {
               size="Large"
               maxWidth="8rem"
               type="submit"
-              onClick={methods.handleSubmit(onSubmit)}
+              onClick={handleConvertImages}
             >
               <Typography
                 tag="p"

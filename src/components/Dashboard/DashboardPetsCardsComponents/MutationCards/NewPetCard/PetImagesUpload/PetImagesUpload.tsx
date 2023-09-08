@@ -4,7 +4,11 @@ import PetsThumbnails from "./PetsThumbnails/PetsThumbnails"
 import ImageCropModal from "./ImageCropModal/ImageCropModal"
 import { PixelCrop } from "react-image-crop"
 
-const PetImagesUpload = () => {
+type PetImagesUploadProps = {
+  handleCroppedImages: (file: File[]) => void
+}
+
+const PetImagesUpload = ({ handleCroppedImages }: PetImagesUploadProps) => {
   const [convertedImages, setConvertedImages] = useState<string[] | undefined>()
   const [fileNames, setFileNames] = useState<string[]>([])
   const [modalIsVisibe, setModalIsVisible] = useState(false)
@@ -26,6 +30,7 @@ const PetImagesUpload = () => {
 
   const uploadImageHandler = (uploadedImages: FileList) => {
     convertToBase64(uploadedImages)
+
     openModalHandler()
   }
 
@@ -45,7 +50,7 @@ const PetImagesUpload = () => {
   const convertToBase64 = (uploadedImages: FileList) => {
     const newImagesArray = Array.from(uploadedImages)
 
-    newImagesArray.map((file) => {
+    newImagesArray.forEach((file) => {
       setFileNames((prevState) => [...prevState, file.name])
     })
 
@@ -64,13 +69,18 @@ const PetImagesUpload = () => {
     })
   }
 
-  const handleImageCrop = (imageIndex: number, completedCrop: PixelCrop) => {
+  const handleImageCrop = (
+    imageIndex: number,
+    completedCrop: PixelCrop,
+    width: number,
+    height: number
+  ) => {
     const image = document.createElement("img")
     image.src = convertedImages![imageIndex] as string
 
     const canvas = document.createElement("canvas")
-    const scaleX = image.naturalWidth / image.width!
-    const scaleY = image.naturalHeight / image.height!
+    const scaleX = image.naturalWidth / width
+    const scaleY = image.naturalHeight / height
     canvas.width = completedCrop!.width!
     canvas.height = completedCrop!.height!
 
@@ -99,6 +109,8 @@ const PetImagesUpload = () => {
         const newFile = new File([arrayBuffer], fileNames[imageIndex], {
           type: "image/jpeg",
         })
+
+        handleCroppedImages([newFile])
 
         const reader = new FileReader()
         reader.readAsDataURL(newFile)

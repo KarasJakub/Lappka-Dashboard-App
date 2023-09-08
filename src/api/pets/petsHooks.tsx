@@ -4,6 +4,8 @@ import {
   mostPopularPetsHandler,
   newestPetsHandler,
   createNewPetHandler,
+  getImagesId,
+  getImagesUrl,
 } from "./pets"
 
 export const useShelterStatsHandler = () => {
@@ -18,6 +20,14 @@ export const useNewestPetsHandler = () => {
   return useQuery(["newestPets"], newestPetsHandler)
 }
 
-export const useCreateNewPethandler = () => {
+export const useGetImagesId = () => {
+  return useMutation(getImagesId)
+}
+
+export const useGetImagesUrl = () => {
+  return useMutation(getImagesUrl)
+}
+
+export const useCreateNewPetHandler = () => {
   return useMutation(createNewPetHandler)
 }

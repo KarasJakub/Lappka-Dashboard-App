@@ -1,5 +1,5 @@
 import * as S from "./ImageCropModal.styled"
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
@@ -38,7 +38,12 @@ function centerAspectCrop(
 type ImageCropModalTypes = {
   images: string[]
   onCloseModal: () => void
-  onImageCrop: (imageIndex: number, completedCrop: PixelCrop) => void
+  onImageCrop: (
+    imageIndex: number,
+    completedCrop: PixelCrop,
+    width: number,
+    height: number
+  ) => void
   onCancelCrop: () => void
 }
 
@@ -49,6 +54,8 @@ const ImageCropModal = ({
   onCancelCrop,
 }: ImageCropModalTypes) => {
   const imgRef = useRef<HTMLImageElement>(null)
+  const [width, setWidth] = useState(0)
+  const [height, setHeight] = useState(0)
   const [crop, setCrop] = useState<Crop>()
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>()
   const [imageIndex, setImageIndex] = useState(0)
@@ -62,10 +69,9 @@ const ImageCropModal = ({
     }
   }
 
-  const nextImageHandler = (e: any) => {
+  const nextImageHandler = () => {
     increaseImageIndex()
-    onImageCrop(imageIndex, completedCrop!)
-    e.preventDefault()
+    onImageCrop(imageIndex, completedCrop!, width, height)
 
     if (isLastImage) {
       handleCompleteCrop()
@@ -81,6 +87,19 @@ const ImageCropModal = ({
   const handleCompleteCrop = () => {
     onCloseModal()
   }
+
+  useEffect(() => {
+    if (imgRef.current) {
+      const computedStyle = window.getComputedStyle(imgRef.current)
+      const width = computedStyle.getPropertyValue("width")
+      const height = computedStyle.getPropertyValue("height")
+      const numericValueWidth = parseFloat(width)
+      const numericValueHeight = parseFloat(height)
+
+      setWidth(numericValueWidth)
+      setHeight(numericValueHeight)
+    }
+  }, [imgRef])
 
   return (
     <S.Wrapper>
@@ -102,6 +121,8 @@ const ImageCropModal = ({
             onChange={(_, percentCrop) => setCrop(percentCrop)}
             onComplete={(c) => setCompletedCrop(c)}
             aspect={aspect}
+            maxHeight={1280}
+            maxWidth={720}
           >
             <img
               ref={imgRef}
