@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import FileInput from "components/global/Input/FileInput/FileInput"
 import PetsThumbnails from "./PetsThumbnails/PetsThumbnails"
 import ImageCropModal from "./ImageCropModal/ImageCropModal"
@@ -14,15 +14,15 @@ const PetImagesUpload = ({ handleCroppedImages }: PetImagesUploadProps) => {
   const [modalIsVisibe, setModalIsVisible] = useState(false)
   const [thumbnail, setThumbnail] = useState<string[]>([])
 
-  const openModalHandler = () => {
+  const openModalHandler = useCallback(() => {
     if (convertedImages) {
       setModalIsVisible(true)
     }
-  }
+  }, [convertedImages])
 
   useEffect(() => {
     openModalHandler()
-  }, [convertedImages])
+  }, [convertedImages, openModalHandler])
 
   const closeModalHandler = () => {
     setModalIsVisible(false)
@@ -127,7 +127,7 @@ const PetImagesUpload = ({ handleCroppedImages }: PetImagesUploadProps) => {
   return (
     <>
       <FileInput
-        name="photos"
+        name="images"
         placeholder="Upload"
         uploadImage={uploadImageHandler}
         margin="Medium"

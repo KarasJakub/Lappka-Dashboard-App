@@ -10,11 +10,15 @@ import CardFooter from "components/global/CardFooter/CardFooter"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import theme from "layout/theme"
 import PetImagesUpload from "./PetImagesUpload/PetImagesUpload"
-import { useCreateNewPetHandler } from "api/pets/petsHooks"
-import { useConvertImagesToUrls } from "helpers/hooks/useConvertImagesToUrls"
 import { useCallback, useEffect, useState } from "react"
 import ROUTES from "helpers/utils/routes"
 import { useNavigate } from "react-router-dom"
+import { useConvertImagesToUrls } from "helpers/hooks/useConvertImagesToUrls"
+import {
+  useCreateNewPetHandler,
+  useGetImagesId,
+  useGetImagesUrl,
+} from "api/pets/petsHooks"
 
 const defaultValues = {
   name: "",
@@ -113,11 +117,11 @@ export type handleFormValues = keyof defaultNewPetTypes
 export type genderOptionsTypes = typeof genderOptions
 
 const PetsNewPetCard = () => {
-  const navigate = useNavigate()
   const [croppedImages, setCroppedImages] = useState<File[]>([])
+  const navigate = useNavigate()
 
   const methods = useForm({
-    defaultValues,
+    defaultValues: defaultValues,
     // resolver: yupResolver(newPetValidation),
   })
   const {
@@ -127,12 +131,19 @@ const PetsNewPetCard = () => {
     register,
   } = methods
 
-  const { newImageUrls, getImageUrl, imagesIds } = useConvertImagesToUrls()
-  const { mutate } = useCreateNewPetHandler()
+  const {
+    mutate: mutateImagesIds,
+    data: imagesIds,
+    isSuccess,
+  } = useGetImagesId()
+
+  const { mutate: createNewPetCart } = useCreateNewPetHandler()
 
   const handleConvertImages = () => {
     if (croppedImages.length > 0) {
-      getImageUrl(croppedImages)
+      const formData = new FormData()
+      croppedImages.forEach((image) => formData.append("files", image))
+      mutateImagesIds(formData)
     }
   }
 
@@ -159,22 +170,22 @@ const PetsNewPetCard = () => {
         data.animalCategory
       )
 
-      const dupa = {
+      const CompletedData = {
         ...data,
         animalCategory: revertAnimalCategory,
-        marking: "Jasny",
         gender: revertGender,
         isSterilized: true,
         isVisible: false,
-        photos: imagesIds,
-        profilePhoto: imagesIds,
+        photos: imagesIds!.data,
+        profilePhoto: imagesIds!.data[0],
         // profilePhoto: "dupa",
         // photos: ["dupa"],
       }
-      console.log(dupa)
-      mutate(dupa)
+      console.log(data)
+      console.log(CompletedData)
+      createNewPetCart(CompletedData)
     },
-    [newImageUrls, mutate]
+    [createNewPetCart, imagesIds]
   )
 
   const handleValue = (name: handleFormValues, value: string | boolean) => {
@@ -186,10 +197,10 @@ const PetsNewPetCard = () => {
   }
 
   useEffect(() => {
-    if (newImageUrls.length > 0) {
+    if (isSuccess) {
       methods.handleSubmit(onSubmit)()
     }
-  }, [newImageUrls, methods, onSubmit])
+  }, [methods, onSubmit, isSuccess])
 
   return (
     <S.NewPetFormWrapper>
