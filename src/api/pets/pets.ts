@@ -4,6 +4,32 @@ import { mockClient, productionClient } from "api/client"
 import { defaultNewPetTypes } from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/NewPetCard/PetsNewPetCard"
 import { stringify } from 'qs'
 
+export interface PetsCardsTypes {
+  petInListInShelterDto: [
+    {
+      id: string;
+      petIdentifier: string;
+      name: string;
+      type: string;
+      gender: string;
+      breed: string;
+      color: string;
+      weight: number;
+      profilePhoto: string;
+      photos: string[];
+      age: number;
+      createdAt: string;
+      isSterilized: boolean;
+      isVisible: boolean;
+      description: string;
+    }
+  ];
+  totalPages: number;
+  itemFrom: number;
+  itemsTo: number;
+  totalItemsCount: number;
+}
+
   export const mostPopularPetsHandler = async () => {
     try {
       const response = await mockClient.get<mostPopularPetsHandlerTypes>('/shelters/popularPets')
@@ -51,3 +77,15 @@ import { stringify } from 'qs'
       console.log(error)
     }
   }
+
+  export const petListInShelter = async () => {
+    try {
+      const response = await productionClient.get<PetsCardsTypes>(
+        '/shelters/cards/petlistinshelter',
+        { params: { pagenumber: 1, pagesize: 10, sortparam: 'createdat' } }
+      );
+      return response.data.petInListInShelterDto;
+    } catch (error) {
+      console.log(error);
+    }
+  };

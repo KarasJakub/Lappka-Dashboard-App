@@ -9,25 +9,38 @@ import theme from "layout/theme"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
+import { useState } from "react"
+import { useVolunteeringStatsHandler } from "api/volunteering/volunteeringHooks"
 
 const defaultValues = {
   bankAccountNumber: "",
-  bankDescription: "",
-  supportDescription: "",
-  walkDescription: "",
+  donationDescription: "",
+  dailyHelpDescription: "",
+  takingDogsOutDescription: "",
 }
 
 export const VoluntaryValidation = yup.object({
   bankAccountNumber: yup.string().required("Numer konta jest wymagany"),
-  bankDescription: yup.string().required("Opis jest wymagany"),
-  supportDescription: yup.string().required("Opis jest wymagany"),
-  walkDescription: yup.string().required("Opis jest wymagany"),
+  donationDescription: yup.string().required("Opis jest wymagany"),
+  dailyHelpDescription: yup.string().required("Opis jest wymagany"),
+  takingDogsOutDescription: yup.string().required("Opis jest wymagany"),
 })
 
 type defaultFormValuesTypes = typeof defaultValues
 export type handleFormValues = keyof defaultFormValuesTypes
 
 const VoluntaryCard = () => {
+  const { data, isSuccess, isError } = useVolunteeringStatsHandler()
+  const [isDonationActive, setIsDonationActive] = useState(
+    isSuccess ? data.isDonationActive : false
+  )
+  const [isDailyHelpActive, setIsDailyHelpActive] = useState(
+    isSuccess ? data.isDailyHelpActive : false
+  )
+  const [isTakingDogsOutActive, setIsTakingDogsOutActive] = useState(
+    isSuccess ? data.isTakingDogsOutActive : false
+  )
+
   const methods = useForm({
     defaultValues,
     resolver: yupResolver(VoluntaryValidation),
@@ -42,97 +55,137 @@ const VoluntaryCard = () => {
   }
   return (
     <S.VoluntaryCardWrapper>
-      <FormProvider {...methods}>
-        <S.Form onSubmit={methods.handleSubmit(onSubmit)}>
-          <S.SectionWrapper>
-            <S.TitleWrapper>
-              <Typography tag="h6" variant="UIText16SemiBold">
-                Wpłać darowiznę
-              </Typography>
-              <ToggleButton label="Aktywna" />
-            </S.TitleWrapper>
-            <S.InputsWrapper>
-              <Typography tag="p" variant="UIText13Med" margin="Medium">
-                Podaj numer konta
-              </Typography>
-              <InputComponent
-                variant="XLarge"
-                placeholder="0000-0000-0000-0000"
-                type="text"
-                margin="Medium"
-                {...register("bankAccountNumber")}
-                error={errors.bankAccountNumber?.message}
-              />
-              <Typography tag="p" variant="UIText13Med" margin="Medium">
-                Opis
-              </Typography>
-              <TextAreaInput
-                variant="XLarge"
-                placeholder="Textarea"
-                margin="Medium"
-                {...register("bankDescription")}
-                error={errors.bankDescription?.message}
-              />
-            </S.InputsWrapper>
-          </S.SectionWrapper>
-          <S.SectionWrapper>
-            <S.TitleWrapper>
-              <Typography tag="h6" variant="UIText16SemiBold">
-                Codzienna pomoc
-              </Typography>
-              <ToggleButton label="Aktywna" />
-            </S.TitleWrapper>
-            <S.InputsWrapper>
-              <Typography tag="p" variant="UIText13Med" margin="Medium">
-                Opis
-              </Typography>
-              <TextAreaInput
-                variant="XLarge"
-                placeholder="Textarea"
-                margin="Medium"
-                {...register("supportDescription")}
-                error={errors.supportDescription?.message}
-              />
-            </S.InputsWrapper>
-          </S.SectionWrapper>
-          <S.SectionWrapper>
-            <S.TitleWrapper>
-              <Typography tag="h6" variant="UIText16SemiBold">
-                Wyprowadzanie psów
-              </Typography>
-              <ToggleButton label="Aktywna" />
-            </S.TitleWrapper>
-            <S.InputsWrapper>
-              <Typography tag="p" variant="UIText13Med" margin="Medium">
-                Opis
-              </Typography>
-              <TextAreaInput
-                variant="XLarge"
-                placeholder="Textarea"
-                margin="Medium"
-                {...register("walkDescription")}
-                error={errors.walkDescription?.message}
-              />
-            </S.InputsWrapper>
-          </S.SectionWrapper>
-          <CardFooter>
-            <ButtonComponent
-              className="primary"
-              size="Large"
-              maxWidth="8rem"
-              type="submit"
-            >
-              <Typography
-                tag="p"
-                variant="UIText16MediumButton"
-                color={theme.colors.white}
+      {isSuccess && (
+        <FormProvider {...methods}>
+          <S.Form onSubmit={methods.handleSubmit(onSubmit)}>
+            <S.SectionWrapper>
+              <S.TitleWrapper>
+                <Typography tag="h6" variant="UIText16SemiBold">
+                  Wpłać darowiznę
+                </Typography>
+                <ToggleButton
+                  label="Aktywna"
+                  checked={isDonationActive}
+                  handleChange={() => setIsDonationActive(!isDonationActive)}
+                />
+              </S.TitleWrapper>
+              <S.InputsWrapper>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Podaj numer konta
+                </Typography>
+                <InputComponent
+                  variant="XLarge"
+                  placeholder={
+                    data.bankAccountNumber
+                      ? data.bankAccountNumber
+                      : "0000-0000-0000-0000"
+                  }
+                  type="text"
+                  margin="Medium"
+                  {...register("bankAccountNumber")}
+                  error={errors.bankAccountNumber?.message}
+                />
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Opis
+                </Typography>
+                <TextAreaInput
+                  variant="XLarge"
+                  placeholder={
+                    data.donationDescription
+                      ? data.donationDescription
+                      : "Wpisz"
+                  }
+                  margin="Medium"
+                  {...register("donationDescription")}
+                  error={errors.donationDescription?.message}
+                />
+              </S.InputsWrapper>
+            </S.SectionWrapper>
+            <S.SectionWrapper>
+              <S.TitleWrapper>
+                <Typography tag="h6" variant="UIText16SemiBold">
+                  Codzienna pomoc
+                </Typography>
+                <ToggleButton
+                  label="Aktywna"
+                  checked={isDailyHelpActive}
+                  handleChange={() => setIsDailyHelpActive(!isDailyHelpActive)}
+                />
+              </S.TitleWrapper>
+              <S.InputsWrapper>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Opis
+                </Typography>
+                <TextAreaInput
+                  variant="XLarge"
+                  placeholder={
+                    data.dailyHelpDescription
+                      ? data.dailyHelpDescription
+                      : "Wpisz"
+                  }
+                  margin="Medium"
+                  {...register("dailyHelpDescription")}
+                  error={errors.dailyHelpDescription?.message}
+                />
+              </S.InputsWrapper>
+            </S.SectionWrapper>
+            <S.SectionWrapper>
+              <S.TitleWrapper>
+                <Typography tag="h6" variant="UIText16SemiBold">
+                  Wyprowadzanie psów
+                </Typography>
+                <ToggleButton
+                  label="Aktywna"
+                  checked={isTakingDogsOutActive}
+                  handleChange={() =>
+                    setIsTakingDogsOutActive(!isTakingDogsOutActive)
+                  }
+                />
+              </S.TitleWrapper>
+              <S.InputsWrapper>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Opis
+                </Typography>
+                <TextAreaInput
+                  variant="XLarge"
+                  placeholder={
+                    data.takingDogsOutDesctiption
+                      ? data.takingDogsOutDesctiption
+                      : "Wpisz"
+                  }
+                  margin="Medium"
+                  {...register("takingDogsOutDescription")}
+                  error={errors.takingDogsOutDescription?.message}
+                />
+              </S.InputsWrapper>
+            </S.SectionWrapper>
+            <CardFooter>
+              <ButtonComponent
+                className="primary"
+                size="Large"
+                maxWidth="8rem"
+                type="submit"
               >
-                Zapisz
-              </Typography>
-            </ButtonComponent>
-          </CardFooter>
-        </S.Form>
-      </FormProvider>
+                <Typography
+                  tag="p"
+                  variant="UIText16MediumButton"
+                  color={theme.colors.white}
+                >
+                  Zapisz
+                </Typography>
+              </ButtonComponent>
+            </CardFooter>
+          </S.Form>
+        </FormProvider>
+      )}
+      {isError && (
+        <div style={{ padding: "1rem" }}>
+          <Typography tag="p" variant="Heading18SemiBold" margin="Medium">
+            Nie udało sie pobrać danych wolontariatu schroniska, skontakuj się z
+            administratorem
+          </Typography>
+        </div>
+      )}
     </S.VoluntaryCardWrapper>
   )
 }

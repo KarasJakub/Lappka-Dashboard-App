@@ -6,6 +6,7 @@ import {
   createNewPetHandler,
   getImagesId,
   getImagesUrl,
+  petListInShelter,
 } from "./pets"
 
 export const useShelterStatsHandler = () => {
@@ -30,4 +31,8 @@ export const useGetImagesUrl = () => {
 
 export const useCreateNewPetHandler = () => {
   return useMutation(createNewPetHandler)
+}
+
+export const usePetListInShelterHandler = () => {
+  return useQuery(["latestPetsCards"], petListInShelter)
 }
