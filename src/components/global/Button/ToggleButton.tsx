@@ -33,6 +33,7 @@ const ToggleButton = ({
           onChange={() => setIsActive(!isActive)}
           disabled={disabled}
           checked={checked}
+          onClick={handleChange}
           {...rest}
         />
         <ToggleSlider />
@@ -41,7 +42,7 @@ const ToggleButton = ({
         <Typography
           tag="label"
           variant="UIText14Reg"
-          color={isActive ? theme.colors.black : theme.colors.midGray4}
+          color={checked ? theme.colors.black : theme.colors.midGray4}
         >
           {label}
         </Typography>

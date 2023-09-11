@@ -8,15 +8,11 @@ import TableStats from "components/Dashboard/DashboardDefaultComponents/TableSta
 import VoluntaryCard from "../VoluntaryCard/VoluntaryCard"
 import NewestPetsCards from "../NewestPetsCards/NewestPetsCards"
 import PopularPetsCards from "../PopularPetsCards/PopularPetsCards"
-import { useQuery } from "@tanstack/react-query"
-import { shelterDataHandler } from "api/DashboardCalls/DashboardCalls"
 import Typography from "components/global/Typography/Typography"
+import { useShelterStatsHandler } from "api/shelter/shelterHooks"
 
 const DashboardInitialSubpage = () => {
-  const { isSuccess, data, isError } = useQuery({
-    queryKey: ["shelterStats"],
-    queryFn: () => shelterDataHandler(),
-  })
+  const { data, isSuccess, isError } = useShelterStatsHandler()
 
   return (
     <S.DashboardInitialSubpageWrapper>

@@ -1,24 +1,32 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import FileInput from "components/global/Input/FileInput/FileInput"
 import PetsThumbnails from "./PetsThumbnails/PetsThumbnails"
 import ImageCropModal from "./ImageCropModal/ImageCropModal"
 import { PixelCrop } from "react-image-crop"
 
-const PetImagesUpload = () => {
+type PetImagesUploadProps = {
+  handleCroppedImages: (file: File[]) => void
+  fileError: string | undefined
+}
+
+const PetImagesUpload = ({
+  handleCroppedImages,
+  fileError,
+}: PetImagesUploadProps) => {
   const [convertedImages, setConvertedImages] = useState<string[] | undefined>()
   const [fileNames, setFileNames] = useState<string[]>([])
   const [modalIsVisibe, setModalIsVisible] = useState(false)
   const [thumbnail, setThumbnail] = useState<string[]>([])
 
-  const openModalHandler = () => {
+  const openModalHandler = useCallback(() => {
     if (convertedImages) {
       setModalIsVisible(true)
     }
-  }
+  }, [convertedImages])
 
   useEffect(() => {
     openModalHandler()
-  }, [convertedImages])
+  }, [convertedImages, openModalHandler])
 
   const closeModalHandler = () => {
     setModalIsVisible(false)
@@ -26,6 +34,7 @@ const PetImagesUpload = () => {
 
   const uploadImageHandler = (uploadedImages: FileList) => {
     convertToBase64(uploadedImages)
+
     openModalHandler()
   }
 
@@ -45,7 +54,7 @@ const PetImagesUpload = () => {
   const convertToBase64 = (uploadedImages: FileList) => {
     const newImagesArray = Array.from(uploadedImages)
 
-    newImagesArray.map((file) => {
+    newImagesArray.forEach((file) => {
       setFileNames((prevState) => [...prevState, file.name])
     })
 
@@ -64,13 +73,18 @@ const PetImagesUpload = () => {
     })
   }
 
-  const handleImageCrop = (imageIndex: number, completedCrop: PixelCrop) => {
+  const handleImageCrop = (
+    imageIndex: number,
+    completedCrop: PixelCrop,
+    width: number,
+    height: number
+  ) => {
     const image = document.createElement("img")
     image.src = convertedImages![imageIndex] as string
 
     const canvas = document.createElement("canvas")
-    const scaleX = image.naturalWidth / image.width!
-    const scaleY = image.naturalHeight / image.height!
+    const scaleX = image.naturalWidth / width
+    const scaleY = image.naturalHeight / height
     canvas.width = completedCrop!.width!
     canvas.height = completedCrop!.height!
 
@@ -100,6 +114,8 @@ const PetImagesUpload = () => {
           type: "image/jpeg",
         })
 
+        handleCroppedImages([newFile])
+
         const reader = new FileReader()
         reader.readAsDataURL(newFile)
 
@@ -120,6 +136,7 @@ const PetImagesUpload = () => {
         uploadImage={uploadImageHandler}
         margin="Medium"
         variant="XLarge"
+        error={fileError}
       />
       {thumbnail.length ? (
         <PetsThumbnails

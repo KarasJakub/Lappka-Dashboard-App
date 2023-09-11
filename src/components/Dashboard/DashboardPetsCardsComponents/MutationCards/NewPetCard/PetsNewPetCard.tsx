@@ -9,86 +9,211 @@ import * as yup from "yup"
 import CardFooter from "components/global/CardFooter/CardFooter"
 import ButtonComponent from "components/global/Button/ButtonComponent.styled"
 import theme from "layout/theme"
-import { useState } from "react"
 import PetImagesUpload from "./PetImagesUpload/PetImagesUpload"
+import { useCallback, useEffect, useState } from "react"
+import ROUTES from "helpers/utils/routes"
+import { useNavigate } from "react-router-dom"
+import { useCreateNewPetHandler, useGetImagesId } from "api/pets/petsHooks"
+import { toast } from "react-toastify"
 
 const defaultValues = {
   name: "",
   description: "",
   animalCategory: "",
-  color: "",
-  breed: "",
+  marking: "",
+  gender: "",
   weight: 0,
   isSterilized: true,
   isVisible: true,
-  // images: [] as string[] | Array<any>,
+  species: "",
+  months: 0,
+  photos: [""],
+  profilePhoto: "",
 }
+
+const genderOptions = [
+  {
+    value: "Undefined",
+    name: "Niezidentyfikowany",
+  },
+  {
+    value: "Male",
+    name: "Samiec",
+  },
+  {
+    value: "Female",
+    name: "Samiczka",
+  },
+  {
+    value: "Other",
+    name: "Inna",
+  },
+]
+const animalCategoryOptions = [
+  {
+    value: "Undefined",
+    name: "Niezidentyfikowany",
+  },
+  {
+    value: "Other",
+    name: "Inna",
+  },
+  {
+    value: "Dog",
+    name: "Pies",
+  },
+  {
+    value: "Cat",
+    name: "Kot",
+  },
+  {
+    value: "Rabbit",
+    name: "Królik",
+  },
+]
 
 export const newPetValidation = yup.object({
   name: yup
     .string()
     .max(50, "Imie zwierzaka nie może być dłuższe niż 50 znaków")
+    .matches(/^[a-zA-Z]+$/, "Imię może zawierać tylko litery")
     .required("Imię zwierzaka jest wymagane"),
   description: yup
     .string()
     .max(200, "Opis nie może być dłuższy niz 200 słów")
     .required("Opis jest wymagany"),
   animalCategory: yup.string().required("Gatunek jest wymagany"),
-  color: yup
+  marking: yup
     .string()
-    .max(50, "Kolor nie może być dłuższy niuz 50 słow")
-    .required("Kolor jest wymagany"),
-  breed: yup
+    .max(50, "Umaszczenie nie może być dłuższe niż 50 słow")
+    .required("Umaszczenie jest wymagane"),
+  gender: yup
     .string()
     .max(50, "Rasa nie może byc dłuższa niż 50 słów")
     .required("Rasa jest wymagana"),
   weight: yup
     .number()
     .min(1, "Waga musi być dodatnia")
-    .required("Waga jest wymagana"),
-  isSterilized: yup.string().required("Sterylizacja jest wymagana"),
-  isVisible: yup.string().required("Sterylizacja jest wymagana"),
-  // images: yup.array().required("Zdjęcie jest wymagane"),
+    .required("Waga jest wymagana")
+    .typeError("Waga jest wymagana"),
+  isSterilized: yup.boolean().required("Sterylizacja jest wymagana"),
+  isVisible: yup.boolean().required("Sterylizacja jest wymagana"),
+  species: yup
+    .string()
+    .required("Rasa jest wymagana")
+    .matches(/^[a-zA-Z]+$/, "Rasa nie może zawierać liczb")
+    .typeError("Rasa nie może zawierać liczb"),
+  months: yup
+    .number()
+    .min(1, "Wiek musi być dodatki")
+    .required("Wiek jest wymagany")
+    .typeError("Wiek jest wymagany i musi byc liczbą"),
+  photos: yup
+    .array()
+    .required("Dodaj minimum jedno zdjecie")
+    .max(5, "Można dodac maksymalnie 5 zdjęć zwierzaka")
+    .of(yup.string().required("")),
+  profilePhoto: yup.string().required(""),
 })
 
-type defaultFormValuesTypes = typeof defaultValues
-export type handleFormValues = keyof defaultFormValuesTypes
+export type defaultNewPetTypes = typeof defaultValues
+export type handleFormValues = keyof defaultNewPetTypes
+export type genderOptionsTypes = typeof genderOptions
 
 const PetsNewPetCard = () => {
+  const [croppedImages, setCroppedImages] = useState<File[]>([])
+  const navigate = useNavigate()
+
   const methods = useForm({
-    defaultValues,
-    // resolver: yupResolver(newPetValidation),
+    defaultValues: defaultValues,
+    resolver: yupResolver(newPetValidation),
   })
   const {
-    formState: { errors, touchedFields },
+    formState: { errors },
     setValue,
     watch,
     register,
   } = methods
 
-  const onSubmit: SubmitHandler<defaultFormValuesTypes> = (data) => {
-    console.log(data)
+  const {
+    mutate: mutateImagesIds,
+    data: imagesIds,
+    isSuccess,
+  } = useGetImagesId()
+
+  const { mutate: createNewPetCart } = useCreateNewPetHandler()
+
+  const handleConvertImages = () => {
+    if (croppedImages.length > 0) {
+      const formData = new FormData()
+      croppedImages.forEach((image) => formData.append("files", image))
+      mutateImagesIds(formData)
+    }
   }
 
-  const handleValue = (name: handleFormValues, value: string) => {
+  // const convertStringToBoolean = (value: string) => {
+  //   if (value === "Tak") {
+  //     return true
+  //   }
+  //   return false
+  // }
+
+  const convertNameToFormValue = (
+    options: genderOptionsTypes,
+    formName: string
+  ) => {
+    const name = options.filter(({ name }) => name === formName)[0]
+    return name?.value
+  }
+
+  const onSubmit: SubmitHandler<defaultNewPetTypes> = useCallback(
+    async (data) => {
+      const revertGender = convertNameToFormValue(genderOptions, data.gender)
+      const revertAnimalCategory = convertNameToFormValue(
+        animalCategoryOptions,
+        data.animalCategory
+      )
+
+      const CompletedData = {
+        ...data,
+        animalCategory: revertAnimalCategory,
+        gender: revertGender,
+        isSterilized: true,
+        isVisible: true,
+        photos: imagesIds?.data || [],
+        profilePhoto: imagesIds?.data?.[0] || "",
+      }
+      console.log(CompletedData)
+      createNewPetCart(CompletedData)
+    },
+    [createNewPetCart, imagesIds]
+  )
+
+  const handleValue = (name: handleFormValues, value: string | boolean) => {
     setValue(name, value, { shouldTouch: true, shouldDirty: true })
   }
 
-  const [weight, setWeight] = useState(0)
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value
-    // If value is empty, set actual value
-    if (inputValue === "") {
-      return
-    }
-    // If value is not a number, also set the actual value
-    if (isNaN(Number(inputValue))) {
-      return
-    }
-    // Otherwise actuallize field value
-    setWeight(Number(inputValue))
+  const handleCroppedImages = (file: File[]) => {
+    setCroppedImages((prevState) => [...prevState, ...file])
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      methods.handleSubmit(onSubmit)()
+      toast.success("Zwierzak został dodany!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+    }
+  }, [methods, onSubmit, isSuccess])
+
+  console.log(isSuccess)
 
   return (
     <S.NewPetFormWrapper>
@@ -127,23 +252,25 @@ const PetsNewPetCard = () => {
               variant="Large"
               margin="Medium"
               placeholder="Wybierz z listy"
+              isAllowed={true}
               displayValue={watch("animalCategory")}
               setValue={handleValue}
-              options={["Kot", "Pies"]}
+              options={animalCategoryOptions.map(({ name }) => name)}
               error={errors.animalCategory?.message}
             />
             <Typography tag="p" variant="UIText13Med" margin="Medium">
               Umaszczenie
             </Typography>
             <SelectInput
-              name="color"
+              name="marking"
               variant="Large"
               margin="Medium"
               placeholder="Wybierz z listy"
-              displayValue={watch("color")}
+              isAllowed={true}
+              displayValue={watch("marking")}
               setValue={handleValue}
               options={["Jasny", "Ciemny"]}
-              error={errors.color?.message}
+              error={errors.marking?.message}
             />
             <S.FormListWrapper>
               <S.FormListItem style={{ width: "50%" }}>
@@ -151,14 +278,15 @@ const PetsNewPetCard = () => {
                   Płeć
                 </Typography>
                 <SelectInput
-                  name="breed"
-                  displayValue={watch("breed")}
+                  name="gender"
+                  displayValue={watch("gender")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
-                  options={["Samiec", "Samiczka"]}
+                  isAllowed={true}
+                  options={genderOptions.map(({ name }) => name)}
                   margin="Medium"
                   variant="Large"
-                  error={errors.breed?.message}
+                  error={errors.gender?.message}
                 />
               </S.FormListItem>
               <S.FormListItem>
@@ -167,15 +295,14 @@ const PetsNewPetCard = () => {
                 </Typography>
                 <InputComponent
                   variant="XLarge"
-                  placeholder="Wpisz"
                   type="number"
                   margin="Medium"
                   isAdditionalUnit
                   additionalUnitValue="KG"
-                  {...register("weight")}
+                  {...register("weight", {
+                    valueAsNumber: true,
+                  })}
                   error={errors.weight?.message}
-                  value={weight}
-                  onChange={handleInputChange}
                 />
               </S.FormListItem>
             </S.FormListWrapper>
@@ -189,6 +316,7 @@ const PetsNewPetCard = () => {
                   displayValue={watch("isSterilized")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
+                  isAllowed={true}
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
@@ -204,6 +332,7 @@ const PetsNewPetCard = () => {
                   displayValue={watch("isVisible")}
                   setValue={handleValue}
                   placeholder="Wybierz z listy"
+                  isAllowed={true}
                   options={["Tak", "Nie"]}
                   margin="Medium"
                   variant="Large"
@@ -211,13 +340,51 @@ const PetsNewPetCard = () => {
                 />
               </S.FormListItem>
             </S.FormListWrapper>
+            <S.FormListWrapper>
+              <S.FormListItem>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Rasa
+                </Typography>
+                <InputComponent
+                  variant="XLarge"
+                  placeholder="Wpisz"
+                  type="text"
+                  margin="Medium"
+                  {...register("species")}
+                  error={errors.species?.message}
+                />
+              </S.FormListItem>
+              <S.FormListItem>
+                <Typography tag="p" variant="UIText13Med" margin="Medium">
+                  Wiek (w miesiącach)
+                </Typography>
+                <InputComponent
+                  variant="XLarge"
+                  placeholder="Wpisz"
+                  type="number"
+                  margin="Medium"
+                  {...register("months", {
+                    valueAsNumber: true,
+                  })}
+                  error={errors.months?.message}
+                />
+              </S.FormListItem>
+            </S.FormListWrapper>
             <Typography tag="p" variant="UIText13Med" margin="Medium">
               Dodaj zdjęcia
             </Typography>
-            <PetImagesUpload />
+            <PetImagesUpload
+              handleCroppedImages={handleCroppedImages}
+              fileError={errors.photos?.message}
+            />
           </S.InnerWrapper>
           <CardFooter>
-            <ButtonComponent className="secondary" size="Large" maxWidth="8rem">
+            <ButtonComponent
+              className="secondary"
+              size="Large"
+              maxWidth="8rem"
+              onClick={() => navigate(ROUTES.pets)}
+            >
               <Typography
                 tag="p"
                 variant="UIText16MediumButton"
@@ -231,7 +398,8 @@ const PetsNewPetCard = () => {
               size="Large"
               maxWidth="8rem"
               type="submit"
-              onClick={methods.handleSubmit(onSubmit)}
+              onClick={handleConvertImages}
+              disabled={isSuccess}
             >
               <Typography
                 tag="p"

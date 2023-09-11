@@ -1,15 +1,11 @@
 import * as S from "./PopularPetsCards.styled"
 import CardHeading from "components/global/CardHeading/CardHeading"
 import PopularPetCard from "./PopularPetCard/PopularPetCard"
-import { useQuery } from "@tanstack/react-query"
-import { mostPopularPetsHandler } from "api/DashboardCalls/DashboardCalls"
 import Typography from "components/global/Typography/Typography"
+import { useMostPopularPetsHandler } from "api/pets/petsHooks"
 
 const PopularPetsCards = () => {
-  const { isSuccess, data, isError } = useQuery({
-    queryKey: ["shelterPopular"],
-    queryFn: () => mostPopularPetsHandler(),
-  })
+  const { isSuccess, data, isError } = useMostPopularPetsHandler()
   return (
     <S.PopularPetsRootWrapper>
       <CardHeading title="Najpopularniejsze" />
