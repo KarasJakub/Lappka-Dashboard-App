@@ -10,7 +10,10 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import { useState } from "react"
-import { useVolunteeringStatsHandler } from "api/volunteering/volunteeringHooks"
+import {
+  useVolunteeringStatsHandler,
+  useUpdateVolunteeringHandler,
+} from "api/volunteering/volunteeringHooks"
 
 const defaultValues = {
   bankAccountNumber: "",
@@ -50,8 +53,20 @@ const VoluntaryCard = () => {
     register,
   } = methods
 
-  const onSubmit: SubmitHandler<defaultFormValuesTypes> = (data) => {
-    console.log(data)
+  const { mutate } = useUpdateVolunteeringHandler()
+
+  const onSubmit: SubmitHandler<defaultFormValuesTypes> = async (data) => {
+    const CompletedData = {
+      bankAccountNumber: data.bankAccountNumber,
+      dailyHelpDescription: data.dailyHelpDescription,
+      donationDescription: data.donationDescription,
+      isDailyHelpActive: isDailyHelpActive,
+      isDonationActive: isDonationActive,
+      isTakingDogsOutActive: isTakingDogsOutActive,
+      takingDogsOutDescription: data.takingDogsOutDescription,
+    }
+    console.log(CompletedData)
+    mutate(CompletedData)
   }
   return (
     <S.VoluntaryCardWrapper>

@@ -8,3 +8,12 @@ export const volunteringStatsHandler = async () => {
       console.log(error)
     }
   }
+
+  export const updateVolunteringHandler = async () => {
+    try {
+      const response = await productionClient.put('/shelters/volunteering/update')
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
