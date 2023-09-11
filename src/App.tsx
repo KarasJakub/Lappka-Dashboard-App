@@ -24,6 +24,8 @@ import Workers from "pages/Workers"
 import PetEditCard from "components/Dashboard/DashboardPetsCardsComponents/MutationCards/PetEditCard/PetEditCard"
 import NewWorker from "components/Dashboard/DashboardWorkersComponents/NewWorker/NewWorker"
 import AccountSettings from "pages/AccountSettings"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const queryClient = new QueryClient()
 function App() {
@@ -76,6 +78,7 @@ function App() {
             </Route>
           </Routes>
         </ThemeProvider>
+        <ToastContainer />
       </QueryClientProvider>
     </>
   )

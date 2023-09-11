@@ -57,9 +57,7 @@ const FileInput = ({
             </S.IconContainer>
           </S.InputContainer>
           <S.Information>
-            <Typography variant="UIText12Reg">
-              {error ? error : "Zdjęcia maksymalnie 1MB"}
-            </Typography>
+            <Typography variant="UIText12Reg">{error}</Typography>
           </S.Information>
         </label>
       </S.InputWrapper>

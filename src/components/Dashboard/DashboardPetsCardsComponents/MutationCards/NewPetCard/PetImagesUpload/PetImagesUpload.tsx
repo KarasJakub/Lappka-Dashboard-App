@@ -6,9 +6,13 @@ import { PixelCrop } from "react-image-crop"
 
 type PetImagesUploadProps = {
   handleCroppedImages: (file: File[]) => void
+  fileError: string | undefined
 }
 
-const PetImagesUpload = ({ handleCroppedImages }: PetImagesUploadProps) => {
+const PetImagesUpload = ({
+  handleCroppedImages,
+  fileError,
+}: PetImagesUploadProps) => {
   const [convertedImages, setConvertedImages] = useState<string[] | undefined>()
   const [fileNames, setFileNames] = useState<string[]>([])
   const [modalIsVisibe, setModalIsVisible] = useState(false)
@@ -132,6 +136,7 @@ const PetImagesUpload = ({ handleCroppedImages }: PetImagesUploadProps) => {
         uploadImage={uploadImageHandler}
         margin="Medium"
         variant="XLarge"
+        error={fileError}
       />
       {thumbnail.length ? (
         <PetsThumbnails

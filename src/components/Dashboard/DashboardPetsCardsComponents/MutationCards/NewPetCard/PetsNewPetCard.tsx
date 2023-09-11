@@ -13,12 +13,8 @@ import PetImagesUpload from "./PetImagesUpload/PetImagesUpload"
 import { useCallback, useEffect, useState } from "react"
 import ROUTES from "helpers/utils/routes"
 import { useNavigate } from "react-router-dom"
-import { useConvertImagesToUrls } from "helpers/hooks/useConvertImagesToUrls"
-import {
-  useCreateNewPetHandler,
-  useGetImagesId,
-  useGetImagesUrl,
-} from "api/pets/petsHooks"
+import { useCreateNewPetHandler, useGetImagesId } from "api/pets/petsHooks"
+import { toast } from "react-toastify"
 
 const defaultValues = {
   name: "",
@@ -28,11 +24,11 @@ const defaultValues = {
   gender: "",
   weight: 0,
   isSterilized: true,
-  isVisible: false,
+  isVisible: true,
   species: "",
   months: 0,
-  profilePhoto: "",
   photos: [""],
+  profilePhoto: "",
 }
 
 const genderOptions = [
@@ -80,6 +76,7 @@ export const newPetValidation = yup.object({
   name: yup
     .string()
     .max(50, "Imie zwierzaka nie może być dłuższe niż 50 znaków")
+    .matches(/^[a-zA-Z]+$/, "Imię może zawierać tylko litery")
     .required("Imię zwierzaka jest wymagane"),
   description: yup
     .string()
@@ -88,8 +85,8 @@ export const newPetValidation = yup.object({
   animalCategory: yup.string().required("Gatunek jest wymagany"),
   marking: yup
     .string()
-    .max(50, "Kolor nie może być dłuższy niż 50 słow")
-    .required("Kolor jest wymagany"),
+    .max(50, "Umaszczenie nie może być dłuższe niż 50 słow")
+    .required("Umaszczenie jest wymagane"),
   gender: yup
     .string()
     .max(50, "Rasa nie może byc dłuższa niż 50 słów")
@@ -99,17 +96,24 @@ export const newPetValidation = yup.object({
     .min(1, "Waga musi być dodatnia")
     .required("Waga jest wymagana")
     .typeError("Waga jest wymagana"),
-  isSterilized: yup.string().required("Sterylizacja jest wymagana"),
-  isVisible: yup.string().required("Sterylizacja jest wymagana"),
+  isSterilized: yup.boolean().required("Sterylizacja jest wymagana"),
+  isVisible: yup.boolean().required("Sterylizacja jest wymagana"),
   species: yup
     .string()
     .required("Rasa jest wymagana")
+    .matches(/^[a-zA-Z]+$/, "Rasa nie może zawierać liczb")
     .typeError("Rasa nie może zawierać liczb"),
   months: yup
     .number()
     .min(1, "Wiek musi być dodatki")
     .required("Wiek jest wymagany")
     .typeError("Wiek jest wymagany i musi byc liczbą"),
+  photos: yup
+    .array()
+    .required("Dodaj minimum jedno zdjecie")
+    .max(5, "Można dodac maksymalnie 5 zdjęć zwierzaka")
+    .of(yup.string().required("")),
+  profilePhoto: yup.string().required(""),
 })
 
 export type defaultNewPetTypes = typeof defaultValues
@@ -122,7 +126,7 @@ const PetsNewPetCard = () => {
 
   const methods = useForm({
     defaultValues: defaultValues,
-    // resolver: yupResolver(newPetValidation),
+    resolver: yupResolver(newPetValidation),
   })
   const {
     formState: { errors },
@@ -159,7 +163,7 @@ const PetsNewPetCard = () => {
     formName: string
   ) => {
     const name = options.filter(({ name }) => name === formName)[0]
-    return name.value
+    return name?.value
   }
 
   const onSubmit: SubmitHandler<defaultNewPetTypes> = useCallback(
@@ -175,13 +179,10 @@ const PetsNewPetCard = () => {
         animalCategory: revertAnimalCategory,
         gender: revertGender,
         isSterilized: true,
-        isVisible: false,
-        photos: imagesIds!.data,
-        profilePhoto: imagesIds!.data[0],
-        // profilePhoto: "dupa",
-        // photos: ["dupa"],
+        isVisible: true,
+        photos: imagesIds?.data || [],
+        profilePhoto: imagesIds?.data?.[0] || "",
       }
-      console.log(data)
       console.log(CompletedData)
       createNewPetCart(CompletedData)
     },
@@ -199,8 +200,20 @@ const PetsNewPetCard = () => {
   useEffect(() => {
     if (isSuccess) {
       methods.handleSubmit(onSubmit)()
+      toast.success("Zwierzak został dodany!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
     }
   }, [methods, onSubmit, isSuccess])
+
+  console.log(isSuccess)
 
   return (
     <S.NewPetFormWrapper>
@@ -348,7 +361,7 @@ const PetsNewPetCard = () => {
                 <InputComponent
                   variant="XLarge"
                   placeholder="Wpisz"
-                  type="text"
+                  type="number"
                   margin="Medium"
                   {...register("months", {
                     valueAsNumber: true,
@@ -360,7 +373,10 @@ const PetsNewPetCard = () => {
             <Typography tag="p" variant="UIText13Med" margin="Medium">
               Dodaj zdjęcia
             </Typography>
-            <PetImagesUpload handleCroppedImages={handleCroppedImages} />
+            <PetImagesUpload
+              handleCroppedImages={handleCroppedImages}
+              fileError={errors.photos?.message}
+            />
           </S.InnerWrapper>
           <CardFooter>
             <ButtonComponent
@@ -383,6 +399,7 @@ const PetsNewPetCard = () => {
               maxWidth="8rem"
               type="submit"
               onClick={handleConvertImages}
+              disabled={isSuccess}
             >
               <Typography
                 tag="p"
