@@ -5,8 +5,11 @@ import NewPetCard from "./NewPetCard/NewPetCard"
 import { newestPetsHandler } from "api/DashboardCalls/DashboardCalls"
 import { useQuery } from "@tanstack/react-query"
 import Typography from "components/global/Typography/Typography"
+import { useNavigate } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
 
 const NewestPetsCards = () => {
+  const navigate = useNavigate()
   const { isSuccess, data, isError } = useQuery({
     queryKey: ["shelterNewestPets"],
     queryFn: () => newestPetsHandler(),
@@ -18,6 +21,7 @@ const NewestPetsCards = () => {
           className="secondary"
           size="Large"
           style={{ maxWidth: "9rem" }}
+          onClick={() => navigate(ROUTES.pets)}
         >
           Wszystkie
         </ButtonComponent>
