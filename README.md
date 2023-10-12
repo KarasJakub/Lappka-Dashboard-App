@@ -18,3 +18,4 @@ The primary goal of the Łappka application was to bring together animal shelter
 - React Hook Form
 - Storybook
 - MSW
+- JWT
